@@ -13,6 +13,6 @@ Dao = new Dao(model);
 //     .then(console.log)
 //     .catch(console.log);
 // console.log(Dao);
-let res = Dao._update({name:'Goku'},{name:'Son Goku'})
-    .then(console.log)
-    .catch(console.log);
+// let res = Dao._update({name:'Goku'},{name:'Son Goku'})
+    // .then(console.log)
+    // .catch(console.log);
