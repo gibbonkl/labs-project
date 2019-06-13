@@ -7,11 +7,11 @@ module.exports = function() {
 
     var app = express();
 
-    app.use(express.static('public/'));  
+    app.use(express.static('app/'));
 
-    consign({cwd: 'public'})
-    .include('controllers')
-    .into(app);
+    consign({ cwd: 'app' })
+        .include('routes')
+        .into(app);
 
     return app;
 }
