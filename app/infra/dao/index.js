@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
-const async = require('async');
-let Dao = require("./TemplateDao");
+let Dao = require("./UserDao");
+let Model = require("../../models/schema_usuario");
+let obj = new Model({
+    nome: "Trunks",
+    sobrenome:"S",
+    username:"trunks",
+    email:"trunks@compasso.com.br",
+    senha:"teste123,",
+    hash:"3094ijifj1394k4o5ko23",
+    imagem:"diego.png",
+    data_nascimento: new Date("1996","09","17")
+});
 
-var schema = new mongoose.Schema({
-    name: String
-})
-var model = mongoose.model('Kitty', schema);
-
-Dao = new Dao(model);
-// Dao._save({name:'Goku'}).then(console.log);
-// let res = Dao._findOne({name:"Gohan"})
-//     .then(console.log)
-//     .catch(console.log);
-// console.log(Dao);
-// let res = Dao._update({name:'Goku'},{name:'Son Goku'})
-    // .then(console.log)
-    // .catch(console.log);
