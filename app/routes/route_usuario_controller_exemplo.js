@@ -5,7 +5,7 @@
  */
 var multer = require('multer');
 var upload = multer();
-var modelo = require('../model/schema/schema_usuario');
+var modelo = require('../models/schema_usuario');
 
 module.exports = function(app) {
     app.post("/cadastrar", upload.none(), function(req, res) {
