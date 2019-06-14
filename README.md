@@ -1,8 +1,8 @@
-# game-of-bols
+﻿# game-of-bols
 
-Padrões de mensagem de commit:
-"(FEAT) mensagem"
-"(FIX) mensagem"
+Padrões de mensagem de commit: <br>
+"(FEAT) mensagem" <br>
+"(FIX) mensagem" <br>
 
 Padrão de branch:
 sprint-0
