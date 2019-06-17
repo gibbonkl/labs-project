@@ -4,25 +4,33 @@ Padrões de mensagem de commit: <br>
 "(FEAT) mensagem" <br>
 "(FIX) mensagem" <br>
 
-Padrão de branch: <br>
-sprint-0 <br>
+Padrão de branch:
+sprint-0
 
-<hr>
-git clone https://github.com/gibbonkl/game-of-bols <br>
-cd ./game-of-bols <br>
-git checkout -t origin/sprint-0 <br>
-git add <filename> <br>
-git commit -m "Commit message" <br>
-git pull  <br>
-git push  <br>
-  
-Muda de branch: <br>
+-------------------------
+git clone https://github.com/gibbonkl/game-of-bols
+cd ./game-of-bols
+
+Quando já existe a branch desejada no repositório:
+git checkout -t origin/sprint-0
+
+git add <filename>
+git commit -m "<commitmessage>"
+
+Quando a branch ainda não existe no repositório:
+git checkout -b <branchname>
+git push origin <branchname>
+
+git pull
+git push
+
+Muda de branch:
 git checkout sprint-0
 
-<hr>
+----------------------
 
-(No final da Sprint) fazer merge com a master: <br>
-git checkout master <br>
-git merge sprint-0 <br>
-Verificar mudanças antes: <br>
-git diff <source_branch> <target_branch> 
+(No final da Sprint) fazer merge com a master:
+git checkout master
+git merge sprint-0
+Verificar mudanças antes:
+git diff <source_branch> <target_branch>
