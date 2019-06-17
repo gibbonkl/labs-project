@@ -12,9 +12,6 @@ let obj = new Model({
     // data_nascimento: new Date("1996","09","17")
 });
 Dao = new Dao(Model);
-// Dao.insertUser(obj)
-    // .then(console.log)
-    // .catch(err=> console.log(err.detail));
-Dao.getHash('goku','3094ijifj1394k4')
+Dao.login('oi','goku')
     .then(console.log)
-    .catch(console.log)
+    .catch(console.error);
