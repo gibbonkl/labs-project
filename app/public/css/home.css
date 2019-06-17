@@ -148,3 +148,6 @@ textarea.materialize-textarea {
 .btn-small:hover {
     background-color: rgba(62, 87, 122, 0.95) !important;
 }
+.margin-forgot-pass {
+    margin-bottom: 5%;
+}
