@@ -29,21 +29,70 @@ function submit() {
         senha: document.querySelector('#login_senha').value
     };
 
-    $.ajax({
-            url: '/cadastro',
-            method: 'post',
-            data: dados
-        })
-        .done(function(res) 
-        {
-            if (res.success) 
+    
+    if(ehValido)
+    {
+        $.ajax({
+                url: '/cadastro',
+                method: 'post',
+                data: dados
+            })
+            .done(function(res) 
             {
-                console.log('id from ajax call is', res);
-                window.location.reload();
-            } 
-            else 
-            {
-            console.log('error...ajax');
-            }
-        });
+                if (res.success) 
+                {
+                    console.log('id from ajax call is', res);
+                    window.location.reload();
+                } 
+                else 
+                {
+                console.log('error...ajax');
+                }
+            });
     }
+
+}
+
+function ehValido() 
+{
+    if(document.querySelector('#login_senha').value != document.querySelector('#login_repsenha').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_name').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_lastname').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_login').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_email').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_senha').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else if (!document.querySelector('#login_date').value)
+    {
+        //retorna msg erro para html
+        return false;
+    }
+    else
+    {
+        //tudo certo
+        return true;
+    }
+}
