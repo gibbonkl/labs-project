@@ -1,3 +1,4 @@
+var userDAO = require('../infra/dao/UserDao');
 var sessionChecker = require('../helper/sessionChecker');
 
 // Esse Array não existirá, ele foi criado aqui apenas para testar a sessão
@@ -29,5 +30,6 @@ module.exports = function(app)
             {
                 res.redirect('/signup');
             }
+
         });
 }
