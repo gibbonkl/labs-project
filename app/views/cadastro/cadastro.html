@@ -29,7 +29,7 @@
                             <input type="file" id="myfile" class="hide" />
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="login_name" type="text" class="validate">
+                            <input id="login_name" name="login_name"type="text" class="validate">
                             <label class="active" for="login_name">Nome</label>
                         </div>
                         <div class="input-field col s12 m6">
@@ -60,7 +60,7 @@
                     </div>
                 </form>
                 <div class="row center">
-                    <button class="btn bg-blue-compass rounded waves-effect">Cadastrar</button>
+                    <button class="btn bg-blue-compass rounded waves-effect" onclick="submit()" >Cadastrar</button>
                 </div>
             </div>
         </div>

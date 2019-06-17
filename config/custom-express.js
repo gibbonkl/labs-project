@@ -11,7 +11,6 @@ module.exports = function() {
     var app = express();
 
     app.use(express.static('app/'));
-<<<<<<< HEAD
 
     // initialize body-parser to parse incoming parameters requests to req.body
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,9 +18,6 @@ module.exports = function() {
     // configura a sessão
     app = sessionExpress(app);
 
-=======
-    app.use("/dao",express.static('infra/dao'))
->>>>>>> login_dao
     consign({ cwd: 'app' })
         .include('routes')
         .into(app);

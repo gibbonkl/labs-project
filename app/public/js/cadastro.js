@@ -17,8 +17,8 @@ function cad() {
     document.querySelector('*').classList.remove("slide-right");
 }
 
-function submit(e) {
-    e.preventDefault();
+function submit() {
+    // e.preventDefault();
 
     var dados = {
         nome: document.querySelector('#login_name').value,
@@ -28,13 +28,12 @@ function submit(e) {
         senha: document.querySelector('#login_senha').value,
         repsenha: document.querySelector('#login_repsenha').value
     };
-
-    fetch(url, {
+    
+    fetch('http://localhost:1337/cadastro', {
             method: 'post',
             body: dados
         }).then(resposta => resposta.json())
         .then(data => data)
         .catch(erro => console.error(erro));
+    }
 
-
-}
