@@ -1,28 +1,31 @@
 var sessionChecker = require('../helper/sessionChecker');
-
-// Esse Array não existirá, ele foi criado aqui apenas para testar a sessão
-const User = [{username: 'user', password: 'user'}, {username: 'user', password: '123'}];
+let Model = require("../models/schema_usuario");
+var UserDAO = require('../infra/dao/UserDao');
 
 module.exports = function(app)
 {
     // route for user Login
     app.route('/login')
         .get(sessionChecker, (req, res) => {
-            res.sendFile('login.html', { root: './app/views' });
+            res.sendFile('login.html', { root: './app/views/login' });
         })
         .post((req, res) => {
-            var username = req.body.username,
-                password = req.body.password;
+            let user = {
+                email : req.body.email,
+                senha : req.body.senha
+            }
 
-            //Essa busca será feita pelo DAO
-            if( (User[0].username == username) && (User[0].password == password))
-            {
-                req.session.user = User[0];
-                res.redirect('/dashboard');
-            }
-            else
-            {
-                res.redirect('/login');
-            }
+            let userDAO = new UserDAO(Model);
+            userDAO.login(user.email, user.senha)
+                .then((user) => 
+                {
+                    req.session.user = user;
+                    res.redirect('/dashboard');
+                })
+                .catch((error) => 
+                {
+                    console.error;
+                    res.redirect('/login');
+                });
         });
 }

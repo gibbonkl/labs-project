@@ -3,8 +3,6 @@ var UserDAO = require('../infra/dao/UserDao');
 var sessionChecker = require('../helper/sessionChecker');
 var multer = require("multer");
 var upload = multer();
-// Esse Array não existirá, ele foi criado aqui apenas para testar a sessão
-const User = [{username: 'user', password: 'user'}, {username: 'user', password: '123'}];
 
 module.exports = function(app)
 {
