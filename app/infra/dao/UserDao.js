@@ -74,15 +74,24 @@ class UserDao extends TemplateDao{
         *   Busca por um usuário pelo username e senha
         *   @param {string} username Nome de usuário
         *   @param {string} password Senha de usuário
+        *   @param {string} email Email do usuário
         *   @returns {object}
     */
-    login(username='',password=''){
+    login(username='',password='',email=''){
         if(username && password){
             return this._findOne({username:username,senha:password})
                 .then(res=> res? res: null)
                 .catch(err=>{
                     console.error(err);
                     return({detail:"Impossível realizar autenticação.",error:err})
+                })
+        }
+        else if(email && password){
+            return this._findOne({email:email,senha:password})
+                .then(res=> res? res:null)
+                .catch(err=>{
+                    console.error(err);
+                    return({detail:"Impossível realizar autenticação",error:err})
                 })
         }
         return({detail:"Impossível realizar autenticação.",error:"Username e senha null ou undefined"})

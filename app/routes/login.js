@@ -14,9 +14,8 @@ module.exports = function(app)
                 email : req.body.email,
                 senha : req.body.senha
             }
-
             let userDAO = new UserDAO(Model);
-            userDAO.login(user.email, user.senha)
+            userDAO.login('', user.senha,user.email)
                 .then((user) => 
                 {
                     req.session.user = user;

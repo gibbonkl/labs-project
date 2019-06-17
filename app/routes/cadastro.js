@@ -12,7 +12,6 @@ module.exports = function(app)
             res.sendFile('cadastro.html', { root: './app/views/cadastro' });
         })
         .post(upload.none(),(req, res) => {
-
             let user = new Model({
                     nome: req.body.nome,
                     sobrenome: req.body.sobrenome,
@@ -20,11 +19,11 @@ module.exports = function(app)
                     email: req.body.email,
                     senha: req.body.senha,
                     imagem: req.body.imagem,
-                    data_nascimento: req.body.data
+                    data_nascimento: new Date(req.body.data_nasc)
             });
             
             let userDAO = new UserDAO(Model);
-            let msg = userDAO.insertUser(user)
+            userDAO.insertUser(user)
                 .then(user => {
                     if(user && !user.error){
                         req.session.user = user;
@@ -35,10 +34,8 @@ module.exports = function(app)
                         res.redirect('/cadastro');
                     }
                 })
-                .catch();
+                .catch(console.log);
             
-            console.log(msg);
-
         });
 }
 
