@@ -23,17 +23,27 @@ function submit() {
     var dados = {
         nome: document.querySelector('#login_name').value,
         sobrenome: document.querySelector('#login_lastname').value,
-        data: document.querySelector('#login_data').value,
+        username: document.querySelector('#login_login').value,
+        data_nasc: document.querySelector('#login_date').value,
         email: document.querySelector('#login_email').value,
-        senha: document.querySelector('#login_senha').value,
-        repsenha: document.querySelector('#login_repsenha').value
+        senha: document.querySelector('#login_senha').value
     };
-    
-    fetch('http://localhost:1337/cadastro', {
-            method: 'post',
-            body: dados
-        }).then(resposta => resposta.json())
-        .then(data => data)
-        .catch(erro => console.error(erro));
-    }
 
+    $.ajax({
+            url: '/cadastro',
+            method: 'post',
+            data: dados
+        })
+        .done(function(res) 
+        {
+            if (res.success) 
+            {
+                console.log('id from ajax call is', res);
+                window.location.reload();
+            } 
+            else 
+            {
+            console.log('error...ajax');
+            }
+        });
+    }

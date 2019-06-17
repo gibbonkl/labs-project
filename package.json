@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js"
+        "start": "nodemon server.js"
     },
     "author": "umaGalera",
     "license": "ISC",
@@ -20,6 +20,7 @@
         "mongo": "0.1.0",
         "mongoose": "5.5.14",
         "multer": "1.4.1",
+        "node-fetch": "^2.6.0",
         "uuid": "3.3.2"
     },
     "devDependencies": {
