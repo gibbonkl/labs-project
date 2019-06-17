@@ -1,26 +1,32 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of bols</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../public/css/materialize.css"></link>
     <link rel="stylesheet" type="text/css" href="../../public/css/home.css"></link>
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"></link>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="../../public/js/materialize.js"></script>
 </head>
+
 <body>
-    <div class="row gradient-compass">
-        <div class="col m5 s12">
-        <!-- espaço azul -->
+    <div class="row valign-wrapper">
+        <div id="nav_btn" class="col m4 s12 gradient-compass">
+            <div>
+                <h4 class="white-text mont-serrat">É nosso membro?</h4>
+            </div>
+            <button id="btn_log" class="btn" onclick="log()">Logar</button>
+            <button id="btn_cad" class="btn hide" onclick="cad()">Cadastrar</button>
         </div>
-        <div class="col m7 s12 grey lighten-5 z-depth-5 full-height valign-wrapper">
+        <div id="nav_form" class="col m8 s12 grey lighten-5 z-depth-5 full-height">
             <div class="row center margin-login">
-                <h4 class="blue-compass center mont-serrat">Bem-vindo</h4>
+                <h2 class="blue-compass center mont-serrat">Bem-vindo</h2>
                 <form>
                     <div class="col s12">
                         <div class="row">
-                            <img id="image" src="http://via.placeholder.com/150x150" class="circle"/>
-                            <input type="file" id="myfile" class="hide"/>
+                            <img id="image" src="http://via.placeholder.com/150x150" class="circle" />
+                            <input type="file" id="myfile" class="hide" />
                         </div>
                         <div class="input-field col s12 m6">
                             <input id="login_name" type="text" class="validate">
@@ -39,11 +45,12 @@
                             <label class="active" for="login_date">Data de nascimento</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="login_email" type="email" class="validate">
+                            <input id="login_email" type="email" class="validate" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                             <label class="active" for="login_email">Email</label>
+                            <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="login_senha" type="password" class="validate">
+                            <input id="login_senha" type="password" class="validate" data-length="6">
                             <label class="active" for="login_senha">Senha</label>
                         </div>
                         <div class="input-field col s12 m6">
@@ -58,5 +65,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../../public/js/cadastro.js"></script>
 </body>
+
 </html>
