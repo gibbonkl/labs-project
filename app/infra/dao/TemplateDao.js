@@ -8,12 +8,15 @@ const mongoose = require('mongoose');
 class TemplateDao{
     constructor(model){
         this._model = model
-        this._host = process.env.host;
-        this._port = process.env.port;
-        this._dbName = process.env.dbname;
-        this._uri = `mongodb://${this._host}:${this._port}/${this._dbName}`;
         
-        mongoose.connect(this._uri,{useNewUrlParser: true});
+        mongoose.connect(process.env.COSMOSDB_CONNSTR+"?ssl=true&replicaSet=globaldb", {
+            auth: {
+              user: process.env.COSMODDB_USER,
+              password: process.env.COSMOSDB_PASSWORD
+            }
+          })
+          .then(() => console.log('Connection to CosmosDB successful'))
+          .catch((err) => console.error(err));
         this._db = mongoose.connection;
     }
     /*
