@@ -1,98 +1,76 @@
+// funcionalidades de transição e mudança de inputs
 function log() {
-    document.querySelector('#nav_form').classList.add("slide-left");
+    $('#nav_form').addClass("slide-left");
     setTimeout(function() {
-        document.querySelector('#btn_log').classList.add("hide");
-        document.querySelector('#btn_cad').classList.remove("hide");
+        $('#btn_log').addClass("hide");
+        $('#btn_cad').removeClass("hide");
 
     }, 100);
-    document.querySelector('#nav_btn').classList.add("slide-right");
+    $('#nav_btn').addClass("slide-right");
 }
 
 function cad() {
-    document.querySelector('*').classList.remove("slide-left");
+    $('*').removeClass("slide-left");
     setTimeout(function() {
-        document.querySelector('#btn_log').classList.remove("hide");
-        document.querySelector('#btn_cad').classList.add("hide");
+        $('#btn_log').removeClass("hide");
+        $('#btn_cad').addClass("hide");
     }, 100);
-    document.querySelector('*').classList.remove("slide-right");
+    $('*').removeClass("slide-right");
 }
+
+// validação
+function ehValido(dados) {
+    let valida = false;
+
+    $.each(dados, function(index, value) {
+        if ((value == '') || (value === null)) {
+            console.log(index);
+            $('#login_' + index).addClass('invalid');
+            valida = true;
+        }
+    });
+    if (valida) {
+        let toastHTML = '<span>Por favor, preencha todos os campos! </span><button class="btn-flat toast-action">OK</button>';
+        M.toast({ html: toastHTML });
+    }
+    if (dados.key != dados.repkey) {
+        $('#login_key').addClass('invalid');
+        $('#login_repkey').addClass('invalid');
+        let toastHTML = '<span>Ops... As senhas precisam ser iguais! </span><button class="btn-flat toast-action">OK</button>';
+        M.toast({ html: toastHTML });
+        $('#login_key').val('');
+        $('#login_repkey').val('');
+        valida = true;
+    }
+    return valida;
+}
+
 
 function submit() {
     // e.preventDefault();
-
     var dados = {
-        nome: document.querySelector('#login_name').value,
-        sobrenome: document.querySelector('#login_lastname').value,
-        username: document.querySelector('#login_login').value,
-        data_nasc: document.querySelector('#login_date').value,
-        email: document.querySelector('#login_email').value,
-        senha: document.querySelector('#login_senha').value
+        name: $('#login_name').val(),
+        lastname: $('#login_lastname').val(),
+        username: $('#login_username').val(),
+        date: $('#login_date').val(),
+        email: $('#login_email').val(),
+        key: md5($('#login_key').val()),
+        repkey: md5($('#login_repkey').val())
     };
 
-    
-    if(ehValido)
-    {
-        $.ajax({
-                url: '/cadastro',
-                method: 'post',
-                data: dados
-            })
-            .done(function(res) 
-            {
-                if (res.success) 
-                {
-                    console.log('id from ajax call is', res);
-                    window.location.reload();
-                } 
-                else 
-                {
-                console.log('error...ajax');
-                }
-            });
-    }
+    if (ehValido(dados))
+        return;
 
-}
-
-function ehValido() 
-{
-    if(document.querySelector('#login_senha').value != document.querySelector('#login_repsenha').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_name').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_lastname').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_login').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_email').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_senha').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else if (!document.querySelector('#login_date').value)
-    {
-        //retorna msg erro para html
-        return false;
-    }
-    else
-    {
-        //tudo certo
-        return true;
-    }
+    $.ajax({
+        url: '/cadastro',
+        data: dados,
+        type: "post",
+        done: (resp) => {
+            M.Toast({ html: "Cadastrado efetuado!", displayLenght: 2000 });
+            window.location.reload(3000);
+        },
+        error: () => {
+            console.log("error");
+        }
+    });
 }
