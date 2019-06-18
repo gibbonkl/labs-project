@@ -12,8 +12,8 @@ module.exports = function() {
     app.use(express.static('app/'));
 
     app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, '/../app/views/cadastro'));
-
+    app.set('views', path.join(__dirname, '/../app/views/'));
+    
     console.log(path.join(__dirname + '/../app'));
     
     app.use(express.json());
