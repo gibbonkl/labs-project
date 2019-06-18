@@ -9,10 +9,10 @@ class TemplateDao{
     constructor(model){
         this._model = model
         
-        mongoose.connect(process.env.COSMOSDB_CONNSTR+"?ssl=true&replicaSet=globaldb", {
+        mongoose.connect("mongodb://gob.documents.azure.com:10255/users"+"?ssl=true&replicaSet=globaldb", {
             auth: {
-              user: process.env.COSMODDB_USER,
-              password: process.env.COSMOSDB_PASSWORD
+                user: "gob",//process.env.COSMODDB_USER,
+                password: "PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA=="//process.env.COSMOSDB_PASSWORD
             }
           })
           .then(() => console.log('Connection to CosmosDB successful'))
