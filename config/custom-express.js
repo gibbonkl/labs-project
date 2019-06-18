@@ -11,6 +11,8 @@ module.exports = function() {
     var app = express();
 
     app.use(express.static('app/'));
+    
+    app.use(express.json());
 
     // initialize body-parser to parse incoming parameters requests to req.body
     app.use(bodyParser.urlencoded({ extended: true }));

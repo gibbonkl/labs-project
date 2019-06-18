@@ -7,7 +7,7 @@ module.exports = function(app)
         console.log(req.session.user);
         if (req.session.user && req.cookies.user_sid) {
             console.log("SESSION E COOKIES")
-            res.sendFile('dashboard.html', { root: 'app/views/' });
+            res.sendFile('dashboard.html', { root: './app/views' });
         } else {
             res.redirect('/login');
         }

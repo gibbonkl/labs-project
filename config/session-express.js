@@ -14,7 +14,7 @@ module.exports = function(app)
         saveUninitialized: false,
         rolling: true,
         cookie: {
-            expires: 30000
+            expires: 300000
         }
     }));
     

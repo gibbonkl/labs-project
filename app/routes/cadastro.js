@@ -30,7 +30,6 @@ module.exports = function(app)
                         res.redirect('/dashboard');
                     }
                     else {
-                        console.log('entrou');
                         res.redirect('/cadastro');
                     }
                 })

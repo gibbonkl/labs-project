@@ -1,26 +1,36 @@
 function submit() {
 
     var dados = {
-        email: document.querySelector('#login_email').value,
+        username: document.querySelector('#login_email').value,
         senha: document.querySelector('#login_senha').value
     };
 
-    $.ajax({
-            url: '/login',
-            method: 'post',
-            data: dados
-        })
-        .done(function(res) 
-        {
-            if (res.success) 
-            {
-                console.log('id from ajax call is', res);
-                window.location.reload();
-            } 
-            else 
-            {
-            console.log('error...ajax');
-            }
-        });
+    
+    var data = new FormData();
+    data.append( "json", JSON.stringify( dados ) );
 
+    // fetch('http://localhost:1337/login', {
+    //     method: 'post',
+    //     headers: {
+    //         'Accept': 'application/json, text/plain, */*',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(dados)
+    //     });
+        // .then(res=>res.json())
+        // .then(res => console.log(res));
+
+    (async () => {
+        const rawResponse = await fetch('http://localhost:1337/login', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+        const content = await rawResponse;
+        location.reload();
+        console.log(content);
+        })();
 }
