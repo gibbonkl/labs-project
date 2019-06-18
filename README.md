@@ -36,8 +36,9 @@ git commit -m "<commitmessage>"
   
 ## Enviar a branch para test_dev (task em test dev no trello):
 ```
+git checkout test_dev
 git pull
-git push origin test_dev
+git merge <branchname>
 ```
 
 ## Muda de branch:
