@@ -1,4 +1,5 @@
 // funcionalidades de transição e mudança de inputs
+
 function log() {
     $('#nav_form').addClass("slide-left");
     setTimeout(function() {
@@ -20,57 +21,57 @@ function cad() {
 
 // validação
 function ehValido(dados) {
+    console.log(dados)
     let valida = false;
-
     $.each(dados, function(index, value) {
         if ((value == '') || (value === null)) {
-            console.log(index);
-            $('#login_' + index).addClass('invalid');
+            $('#'+ index).addClass('invalid');
             valida = true;
+            console.log(index);
         }
     });
     if (valida) {
         let toastHTML = '<span>Por favor, preencha todos os campos! </span><button class="btn-flat toast-action">OK</button>';
         M.toast({ html: toastHTML });
     }
-    if (dados.key != dados.repkey) {
-        $('#login_key').addClass('invalid');
-        $('#login_repkey').addClass('invalid');
+    if (dados.senha != dados.repsenha) {
+        $('#senha').addClass('invalid');
+        $('#repsenha').addClass('invalid');
         let toastHTML = '<span>Ops... As senhas precisam ser iguais! </span><button class="btn-flat toast-action">OK</button>';
         M.toast({ html: toastHTML });
-        $('#login_key').val('');
-        $('#login_repkey').val('');
+        $('#senha').val('');
+        $('#repsenha').val('');
         valida = true;
-    }
+    } 
     return valida;
 }
-
 
 function submit() {
     // e.preventDefault();
     var dados = {
-        name: $('#login_name').val(),
-        lastname: $('#login_lastname').val(),
-        username: $('#login_username').val(),
-        date: $('#login_date').val(),
-        email: $('#login_email').val(),
-        key: md5($('#login_key').val()),
-        repkey: md5($('#login_repkey').val())
+        nome: $('#nome').val(),
+        sobrenome: $('#sobrenome').val(),
+        username: $('#username').val(),
+        data_nascimento: $('#data_nascimento').val(),
+        email: $('#email').val(),
+        senha: $('#senha').val(),
+        repsenha: $('#repsenha').val()
     };
 
     if (ehValido(dados))
         return;
+    
+    dados.senha = md5($('#senha').val());
 
-    $.ajax({
+    axios({
+        method: 'post', 
         url: '/cadastro',
         data: dados,
-        type: "post",
-        done: (resp) => {
-            M.Toast({ html: "Cadastrado efetuado!", displayLenght: 2000 });
-            window.location.reload(3000);
-        },
-        error: () => {
-            console.log("error");
-        }
-    });
+    })
+    .then(response => {
+        M.toast({ html: "Cadastro efetuado com sucesso!", displayLenght:2500 });
+    })
+    .catch(error => {
+        M.toast({ html: "Aconteceu um erro, por favor tente mais tarde!", displayLenght:2500 });
+    })
 }
