@@ -1,8 +1,6 @@
 var sessionChecker = require('../helper/sessionChecker');
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
-const fetch = require('node-fetch');
-
 
 module.exports = function(app)
 {
@@ -16,7 +14,7 @@ module.exports = function(app)
                 username : req.body.username,
                 senha : req.body.senha
             }
-
+            
             let userDAO = new UserDAO(Model);
             userDAO.login(user.username,user.senha,'')
                 .then((user) => 
@@ -25,7 +23,11 @@ module.exports = function(app)
                     {
                         //console.log(user);
                         req.session.user = user;
-                        res.redirect('/dashboard');
+                        
+                        res.writeHead(301,
+                            {Location: '/dashboard'}
+                          );
+                        res.end();
                     }
                     else
                     {
