@@ -12,6 +12,6 @@ let obj = new Model({
     // data_nascimento: new Date("1996","09","17")
 });
 Dao = new Dao(Model);
-Dao.login('oi','goku')
+Dao.login('','12345','teste@gmail.com')
     .then(console.log)
     .catch(console.error);
