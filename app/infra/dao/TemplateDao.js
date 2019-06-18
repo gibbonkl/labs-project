@@ -6,6 +6,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 class TemplateDao{
+    /*
+        *   Salva um objeto no banco de dados local
+    */
     //constructor(model){
     //    this._model = model
     //    this._host = process.env.host;
@@ -16,6 +19,10 @@ class TemplateDao{
     //    mongoose.connect(this._uri,{useNewUrlParser: true});
     //    this._db = mongoose.connection;
     //}
+
+    /*
+        *   Salva um objeto no CosmosDB
+    */
     constructor(model) {
         this._model = model
 
