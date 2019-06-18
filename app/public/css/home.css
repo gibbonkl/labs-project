@@ -80,6 +80,10 @@ html {
     border-radius: 50px;
 }
 
+.font-key {
+    font-size: 0.8rem;
+}
+
 .input-field input[type]:not([readonly]),
 .input-field input[type]:focus:not([readonly]),
 .input-field textarea:not([readonly]),
@@ -97,8 +101,8 @@ html {
 .input-field input[type].invalid:focus,
 .input-field textarea.invalid,
 .input-field textarea.invalid:focus {
-    border-bottom: 1px solid #e57373;
-    box-shadow: 0 1px 0 0 #e57373;
+    border-bottom: 1px solid #e57373 !important;
+    box-shadow: 0 1px 0 0 #e57373 !important;
 }
 
 .input-field input[type].invalid:focus+label,
@@ -115,7 +119,7 @@ html {
 .input-field textarea.valid,
 .input-field textarea.valid:focus {
     border-bottom: 1px solid #26a69a;
-    box-shadow: 0 1px 0 0 #26a69a;
+    box-shadow: 0 2px 0 0 #26a69a;
 }
 
 .input-field input[type].valid:focus+label,
@@ -124,7 +128,7 @@ html {
 .input-field textarea.valid:focus+label,
 .input-field textarea.valid~.helper-text::after,
 .input-field textarea.valid:focus~.helper-text::after {
-    color: #26a69a;
+    color: #24b6a7;
 }
 
 input:not([type]),
@@ -148,6 +152,7 @@ textarea.materialize-textarea {
 .btn-small:hover {
     background-color: rgba(62, 87, 122, 0.95) !important;
 }
+
 .margin-forgot-pass {
     margin-bottom: 5%;
 }
