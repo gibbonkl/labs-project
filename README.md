@@ -49,6 +49,8 @@ git checkout <branchname>
 ```
 git checkout master
 git merge sprint-0
-Verificar mudanças antes:
+```
+Verificar mudanças:
+```
 git diff <source_branch> <target_branch>
 ```
