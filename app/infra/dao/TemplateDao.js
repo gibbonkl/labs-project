@@ -1,10 +1,6 @@
 
 const path = require('path');
-<<<<<<< HEAD
-//const ENV_FILE = path.join(__dirname, 'env');
-=======
 //const ENV_FILE = path.join(__dirname, '.env');
->>>>>>> sprint-0
 //require('dotenv').config({ path: ENV_FILE });
 //const async = require('async');
 const mongoose = require('mongoose');
@@ -29,26 +25,15 @@ class TemplateDao{
     */
     constructor(model) {
         this._model = model
-<<<<<<< HEAD
-        
-        mongoose.connect("mongodb://gob.documents.azure.com:10255/users"+"?ssl=true&replicaSet=globaldb", {
-=======
 
         mongoose.connect("mongodb://gob.documents.azure.com:10255/users" + "?ssl=true&replicaSet=globaldb", {
->>>>>>> sprint-0
             auth: {
                 user: "gob",//process.env.COSMODDB_USER,
                 password: "PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA=="//process.env.COSMOSDB_PASSWORD
             }
-<<<<<<< HEAD
-          })
-          .then(() => console.log('Connection to CosmosDB successful'))
-          .catch((err) => console.error(err));
-=======
         })
             .then(() => console.log('Connection to CosmosDB successful'))
             .catch((err) => console.error(err));
->>>>>>> sprint-0
         this._db = mongoose.connection;
     }
     /*
