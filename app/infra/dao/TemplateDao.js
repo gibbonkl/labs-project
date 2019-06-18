@@ -1,16 +1,16 @@
 
 const path = require('path');
-const ENV_FILE = path.join(__dirname, 'env');
-require('dotenv').config({ path: ENV_FILE });
-const async = require('async');
+//const ENV_FILE = path.join(__dirname, 'env');
+//require('dotenv').config({ path: ENV_FILE });
+//const async = require('async');
 const mongoose = require('mongoose');
 
 class TemplateDao{
     constructor(model){
         this._model = model
-        this._host = process.env.host;
-        this._port = process.env.port;
-        this._dbName = process.env.dbname;
+        //this._host = process.env.host;
+        //this._port = process.env.port;
+        //this._dbName = process.env.dbname;
         this._uri = `mongodb://gob:PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA==@gob.documents.azure.com:10255/?ssl=true"`;
         
         mongoose.connect(this._uri,{useNewUrlParser: true});
