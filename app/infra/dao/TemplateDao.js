@@ -1,8 +1,8 @@
 
 const path = require('path');
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-const async = require('async');
+//const ENV_FILE = path.join(__dirname, 'env');
+//require('dotenv').config({ path: ENV_FILE });
+//const async = require('async');
 const mongoose = require('mongoose');
 
 class TemplateDao{
