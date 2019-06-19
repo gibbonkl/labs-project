@@ -14,6 +14,7 @@ module.exports = function(app)
                 username : req.body.username,
                 senha : req.body.senha
             }
+            console.log(user);
             
             let userDAO = new UserDAO(Model);
             userDAO.login(user.username,user.senha,'')
@@ -23,11 +24,7 @@ module.exports = function(app)
                     {
                         //console.log(user);
                         req.session.user = user;
-                        
-                        res.writeHead(301,
-                            {Location: '/dashboard'}
-                          );
-                        res.end();
+                        res.redirect('/dashboard');
                     }
                     else
                     {
