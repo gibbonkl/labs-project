@@ -41,22 +41,24 @@
         </div>
         <!-- modal de alteração de senha -->
         <div id="modal_key" class="modal">
-            <div class="modal-content">
-                <h6 class="blue-compass center mont-serrat margin-bottom">Nos ajude a recuperar sua senha. Enviaremos um link para o seu e-mail</h6>
-                <div class="input-field">
-                    <input id="modal_username" type="text" class="active" name="modal_username" pattern="[a-zA-Z0-9]{4,20}$" required>
-                    <label for="email">Nome de usuário</label>
-                    <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
+            <form action="/recuperar_senha" method="POST">
+                <div class="modal-content">
+                    <h6 class="blue-compass center mont-serrat margin-bottom">Nos ajude a recuperar sua senha. Enviaremos um link para o seu e-mail</h6>
+                    <div class="input-field">
+                        <input id="modal_username" type="text" class="active" name="modal_username" pattern="[a-zA-Z0-9]{4,20}$" required>
+                        <label for="email">Nome de usuário</label>
+                        <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
+                    </div>
+                    <div class="input-field">
+                        <input id="modal_email" type="email" name="modal_email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+                        <label for="modal_email">Email</label>
+                        <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
+                    </div>
                 </div>
-                <div class="input-field">
-                    <input id="modal_email" type="email" name="modal_email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
-                    <label for="modal_email">Email</label>
-                    <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
+                <div class="row center">
+                    <input class="modal-close btn waves-effect bg-blue-compass rounded" value="Recuperar" type="submit"/>
                 </div>
-            </div>
-            <div class="row center">
-                <button class="modal-close btn waves-effect bg-blue-compass rounded">Recuperar</button>
-            </div>
+            </form>
         </div>
         <!-- fim modal -->
         <!-- Fim do formulário -->

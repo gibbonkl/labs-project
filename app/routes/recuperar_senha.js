@@ -1,30 +1,34 @@
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
-const onSucess = "E-mail enviado com sucesso. Favor verificar sua caixa de entrada."
-const onError = "Não foi possível alterar a sua hash. Favor verificar as informações fornecidas."
-const onFail = "Tivemos um problema com o nosso sistema. Tente novamente mais tarde."
+const email = require("../helper/sendEmail");
+const onSucess = "E-mail enviado com sucesso. Favor verificar sua caixa de entrada.";
+const onError = "Não foi possível alterar a sua hash. Favor verificar as informações fornecidas.";
+const onFail = "Tivemos um problema com o nosso sistema. Tente novamente mais tarde.";
 module.exports = function(app)
 {
     // route for user Login
     app.route('/recuperar_senha')
         .get((req, res) => {
-            res.render("recuperar_senha",{message:""});
+            res.render("recuperar_senha");
         })
         .post((req, res, next) => {
-            let dados = {
-                user: req.body.username,
-                email: req.body.email
+            let user = {
+                username: req.body.modal_username,
+                email: req.body.modal_email
             }
-            
             let userDAO = new UserDAO(Model);
-            userDAO.updateHash(user.username,user.senha,'')
-                .then((hash) => 
-                    hash? res.render('recuperar_senha',{message: onSucess}) : res.render('recuperar_senha',{message:onError})
-                )
+            userDAO.updateHash(user.username,user.email,'')
+                .then((hash) =>{ 
+                    if(hash){
+                        email.send(user.email,hash)
+                        res.redirect('/login');
+                    }
+                    else res.redirect('/login');
+                })
                 .catch((error) => 
                 {
                     console.error;
-                    res.render('recuperar_senha',{message: onFail})
+                    res.redirect('/login');
                 });
         });
     
