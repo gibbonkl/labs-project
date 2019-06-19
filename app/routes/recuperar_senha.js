@@ -8,7 +8,7 @@ module.exports = function(app)
     // route for user Login
     app.route('/recuperar_senha')
         .get((req, res) => {
-            res.render("<view>",{message:""});
+            res.render("recuperar_senha",{message:""});
         })
         .post((req, res, next) => {
             let dados = {
@@ -19,12 +19,12 @@ module.exports = function(app)
             let userDAO = new UserDAO(Model);
             userDAO.updateHash(user.username,user.senha,'')
                 .then((hash) => 
-                    hash? res.render('<view>',{message: onSucess}) : res.render('view',{message:onError})
+                    hash? res.render('recuperar_senha',{message: onSucess}) : res.render('view',{message:onError})
                 )
                 .catch((error) => 
                 {
                     console.error;
-                    res.render('<view>',{message: onFail})
+                    res.render('recuperar_senha',{message: onFail})
                 });
         });
     
