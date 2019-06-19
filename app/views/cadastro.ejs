@@ -38,31 +38,31 @@
         <div id="nav_form" class="col m8 s12 grey lighten-5 z-depth-5 full-height valign-wrapper">
             <div class="row center margin-login">
                 <h2 class="blue-compass center mont-serrat">Criar uma conta</h2>
-                <form>
+                <form action="/cadastro" method="post">
                     <div class="col s12">
                         <div class="row">
                             <img id="image" src="http://via.placeholder.com/150x150" class="circle" />
                             <input type="file" id="myfile" class="hide" />
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="nome" type="text" class="validate">
+                            <input id="nome" name="nome" type="text" class="validate  <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>"  value='<%= user.nome%>' >
                             <label class="active" for="nome">Nome</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="sobrenome" type="text" class="validate">
+                            <input id="sobrenome" name="sobrenome" type="text" class="validate <%if(user.sobrenome == ''){%><%=user.invalidClass%> <%}%>"  value=<%= user.sobrenome%>>
                             <label class="active" for="sobrenome">Sobrenome</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="username" type="text" class="validate" pattern="[a-zA-Z0-9]{4,20}$">
+                            <input id="username" name="username" type="text" class="validate <%if(user.username == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9]{4,20}$"  value=<%= user.username%>>
                             <label class="active" for="username">Nome de usuário</label>
                             <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="data_nascimento" type="date" class="validate">
+                            <input id="data_nascimento" name="data_nasc" type="date" class="validate <%if(user.data_nasc == ''){%><%=user.invalidClass%>"<%}%> >
                             <label class="active" for="data_nascimento">Data de nascimento</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate" required="required" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" />
+                            <input id="email" name="email" type="email" class="validate <%if(user.email == ''){%><%=user.invalidClass%> <%}%>"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%= user.email%>>
                             <label class="active" for="email">Email</label>
                             <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
                         </div>
@@ -70,23 +70,31 @@
                             <span class="font-key grey-text text-darken-2">Insira uma combinação de pelo menos 6 caracteres</span>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="senha" type="password" class="validate">
+                            <input id="senha" type="password" class="validate <%=user.invalidClass%>"  name="senha">
                             <label class="active" for="senha">Senha</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="repsenha" type="password" class="validate">
+                            <input id="repsenha" type="password" class="validate <%=user.invalidClass%>"  name="repsenha">
                             <label class="active" for="repsenha">Repetir senha</label>
                         </div>
                     </div>
+                    <div class="row center">
+                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar"/>
+                    </div>
+                    <% user.erros.forEach(function(er){ %>
+                        <li> <%= er%> </li>
+                    <% }) %>
                 </form>
                 <div class="row center">
-                    <button class="btn bg-blue-compass rounded waves-effect" onclick="submit()">Cadastrar</button>
+                    <!--button class="btn bg-blue-compass rounded waves-effect" onclick="submit()">Cadastrar</button -->
                 </div>
             </div>
         </div>
         <!-- Fim do formulário -->
     </div>
     <script type="text/javascript" src="../../public/js/cadastro.js"></script>
+    <script src="../../public/js/ejs.js"></script>
 </body>
+
 
 </html>
