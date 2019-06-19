@@ -19,7 +19,7 @@ module.exports = function(app)
             let userDAO = new UserDAO(Model);
             userDAO.updateHash(user.username,user.senha,'')
                 .then((hash) => 
-                    hash? res.render('recuperar_senha',{message: onSucess}) : res.render('view',{message:onError})
+                    hash? res.render('recuperar_senha',{message: onSucess}) : res.render('recuperar_senha',{message:onError})
                 )
                 .catch((error) => 
                 {
