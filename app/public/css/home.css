@@ -9,31 +9,9 @@ html {
     animation: slide-left 0.5s linear both;
 }
 
-@keyframes slide-left {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-    }
-}
-
 .slide-right {
     -webkit-animation: slide-right 0.5s linear both;
     animation: slide-right 0.5s linear both;
-}
-
-@keyframes slide-right {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(calc(100%*2));
-        transform: translateX(calc(100%*2));
-    }
 }
 
 .full-height {
@@ -160,4 +138,7 @@ textarea.materialize-textarea {
 .nav-btn-padding {
     padding-left: 15px;
     padding-right: 15px;
+}
+.margin-bottom{
+    margin-bottom: 8%;
 }
