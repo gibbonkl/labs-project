@@ -1,33 +1,31 @@
-// funcionalidades de transição e mudança de inputs
+// // funcionalidades de transição e mudança de inputs
 
-function log() {
-    $('#nav_form').addClass("slide-left");
-    setTimeout(function() {
-        $('#btn_log').addClass("hide");
-        $('#btn_cad').removeClass("hide");
+// function log() {
+//     $('#nav_form').addClass("slide-left");
+//     setTimeout(function() {
+//         $('#btn_log').addClass("hide");
+//         $('#btn_cad').removeClass("hide");
 
-    }, 100);
-    $('#nav_btn').addClass("slide-right");
-}
+//     }, 100);
+//     $('#nav_btn').addClass("slide-right");
+// }
 
-function cad() {
-    $('*').removeClass("slide-left");
-    setTimeout(function() {
-        $('#btn_log').removeClass("hide");
-        $('#btn_cad').addClass("hide");
-    }, 100);
-    $('*').removeClass("slide-right");
-}
+// function cad() {
+//     $('*').removeClass("slide-left");
+//     setTimeout(function() {
+//         $('#btn_log').removeClass("hide");
+//         $('#btn_cad').addClass("hide");
+//     }, 100);
+//     $('*').removeClass("slide-right");
+// }
 
 // validação
 function ehValido(dados) {
-    console.log(dados)
     let valida = false;
     $.each(dados, function(index, value) {
         if ((value == '') || (value === null)) {
-            $('#'+ index).addClass('invalid');
+            $('#' + index).addClass('invalid');
             valida = true;
-            console.log(index);
         }
     });
     if (valida) {
@@ -42,12 +40,11 @@ function ehValido(dados) {
         $('#senha').val('');
         $('#repsenha').val('');
         valida = true;
-    } 
+    }
     return valida;
 }
 
 function submit() {
-    // e.preventDefault();
     var dados = {
         nome: $('#nome').val(),
         sobrenome: $('#sobrenome').val(),
@@ -60,18 +57,19 @@ function submit() {
 
     if (ehValido(dados))
         return;
-    
+
     dados.senha = md5($('#senha').val());
+    dados.repsenha = md5($('#repsenha').val());
 
     axios({
-        method: 'post', 
-        url: '/cadastro',
-        data: dados,
-    })
-    .then(response => {
-        M.toast({ html: "Cadastro efetuado com sucesso!", displayLenght:2500 });
-    })
-    .catch(error => {
-        M.toast({ html: "Aconteceu um erro, por favor tente mais tarde!", displayLenght:2500 });
-    })
+            method: 'post',
+            url: '/cadastro',
+            data: dados,
+        })
+        .then(response => {
+            M.toast({ html: "Cadastro efetuado com sucesso!", displayLenght: 2500 });
+        })
+        .catch(error => {
+            M.toast({ html: "Aconteceu um erro, por favor tente mais tarde!", displayLenght: 2500 });
+        })
 }
