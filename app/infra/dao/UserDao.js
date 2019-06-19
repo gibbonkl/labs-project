@@ -1,4 +1,5 @@
 const TemplateDao = require("./TemplateDao");
+var createHash = require('../helper/createHash');
 
 class UserDao extends TemplateDao{
     /*
@@ -41,9 +42,13 @@ class UserDao extends TemplateDao{
         }
         return({detail:"Impossível realizar operação",error:"Usuário null ou undefined"})
     }
-    updateHash(username='',newHash='',hash=''){
-        if(username && newHash && hash){
-            return this._update({username:username,hash:hash},{$set:{hash: newHash}})
+    updateHash(username, email){
+        if(username && email){
+            
+            let newHash =  createHash(Math.random().toString(36).substring(7));
+            return this._update({username:username},{$set:{hash: newHash}})
+                .then(() => newHash)
+                .catch(console.error);
                 
         }
         return({detail:"Impossível realizar operação",error:"Campo inválido"})
@@ -65,6 +70,7 @@ class UserDao extends TemplateDao{
         }
         return(false);
     }
+
     updatePassword(username="",newPassword=""){
         if(username && newPassword){
             return this._update({username:username},{$set:{senha: newPassword}})
