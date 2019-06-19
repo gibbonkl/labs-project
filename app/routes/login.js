@@ -9,17 +9,31 @@ module.exports = function(app)
         .get(sessionChecker, (req, res) => {
             res.sendFile('login.html', { root: './app/views/login' });
         })
-        .post((req, res) => {
+        .post( (req, res, next) => {
             let user = {
-                email : req.body.email,
+                username : req.body.username,
                 senha : req.body.senha
             }
+            
             let userDAO = new UserDAO(Model);
-            userDAO.login('', user.senha,user.email)
+            userDAO.login(user.username,user.senha,'')
                 .then((user) => 
                 {
-                    req.session.user = user;
-                    res.redirect('/dashboard');
+                    if(user)
+                    {
+                        //console.log(user);
+                        req.session.user = user;
+                        
+                        res.writeHead(301,
+                            {Location: '/dashboard'}
+                          );
+                        res.end();
+                    }
+                    else
+                    {
+                        res.redirect('/login');
+                    }
+                    next();
                 })
                 .catch((error) => 
                 {
@@ -27,4 +41,5 @@ module.exports = function(app)
                     res.redirect('/login');
                 });
         });
+    
 }
