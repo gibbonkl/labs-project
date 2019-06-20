@@ -25,11 +25,17 @@ class TemplateDao{
     */
     constructor(model) {
         this._model = model
-
+        /*
         mongoose.connect("mongodb://gob.documents.azure.com:10255/users" + "?ssl=true&replicaSet=globaldb", {
             auth: {
                 user: "gob",//process.env.COSMODDB_USER,
                 password: "PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA=="//process.env.COSMOSDB_PASSWORD
+            }
+        */
+        mongoose.connect("mongodb://gob-db.documents.azure.com:10255/" + "?ssl=true&replicaSet=globaldb", {
+            auth: {
+                user: "gob-db",
+                password: "4NMC2w09k4tC3dzOvTLlMDSvgZan2x44I0oq0EHBcNudnE3ZDUchSncSqfqHjUxM6wcTVpq0r7Gezct2qRckOw=="
             }
         })
             .then(() => console.log('Connection to CosmosDB successful'))
