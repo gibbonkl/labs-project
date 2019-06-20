@@ -11,6 +11,7 @@
     <script type="text/javascript" src="../../public/js/materialize.js"></script>
     <script type="text/javascript" src="../../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../../public/js/inicio.js"></script>
+    <script type="text/javascript" src="../../public/js/fetch.js"></script>
 </head>
 
 <body>
@@ -41,7 +42,7 @@
         </div>
         <!-- modal de alteração de senha -->
         <div id="modal_key" class="modal">
-            <form action="/recuperar_senha" method="POST">
+            <form>
                 <div class="modal-content">
                     <h6 class="blue-compass center mont-serrat margin-bottom">Nos ajude a recuperar sua senha. Enviaremos um link para o seu e-mail</h6>
                     <div class="input-field">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="row center">
-                    <input class="modal-close btn waves-effect bg-blue-compass rounded" value="Recuperar" type="submit"/>
+                    <button class="modal-close btn waves-effect bg-blue-compass rounded" value="Recuperar" onclick="recoveryPassword(event)">Recuperar</button>
                 </div>
             </form>
         </div>
