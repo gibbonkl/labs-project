@@ -17,16 +17,14 @@ module.exports = function(app)
             return userDAO.updateHash(user.username,user.email)
                 .then(hash =>{
                     if(hash){
+                        console.log("ENTREI NO HASH");
                         email.send(user.email,hash)
-                            .then(response => res.status(200).send("ok"))
-                            .catch(error => res.status(404).send("error"))
+                            .then(res.send("ok"))
+                            .catch(error => res.send("error"))
                     }
-                    else res.status(404).send("error")
+                    else res.send("error")
                 })
-                .catch((error) =>
-                {                       
-                    res.status(505).send("error")
-                });
+                .catch((error) => res.status(505).send("error"));
         });
     
 }

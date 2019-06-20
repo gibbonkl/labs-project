@@ -16,7 +16,7 @@ class sendEmail{
                 subject: `Recuperar senha - Casa do Código`,
                 text: `
 Olá! Vi que você precisa recuperar sua senha =)
-É só clicar nesse link <a href=${link}>recuperar senha</a>
+É só clicar nesse link <a href="http://google.com.br">recuperar senha</a>
 
 Atenciosamente,
 Casa dos Bolsistas.`
