@@ -12,9 +12,9 @@ module.exports = function(app)
         secret: 'somerandonstuffs',
         resave: false,
         saveUninitialized: false,
-        rolling: true,
+        rolling: false,
         cookie: {
-            expires: 300000
+            expires: 300000000
         }
     }));
     
