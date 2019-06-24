@@ -24,7 +24,7 @@ module.exports = function(app)
                     }
                     else res.send("error")
                 })
-                .catch((error) => res.status(505).send("error"));
+                .catch((error) => res.send("error"));
         });
     
 }
