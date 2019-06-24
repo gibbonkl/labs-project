@@ -19,14 +19,8 @@ module.exports = function(app)
     // route for user signup
     app.route('/alterar_senha')
         .get(sessionChecker, (req, res) => {
-            let user = {
-                nome: '',
-                sobrenome: '',
-                username: '',
-                email: '',
-                erros : []
-            };
-            res.render('alterar_senha', { user : user});
+            
+            res.render('alterar_senha');
         })
         .post((req, res) => {
             console.log('post');
