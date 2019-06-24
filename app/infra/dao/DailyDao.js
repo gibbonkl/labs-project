@@ -27,14 +27,15 @@ class DailyDao extends TemplateDao{
     */
     validateDailyNote(dailyNote){
         if(dailyNote){
-            return this._findOne({$or: [{usuario: dailyNote.usuario}, {data: dailyNote.data}]
+            return this._findOne({usuario: dailyNote.usuario,data: dailyNote.data})
                 .then(res => res ? res : null)
                 .catch(err =>{
                     console.error(err);
                     return({detail:"Impossível realizar operação", error:err})
                 })
-            })
+            
         }
+        
     return({detail:"Impossível realizar operação", error:"Daily Note null ou undefined"})
     }
     /*
@@ -51,6 +52,17 @@ class DailyDao extends TemplateDao{
                 .catch(err => {
                     console.log(err);
                     return({detail:"Impossível fazer update"})
+                })
+        }
+    }
+
+    removeDailyNote(dailyNote){
+        if(dailyNote){
+            return  this._updateOne({ usuario: dailyNote.usuario, data: dailyNote.data },
+                        { $set: { ativo: "false"} })
+                .catch(err => {
+                    console.log(err);
+                    return ({ detail: "Impossível remover" })
                 })
         }
     }
