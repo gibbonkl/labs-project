@@ -24,7 +24,7 @@ cd ./game-of-bols
 
 ## Estrutura MVC do projeto:
 
-![alt text](relative/readme_source/MVC?raw=true "MVC")
+![alt text](relative/readme_source/MVC.png?raw=true "MVC")
 
 ## No final da Sprint, fazer merge com a master:
 ```
