@@ -84,23 +84,13 @@ class UserDao extends TemplateDao{
         *   @returns {object}
     */
     login(username='',password='',email=''){
-        if(username && password){
-            return this._findOne({username:username,senha:password})
-                .then(res=> res? res: null)
-                .catch(err=>{
-                    console.error(err);
-                    return({detail:"Impossível realizar autenticação.",error:err})
-                })
-        }
-        else if(email && password){
-            return this._findOne({email:email,senha:password})
-                .then(res=> res? res:null)
-                .catch(err=>{
-                    console.error(err);
-                    return({detail:"Impossível realizar autenticação",error:err})
-                })
-        }
-        return({detail:"Impossível realizar autenticação.",error:"Username e senha null ou undefined"})
+        
+        return this._findOne({$or: [{username:username},{email:email}]}, {senha:password})
+            .then(res=> res? res: null)
+            .catch(err=>{
+                console.error(err);
+                return({detail:"Impossível realizar autenticação.",error:err})
+        });
     }
 }
 module.exports = UserDao;
