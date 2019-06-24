@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "start2": "nodemon index.js"
+        "inicia": "nodemon index.js --ignore 'config/config_localOUremoto.json'"
     },
     "author": "umaGalera",
     "license": "ISC",

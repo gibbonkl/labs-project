@@ -1,3 +1,4 @@
+var Class_config = require('../../../config/config_localOUremoto');
 
 const path = require('path');
 //const ENV_FILE = path.join(__dirname, '.env');
@@ -5,26 +6,39 @@ const path = require('path');
 //const async = require('async');
 const mongoose = require('mongoose');
 
+
 class TemplateDao{
-    /*
-        *   Salva um objeto no banco de dados local
-    */
-    //constructor(model){
-    //    this._model = model
-    //    this._host = process.env.host;
-    //    this._port = process.env.port;
-    //    this._dbName = process.env.dbname;
-    //    this._uri = `mongodb://${this._host}:${this._port}/${this._dbName}`;
-    //    
-    //    mongoose.connect(this._uri,{useNewUrlParser: true});
-    //    this._db = mongoose.connection;
-    //}
 
     /*
-        *   Salva um objeto no CosmosDB
+        *   Salva um objeto no CosmosDB ou local 
+        *   dependendo de qual arquivo é executado (index.js ou server.js)
     */
     constructor(model) {
         this._model = model
+        var config = new Class_config();
+
+        if(config.get() == 'local')
+        {
+            this._host = 'localhost';
+            this._port = 27017;
+            this._dbName = 'test';
+            this._uri = `mongodb://${this._host}:${this._port}/${this._dbName}`;
+            
+            mongoose.connect(this._uri,{useNewUrlParser: true});
+            this._db = mongoose.connection;
+        }
+        else if(config.get() == 'remoto')
+        {
+            mongoose.connect("mongodb://gob-db.documents.azure.com:10255/" + "?ssl=true&replicaSet=globaldb", {
+                auth: {
+                    user: "gob-db",
+                    password: "4NMC2w09k4tC3dzOvTLlMDSvgZan2x44I0oq0EHBcNudnE3ZDUchSncSqfqHjUxM6wcTVpq0r7Gezct2qRckOw=="
+                }
+            })
+                .then(() => console.log('Connection to CosmosDB successful'))
+                .catch((err) => console.error(err));
+            this._db = mongoose.connection;
+        }
         /*
         mongoose.connect("mongodb://gob.documents.azure.com:10255/users" + "?ssl=true&replicaSet=globaldb", {
             auth: {
@@ -32,15 +46,6 @@ class TemplateDao{
                 password: "PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA=="//process.env.COSMOSDB_PASSWORD
             }
         */
-        mongoose.connect("mongodb://gob-db.documents.azure.com:10255/" + "?ssl=true&replicaSet=globaldb", {
-            auth: {
-                user: "gob-db",
-                password: "4NMC2w09k4tC3dzOvTLlMDSvgZan2x44I0oq0EHBcNudnE3ZDUchSncSqfqHjUxM6wcTVpq0r7Gezct2qRckOw=="
-            }
-        })
-            .then(() => console.log('Connection to CosmosDB successful'))
-            .catch((err) => console.error(err));
-        this._db = mongoose.connection;
     }
     /*
         *   Salva um objeto no banco de dados
