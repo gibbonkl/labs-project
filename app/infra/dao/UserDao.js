@@ -46,8 +46,8 @@ class UserDao extends TemplateDao{
         if(username && email){
             
             let newHash =  createHash(Math.random().toString(36).substring(7));
-            return this._update({username:username, email:email},{$set:{hash: newHash}})
-                .then(() => (newHash))
+            return this._updateOne({username:username, email:email},{$set:{hash: newHash}})
+                .then(() => newHash)
                 .catch(console.error);
                 
         }

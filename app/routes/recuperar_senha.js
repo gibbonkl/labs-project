@@ -1,31 +1,30 @@
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
-const onSucess = "E-mail enviado com sucesso. Favor verificar sua caixa de entrada."
-const onError = "Não foi possível alterar a sua hash. Favor verificar as informações fornecidas."
-const onFail = "Tivemos um problema com o nosso sistema. Tente novamente mais tarde."
+const email = require("../helper/sendEmail");
 module.exports = function(app)
 {
     // route for user Login
     app.route('/recuperar_senha')
         .get((req, res) => {
-            res.render("recuperar_senha",{message:""});
+            res.render("recuperar_senha");
         })
         .post((req, res, next) => {
-            let dados = {
-                user: req.body.username,
+            let user = {
+                username: req.body.username,
                 email: req.body.email
             }
-            
             let userDAO = new UserDAO(Model);
-            userDAO.updateHash(user.username,user.senha,'')
-                .then((hash) => 
-                    hash? res.render('recuperar_senha',{message: onSucess}) : res.render('recuperar_senha',{message:onError})
-                )
-                .catch((error) => 
-                {
-                    console.error;
-                    res.render('recuperar_senha',{message: onFail})
-                });
+            return userDAO.updateHash(user.username,user.email)
+                .then(hash =>{
+                    if(hash){
+                        console.log("ENTREI NO HASH");
+                        email.send(user.email,hash)
+                            .then(res.send("ok"))
+                            .catch(error => res.send("error"))
+                    }
+                    else res.send("error")
+                })
+                .catch((error) => res.status(505).send("error"));
         });
     
 }

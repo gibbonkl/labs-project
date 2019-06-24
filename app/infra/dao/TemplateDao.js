@@ -1,8 +1,8 @@
 var Class_config = require('../../../config/config_localOUremoto');
 
 const path = require('path');
-//const ENV_FILE = path.join(__dirname, '.env');
-//require('dotenv').config({ path: ENV_FILE });
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 //const async = require('async');
 const mongoose = require('mongoose');
 
@@ -39,13 +39,6 @@ class TemplateDao{
                 .catch((err) => console.error(err));
             this._db = mongoose.connection;
         }
-        /*
-        mongoose.connect("mongodb://gob.documents.azure.com:10255/users" + "?ssl=true&replicaSet=globaldb", {
-            auth: {
-                user: "gob",//process.env.COSMODDB_USER,
-                password: "PxadGsdwwKXIeAZz2w2Mk0EZxHXwOwF5DfhjZruXtsbV4jWwHhSi44NdpxwmIiWSUxwy08Q5ihJCuHIaE7Z1wA=="//process.env.COSMOSDB_PASSWORD
-            }
-        */
     }
     /*
         *   Salva um objeto no banco de dados

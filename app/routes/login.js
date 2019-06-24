@@ -7,7 +7,7 @@ module.exports = function(app)
     // route for user Login
     app.route('/login')
         .get(sessionChecker, (req, res) => {
-            res.sendFile('login.html', { root: './app/views/login' });
+            res.render('login');
         })
         .post( (req, res, next) => {
             let user = {
