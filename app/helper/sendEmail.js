@@ -6,7 +6,7 @@ class sendEmail{
     static send(dest='',hash=''){
         let link;
        return new Promise((resolve,reject)=>
-        mailer.sendEmail({
+            mailer.sendEmail({
                 auth: {
                     user: 'casadobolsista@outlook.com',
                     pass: '#c4s4d0b0ls1st4.2019'
@@ -14,15 +14,15 @@ class sendEmail{
                 from: 'casadobolsista@outlook.com',
                 to: dest,
                 subject: `Recuperar senha - Casa do Código`,
-                text: `
-Olá! Vi que você precisa recuperar sua senha =)
+                html: `
+<pre>Olá! Vi que você precisa recuperar sua senha =)
 É só clicar nesse link <a href="http://google.com.br">recuperar senha</a>
 
 Atenciosamente,
-Casa dos Bolsistas.`
+Casa dos Bolsistas.</pre>`
                 ,
-                onError: (e) => resolve(e),
-                onSuccess: (i) => reject(i)
+                onError: (e) => reject(e),
+                onSuccess: (i) => resolve(i)
             })
         )
     }

@@ -9,7 +9,9 @@ function recoveryPassword(e){
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(data)
     })
-        .then(res => res.ok? document.querySelector(".row").append("Email enviado"):document.querySelector(".row").append("Email não pode ser enviado."))
+        .then(res => 
+            M.toast({html: res.body, displayLength: 2000})
+        )
         .catch(console.log);
 
-}
+}   
