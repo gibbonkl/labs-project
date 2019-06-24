@@ -20,11 +20,11 @@ cd ./game-of-bols
 
 ## Fluxo de uso do repositório:
 
-![alt text](relative/readme_source/fluxo_basico.png?raw=true "Fluxo de uso do repositório")
+![Fluxo de uso do repositório](readme_source/fluxo_basico.png?raw=true "Fluxo de uso do repositório")
 
 ## Estrutura MVC do projeto:
 
-![alt text](relative/readme_source/MVC.png?raw=true "MVC")
+![Fluxo de uso do repositório](readme_source/MVC.png?raw=true "MVC")
 
 ## No final da Sprint, fazer merge com a master:
 ```
