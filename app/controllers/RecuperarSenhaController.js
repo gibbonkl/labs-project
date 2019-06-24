@@ -6,6 +6,7 @@ const Email = require("../helper/sendEmail");
     *   Controller responsável por enviar o email 
     *   para recuperar a senha do usuário
     *
+    * 
     *   @author Diego Bastos da Costa 
 */
 class RecuperarSenhaController{
