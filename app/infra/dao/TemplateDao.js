@@ -103,5 +103,10 @@ class TemplateDao{
         
     }
 
+    _findOneAndUpdate(filter={},doc={},options={}){
+        return this._model
+            .findOneAndUpdate(filter,doc,options);
+    }
+
 }
 module.exports = TemplateDao;

@@ -25,16 +25,28 @@ class RecuperarSenhaController{
         *   @param {string} email Email de usuário
         *   @returns {bool}
     */
-    recoveryPassword(user,email){
+    recoveryPassword(user="",email=""){
         return this._userDAO.updateHash(user,email)
             .then(hash=> 
                 hash? Email.send(email,hash) : null
             )
-            .then(res => res? true:false)
+            .then(res => res ? true:false)
             .catch(err=> {
                 console.error(err);
                 throw new Error(err);
             })
+    }
+    changePassword(hash="",newPassword=""){
+        return this._userDAO.updatePassword(hash,newPassword)
+            .then(res =>{
+                console.log(res)
+                return res? true:false
+            })
+            .catch(err=>{
+                console.log(err);
+                throw new Error(err);
+            })
+
     }
 }
 module.exports = RecuperarSenhaController;

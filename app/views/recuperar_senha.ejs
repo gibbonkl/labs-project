@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/home.css"></link>
     <link rel="stylesheet" type="text/css" href="../../public/css/alterasenha.css"></link>
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"></link>
+    <script src="../../public/js/recuperar-senha.js" type="text/javascript"></script>
     <script src="../../public/js/jquery.min.js" type="text/javascript"></script>
     <script src="../../public/js/materialize.js" type="text/javascript"></script>
 </head>
@@ -20,16 +21,16 @@
                     <h5 class="blue-compass center mont-serrat margin-bottom">Altere sua senha</h5>
                     <p class="grey-text text-darken-2 font-key">Insira uma combinação de pelo menos 6 caracteres</p>
                     <div class="input-field col s12">
-                        <input id="card_novasenha" type="password" class="validate" required>
+                        <input id="card_novasenha" name="card_novasenha" type="password" class="validate" required>
                         <label for="card_novasenha">Nova senha</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="card_confsenha" type="password" class="validate" required>
+                        <input id="card_confsenha"  name="card_confsenha" type="password" class="validate" required>
                         <label for="card_confsenha">Confirme a nova senha</label>
                     </div>
                 </div>
                 <div class="row center">
-                    <button class="modal-close btn waves-effect bg-blue-compass rounded">Confirmar</button>
+                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="changePassword(event)">Confirmar</button>
                 </div>
             </div>
         </div>
