@@ -57,9 +57,9 @@ class TemplateDao{
         *   @params {object} options Opções para a busca
         *   @returns {object}
     */
-    _find(filter={}, projection={},options={}){
+    _find(filter={}, projection={}, options={}){
         return this._model
-            .find(filter, projection,options)
+            .find(filter, projection, options)
             .exec();
     }
     /*
