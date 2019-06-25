@@ -2,6 +2,10 @@ let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 var sessionChecker = require('../helper/sessionChecker');
 
+/*
+FALTA COLOCAR O SESSIO CHECKER LOGOUT
+*/
+
 module.exports = function (app) {
     //middleware de validação
     app.use('/alterar_senha', (req, res, next) => {
@@ -33,9 +37,9 @@ module.exports = function (app) {
 
     // rota para alterar senha
     app.route('/alterar_senha')
+        //COLOCAR O SESSION CHECKER COMO PRIMEIRO ´PARAMETRO DO GET
         .get( (req, res) => {
-            res.send(req.session.user.username);
-            //res.render('alterar_senha');
+            res.render('alterar_senha');
         })
         .post((req, res, next) => {
             let user = {
@@ -44,11 +48,15 @@ module.exports = function (app) {
                 confirmacaosenha: req.body.confirmacaosenha,
             } 
 
-            //console.log(session.user);
-            
             let userDAO = new UserDAO(Model);
-            return userDAO.updatePassword(username = req.session.user.username, newPassword = user.novasenha)
-                .then()
+            if (userDAO.checkPassword(req.session.user.username, user.senha)) {
+                return userDAO.updatePassword(username = req.session.user.username, newPassword = user.novasenha)
+                .then(res.send("Senha Alterada"))
                 .catch((error) => res.send("Impossível modificação de senha", error))
-        });
+            }
+            else{
+                return res.send(error);
+            }
+        
+        })                
 }
