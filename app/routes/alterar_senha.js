@@ -2,59 +2,61 @@ let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 var sessionChecker = require('../helper/sessionChecker');
 
-module.exports = function(app)
-{
+/*
+FALTA COLOCAR O SESSIO CHECKER LOGOUT
+*/
+
+module.exports = function (app) {
     //middleware de validação
-    app.use('/alterar_senha', (req,res,next) => 
-    {
-        if(req.method == 'POST')
-        {
-            
+    app.use('/alterar_senha', (req, res, next) => {
+        if (req.method == 'POST') {
+
+            let user = {
+                senha: req.body.senha,
+                novasenha: req.body.novasenha,
+                confirmacaosenha: req.body.confirmacaosenha,
+                erros: [],
+                invalidClass: '',
+            } 
+
+            if (!user.senha || !user.novasenha || !user.confirmacaosenha || (user.novasenha != user.confirmacaosenha)) {
+
+                temErro = true;
+                user.invalidClass = 'invalid';
+
+                res.send("Impossível alteração de senha");
+            }
+            else {
+                next();
+            }
         }
-        else
-        {
+        else {
             next();
         }
     });
-    // route for user signup
+
+    // rota para alterar senha
     app.route('/alterar_senha')
-        .get(sessionChecker, (req, res) => {
-            
+        //COLOCAR O SESSION CHECKER COMO PRIMEIRO ´PARAMETRO DO GET
+        .get( (req, res) => {
             res.render('alterar_senha');
         })
-        .post((req, res) => {
-            console.log('post');
-            let user = new Model({
-                    nome: req.body.nome,
-                    sobrenome: req.body.sobrenome,
-                    username: req.body.username,
-                    email: req.body.email,
-                    senha: req.body.senha,
-                    imagem: req.body.imagem,
-                    data_nascimento: new Date(req.body.data_nasc)
-            });
-            
-            let userDAO = new UserDAO(Model);
-            userDAO.insertUser(user)
-                .then(user => {
-                    if(user && !user.error){
-                        req.session.user = user;
-                        res.redirect('/dashboard');
-                    }
-                    else 
-                    {
-                        let user = {
-                            nome: req.body.nome,
-                            sobrenome: req.body.sobrenome,
-                            username: req.body.username,
-                            email: req.body.email,
-                            erros : ['username ou email já existente']
-                        };
-                        res.render('cadastro', { user : user});
-                    }
-                })
-                .catch(console.log);
-            
-        });
-}
+        .post((req, res, next) => {
+            let user = {
+                senha: req.body.senha,
+                novasenha: req.body.novasenha,
+                confirmacaosenha: req.body.confirmacaosenha,
+            } 
 
+            let userDAO = new UserDAO(Model);
+            if (userDAO.checkPassword(req.session.user.username, user.senha)) {
+                return userDAO.updatePassword(username = req.session.user.username, newPassword = user.novasenha)
+                .then(res.send("Senha Alterada"))
+                .catch((error) => res.send("Impossível modificação de senha", error))
+            }
+            else{
+                return res.send(error);
+            }
+        
+        })                
+}
