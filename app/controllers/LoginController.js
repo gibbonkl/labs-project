@@ -17,15 +17,17 @@ class LoginController {
             let userDAO = new UserDAO(Model);
             return userDAO.login(user, password)
                 .then((user) => {
-                    if(user) JSON.parse('{"status":"ok", "user":"user"}');
-                    else JSON.parse('{"status":"Credenciais inválidas.", "user":""}');
+                    console.log(user)
+                    if(user) return {"status":"ok", "user":user};
+                    else return {"status":"Credenciais inválidas.", "user":""};
                 })
                 .catch((err) => console.log(err));
         }
 
         else {
-            return JSON.parse('{"status":"Os campos não podem estar vazios!", "user":""}')
+            return {"status":"Os campos não podem estar vazios!", "user":""}
         }
+
     }
 }
 
