@@ -84,6 +84,9 @@
                     <% user.erros.forEach(function(er){ %>
                         <li> <%= er%> </li>
                     <% }) %>
+                    <% if(captcha) {%>
+                        <%- captcha %>
+                    <% } %>
                 </form>
                 <div class="row center">
                     <!--button class="btn bg-blue-compass rounded waves-effect" onclick="submit()">Cadastrar</button -->
