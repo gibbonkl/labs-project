@@ -83,6 +83,19 @@ class UserDao extends TemplateDao{
         *   @param {string} email Email do usuário
         *   @returns {object}
     */
+
+    checkPassword(username='', password=''){
+        if(username && password){
+            return this._findOne({username: username, senha: password})
+                .then(res=> res?true:false)
+                .catch(err=>{
+                    console.error(err);
+                    return(false);
+                })
+        }
+        return(false);
+    }
+
     login(username='',password='',email=''){
         if(username && password){
             return this._findOne({username:username,senha:password})
