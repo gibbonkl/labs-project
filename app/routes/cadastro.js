@@ -4,13 +4,10 @@ var sessionChecker = require('../helper/sessionChecker');
 var multer = require("multer");
 var upload = multer();
 
-module.exports = function(app)
-{
+module.exports = function(app) {
     //middleware de validação
-    app.use('/cadastro', (req,res,next) => 
-    {
-        if(req.method == 'POST')
-        {
+    app.use('/cadastro', (req, res, next) => {
+        if (req.method == 'POST') {
             console.log('validacao');
 
             /* fazer validação
@@ -21,28 +18,25 @@ module.exports = function(app)
                 nome: req.body.nome,
                 sobrenome: req.body.sobrenome,
                 username: req.body.username,
-                email: req.body.email,                
+                email: req.body.email,
                 data_nasc: req.body.data_nasc,
                 senha: req.body.senha,
                 repsenha: req.body.repsenha,
-                erros : [],
-                invalidClass : ''
+                erros: [],
+                invalidClass: ''
             }
             let temErro = false;
 
-            if(!user.nome || !user.sobrenome || !user.username || !user.email)
-            {
+            if (!user.nome || !user.sobrenome || !user.username || !user.email) {
                 temErro = true;
                 user.invalidClass = 'invalid';
             }
-            if(!user.data_nasc || !user.senha || !user.repsenha)
-            {
+            if (!user.data_nasc || !user.senha || !user.repsenha) {
                 temErro = true;
                 user.invalidClass = 'invalid';
             }
 
-            if(req.body.senha != req.body.repsenha)
-            {
+            if (req.body.senha != req.body.repsenha) {
                 console.log('tem erro ai');
                 temErro = true;
                 user.erros.push('As senhas devem ser iguais');
@@ -50,18 +44,13 @@ module.exports = function(app)
 
             //outros ifs de validação
 
-            if(temErro)
-            {
+            if (temErro) {
                 temErro = false;
-                res.render('cadastro', {user : user});
-            }
-            else
-            {
+                res.render('cadastro', { user: user });
+            } else {
                 next();
             }
-        }
-        else
-        {
+        } else {
             next();
         }
     });
@@ -72,52 +61,49 @@ module.exports = function(app)
                 nome: req.body.nome,
                 sobrenome: req.body.sobrenome,
                 username: req.body.username,
-                email: req.body.email,                
+                email: req.body.email,
                 data_nasc: req.body.data_nasc,
                 senha: req.body.senha,
                 repsenha: req.body.repsenha,
-                erros : [],
-                invalidClass : ''
+                erros: [],
+                invalidClass: ''
             };
-            res.render('cadastro', { user : user});
+            res.render('cadastro', { user: user });
         })
-        .post(upload.none(),(req, res) => {
+        .post(upload.none(), (req, res) => {
             console.log('post');
             let user = new Model({
-                    nome: req.body.nome,
-                    sobrenome: req.body.sobrenome,
-                    username: req.body.username,
-                    email: req.body.email,
-                    senha: req.body.senha,
-                    imagem: req.body.imagem,
-                    data_nascimento: new Date(req.body.data_nasc)
+                nome: req.body.nome,
+                sobrenome: req.body.sobrenome,
+                username: req.body.username,
+                email: req.body.email,
+                senha: req.body.senha,
+                imagem: req.body.imagem,
+                data_nascimento: new Date(req.body.data_nasc)
             });
-            
+
             let userDAO = new UserDAO(Model);
             userDAO.insertUser(user)
                 .then(user => {
-                    if(user && !user.error){
+                    if (user && !user.error) {
                         req.session.user = user;
                         res.redirect('/dashboard');
-                    }
-                    else 
-                    {
+                    } else {
                         let user = {
                             nome: req.body.nome,
                             sobrenome: req.body.sobrenome,
                             username: req.body.username,
-                            email: req.body.email,                
+                            email: req.body.email,
                             data_nasc: req.body.data_nasc,
                             senha: req.body.senha,
                             repsenha: req.body.repsenha,
-                            invalidClass : '',
-                            erros : ['username ou email já existente']
+                            invalidClass: '',
+                            erros: ['username ou email já existente']
                         };
-                        res.render('cadastro', { user : user});
+                        res.render('cadastro', { user: user });
                     }
                 })
                 .catch(console.log);
-            
+
         });
 }
-
