@@ -19,9 +19,9 @@ class TemplateDao{
 
         if(config.get() == 'local')
         {
-            this._host = 'localhost';
-            this._port = 27017;
-            this._dbName = 'test';
+            this._host = process.env.host;
+            this._port = process.env.port;
+            this._dbName = process.env.dbname;
             this._uri = `mongodb://${this._host}:${this._port}/${this._dbName}`;
             
             mongoose.connect(this._uri,{useNewUrlParser: true});
