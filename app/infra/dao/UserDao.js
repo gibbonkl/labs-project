@@ -83,9 +83,9 @@ class UserDao extends TemplateDao{
         *   @param {string} email Email do usuário
         *   @returns {object}
     */
-    login(username='',password='',email=''){
+    login(user='', password=''){
         
-        return this._findOne({$or: [{username:username},{email:email}]}, {senha:password})
+        return this._findOne({$or: [{username:user},{email:user}]}, {senha:password})
             .then(res=> res? res: null)
             .catch(err=>{
                 console.error(err);
