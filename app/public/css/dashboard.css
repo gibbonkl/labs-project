@@ -1,0 +1,10 @@
+.nav-padding-left {
+    padding-left: 1%;
+}
+.logo-img {
+    background-image: url("../img/logo_compasso_mini.png");
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 60px;
+    width: 60px;
+}
