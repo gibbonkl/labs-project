@@ -2,7 +2,11 @@
 const Controller = require("../controllers/RecuperarSenhaController");
 module.exports = function(app)
 {
-    // route for user Login
+    /*
+        *
+        *   Rota para recuperação de senha
+        * 
+    */
     app.route('/recuperar_senha')
         .get((req, res) => 
             res.render("recuperar_senha")
