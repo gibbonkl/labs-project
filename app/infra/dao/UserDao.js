@@ -71,9 +71,11 @@ class UserDao extends TemplateDao{
         return(false);
     }
 
-    updatePassword(username="",newPassword=""){
-        if(username && newPassword){
-            return this._update({username:username},{$set:{senha: newPassword}})
+    updatePassword(hash="",newPassword=""){
+        if(newPassword && hash){
+            return this._findOneAndUpdate({hash:hash},{$set:{senha: newPassword}})
+                .then(user => this.updateHash(user.username,user.email))
+                .then(hash => hash? true: false)
         }
     }
     /*
@@ -91,6 +93,23 @@ class UserDao extends TemplateDao{
                 console.error(err);
                 return({detail:"Impossível realizar autenticação.",error:err})
         });
+    }
+    /*
+        *   Busca por um usuário pelo username e senha
+        *   @param {string} username Nome de usuário
+        *   @param {string} password Senha de usuário
+        *   @returns true se a senha for do usuário
+    */
+    checkPassword(username = '', password = '') {
+        if (username && password) {
+            return this._findOne({ username: username, senha: password })
+                .then(res => res ? true : false)
+                .catch(err => {
+                    console.error(err);
+                    return (false);
+                })
+        }
+        return (false);
     }
 }
 module.exports = UserDao;

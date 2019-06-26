@@ -1,5 +1,6 @@
 class DashboardController {
     constructor(){
+<<<<<<< HEAD
         throw new Error("Classe estática. Impossível instanciar.");
     }
 
@@ -7,3 +8,8 @@ class DashboardController {
 }
 
 module.exports = DashboardController;
+=======
+        
+    }
+}
+>>>>>>> test_dev

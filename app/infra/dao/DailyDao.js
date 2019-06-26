@@ -2,7 +2,7 @@ const TemplateDao = require("./TemplateDao");
 
 class DailyDao extends TemplateDao{
     /*
-        *   Verifica se existe daily note no banco,
+        *   Verifica se daily note no banco,
         *   Se não existir, insere no banco de dados e retorna o objeto inserido
         *   Se não existir, retorna null
         *   @param {Model} dailyNote Modelo de daily mongoose
@@ -48,14 +48,18 @@ class DailyDao extends TemplateDao{
     updateDailyNote(dailyNote){
         if(dailyNote){
             return  this._updateOne({usuario:dailyNote.usuario,data:dailyNote.data},
-                        {$set:{ontem:dailyNote.ontem, hoje:dailyNote.hoje, impedimento:dailyNote.impedimento}})
+                { $set: { corpo :dailyNote.corpo}})
                 .catch(err => {
                     console.log(err);
                     return({detail:"Impossível fazer update"})
                 })
         }
     }
-
+    /*
+        *   Faz update no campo ativo mudando para false
+        *   @param {Model} dailyNote Modelo de daily mongoose
+        *   @returns {object}
+    */
     removeDailyNote(dailyNote){
         if(dailyNote){
             return  this._updateOne({ usuario: dailyNote.usuario, data: dailyNote.data },
@@ -66,5 +70,31 @@ class DailyDao extends TemplateDao{
                 })
         }
     }
+    /*
+        *   Lista todas as Daily Notes por Usuário ou por Data 
+        *   @param {string} username usuário das daily notes
+        *   @param {date} data data da daily note
+        *   @returns {object}
+    */
+    listAllDailyNotes(username = '', data = ''){
+           if (username) {
+               return this._find({ usuario: username }, { data, corpo }, { sort: { data: -1 } })
+                   .then(res => res ? res : null)
+                   .catch(err => {
+                       console.error(err);
+                       return ({ detail: "Impossível buscar para esse usuário", error: err })
+                   })
+           }
+           else if (data) {
+               return this._find({ data: data }, { username, corpo })
+                   .then(res => res ? res : null)
+                   .catch(err => {
+                       console.error(err);
+                       return ({ detail: "Impossível buscar para essa data", error: err })
+                   })
+           }
+           return ({ detail: "Impossível realizar busca", error: "Data ou Usuário null ou undefined" })
+       }
+       
 }
 module.exports = DailyDao;

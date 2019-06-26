@@ -25,11 +25,11 @@ body {
 }
 
 .blue-compass {
-    color: #3A5477;
+    color: #3A5477 !important;
 }
 
 .bg-blue-compass {
-    background-color: #3A5477;
+    background-color: #3A5477 !important;
 }
 
 .gradient-compass {
