@@ -2,10 +2,6 @@ let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
-/*
-FALTA COLOCAR O SESSIO CHECKER LOGOUT
-*/
-
 module.exports = function (app) {
     //middleware de validação
     app.use('/alterar_senha', (req, res, next) => {
@@ -17,7 +13,7 @@ module.exports = function (app) {
                 confirmacaosenha: req.body.confirmacaosenha,
                 erros: [],
                 invalidClass: '',
-            } 
+            }
 
             if (!user.senha || !user.novasenha || !user.confirmacaosenha || (user.novasenha != user.confirmacaosenha)) {
 
@@ -45,16 +41,17 @@ module.exports = function (app) {
                 senha: req.body.senha,
                 novasenha: req.body.novasenha,
                 confirmacaosenha: req.body.confirmacaosenha,
-            } 
+            }
 
             let userDAO = new UserDAO(Model);
             if (userDAO.checkPassword(req.session.user.username, user.senha)) {
-                return userDAO.updatePassword(username = req.session.user.username, newPassword = user.novasenha)
-                .then(res.send("Senha Alterada"))
-                .catch((error) => res.send("Impossível modificação de senha", error))
+                return userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha)
+                    .then(res.send("Senha Alterada"))
+                    .catch((error) => res.send("Impossível modificação de senha", error))
             }
-            else{
+            else {
                 return res.send(error);
             }
-        })                
+
+        })
 }
