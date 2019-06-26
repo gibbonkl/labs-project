@@ -1,68 +1,70 @@
-// $uploadCrop = $('#cad_photo').croppie({
-//     enableExif: true,
-//     viewport: {
-//         width: 200,
-//         height: 200,
-//         type: 'circle'
-//     },
-//     boundary: {
-//         width: 500,
-//         height: 500
-//     }
-// });
-$("#cad_photo")click(function){
-    
-});
-$uploadCrop = $("#cad_photo").croppie({
-        enableExif: true,
-        viewport: {
-        width: 200,
-        height: 200,
-        type: "circle"
-    }
+//Crea el recuadro para recortar
+var $uploadCroppedPhoto
+$uploadCroppedPhoto = $('#main-cropper').croppie({
+    viewport: { 
+		width: 200, 
+		height: 200,
+		type: 'circle' 
+	},
+    boundary: { 
+		width: 250, 
+		height: 250 
+	},
+    showZoomer: true,
+    enableExif: true
 });
 
-  function demoUpload() {
-    var $uploadCrop;
+//Lee la imagen y la muestra para recortar
+$(function() {
+  function readFile(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-    function readFile(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $("#cad_photo").addClass("ready");
-          $uploadCrop
-            .croppie("bind", {
-              url: e.target.result
-            })
-            .then(function() {
-              console.log("jQuery bind complete");
-            });
-        };
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-
-$("#upload").on("change", function() {
-    readFile(this);
-});
-
-$("#img_result").on("click", function(ev) {
-    $uploadCrop
-    .croppie("result", {
-        type: "canvas",
-        size: "viewport"
-    })
-    .then(function(resp) {
-        popupResult({
-        src: resp
+      reader.onload = function (e) {
+        $('#main-cropper').croppie('bind', {
+          url: e.target.result
         });
-    });
-});
-}
+      }
 
-function popupResult(result) {
-	$('#btn_img').attr('src', result.src);
-}
+      reader.readAsDataURL(input.files[0]);
+    }
+	}
+
+  $("#upload").change(function(){
+    readFile(this);
+  });
+
+});
+
+//Muestra la imagen recortada
+$('.actionCrop').on('click', function (ev) {
+  $uploadCroppedPhoto.croppie('result', {
+    type: 'canvas',
+    size: 'viewport'
+  }).then(function (resp) {
+    this.picture = $("#resultado img");
+    this.picture.attr('src', resp);
+  });
+});
+
+// //Envia la imagen recortada en base64, hay que decodificarla del lado del servidor
+// $('.subir').on('click', function (ev) {
+//   	var blobFile = $('#resultado img').attr('src');
+//     var formData = new FormData();
+//     formData.append("fileToUpload", blobFile);
+  
+//     //Manda la imagen de forma asincronica, puede servir para
+//     //otras cosas
+//     $.ajax({
+//        type: "POST",
+//        data: formData,
+//        processData: false,
+//        contentType: false,
+//        success: function(response) {
+//            // .. do something
+//        },
+//        error: function(jqXHR, textStatus, errorMessage) {
+//            console.log(errorMessage); // Optional
+//        }
+//     });
+// });
