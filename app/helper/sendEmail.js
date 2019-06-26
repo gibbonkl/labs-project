@@ -1,6 +1,9 @@
 const mailer = require('nodejs-nodemailer-outlook');
-const local = `http://localhost:1337`
-const route = "/recuperar_senha"
+const Class_config = require('../../../config/config_localOUremoto');
+const config = new Class_config();
+const local = `http://localhost:1337`;
+const remote = `https://gob-p1.azurewebsites.net`
+const route = "/recuperar_senha";
 class sendEmail{
     constructor(){
         throw new Error("Classe estática. Impossível instanciar.");
@@ -19,7 +22,7 @@ class sendEmail{
                 subject: `Recuperar senha - Casa do Código`,
                 html: `
 <pre>Olá! Vi que você precisa recuperar sua senha =)
-É só clicar nesse link <a href="${local}${route}/hash=${hash}">recuperar senha</a>
+É só clicar nesse link <a href="${config.get() == "local" ? local : remote  }${route}/hash=${hash}">recuperar senha</a>
 
 Atenciosamente,
 Casa dos Bolsistas.</pre>`
