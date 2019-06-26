@@ -18,6 +18,11 @@ module.exports = function(app)
                 username: req.body.username,
                 email: req.body.email
             };
+            /*
+                *   Tenta enviar um email para o user
+                *   com a nova hash para trocar a senha
+                *   @returns {string}
+            */
            passwordController.recoveryPassword(user.username,user.email)
             .then(response => 
                 response? res.send('Email enviado com sucesso.'):res.send('Não foi possível enviar o email.')
@@ -31,6 +36,12 @@ module.exports = function(app)
         .post((req,res)=>{
             const hash = req.params.hash;
             const newPassword = req.body.newPassword;
+            /*
+                *   Tenta trocar a senha do usuário
+                *   Se for possível, troca a hash do usuário
+                *   no banco
+                *   @returns {string}
+            */
             passwordController.changePassword(hash,newPassword)
                 .then(response=>
                     response? res.send("Senha alterada com sucesso.") : res.send("Não foi possível alterar a sua senha.")

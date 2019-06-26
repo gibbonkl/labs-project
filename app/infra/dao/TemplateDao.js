@@ -42,7 +42,7 @@ class TemplateDao{
     }
     /*
         *   Salva um objeto no banco de dados
-        *   @params {object} data Objeto para salvar no banco
+        *   @param {object} data Objeto para salvar no banco
         *   @returns {object}
     */
     _save(data){
@@ -52,9 +52,9 @@ class TemplateDao{
     }
     /*
         *   Busca documents no banco de dados
-        *   @params {object} filter Filtro de opções para a busca
-        *   @params {object} projection Projeção para a busca
-        *   @params {object} options Opções para a busca
+        *   @param {object} filter Filtro de opções para a busca
+        *   @param {object} projection Projeção para a busca
+        *   @param {object} options Opções para a busca
         *   @returns {object}
     */
     _find(filter={}, projection={},options={}){
@@ -64,9 +64,9 @@ class TemplateDao{
     }
     /*
         *   Busca um document na base de dados
-        *   @params {object} filter Filtro para a busca
-        *   @params {object} projection Projeção para a busca
-        *   @params {object} options Opções para a busca
+        *   @param {object} filter Filtro para a busca
+        *   @param {object} projection Projeção para a busca
+        *   @param {object} options Opções para a busca
         *   @returns {object}
     */
     _findOne(filter={},projection={},options={}){
@@ -77,9 +77,9 @@ class TemplateDao{
     /*
         *   Atualiza documents na base de dados
         *   @note Cuidado ao atualizar e não sobrescrever o document
-        *   @params {object} filter Filtro para a busca
-        *   @params {object} doc Novas informações do document
-        *   @options {object} options Opções para a atualização
+        *   @param {object} filter Filtro para a busca
+        *   @param {object} doc Novas informações do document
+        *   @param {object} options Opções para a atualização
         *   @returns {object}
     */
     _update(filter={},doc={},options={}){
@@ -91,9 +91,9 @@ class TemplateDao{
     /*
         *   Atualiza um document na base de dados
         *   @note Cuidado ao atualizar e não sobrescrever o document
-        *   @params {object} filter Filtro para a busca
-        *   @params {object} doc Novas informações do document
-        *   @options {object} options Opções para a atualização
+        *   @param {object} filter Filtro para a busca
+        *   @param {object} doc Novas informações do document
+        *   @param {object} options Opções para a atualização
         *   @returns {object}
     */
     _updateOne(filter={},doc={},options={}){
@@ -102,7 +102,15 @@ class TemplateDao{
             .exec();
         
     }
-
+    /*
+        *   Busca um document na base de dados
+        *   E atualiza com o novo document
+        *   @note Cuidado ao atualizar e não sobrescrever o document
+        *   @param {object}  filter Filtro para a busca
+        *   @param {object} doc Novas informações do doc
+        *   @param {object} options Opções para a atualização
+        *   @returns {object}
+    */
     _findOneAndUpdate(filter={},doc={},options={}){
         return this._model
             .findOneAndUpdate(filter,doc,options);

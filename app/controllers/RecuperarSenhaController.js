@@ -36,6 +36,16 @@ class RecuperarSenhaController{
                 throw new Error(err);
             })
     }
+    /*
+        *   Recupera a senha do usuário pelo link enviado por email
+        *   Se for possível, envia true
+        *   Se a senha for trocada, reseta a hash do usuário
+        *   Se não, false
+        *   Em caso de erro, retorna uma exception
+        *   @param {string} hash Hash do usuário
+        *   @param {string} newPassword Nova senha de usuário
+        *   @returns {bool}
+    */
     changePassword(hash="",newPassword=""){
         return this._userDAO.updatePassword(hash,newPassword)
             .then(res =>{
