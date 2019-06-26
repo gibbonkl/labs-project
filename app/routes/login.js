@@ -15,7 +15,7 @@ module.exports = function(app)
                     //console.log(user);
                     if(user.status == 'ok'){
                         req.session.user = user.user;
-                        res.redirect('/dashboard');
+                        res.redirect('/');
                     }
                     else{
                         res.render('login', {errorMessage: user.status});
