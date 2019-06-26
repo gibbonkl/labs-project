@@ -1,4 +1,5 @@
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
+let controllerAdicionarDaily = require('../controllers/adicionar_nova_daily');
 
 module.exports = function(app)
 {
@@ -12,9 +13,17 @@ module.exports = function(app)
             res.render('dashboard');
         })
         .post(sessionCheckerRedLogin, (req,res) => {
-        
-            console.log(req.params.id);
             // controller adicionar nova daily
+            
+            controllerAdicionarDaily(req)
+            .then(retorno => {
+                if(!retorno)
+                    res.send('erro');
+            })
+            .catch(retorno => {
+                if(!retorno)
+                    res.send('erro');
+            });
         })
         .delete(sessionCheckerRedLogin, (req,res) => {
 
