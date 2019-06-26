@@ -1,33 +1,26 @@
-let sessionCheckerLogout = require('../helper/sessionCheckerLogout');
+let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function(app)
 {
     // route for user's dashboard
-    app.route('/dashboard')
-        .get(sessionCheckerLogout, (req, res) => {
+    app.route('/')
+        .get((req, res) => {
             
             console.log("DASHBOARD");
             // console.log(req.cookies);
             // console.log(req.session.user);
             res.render('dashboard');
-        });
-
-    app.route('/dashboard/daily_note/:id')
-        .get(sessionCheckerLogout, (req,res) => {
-            
-            res.send('ok');
-            console.log(req.params.id);
         })
-        .post(sessionCheckerLogout, (req,res) => {
+        .post(sessionCheckerRedLogin, (req,res) => {
         
             console.log(req.params.id);
             // controller adicionar nova daily
         })
-        .delete(sessionCheckerLogout, (req,res) => {
+        .delete(sessionCheckerRedLogin, (req,res) => {
 
             // controller deletar daily
         })
-        .put(sessionCheckerLogout, (req,res) => {
+        .put(sessionCheckerRedLogin, (req,res) => {
 
             // controller alterar daily
         })

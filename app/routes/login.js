@@ -1,14 +1,14 @@
-var sessionChecker = require('../helper/sessionChecker');
+var sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
 const Controller = require('../controllers/LoginController')
 
 module.exports = function(app)
 {
     // route for user Login
     app.route('/login')
-        .get(sessionChecker, (req, res) => {
+        .get(sessionCheckerRedDash, (req, res) => {
             res.render('login', {errorMessage:''});
         })
-        .post( (req, res) => {
+        .post(sessionCheckerRedDash, (req, res) => {
 
             Controller.validateUser(req.body.username, req.body.senha)
                 .then((user)=>{

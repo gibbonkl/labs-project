@@ -1,3 +1,4 @@
+const sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
 
 const Controller = require("../controllers/RecuperarSenhaController");
 const passwordController = new Controller();
@@ -10,10 +11,10 @@ module.exports = function(app)
         * 
     */
     app.route('/recuperar_senha')
-        .get((req, res) => 
+        .get(sessionCheckerRedDash, (req, res) => 
             res.render("recuperar_senha")
         )
-        .post((req, res, next) => {
+        .post(sessionCheckerRedDash, (req, res, next) => {
             let user = {
                 username: req.body.username,
                 email: req.body.email
@@ -30,10 +31,10 @@ module.exports = function(app)
             .catch(error=> res.send('Ocorreu um erro ao enviar o email.'))
         });
     app.route('/recuperar_senha/:hash')
-        .get((req,res)=>
+        .get(sessionCheckerRedDash, (req,res)=>
             res.render("recuperar_senha")
         )
-        .post((req,res)=>{
+        .post(sessionCheckerRedDash, (req,res)=>{
             const hash = req.params.hash;
             const newPassword = req.body.newPassword;
             /*

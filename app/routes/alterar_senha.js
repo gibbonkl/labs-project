@@ -1,6 +1,6 @@
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
-var sessionChecker = require('../helper/sessionChecker');
+var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 /*
 FALTA COLOCAR O SESSIO CHECKER LOGOUT
@@ -37,11 +37,10 @@ module.exports = function (app) {
 
     // rota para alterar senha
     app.route('/alterar_senha')
-        //COLOCAR O SESSION CHECKER COMO PRIMEIRO ´PARAMETRO DO GET
-        .get( (req, res) => {
+        .get(sessionCheckerRedLogin, (req, res) => {
             res.render('alterar_senha');
         })
-        .post((req, res, next) => {
+        .post(sessionCheckerRedLogin, (req, res, next) => {
             let user = {
                 senha: req.body.senha,
                 novasenha: req.body.novasenha,
@@ -57,6 +56,5 @@ module.exports = function (app) {
             else{
                 return res.send(error);
             }
-        
         })                
 }
