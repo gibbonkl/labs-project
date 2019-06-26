@@ -20,6 +20,7 @@
         "express-recaptcha": "^5.0.0",
         "express-session": "1.16.2",
         "jQuery": "^1.7.4",
+        "material-design-icons": "^3.0.1",
         "mongo": "0.1.0",
         "mongoose": "5.5.14",
         "multer": "1.4.1",

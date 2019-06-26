@@ -6,4 +6,6 @@ function cadastro(){
     window.location.href = "/cadastro";
 }
 
-function visit(){}
+function visit(){
+    window.location.href = "/dashboard";
+}
