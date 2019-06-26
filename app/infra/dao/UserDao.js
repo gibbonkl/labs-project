@@ -104,5 +104,22 @@ class UserDao extends TemplateDao{
         }
         return({detail:"Impossível realizar autenticação.",error:"Username e senha null ou undefined"})
     }
+    /*
+        *   Busca por um usuário pelo username e senha
+        *   @param {string} username Nome de usuário
+        *   @param {string} password Senha de usuário
+        *   @returns true se a senha for do usuário
+    */
+    checkPassword(username = '', password = '') {
+        if (username && password) {
+            return this._findOne({ username: username, senha: password })
+                .then(res => res ? true : false)
+                .catch(err => {
+                    console.error(err);
+                    return (false);
+                })
+        }
+        return (false);
+    }
 }
 module.exports = UserDao;

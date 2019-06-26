@@ -1,42 +1,33 @@
 var sessionChecker = require('../helper/sessionChecker');
-let Model = require("../models/schema_usuario");
-var UserDAO = require('../infra/dao/UserDao');
+const Controller = require('../controllers/LoginController')
 
 module.exports = function(app)
 {
     // route for user Login
     app.route('/login')
         .get(sessionChecker, (req, res) => {
-            res.render('login');
+            res.render('login', {errorMessage:''});
         })
-        .post( (req, res, next) => {
-            let user = {
-                username : req.body.username,
-                senha : req.body.senha
-            }
-            console.log(user);
-            
-            let userDAO = new UserDAO(Model);
-            userDAO.login(user.username,user.senha,'')
-                .then((user) => 
-                {
-                    if(user)
-                    {
+        .post( (req, res) => {
+            if (req.body.username && req.body.senha){
+                
+                Controller.validateUser(req.body.username, req.body.senha)
+                    .then((user)=>{
                         //console.log(user);
-                        req.session.user = user;
-                        res.redirect('/dashboard');
-                    }
-                    else
-                    {
-                        res.redirect('/login');
-                    }
-                    next();
-                })
-                .catch((error) => 
-                {
-                    console.error;
-                    res.redirect('/login');
-                });
+                        if(user.status == 'ok'){
+                            req.session.user = user.user;
+                            res.redirect('/dashboard');
+                        }
+                        else{
+                            res.render('login', {errorMessage: user.status});
+                        }
+                        
+                    })
+                    .catch((err)=>console.log(err));
+            }else {
+                res.render('login', {errorMessage: "Os campos não podem estar vazios!"});
+            }
+            //next();
         });
-    
 }
+    

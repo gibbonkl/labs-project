@@ -48,8 +48,8 @@ class Modelo_Usuario_Cadastro
             username: this.username,
             email: this.email,                
             data_nasc: this.data_nasc,
-            senha: this.senha,
-            repsenha: this.repsenha,
+            //senha: this.senha,
+            //repsenha: this.repsenha,
             erros : this.erros,
             invalidClass : this.class,
             tipo: this.tipo
