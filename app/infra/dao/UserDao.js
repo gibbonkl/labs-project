@@ -121,5 +121,36 @@ class UserDao extends TemplateDao{
         }
         return (false);
     }
+    /*
+    *   Busca por um usuário pelo username e senha
+    *   @param {string} username Nome de usuário
+    *   @param {string} password Senha de usuário
+    *   @param {string} email Email do usuário
+    *   @returns {object}
+    */
+    changePassword(username = "", newPassword = "") {
+        if (username && newPassword) {
+            return this._findOneAndUpdate({ username: username }, { $set: { senha: newPassword } })
+                .then(res => res ? res : null)
+                .catch(err => {
+                    console.error(err);
+                    return ({ detail: "Impossível trocar senha", error: err });
+                })
+        }
+    }
+    /*
+    *   Verifica tipo de permissão de usuário
+    *   @param {string} username Nome de usuário
+    *   @returns {enum} 'admin' ou 'user'
+    */
+    checkUserPermission(username = "") {
+        if (username) {
+            return this._findOne({ username: user.username }, { type: 1 })
+                .then(res => res ? res : null)
+                .catch(err => {
+                    return ({ detail: "Impossível verificar ", error: err });
+                })
+        }
+    }
 }
 module.exports = UserDao;

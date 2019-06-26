@@ -1,6 +1,6 @@
 const TemplateDao = require("./TemplateDao");
 
-class DailyDao extends TemplateDao{
+class DailyDao extends TemplateDao {
     /*
         *   Verifica se daily note no banco,
         *   Se não existir, insere no banco de dados e retorna o objeto inserido
@@ -8,13 +8,13 @@ class DailyDao extends TemplateDao{
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
     */
-    insertDailyNote(dailyNote){
-        if(dailyNote){
+    insertDailyNote(dailyNote) {
+        if (dailyNote) {
             return this.validateDailyNote(dailyNote)
                 .then(res => !res ? this._save(dailyNote) : null)
                 .catch(err => {
                     console.log(err);
-                    return({detail:"Impossível realizar operação", error:"Daily Note null ou undefined"})
+                    return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
                 })
         }
     }
@@ -25,18 +25,18 @@ class DailyDao extends TemplateDao{
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
     */
-    validateDailyNote(dailyNote){
-        if(dailyNote){
-            return this._findOne({usuario: dailyNote.usuario,data: dailyNote.data})
+    validateDailyNote(dailyNote) {
+        if (dailyNote) {
+            return this._findOne({ usuario: dailyNote.usuario, data: dailyNote.data })
                 .then(res => res ? res : null)
-                .catch(err =>{
+                .catch(err => {
                     console.error(err);
-                    return({detail:"Impossível realizar operação", error:err})
+                    return ({ detail: "Impossível realizar operação", error: err })
                 })
-            
+
         }
-        
-    return({detail:"Impossível realizar operação", error:"Daily Note null ou undefined"})
+
+        return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
     }
     /*
         *   Verifica se a daily note existe no banco com: username e date
@@ -45,13 +45,15 @@ class DailyDao extends TemplateDao{
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
     */
-    updateDailyNote(dailyNote){
-        if(dailyNote){
-            return  this._updateOne({usuario:dailyNote.usuario,data:dailyNote.data},
-                { $set: { corpo :dailyNote.corpo}})
+    updateDailyNote(dailyNote) {
+        if (dailyNote) {
+            return this.validateDailyNote(dailyNote)
+                .then(res => !res ? this._updateOne(
+                    { usuario: dailyNote.usuario, data: dailyNote.data },
+                    { $set: { corpo: dailyNote.corpo } }) : null)
                 .catch(err => {
                     console.log(err);
-                    return({detail:"Impossível fazer update"})
+                    return ({ detail: "Impossível fazer update" })
                 })
         }
     }
@@ -60,10 +62,10 @@ class DailyDao extends TemplateDao{
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
     */
-    removeDailyNote(dailyNote){
-        if(dailyNote){
-            return  this._updateOne({ usuario: dailyNote.usuario, data: dailyNote.data },
-                        { $set: { ativo: "false"} })
+    removeDailyNote(dailyNote) {
+        if (dailyNote) {
+            return this._updateOne({ usuario: dailyNote.usuario, data: dailyNote.data },
+                { $set: { ativo: false } })
                 .catch(err => {
                     console.log(err);
                     return ({ detail: "Impossível remover" })
@@ -76,25 +78,25 @@ class DailyDao extends TemplateDao{
         *   @param {date} data data da daily note
         *   @returns {object}
     */
-    listAllDailyNotes(username = '', data = ''){
-           if (username) {
-               return this._find({ usuario: username }, { data, corpo }, { sort: { data: -1 } })
-                   .then(res => res ? res : null)
-                   .catch(err => {
-                       console.error(err);
-                       return ({ detail: "Impossível buscar para esse usuário", error: err })
-                   })
-           }
-           else if (data) {
-               return this._find({ data: data }, { username, corpo })
-                   .then(res => res ? res : null)
-                   .catch(err => {
-                       console.error(err);
-                       return ({ detail: "Impossível buscar para essa data", error: err })
-                   })
-           }
-           return ({ detail: "Impossível realizar busca", error: "Data ou Usuário null ou undefined" })
-       }
-       
+    listAllDailyNotes(username = '', data = '') {
+        if (username) {
+            return this._find({ usuario: username }, { data: 1, corpo: 1 }, { sort: { data: -1 } })
+                .then(res => res ? res : null)
+                .catch(err => {
+                    console.error(err);
+                    return ({ detail: "Impossível buscar para esse usuário", error: err })
+                })
+        }
+        else if (data) {
+            return this._find({ data: data }, { username: 1, corpo: 1 })
+                .then(res => res ? res : null)
+                .catch(err => {
+                    console.error(err);
+                    return ({ detail: "Impossível buscar para essa data", error: err })
+                })
+        }
+        return ({ detail: "Impossível realizar busca", error: "Data ou Usuário null ou undefined" })
+    }
+
 }
 module.exports = DailyDao;
