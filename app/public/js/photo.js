@@ -1,70 +1,59 @@
-//Crea el recuadro para recortar
+//redimensiona usando o croppie
 var $uploadCroppedPhoto
 $uploadCroppedPhoto = $('#main-cropper').croppie({
-    viewport: { 
-		width: 200, 
-		height: 200,
-		type: 'circle' 
-	},
-    boundary: { 
-		width: 250, 
-		height: 250 
-	},
+    viewport: {
+        width: 200,
+        height: 200,
+        type: 'circle'
+    },
+    boundary: {
+        width: 220,
+        height: 220
+    },
     showZoomer: true,
     enableExif: true
 });
 
-//Lee la imagen y la muestra para recortar
+//recorta a imagem
 $(function() {
-  function readFile(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-      reader.onload = function (e) {
-        $('#main-cropper').croppie('bind', {
-          url: e.target.result
-        });
-      }
+            reader.onload = function(e) {
+                $('#main-cropper').croppie('bind', {
+                    url: e.target.result
+                });
+            }
 
-      reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-	}
 
-  $("#upload").change(function(){
-    readFile(this);
-  });
+    $("#upload").change(function() {
+        readFile(this);
+        $("#page").removeClass('hide');
+        $("#cad_image").addClass('hide');
+    });
 
 });
 
-//Muestra la imagen recortada
-$('.actionCrop').on('click', function (ev) {
-  $uploadCroppedPhoto.croppie('result', {
-    type: 'canvas',
-    size: 'viewport'
-  }).then(function (resp) {
-    this.picture = $("#resultado img");
-    this.picture.attr('src', resp);
-  });
+//mostra a foto depois do corte
+$('.actionCrop').on('click', function(ev) {
+    $uploadCroppedPhoto.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+    }).then(function(resp) {
+        this.picture = $("#cad_image").attr('src', resp);
+        $("#page").addClass('hide');
+        $("#cad_image").removeClass('hide').show('slow');
+        	var blobFile = $('#cad_image').attr('src');
+          var formData = new FormData();
+          formData.append("fileToUpload", blobFile);
+        	$('#cad_image').val(formData);
+    });
 });
 
-// //Envia la imagen recortada en base64, hay que decodificarla del lado del servidor
-// $('.subir').on('click', function (ev) {
-//   	var blobFile = $('#resultado img').attr('src');
-//     var formData = new FormData();
-//     formData.append("fileToUpload", blobFile);
-  
-//     //Manda la imagen de forma asincronica, puede servir para
-//     //otras cosas
-//     $.ajax({
-//        type: "POST",
-//        data: formData,
-//        processData: false,
-//        contentType: false,
-//        success: function(response) {
-//            // .. do something
-//        },
-//        error: function(jqXHR, textStatus, errorMessage) {
-//            console.log(errorMessage); // Optional
-//        }
-//     });
-// });
+$("#cad_image").click(function() {
+    $("input[id='upload']").click();
+});

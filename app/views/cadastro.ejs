@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"></link>
     <link rel="stylesheet" href="../../public/css/croppie.css" />
 
-    <script type="text/javascript" src="../../public/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="../../public/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../public/js/materialize.js"></script>
     <script type="text/javascript" src="../../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../../public/js/inicio.js"></script>
@@ -43,19 +43,21 @@
                 <h2 class="blue-compass center mont-serrat">Criar uma conta</h2>
                 <form action="/cadastro" method="post">
                     <div class="col s12">
-                        <div class="row">
-                            <!-- <img id="cad_image" src="http://via.placeholder.com/150x150" class="circle" /> -->
-                            <!-- <input id="cad_photo" type="file" class="hide" /> -->
-                                <input type="file" id="upload" value="Choose Image" accept="image/*">
-                            <div id="page">
+                        <div class="col s12 center">
+                        <!-- <input id="cad_photo" type="file" class="hide" /> -->
+                        <!-- <input type="file" id="my_file" style="display: none;" /> -->
+                            <div id="page" class="hide">
                                 <div id="main-cropper"></div>
-                                <button type="button" class="btn btn-primary actionCrop">Cortar</button>
-                                <div id="resultado">
-                                <img src ="">
-                            </div>  
+                                <button type="button" class="btn actionCrop">Cortar</button>
+                            </div>
+                            <div id="resultado">
+                                <!-- <img src=""> -->
+                                <img id="cad_image" src="../../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>"/>
+                                <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
+                            </div>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input id="nome" name="nome" type="text" class="validate  <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
+                            <input id="nome" name="nome" type="text" class="validate <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
                             <label class="active" for="nome">Nome</label>
                         </div>
                         <div class="input-field col s12 m6">
