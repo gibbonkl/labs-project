@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var schema_DailyNote = new Schema({
 
     usuario: { type: String, required: true },
@@ -12,7 +11,8 @@ var schema_DailyNote = new Schema({
         impedimento: { type: String, required: true }
     },
     data: { type: Date, required: true, default: Date.now },
-    ativo: { type: Boolean, required: true, default: true }
+    ativo: { type: Boolean, required: true, default: true },
+    permissao: {type: Boolean, default: false}
 
 }, { timestamps: true });
 
