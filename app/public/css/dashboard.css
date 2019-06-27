@@ -11,3 +11,9 @@
 body{
     overflow: auto;
 }
+.span-margin{
+    margin: 0 14px 0 0;
+}
+.btn-margin-right{
+    margin-right: 1%;
+}
