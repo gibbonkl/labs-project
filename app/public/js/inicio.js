@@ -7,5 +7,5 @@ function cadastro(){
 }
 
 function visit(){
-    window.location.href = "/dashboard";
+    window.location.href = "/";
 }
