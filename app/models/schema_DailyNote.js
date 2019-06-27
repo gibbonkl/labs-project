@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var date = require('../helper/date_helper');
 
 var schema_DailyNote = new Schema({
 
@@ -11,7 +11,7 @@ var schema_DailyNote = new Schema({
         hoje: { type: String, required: true },
         impedimento: { type: String, required: true }
     },
-    data: { type: Date, required: true, default: Date.now },
+    data: { type: String, required: true, default: date() },
     ativo: { type: Boolean, required: true, default: true }
 
 }, { timestamps: true });
