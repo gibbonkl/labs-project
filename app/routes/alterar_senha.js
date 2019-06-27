@@ -16,14 +16,12 @@ module.exports = function (app) {
             }
 
             let userDAO = new UserDAO(Model);
-            if (userDAO.checkPassword(req.session.user.username, user.senha)) {
-                return userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha)
-                    .then(res.send("Senha Alterada"))
-                    .catch((error) => res.send("Impossível modificação de senha"))
-            }
-            else {
-                return res.send("Erro inesperado");
-            }
-
+            let promise = userDAO.checkPassword(req.session.user.username, user.senha)
+                .then(res => {userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha)
+                        return res.send("Senha Alterada!");
+                    })
+                .catch((res) => { return res.send("Erro!")}) 
+            return promise;      
         })
+
 }
