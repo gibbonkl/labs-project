@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" src="../public/js/CrudDaily.js"></script>
+    <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
 </head>
 <body class="bg-blue-compass">
 
@@ -39,8 +41,8 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <div class="hide row center">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded">Nova daily note</a>
+            <div class="row center">
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily note</a>
             </div>
         </div>
     </div>
@@ -54,19 +56,19 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="collapsible expandable">
-                        <li>
+                        <li id="teste" class="data">
                             <div class="collapsible-header">
                                 <i class="material-icons">face</i>
-                                <span class="span-margin">Nome da pessoa</span>
+                                <span class="span-margin data" data-name="">Nome da pessoa</span>
                                 <i class="material-icons">event</i>
-                                <span class="span-margin align-right">Data</span>
+                                <span class="span-margin data align-right" data-date="">Data</span>
                             </div>
                             <div class="collapsible-body grey lighten-3">
                                 <div class="row">
                                     <div class="col s6">
-                                        <span>Ontem:</span><br>
-                                        <span>Hoje:</span><br>
-                                        <span>Impedimentos:</span>
+                                        <span class="data" data-ontem="">Ontem:</span><br>
+                                        <span class="data" data-hoje="">Hoje:</span><br>
+                                        <span class="data" data-imp="">Impedimentos:</span>
                                     </div>
                                     <div class="col s6">
                                         <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
@@ -75,7 +77,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <!-- <li>
                             <div class="collapsible-header">
                                 <i class="material-icons">face</i>
                                 <span class="span-margin">Nome da pessoa</span>
@@ -100,7 +102,7 @@
                                 <span>Hoje:</span><br>
                                 <span>Impedimentos:</span>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -127,5 +129,42 @@
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>
     <script type="text/javascript" src="../public/js/dashboard.js"></script>
+    <script type="text/javascript">
+     function create() {
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2', '3']
+        }).queue([
+            {
+                title: 'Question 1',
+                text: 'O que você fez ontem?'
+            },
+            {
+                title: 'Question 2',
+                text:'O que você fará hoje?',
+            },
+            {
+                title: 'Question 3',
+                text: 'Teve ou tem algum impedimento?',
+            } 
+        ]).then((result) => {
+            if(value=== '') { 
+                return !value && 'Você precisar escrever alguma coisa!'
+            } else {
+                Swal.fire({
+                    title: 'Excelente!',
+                    html:
+                    'Your answers: <pre><code>' +
+                        JSON.stringify(result.value) +
+                    '</code></pre>',
+                    confirmButtonText: 'Registrar Daily! '
+                })
+            }
+        })
+        console.log(create);
+    }
+    </script>
 </body>
 </html>
