@@ -5,8 +5,7 @@ let ModeloUsuarioCadastro = require('../models/modelo_usuario_cadastro');
 let ValidacaoCadastro = require('../controllers/validacao_cadastro');
 let controllerCadastraUsuario = require('../controllers/controller_cadastra_usuario');
 
-module.exports = function(app)
-{
+module.exports = function(app) {
     //middleware de validação
     app.use('/cadastro', captcha_verify, captcha_render, (req,res,next) => {
         if(req.method == 'POST')
