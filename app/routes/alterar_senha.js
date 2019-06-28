@@ -1,7 +1,11 @@
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
-
+/*
+    *
+    *   @author Karolina Gibbon feat. Diego Bastos
+    * 
+*/
 module.exports = function (app) {
     // rota para alterar senha
     app.route('/alterar_senha')
@@ -16,12 +20,9 @@ module.exports = function (app) {
             }
 
             let userDAO = new UserDAO(Model);
-            let promise = userDAO.checkPassword(req.session.user.username, user.senha)
-                .then(res => {userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha)
-                        return res.send("Senha Alterada!");
-                    })
-                .catch((res) => { return res.send("Erro!")}) 
-            return promise;      
+            return userDAO.checkPassword(req.session.user.username, user.senha)
+                .then(response => response ? userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha) : res.send('Senha Atual Incorreta'))
+                .then(response => response ? res.send('Senha Alterada') : res.send("Não Foi Possível Alterar Sua Senha"))
+                .catch((error) => res.send("Um Erro Inesperado Aconteceu"))  
         })
-
 }
