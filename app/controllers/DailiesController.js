@@ -51,7 +51,7 @@ class DashboardController {
 
     static deleteDaily(req) {
         
-        return dailyDao.removeDailyNote(req.body.daily_id)
+        return dailyDao.removeDailyNoteById(req.body.daily_id)
             .then(res.send("Daily Removida"))
             .catch((error) => res.send("Impossível deletar DailyNote", error))
 

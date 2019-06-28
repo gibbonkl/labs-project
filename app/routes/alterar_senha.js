@@ -1,62 +1,28 @@
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
-var sessionChecker = require('../helper/sessionChecker');
-
+var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 /*
-FALTA COLOCAR O SESSIO CHECKER LOGOUT
+    *
+    *   @author Karolina Gibbon feat. Diego Bastos
+    * 
 */
-
 module.exports = function (app) {
-    //middleware de validação
-    app.use('/alterar_senha', (req, res, next) => {
-        if (req.method == 'POST') {
-
-            let user = {
-                senha: req.body.senha,
-                novasenha: req.body.novasenha,
-                confirmacaosenha: req.body.confirmacaosenha,
-                erros: [],
-                invalidClass: '',
-            } 
-
-            if (!user.senha || !user.novasenha || !user.confirmacaosenha || (user.novasenha != user.confirmacaosenha)) {
-
-                temErro = true;
-                user.invalidClass = 'invalid';
-
-                res.send("Impossível alteração de senha");
-            }
-            else {
-                next();
-            }
-        }
-        else {
-            next();
-        }
-    });
-
     // rota para alterar senha
     app.route('/alterar_senha')
-        //COLOCAR O SESSION CHECKER COMO PRIMEIRO ´PARAMETRO DO GET
-        .get( (req, res) => {
+        .get(sessionCheckerRedLogin, (req, res) => {
             res.render('alterar_senha');
         })
-        .post((req, res, next) => {
+        .post(sessionCheckerRedLogin, (req, res, next) => {
             let user = {
                 senha: req.body.senha,
                 novasenha: req.body.novasenha,
                 confirmacaosenha: req.body.confirmacaosenha,
-            } 
+            }
 
             let userDAO = new UserDAO(Model);
-            if (userDAO.checkPassword(req.session.user.username, user.senha)) {
-                return userDAO.updatePassword(username = req.session.user.username, newPassword = user.novasenha)
-                .then(res.send("Senha Alterada"))
-                .catch((error) => res.send("Impossível modificação de senha", error))
-            }
-            else{
-                return res.send(error);
-            }
-        
-        })                
+            return userDAO.checkPassword(req.session.user.username, user.senha)
+                .then(response => response ? userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha) : res.send('Senha Atual Incorreta'))
+                .then(response => response ? res.send('Senha Alterada') : res.send("Não Foi Possível Alterar Sua Senha"))
+                .catch((error) => res.send("Um Erro Inesperado Aconteceu"))  
+        })
 }

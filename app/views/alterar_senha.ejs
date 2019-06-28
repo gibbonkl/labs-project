@@ -7,11 +7,34 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/materialize.css"></link>
     <link rel="stylesheet" type="text/css" href="../../public/css/home.css"></link>
     <link rel="stylesheet" type="text/css" href="../../public/css/alterasenha.css"></link>
+    <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css"></link>    
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"></link>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+        
     <script src="../../public/js/jquery.min.js" type="text/javascript"></script>
     <script src="../../public/js/materialize.js" type="text/javascript"></script>
+    <script src="../../public/js/alterar_senha_logado.js" type="text/javascript"></script>
 </head>
 <body>
+    <!-- Estrutura do menu dropdown da navbar -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="/alterar_senha" class="blue-compass">Alterar senha</a></li>
+        <li class="divider"></li>
+        <li><a href="/logout" class="blue-compass">Fazer Logout</a></li>
+    </ul>
+    <!-- Navbar -->
+    <div class="">
+        <nav class="white">
+            <div class="nav-wrapper nav-padding-left">
+                <a href="#!" class="blue-compass brand-logo"><i class="logo-img"></i>Game of Bols</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#"><i class="material-icons blue-compass">search</i></a></li>
+                    <!-- Dropdown -->
+                    <li><a href="#" class="dropdown-trigger blue-compass" data-target="dropdown1"><i class="material-icons">face</i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
     <div class="row center margin-top">
         <div class="col s12 m4 offset-m4">
@@ -20,23 +43,30 @@
                     <h5 class="blue-compass center mont-serrat margin-bottom">Altere sua senha</h5>
                     <p class="grey-text text-darken-2 font-key">Insira uma combinação de pelo menos 6 caracteres</p>
                     <div class="input-field col s12">
-                        <input id="card_senhaatual" type="password" class="validate" required>
+                        <input id="card_senhaatual" type="password" class="validate" name="senha" required>
                         <label for="card_senhaatual">Senha Atual</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="card_novasenha" type="password" class="validate" required>
+                        <input id="card_novasenha" type="password" class="validate" name="novasenha" required>
                         <label for="card_novasenha">Nova senha</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="card_confsenha" type="password" class="validate" required>
+                        <input id="card_confsenha" type="password" class="validate" name="confirmacaosenha" required>
                         <label for="card_confsenha">Confirme a nova senha</label>
                     </div>
                 </div>
                 <div class="row center">
-                    <button class="modal-close btn waves-effect bg-blue-compass rounded">Confirmar</button>
+                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)" >Confirmar</button>
+                </div>
+                <div class="row">
+                    <ul id="erros">
+                    
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </body>
+    <script type="text/javascript" src="../public/js/dashboard.js"></script>
+
 </html>

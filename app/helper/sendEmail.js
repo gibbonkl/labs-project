@@ -12,6 +12,8 @@ class sendEmail{
         let link;
        return new Promise((resolve,reject)=>
             mailer.sendEmail({
+                maxConnections: 3,
+                pool: true,
                 secure: false,
                 auth: {
                     user: 'casadobolsista@outlook.com',

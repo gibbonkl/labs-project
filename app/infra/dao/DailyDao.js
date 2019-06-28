@@ -63,12 +63,13 @@ class DailyDao extends TemplateDao {
         *   @returns {object}
     */
     
-    removeDailyNote(id=''){
+    removeDailyNoteById(id=''){
         if(id){
             return this._updateOne({_id:id},{$set:{ativo:false}})
         }
         return({detail:"Impossível remover"});
     }
+   
     /*
         *   Lista todas as Daily Notes por Usuário 
         *   @param {string} username usuário das daily notes

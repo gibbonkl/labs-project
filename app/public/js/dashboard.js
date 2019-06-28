@@ -1,4 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible.expandable');
-    var instances = M.Collapsible.init(elems, {accordion: false});
-  });
+$(document).ready(function(){
+    $(".dropdown-trigger").dropdown({
+        constrainWidth: false,
+        coverTrigger: false,
+        hover: true
+    });
+    $('.collapsible').collapsible({
+        accordion: false
+    });
+});
