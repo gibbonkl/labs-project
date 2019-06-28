@@ -112,8 +112,8 @@ body {
 }
 
 input:not([type]),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
+input[type=text]:not(.browser-default) + label,
+input[type=password]:not(.browser-default) + label,
 input[type=email]:not(.browser-default),
 input[type=url]:not(.browser-default),
 input[type=time]:not(.browser-default),
@@ -124,7 +124,7 @@ input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
-    background-color: #eeeeee94 !important;
+    width: 550px !important;
 }
 
 .btn:hover,
@@ -145,4 +145,7 @@ textarea.materialize-textarea {
 .margin-bottom {
     margin-bottom: 8%;
 }
+
+
+
 
