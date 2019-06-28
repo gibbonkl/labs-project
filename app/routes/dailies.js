@@ -7,7 +7,7 @@ module.exports = function(app)
     app.route('/daily')
         .get((req, res) => {
             
-            controller.listDailies()
+            controller.listDailies(req)
             res.render('dashboard');
         })
         .post(sessionCheckerRedLogin, (req,res) => {

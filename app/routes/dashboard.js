@@ -1,5 +1,5 @@
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
-let controllerAdicionarDaily = require('../controllers/adicionar_nova_daily');
+let controller = require('../controllers/DailiesController');
 
 module.exports = function(app)
 {
