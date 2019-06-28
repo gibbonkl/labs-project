@@ -1,3 +1,6 @@
+body{
+    overflow: auto;
+}
 .nav-padding-left {
     padding-left: 1%;
 }
@@ -7,9 +10,6 @@
     background-color: white;
     height: 60px;
     width: 60px;
-}
-body{
-    overflow: auto;
 }
 .span-margin{
     margin: 0 14px 0 0;
