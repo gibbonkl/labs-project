@@ -57,7 +57,7 @@ class DashboardController {
 
     }
 
-    static updateDaily(req ) {
+    static updateDaily(req) {
         
         let dailyDao = new DailyDao(DailyModel);
         let dailyNote = {
