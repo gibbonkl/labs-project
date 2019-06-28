@@ -35,7 +35,7 @@ class DailiesController {
         let daily = new modelDaily({
             usuario : req.session.user.username,
             corpo : 
-            {
+            {   
                 ontem : req.body.ontem,
                 hoje: req.body.hoje,
                 impedimento: req.body.impedimento
@@ -43,18 +43,16 @@ class DailiesController {
         });
 
         let dailyDAO = new DailyDao(DailyModel);
-        let promise = dailyDAO.insertDailyNote(daily);
-    
-        console.log(promise);
-        return promise;
+        return dailyDAO.insertDailyNote(daily)
+            .then(retorno)
+            .catch(console.error)
     }
 
     static deleteDaily(req) {
         
         return dailyDao.removeDailyNoteById(req.body.daily_id)
-            .then(res.send("Daily Removida"))
-            .catch((error) => res.send("Impossível deletar DailyNote", error))
-
+            .then(retorno)
+            .catch(console.error)
     }
 
     static updateDaily(req) {
@@ -70,8 +68,8 @@ class DailiesController {
         }
     
         return dailyDao.updateDailyNote(dailyNote)
-            .then(res.send("Daily Alterada"))
-            .catch((error) => res.send("Impossível alterar Daily", error))
+            .then(retorno)
+            .catch(console.error)
     }
 }
 

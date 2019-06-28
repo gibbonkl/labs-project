@@ -8,27 +8,44 @@ module.exports = function(app)
         .get((req, res) => {
             
             controller.listDailies(req)
-            res.render('dashboard');
+                .then(res.send(dailies))
+                .catch(console.error)
         })
         .post(sessionCheckerRedLogin, (req,res) => {
             // controller adicionar nova daily
             
             controller.addDaily(req)
-            .then(retorno => {
-                if(!retorno)
-                    res.send('erro');
+                .then(retorno => {
+                    if(!retorno)
+                        res.send('erro');
+                    else{
+                        res.send(retorno)
+                    }
             })
-            .catch(retorno => {
-                if(!retorno)
-                    res.send('erro');
-            });
+            .catch(console.error);
         })
         .delete(sessionCheckerRedLogin, (req,res) => {
 
-            // controller deletar daily
+            controller.deleteDaily(req)
+                .then(retorno => {
+                    if(!retorno)
+                        res.send('erro');
+                    else{
+                        res.send(retorno)
+                    }
+                })
+                .catch(console.error)
         })
         .put(sessionCheckerRedLogin, (req,res) => {
 
-            // controller alterar daily
+            controller.updateDaily(req)
+                .then(retorno => {
+                    if(!retorno)
+                        res.send('erro');
+                    else{
+                        res.send(retorno)
+                    }
+                })
+                .catch(console.error)
         })
 }
