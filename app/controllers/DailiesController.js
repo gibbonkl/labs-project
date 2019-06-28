@@ -4,7 +4,7 @@ var DailyDao = require('../infra/dao/DailyDao');
 let UserModel = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 
-class DashboardController {
+class DailiesController {
     constructor(){
         throw new Error("Classe estática. Impossível instanciar.");
     }
@@ -75,4 +75,4 @@ class DashboardController {
     }
 }
 
-module.exports = DashboardController;
+module.exports = DailiesController;
