@@ -49,24 +49,12 @@ class DashboardController {
         return promise;
     }
 
-    static deleteDaily() {
+    static deleteDaily(req) {
         
-        const dailyDao = new DailyDao(Model)
+        return dailyDao.removeDailyNote(req.body.daily_id)
+            .then(res.send("Daily Removida"))
+            .catch((error) => res.send("Impossível deletar DailyNote", error))
 
-        const data = {
-            _id: req.body._id,
-            username: req.session.username,
-            tipo: req.session.tipo
-        };
-
-        if(data.tipo == 'admin')
-            return dailyDao.removeDailyNotebyId(data._id,'')
-                .then(res.send("Daily Removida"))
-                .catch((error) => res.send("Impossível deletar DailyNote", error))
-        else if (data.username)
-            return dailyDao.removeDailyNotebyUser(data._id,data.username)
-                .then(res.send("Daily Removida"))
-                .catch((error) => res.send("Impossível deletar DailyNote", error))
     }
 
     static updateDaily(req ) {

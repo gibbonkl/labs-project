@@ -62,21 +62,10 @@ class DailyDao extends TemplateDao {
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
     */
-    removeDailyNote(dailyNote) {
-        if (dailyNote) {
-            return this._updateOne({ usuario: dailyNote.usuario, data: dailyNote.data },
-                { $set: { ativo: false } })
-                .catch(err => {
-                    console.log(err);
-                    return ({ detail: "Impossível remover" })
-                })
-        }
-    }
-    removeDailyNotebyId(id='',username=''){
+    
+    removeDailyNote(id=''){
         if(id){
-            return username? 
-                this._updateOne({usuario:username,_id:id},{$set:{ativo:false}}):
-                this._updateOne({_id:id},{$set:{ativo:false}})
+            return this._updateOne({_id:id},{$set:{ativo:false}})
         }
         return({detail:"Impossível remover"});
     }
