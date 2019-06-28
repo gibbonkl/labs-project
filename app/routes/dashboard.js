@@ -10,6 +10,21 @@ module.exports = function(app)
             console.log("DASHBOARD");
             // console.log(req.cookies);
             // console.log(req.session.user);
-            res.render('dashboard');
+            if (req.session.user && req.cookies.user_sid) {
+
+                user = {
+                    username: req.session.user.username,
+                    tipo: req.session.user.tipo
+                }
+
+                res.render('dashboard', user);
+            } else {
+
+                user = {
+                    username: '',
+                    tipo: ''
+                }
+                res.render('dashboard', user);                
+            }      
         })
 }
