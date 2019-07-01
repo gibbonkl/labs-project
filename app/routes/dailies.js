@@ -7,24 +7,24 @@ module.exports = function(app)
     app.route('/daily/:op')
         .get((req, res) => {
             
-            controller.listDailies(req, op)
-                .then(res.send(dailies))
+            controller.listDailies(req, req.params.op)
+                .then(dailies => res.send(dailies))
                 .catch(console.error)
-        })
+        });
+        app.route('/daily')
         .post(sessionCheckerRedLogin, (req,res) => {
             // controller adicionar nova daily
             
             controller.addDaily(req)
                 .then(retorno => {
                     if(!retorno)
-                        res.send('erro');
+                        res.send('Não é possível Adicionar Essa Daily');
                     else{
                         res.send(retorno)
                     }
             })
             .catch(console.error);
-        });
-    app.route('/daily')
+        })
         .delete(sessionCheckerRedLogin, (req,res) => {
 
             controller.deleteDaily(req)
@@ -42,7 +42,7 @@ module.exports = function(app)
             controller.updateDaily(req)
                 .then(retorno => {
                     if(!retorno)
-                        res.send('erro');
+                        res.send('Não foi possível fazer update');
                     else{
                         res.send(retorno)
                     }

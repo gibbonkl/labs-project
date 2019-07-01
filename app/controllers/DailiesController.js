@@ -16,16 +16,18 @@ class DailiesController {
         
         //verificar user
         let user = 'visitante'
-        if(req.session) {
-            user = userDao.checkUserPermission(req.session.user.username)
+        let username = ''
+        if(req.session.user) {
+            user = userDao.checkUserPermission(req.session.user.username);
+            username = req.session.user.username;
         }
 
          // get dailies
         if (op == 'user'){
-            return dailyDao.listDailyNotesbyUser(req.body.filtro, (page-1)*batch, batch) 
+            return dailyDao.listDailyNotesByUser(req.body.filtro, (page-1)*batch, batch) 
                 .then(dailies => 
                     dailies.map(function(daily){ 
-                        if(user == 'admin' || daily.username == req.session.user.username)
+                        if (user == 'admin' || daily.username == username)
                             daily['permissao'] = true;
                         return daily}))
                 .catch(console.error)
@@ -35,7 +37,7 @@ class DailiesController {
             return dailyDao.listDailyNotesByDate(req.body.filtro, (page-1)*batch, batch) 
                 .then(dailies => 
                     dailies.map(function(daily){ 
-                        if(user == 'admin' || daily.username == req.session.user.username)
+                        if (user == 'admin' || daily.username == username)
                             daily['permissao'] = true;
                         return daily}))
                 .catch(console.error)
@@ -45,7 +47,7 @@ class DailiesController {
 
     static addDaily(req){
         
-        let daily = new modelDaily({
+        let daily = new DailyModel({
             usuario : req.session.user.username,
             corpo : 
             {   
@@ -57,14 +59,14 @@ class DailiesController {
 
         let dailyDAO = new DailyDao(DailyModel);
         return dailyDAO.insertDailyNote(daily)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 
     static deleteDaily(req) {
-        
+        let dailyDao = new DailyDao(DailyModel);
         return dailyDao.removeDailyNoteById(req.body.daily_id)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 
@@ -72,16 +74,13 @@ class DailiesController {
         
         let dailyDao = new DailyDao(DailyModel);
         let dailyNote = {
-                usuario : req.body.session.user,
-                corpo: {
-                    ontem: req.body.ontem,
-                    hoje: req.body.hoje,
-                    impedimento: req.body.impedimento
-            },
+                usuario : req.session.user.username,
+                data: req.body.data,
+                corpo: req.body.corpo,
         }
     
         return dailyDao.updateDailyNote(dailyNote)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 }
