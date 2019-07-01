@@ -5,7 +5,7 @@ let UserModel = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 
 class DailiesController {
-    constructor(){
+    constructor() {
         throw new Error("Classe estática. Impossível instanciar.");
     }
 
@@ -13,7 +13,7 @@ class DailiesController {
         console.log(req)
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
-        
+
         //verificar user
         let user = 'visitante'
         let username = ''
@@ -71,14 +71,14 @@ class DailiesController {
     }
 
     static updateDaily(req) {
-        
+
         let dailyDao = new DailyDao(DailyModel);
         let dailyNote = {
                 usuario : req.session.user.username,
                 data: req.body.data,
                 corpo: req.body.corpo,
         }
-    
+
         return dailyDao.updateDailyNote(dailyNote)
             .then(response => response)
             .catch(console.error)

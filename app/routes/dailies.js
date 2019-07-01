@@ -1,8 +1,7 @@
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 let controller = require('../controllers/DailiesController');
 
-module.exports = function(app)
-{
+module.exports = function(app) {
     // route for user's dashboard
     app.route('/daily/:op')
         .get((req, res) => {
@@ -14,7 +13,7 @@ module.exports = function(app)
         app.route('/daily')
         .post(sessionCheckerRedLogin, (req,res) => {
             // controller adicionar nova daily
-            
+
             controller.addDaily(req)
                 .then(retorno => {
                     if(!retorno)
@@ -25,7 +24,7 @@ module.exports = function(app)
             })
             .catch(console.error);
         })
-        .delete(sessionCheckerRedLogin, (req,res) => {
+        .delete(sessionCheckerRedLogin, (req, res) => {
 
             controller.deleteDaily(req)
                 .then(retorno => {
@@ -37,7 +36,7 @@ module.exports = function(app)
                 })
                 .catch(console.error)
         })
-        .put(sessionCheckerRedLogin, (req,res) => {
+        .put(sessionCheckerRedLogin, (req, res) => {
 
             controller.updateDaily(req)
                 .then(retorno => {
