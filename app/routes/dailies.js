@@ -4,10 +4,10 @@ let controller = require('../controllers/DailiesController');
 module.exports = function(app)
 {
     // route for user's dashboard
-    app.route('/daily')
+    app.route('/daily/:op')
         .get((req, res) => {
             
-            controller.listDailies(req)
+            controller.listDailies(req, op)
                 .then(res.send(dailies))
                 .catch(console.error)
         })
@@ -23,7 +23,8 @@ module.exports = function(app)
                     }
             })
             .catch(console.error);
-        })
+        });
+    app.route('/daily')
         .delete(sessionCheckerRedLogin, (req,res) => {
 
             controller.deleteDaily(req)

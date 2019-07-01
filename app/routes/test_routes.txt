@@ -1,0 +1,26 @@
+// get '/daily/:op'
+listDailies => {filtro:'data/user'}
+
+
+//post '/daily'
+addDaily => {   
+                ontem : req.body.ontem,
+                hoje: req.body.hoje,
+                impedimento: req.body.impedimento
+            }
+
+
+// delete '/daily'
+deleteDaily => {dailyId: ''}
+
+
+// put '/daily'
+updateDaily => 
+            {
+                dailyId: '',
+                corpo: {  
+                    ontem : req.body.ontem,
+                    hoje: req.body.hoje,
+                    impedimento: req.body.impedimento
+                }
+            }

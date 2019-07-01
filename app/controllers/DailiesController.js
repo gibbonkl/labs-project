@@ -9,7 +9,7 @@ class DailiesController {
         throw new Error("Classe estática. Impossível instanciar.");
     }
 
-    static listDailies(req, page=1, batch=20){
+    static listDailies(req, op, page=1, batch=20){
         console.log(req)
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
@@ -20,14 +20,27 @@ class DailiesController {
             user = userDao.checkUserPermission(req.session.user.username)
         }
 
-        // get dailies
-        return dailyDao.listDailyNotes(req.session.user.username, (page-1)*batch, batch) 
-            .then(dailies => 
-                dailies.map(function(daily){ 
-                    if(user == 'admin' || daily.username == req.session.user.username)
-                        daily['permissao'] = true;
-                    return daily}))
-            .catch(console.error)
+         // get dailies
+        if (op == 'user'){
+            return dailyDao.listDailyNotesbyUser(req.body.filtro, (page-1)*batch, batch) 
+                .then(dailies => 
+                    dailies.map(function(daily){ 
+                        if(user == 'admin' || daily.username == req.session.user.username)
+                            daily['permissao'] = true;
+                        return daily}))
+                .catch(console.error)
+        }
+
+        else if(op == 'data'){
+            return dailyDao.listDailyNotesByDate(req.body.filtro, (page-1)*batch, batch) 
+                .then(dailies => 
+                    dailies.map(function(daily){ 
+                        if(user == 'admin' || daily.username == req.session.user.username)
+                            daily['permissao'] = true;
+                        return daily}))
+                .catch(console.error)
+        }
+
     }
 
     static addDaily(req){
