@@ -1,64 +1,56 @@
-    $(document).ready(function() {
-        $.each(function(arg) {
-            console.log(arg)
-        });
-    });
-
-
-
-    function create() {
-        Swal.mixin({
-                input: 'text',
-                confirmButtonText: 'Próximo &rarr;',
-                showCancelButton: true,
-                progressSteps: ['1', '2', '3']
-            }).queue([{
-                    title: 'O que você fez ontem?'
-                },
-                {
-                    title: 'O que você fará hoje?',
-                },
-                {
-                    title: 'Teve ou tem algum impedimento?',
-                }
-            ]).then((result) => {
-                console.log(result)
-                if (result.value) {
-                    Swal.fire({
-                        title: 'Excelente!',
-                        html: 'Your answers: <pre><code>' +
-                            JSON.stringify(result.value) +
-                            '</code></pre>',
-                        confirmButtonText: 'Registrar Daily! '
-                    })
-                    return {
-                        'ontem': result.value[0],
-                        'hoje': result.value[1],
-                        'impedimento': result.value[2]
-                    }
-                }
-            })
-            .then(resultado =>
-
-                fetch("/daily", {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(resultado)
+function create() {
+    Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Próximo &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2', '3']
+        }).queue([{
+                title: 'O que você fez ontem?'
+            },
+            {
+                title: 'O que você fará hoje?',
+            },
+            {
+                title: 'Teve ou tem algum impedimento?',
+            }
+        ]).then((result) => {
+            console.log(result)
+            if (result.value) {
+                Swal.fire({
+                    title: 'Excelente!',
+                    html: 'Your answers: <pre><code>' +
+                        JSON.stringify(result.value) +
+                        '</code></pre>',
+                    confirmButtonText: 'Registrar Daily! '
                 })
-            )
-            .then(response => response.json())
-            .then(response => $('#collapsible_daily').append(render(response)))
-            .catch(console.log);
-    }
+                return {
+                    'ontem': result.value[0],
+                    'hoje': result.value[1],
+                    'impedimento': result.value[2]
+                }
+            }
+        })
+        .then(resultado =>
 
-    function render(dados) {
+            fetch("/daily", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(resultado)
+            })
+        )
+        .then(response => response.json())
+        .then(response => $('#collapsible_daily').append(render(response)))
+        .catch(console.log);
+}
 
-        return `<li id="${dados._id}" class="data">
+function render(dados) {
+
+    return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
                     <span class="span-margin data" data-name="${dados.usuario}">${dados.usuario}</span>
                     <i class="material-icons">event</i>
-                    <span class="span-margin data align-right" data-date="${dados.data}">${dados.data}</span>
+                    <span class="span-margin data align-right dia" data-date="${dados.data}">${dados.data}</span>
                 </div>
                 <div class="collapsible-body grey lighten-3">
                     <div class="row">
@@ -75,47 +67,67 @@
                 </div>
             </li>`
 
-    }
+}
 
 
 
 
-    function update(id) {
+function update(id) {
 
-        const { value: formValues } = Swal.fire({
-                title: 'Edição de Daily',
-                html: '<input id="edit-data" class="swal2-input">' +
-                    '<input id="edit-ontem" class="swal2-input">' +
-                    '<input id="edit-hoje" class="swal2-input">' +
-                    '<input id="edit-impedimento" class="swal2-input">',
-                focusConfirm: false,
-                preConfirm: () => {
-                    return {
-                        data: $('#edit-data').val(),
-                        ontem: $('#edit-ontem').val(),
-                        hoje: $('#edit-hoje').val(),
-                        impedimento: $('#edit-impedimento').val()
-                    }
-
-                }
-            })
-            .then(resp => {
-                fetch("/daily", {
-                    method: "PUT",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(resp)
+    Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Próximo &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2', '3']
+        }).queue([{
+                title: 'O que você fez ontem?',
+                text: 'Edição de Daily'
+            },
+            {
+                title: 'O que você fará hoje?',
+                text: 'Edição de Daily'
+            },
+            {
+                title: 'Teve ou tem algum impedimento?',
+                text: 'Edição de Daily'
+            }
+        ]).then((result) => {
+            console.log(result)
+            if (result.value) {
+                Swal.fire({
+                    title: 'Excelente!',
+                    html: 'Your answers: <pre><code>' +
+                        JSON.stringify(result.value) +
+                        '</code></pre>',
+                    confirmButtonText: 'Registrar Daily! '
                 })
-
+                return {
+                    'ontem': result.value[0],
+                    'hoje': result.value[1],
+                    'impedimento': result.value[2]
+                }
+            }
+        })
+        .then(resp => {
+            fetch("/daily", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    // data: var teste = $('#5d1a22ea4eb4f449ec3d7528 .data').eq(0).html(), 
+                    corpo: resp
+                })
             })
 
+        })
 
 
-        // if (formValues) {
-        //     Swal.fire(JSON.stringify(formValues))
-        // }
 
-    }
-
-    // function delete(id) {
-
+    // if (formValues) {
+    //     Swal.fire(JSON.stringify(formValues))
     // }
+
+}
+
+function get(id) {
+
+}
