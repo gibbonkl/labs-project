@@ -102,5 +102,11 @@ class DailyDao extends TemplateDao {
         }
         else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
     }
+
+    numberOfDailies(){
+        return this._countDocuments({ativo: true})
+            .then(response)
+            .catch(console.error)
+    }
 }
 module.exports = DailyDao;

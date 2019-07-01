@@ -116,5 +116,11 @@ class TemplateDao{
             .findOneAndUpdate(filter,doc,options);
     }
 
+    _countDocuments(filter={}){
+        return this._model
+            .countDocuments(filter)
+            .exec();
+    }
+
 }
 module.exports = TemplateDao;
