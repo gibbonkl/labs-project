@@ -44,7 +44,7 @@
                             </div>
                             <div id="resultado">
                                 <!-- <img src=""> -->
-                                <img id="cad_image" src="../../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>"/>
+                                <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>"/>
                                 <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="input-field col s12 m6">
                             <input id="data_nascimento" name="data_nasc" type="date" class="validate <%if(user.data_nasc == ''){%><%=user.invalidClass%>" <%}%> >
-                            <label class="active" for="data_nascimento">Data de nascimento</label>
+                            <label class="active" for="data_nascimento"></label>
                         </div>
                         <div class="input-field col s12">
                             <input id="email" name="email" type="email" class="validate <%if(user.email == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%=user.email%>>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row center">
-                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
+                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar"/>
                     </div>
                     <% user.erros.forEach(function(er){ %>
                         <li> <%= er%> </li>

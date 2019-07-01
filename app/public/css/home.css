@@ -120,12 +120,48 @@ textarea.materialize-textarea {
     margin-bottom: 8%;
 }
 .input-field > label:not(.label-icon).active {
-    -webkit-transform: translateY(-13px) scale(0.8) !important;
-            transform: translateY(-13px) scale(0.8) !important;
+    -webkit-transform: translateY(-16px) scale(0.8) !important;
+            transform: translateY(-16px) scale(0.8) !important;
                       
-    -webkit-transform-origin: -13% 0% !important;
-    transform-origin: -13% 0% !important;
-}  
-.input-field.col label {
+    -webkit-transform-origin: -10% 0% !important;
+    transform-origin: -10% 0% !important;
+    
+  }
+
+
+  
+  .input-field.col label {
     left: 1.5rem !important;
+  }
+
+  input:not([type]).validate + label,
+  input[type=password]:not(.browser-default).validate + label,
+  input[type=email]:not(.browser-default).validate + label,
+  input[type=text]:not(.browser-default).validate + label,
+  input[type=date]:not(.browser-default).validate + label,
+  textarea.materialize-textarea {
+    width: 550px !important;
+  }
+
+
+  input:not([type]),
+  input[type=date]:not(.browser-default), 
+  input[type=text]:not(.browser-default),
+  input[type=email]:not(.browser-default), 
+  input[type=password]:not(.browser-default), 
+  textarea.materialize-textarea {
+        padding-left: 10px;
+  }
+
+  .row .col.s12 {
+    overflow: inherit;
+ }
+
+  .input-field > label {
+  
+    -webkit-transform-origin: -10% 100% !important;
+            transform-origin: -10% 100% !important;
 }
+ 
+
+ 

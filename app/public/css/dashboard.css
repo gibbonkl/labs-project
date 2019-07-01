@@ -8,8 +8,8 @@ body{
     background-image: url("../img/logo_compasso_mini.png");
     background-repeat: no-repeat;
     background-color: white;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
 }
 .span-margin{
     margin: 0 14px 0 0;
@@ -17,3 +17,15 @@ body{
 .btn-margin-right{
     margin-right: 1%;
 }
+
+.confirme{
+    width: 115px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav .brand-logo {
+   
+    font-size: 1rem !important;
+   
+  }
