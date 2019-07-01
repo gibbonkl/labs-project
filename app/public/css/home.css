@@ -170,13 +170,12 @@ textarea.materialize-textarea {
 
 
   input:not([type]),
+  input[type=date]:not(.browser-default), 
   input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=date]:not(.browser-default),
+  input[type=email]:not(.browser-default), 
+  input[type=password]:not(.browser-default), 
   textarea.materialize-textarea {
-    padding-left: 10px;
-   
+        padding-left: 10px;
   }
 
   .row .col.s12 {
@@ -187,7 +186,7 @@ textarea.materialize-textarea {
   
     -webkit-transform-origin: -10% 100% !important;
             transform-origin: -10% 100% !important;
- }
+}
  
 
  
