@@ -30,7 +30,7 @@
         </div>
         <!-- Fim da coluna azul -->
         <!-- Formulário -->
-        <div id="nav_form" class="col m8 s12 grey lighten-5 z-depth-5 full-height valign-wrapper">
+        <div id="nav_form" class="col m8 s12 white z-depth-5 full-height valign-wrapper">
             <div class="row center margin-login">
                 <h2 class="blue-compass center mont-serrat">Criar uma conta</h2>
                 <form action="/cadastro" method="post">
@@ -82,15 +82,17 @@
                             <label class="active" for="repsenha">Repetir senha</label>
                         </div>
                     </div>
-                    <div class="row center">
+                    <div class="col s12 center">
+                        <% if(captcha){ %>
+                            <%- captcha %>
+                        <% } %>
+                    </div> 
+                    <div class="col s12 center btn-margin-top">
                         <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar"/>
                     </div>
                     <% user.erros.forEach(function(er){ %>
                         <li> <%= er%> </li>
                     <% }) %>
-                    <% if(captcha) {%>
-                        <%- captcha %>
-                    <% } %>
                 </form>
             </div>
         </div>

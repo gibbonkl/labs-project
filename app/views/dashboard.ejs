@@ -1,19 +1,14 @@
 <html lang="pt">
-
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/home.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/login.css">
     <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
-    <script type="text/javascript" src="../public/js/CrudDaily.js"></script>
 </head>
-
 <body class="bg-blue-compass">
 
     <!-- Estrutura do menu dropdown da navbar -->
@@ -44,7 +39,7 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <div class="row center">
+            <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
                 <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily note</a>
             </div>
         </div>
@@ -113,7 +108,7 @@
     </div>
 
     <div class="confirme">
-    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)" >Confirmar</button>
+        <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)" >Confirmar</button>
     </div>
 
 
@@ -137,6 +132,7 @@
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>
     <script type="text/javascript" src="../public/js/dashboard.js"></script>
+    <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../public/js/CrudDaily.js"></script>
 </body>
-
 </html>

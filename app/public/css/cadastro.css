@@ -34,25 +34,15 @@
         overflow-x: hidden;
     }
 }
-.row .col.s12 {
-    overflow: inherit !important;
-}  
 .z-depth-5, .modal {
     -webkit-box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0.0) !important;
             box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0.0) !important;
  }
-.grey.lighten-5 {
-    background-color: #ffffff !important;
-}
-.valign-wrapper {
-   display: -webkit-box !important; 
-}
-.margin-login {
-    margin: 0% !important;
-}
 .g-recaptcha{
     margin-left: auto;
     margin-right: auto;
     width: 310px;
 }
-
+.btn-margin-top{
+    margin-top: 3%;
+}
