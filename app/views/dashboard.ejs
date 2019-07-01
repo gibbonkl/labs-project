@@ -1,4 +1,5 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
@@ -9,9 +10,10 @@
     <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script type="text/javascript" src="../public/js/CrudDaily.js"></script>
     <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../public/js/CrudDaily.js"></script>
 </head>
+
 <body class="bg-blue-compass">
 
     <!-- Estrutura do menu dropdown da navbar -->
@@ -48,15 +50,15 @@
     </div>
 
     <!-- Pesquisar nas dailies -->
-   
+
 
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
             <div class="row">
                 <div class="col s12">
-                    <ul class="collapsible expandable">
-                        <li id="teste" class="data">
+                    <ul id="collapsible_daily" class="collapsible expandable">
+                        <!-- <li id="" class="data">
                             <div class="collapsible-header">
                                 <i class="material-icons">face</i>
                                 <span class="span-margin data" data-name="">Nome da pessoa</span>
@@ -76,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- <li>
                             <div class="collapsible-header">
                                 <i class="material-icons">face</i>
@@ -123,48 +125,12 @@
                 </div>
             </div>
         </div>
-    </footer>    
+    </footer>
     <script type="text/javascript" src="../public/js/jquery.min.js"></script>
     <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>
     <script type="text/javascript" src="../public/js/dashboard.js"></script>
-    <script type="text/javascript">
-     function create() {
-        Swal.mixin({
-            input: 'text',
-            confirmButtonText: 'Next &rarr;',
-            showCancelButton: true,
-            progressSteps: ['1', '2', '3']
-        }).queue([
-            {
-                title: 'Question 1',
-                text: 'O que você fez ontem?'
-            },
-            {
-                title: 'Question 2',
-                text:'O que você fará hoje?',
-            },
-            {
-                title: 'Question 3',
-                text: 'Teve ou tem algum impedimento?',
-            } 
-        ]).then((result) => {
-            if(value=== '') { 
-                return !value && 'Você precisar escrever alguma coisa!'
-            } else {
-                Swal.fire({
-                    title: 'Excelente!',
-                    html:
-                    'Your answers: <pre><code>' +
-                        JSON.stringify(result.value) +
-                    '</code></pre>',
-                    confirmButtonText: 'Registrar Daily! '
-                })
-            }
-        })
-        console.log(create);
-    }
-    </script>
 </body>
+
 </html>
