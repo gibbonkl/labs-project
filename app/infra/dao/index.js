@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-let Dao = require("./UserDao");
-let Model = require("../../models/schema_Usuario");
+let UserDao = require("./UserDao");
+let UserModel = require("../../models/schema_Usuario");
+let DailyDao = require("./DailyDao");
+let DailyModel = require("../../models/schema_DailyNote");
 //let obj = new Model({
     // nome: "Goku",
     // sobrenome:"SOn",
@@ -11,14 +13,14 @@ let Model = require("../../models/schema_Usuario");
     // imagem:"diego.png",
     // data_nascimento: new Date("1996","09","17")
 //});
-let obj = new Model({
-    // usuario: "vedita",
-    // corpo: {
-    //     ontem: 'cositas',
-    //     hoje: 'controller',
-    //     impedimento: 'não',
-    // },
-    // data: "27/5/2019"
+let obj = new DailyModel({
+    usuario: "pessoinha",
+     corpo: {
+        ontem: 'stuff',
+         hoje: 'controller',
+         impedimento: 'não',
+     }
+     //data: "01/7/2019"
     // username:"goku",
     // email:"goku@compasso.com.br",
     // senha:"teste123"
@@ -26,11 +28,11 @@ let obj = new Model({
     // imagem:"diego.png",
     // data_nascimento: new Date("1996","09","17")
 });
-Dao = new Dao(Model);
-//Dao.insertDailyNote(obj)
-//    .then(console.log)
-//    .catch(console.error);
-
-Dao.changePassword('gibbon', 'gibb')
+Dao = new DailyDao(DailyModel);
+Dao.insertDailyNote(obj)
     .then(console.log)
     .catch(console.error);
+
+//Dao.changePassword('gibbon', 'gibb')
+//    .then(console.log)
+//    .catch(console.error);
