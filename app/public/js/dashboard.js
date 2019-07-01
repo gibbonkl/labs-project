@@ -29,7 +29,7 @@ $(document).ready(function() {
                         </div>
                         ${daily.permissao?
                         `<div class="col s6">
-                            <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
+                            <a class="btn-floating white right" href="#delete" onclick="remove('${daily._id}')"><i class="material-icons black-text">delete</i></a>
                             <a class="btn-floating white right btn-margin-right" onclick="update('${daily._id}')" href="#edit"><i class="material-icons black-text">create</i></a>
                         </div>`
                         :

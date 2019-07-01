@@ -59,12 +59,15 @@ function render(dados) {
                             <span class="bold">Impedimentos: </span><span class="impedimento" data-imp="${dados.corpo.impedimento}">${dados.corpo.impedimento}</span>
                         </div>
                         <div class="col s6">
-                            <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
+                            <a class="btn-floating white right" onclick="remove('${dados._id}')" href="#delete"><i class="material-icons black-text">delete</i></a>
                             <a class="btn-floating white right btn-margin-right" onclick="update('${dados._id}')" href="#edit"><i class="material-icons black-text">create</i></a>
                         </div>
                     </div>
                 </div>
             </li>`
+}
+function remove(id){
+    console.log("Oi, eu sou o Goku")
 }
 function update(id) {
     Swal.mixin({
