@@ -10,10 +10,8 @@ class DailiesController {
     }
 
     static listDailies(req, op, page=1, batch=20){
-        console.log(req)
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
-
         //verificar user
         let user = 'visitante'
         let username = ''
@@ -36,10 +34,11 @@ class DailiesController {
         else if(op == 'data'){
             return dailyDao.listDailyNotesByDate(req.body.filtro, (page-1)*batch, batch) 
                 .then(dailies => 
-                    dailies.map(function(daily){ 
-                        if (user == 'admin' || daily.username == username)
-                            daily['permissao'] = true;
-                        return daily}))
+                    dailies.map(daily=>{
+                        user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
+                        return daily
+                    })
+                )
                 .catch(console.error)
         }
 

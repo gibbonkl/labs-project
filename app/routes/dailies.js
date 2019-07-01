@@ -4,8 +4,7 @@ let controller = require('../controllers/DailiesController');
 module.exports = function(app) {
     // route for user's dashboard
     app.route('/daily/:op')
-        .get((req, res) => {
-            
+        .post((req, res) => {
             controller.listDailies(req, req.params.op)
                 .then(dailies => res.send(dailies))
                 .catch(console.error)
