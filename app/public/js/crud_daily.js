@@ -11,7 +11,7 @@ function create() {
                 title: 'O que você fará hoje?',
             },
             {
-                title: 'Teve ou tem algum impedimento?',
+                title: 'Há algum impedimento?',
             }
         ]).then((result) => {
             console.log(result)
@@ -44,7 +44,6 @@ function create() {
 }
 
 function render(dados) {
-
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
@@ -55,9 +54,9 @@ function render(dados) {
                 <div class="collapsible-body grey lighten-3">
                     <div class="row">
                         <div class="col s6">
-                            <span>Ontem:</span><span class="ontem" data-ontem="${dados.corpo.ontem}">${dados.corpo.ontem}</span><br>
-                            <span>Hoje:</span><span class="hoje" data-hoje="${dados.corpo.hoje}">${dados.corpo.hoje}</span><br>
-                            <span>Impedimentos:</span><span class="impedimento" data-imp="${dados.corpo.impedimento}">${dados.corpo.impedimento}</span>
+                            <span class="bold">Ontem: </span><span class="ontem" data-ontem="${dados.corpo.ontem}">${dados.corpo.ontem}</span><br>
+                            <span class="bold">Hoje: </span><span class="hoje" data-hoje="${dados.corpo.hoje}">${dados.corpo.hoje}</span><br>
+                            <span class="bold">Impedimentos: </span><span class="impedimento" data-imp="${dados.corpo.impedimento}">${dados.corpo.impedimento}</span>
                         </div>
                         <div class="col s6">
                             <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
@@ -66,37 +65,28 @@ function render(dados) {
                     </div>
                 </div>
             </li>`
-
 }
-
-
-
-
 function update(id) {
-
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
             showCancelButton: true,
             progressSteps: ['1', '2', '3']
         }).queue([{
-                title: 'O que você fez ontem?',
-                text: 'Edição de Daily'
+                title: 'O que você fez ontem?'
             },
             {
-                title: 'O que você fará hoje?',
-                text: 'Edição de Daily'
+                title: 'O que você fará hoje?'
             },
             {
-                title: 'Teve ou tem algum impedimento?',
-                text: 'Edição de Daily'
+                title: 'Há algum impedimento?'
             }
         ]).then((result) => {
             console.log(result)
             if (result.value) {
                 Swal.fire({
                     title: 'Excelente!',
-                    html: 'Your answers: <pre><code>' +
+                    html: 'Suas respostas: <pre><code>' +
                         JSON.stringify(result.value) +
                         '</code></pre>',
                     confirmButtonText: 'Registrar Daily! '
@@ -119,15 +109,9 @@ function update(id) {
             })
 
         })
-
-
-
     // if (formValues) {
     //     Swal.fire(JSON.stringify(formValues))
     // }
-
 }
-
 function get(id) {
-
 }
