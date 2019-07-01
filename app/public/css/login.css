@@ -20,7 +20,7 @@
 input[type=text]:not(.browser-default) + label,
 input[type=email]:not(.browser-default) +label,
 textarea.materialize-textarea {
-    width: 350px!important;
+    width: 350px !important;
     overflow-x: hidden;
     padding-left: 10px;
 }

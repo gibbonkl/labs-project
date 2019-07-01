@@ -66,9 +66,6 @@ html {
 .row .col.s12 {
     overflow: inherit !important;
 }
-.valign-wrapper {
-   display: -webkit-box !important; 
-}
 .input-field input[type]:not([readonly]),
 .input-field input[type]:focus:not([readonly]),
 .input-field textarea:not([readonly]),
@@ -124,6 +121,20 @@ input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
     width: 550px !important;
+}
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
     background-color: #eeeeee94 !important;
 }
 .input-field > label:not(.label-icon).active {
