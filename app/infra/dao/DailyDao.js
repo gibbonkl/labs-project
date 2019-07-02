@@ -105,7 +105,7 @@ class DailyDao extends TemplateDao {
 
     numberOfDailies(){
         return this._countDocuments({ativo: true})
-            .then(response)
+            .then(response => response)
             .catch(console.error)
     }
 }

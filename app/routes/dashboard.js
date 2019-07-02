@@ -9,7 +9,7 @@ module.exports = function(app)
     
             console.log("DASHBOARD");
             
-            let count = controller.numberOfDailies()
+            //let count = controller.numberOfDailies()
             
             if (req.session.user && req.cookies.user_sid) {
 
