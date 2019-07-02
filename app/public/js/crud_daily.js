@@ -5,23 +5,26 @@ function create() {
             showCancelButton: true,
             progressSteps: ['1', '2', '3']
         }).queue([{
-                title: 'O que você fez ontem?'
+                title: 'O que você fez ontem?',
+                text: 'Cadastrar daily'
             },
             {
                 title: 'O que você fará hoje?',
+                text: 'Cadastrar daily'
             },
             {
                 title: 'Há algum impedimento?',
+                text: 'Cadastrar daily'
             }
         ]).then((result) => {
             console.log(result)
             if (result.value) {
                 Swal.fire({
-                    title: 'Excelente!',
-                    html: 'Your answers: <pre><code>' +
-                        JSON.stringify(result.value) +
-                        '</code></pre>',
-                    confirmButtonText: 'Registrar Daily! '
+                    position: 'center',
+                    type: 'success',
+                    title: 'Daily registrada!',
+                    showConfirmButton: true,
+                    timer: 1500
                 })
                 return {
                     'ontem': result.value[0],
@@ -66,9 +69,30 @@ function render(dados) {
                 </div>
             </li>`
 }
-function remove(id){
-    console.log("Oi, eu sou o Goku")
+
+function remove(id) {
+    Swal.fire({
+        title: 'Tem certeza que deseja excluir a daily?',
+        text: "Você não poderá reverter",
+        type: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Excluir'
+
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire(
+                'Excluida!',
+                'A sua daily foi deletada!',
+                'success'
+            )
+            $('#' + id).remove(); //remove a li do collapsible
+        }
+    })
+
+
 }
+
 function update(id) {
     Swal.mixin({
             input: 'text',
@@ -76,23 +100,26 @@ function update(id) {
             showCancelButton: true,
             progressSteps: ['1', '2', '3']
         }).queue([{
-                title: 'O que você fez ontem?'
+                title: 'O que você fez ontem?',
+                text: 'Editar daily'
             },
             {
-                title: 'O que você fará hoje?'
+                title: 'O que você fará hoje?',
+                text: 'Editar daily'
             },
             {
-                title: 'Há algum impedimento?'
+                title: 'Há algum impedimento?',
+                text: 'Editar daily'
             }
         ]).then((result) => {
             console.log(result)
             if (result.value) {
                 Swal.fire({
-                    title: 'Excelente!',
-                    html: 'Suas respostas: <pre><code>' +
-                        JSON.stringify(result.value) +
-                        '</code></pre>',
-                    confirmButtonText: 'Registrar Daily! '
+                    position: 'center',
+                    type: 'success',
+                    title: 'Daily editada!',
+                    showConfirmButton: true,
+                    timer: 1500
                 })
                 return {
                     'ontem': result.value[0],
@@ -112,9 +139,9 @@ function update(id) {
             })
 
         })
-    // if (formValues) {
-    //     Swal.fire(JSON.stringify(formValues))
-    // }
+        // if (formValues) {
+        //     Swal.fire(JSON.stringify(formValues))
+        // }
 }
-function get(id) {
-}
+
+function get(id) {}
