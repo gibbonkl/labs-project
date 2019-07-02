@@ -83,6 +83,14 @@ class DailiesController {
             .then(response => response)
             .catch(console.error)
     }
+
+    static numberOfDailies() {
+        let dailyDao = new DailyDao(DailyModel);
+
+        return dailyDao.numberOfDailies()
+            .then(count)
+            .catch(console.error)
+    }
 }
 
 module.exports = DailiesController;
