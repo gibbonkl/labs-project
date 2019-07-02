@@ -11,7 +11,7 @@
 <body>
     <div class="row">
         <!-- Formulário -->
-        <div id="nav_form" class="col m8 s12 grey lighten-5 z-depth-5 full-height valign-wrapper">
+        <div id="nav_form" class="col m8 s12 white z-depth-5 full-height valign-wrapper">
             <div class="row center margin-login">
                 <h2 class="blue-compass center mont-serrat height-title">Acessar sua conta</h2>
                 <form action="/login" method="post">
@@ -27,16 +27,13 @@
                         <div class="col s12 margin-forgot-pass">
                             <a class="blue-text modal-trigger" href="#modal_key">Esqueci a senha</a>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <% if(errorMessage != '') { %>
                         <li><%= errorMessage %></li>
-                    <% } %>
-                    
+                    <% } %>                    
                     <div class="row center">
                         <input class="btn bg-blue-compass rounded" type="submit" value="Entrar" />
-                    </div>
-                    
+                    </div>                    
                 </form>
             </div>
         </div>
@@ -82,8 +79,8 @@
         </div>
         <!-- Fim da coluna azul -->
     </div>
-    <script type="text/javascript" src="../public/js/login.js"></script>
     <script type="text/javascript" src="../public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/login.js"></script>
     <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>    

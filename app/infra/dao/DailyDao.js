@@ -93,7 +93,7 @@ class DailyDao extends TemplateDao {
         */
     listDailyNotesByDate(data = '', skip = '', limit = '') {
         if (data) {
-            return this._find({ data: data, ativo: true }, { _id: 1, usuario: 1, corpo: 1, permissao: 1 },  { skip: skip, limit: limit })
+            return this._find({ data: data, ativo: true }, { _id: 1, usuario: 1, corpo: 1, permissao: 1, data:1 },  { skip: skip, limit: limit })
                 .then(res => res ? res : null)
                 .catch(err => {
                     console.error(err);
