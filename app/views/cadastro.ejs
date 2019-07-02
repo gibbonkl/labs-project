@@ -1,4 +1,5 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../public/css/croppie.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
 </head>
+
 <body>
     <div class="row">
         <!-- Coluna azul -->
@@ -36,15 +38,15 @@
                 <form action="/cadastro" method="post">
                     <div class="col s12">
                         <div class="col s12 center">
-                        <!-- <input id="cad_photo" type="file" class="hide" /> -->
-                        <!-- <input type="file" id="my_file" style="display: none;" /> -->
+                            <!-- <input id="cad_photo" type="file" class="hide" /> -->
+                            <!-- <input type="file" id="my_file" style="display: none;" /> -->
                             <div id="page" class="hide">
                                 <div id="main-cropper"></div>
                                 <button type="button" class="btn actionCrop">Cortar</button>
                             </div>
                             <div id="resultado">
                                 <!-- <img src=""> -->
-                                <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>"/>
+                                <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>" />
                                 <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
                             </div>
                         </div>
@@ -85,26 +87,29 @@
                     <div class="col s12 center">
                         <% if(captcha){ %>
                             <%- captcha %>
-                        <% } %>
-                    </div> 
+                                <% } %>
+                    </div>
                     <div class="col s12 center btn-margin-top">
-                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar"/>
+                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
                     </div>
                     <% user.erros.forEach(function(er){ %>
-                        <li> <%= er%> </li>
-                    <% }) %>
+                        <li>
+                            <%= er%>
+                        </li>
+                        <% }) %>
                 </form>
             </div>
         </div>
         <!-- Fim do formulário -->
     </div>
-    <script type="text/javascript" src="../public/js/cadastro.js"></script>
     <script type="text/javascript" src="../public/js/ejs.js"></script>
-    <script type="text/javascript" src="../public/js/photo.js"></script>
     <script type="text/javascript" src="../public/js/jquery.min.js"></script>
     <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>
     <script type="text/javascript" src="../public/js/croppie.min.js"></script>
+    <script type="text/javascript" src="../public/js/photo.js"></script>
+    <script type="text/javascript" src="../public/js/cadastro.js"></script>
 </body>
+
 </html>
