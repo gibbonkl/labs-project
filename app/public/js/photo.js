@@ -47,10 +47,10 @@ $('.actionCrop').on('click', function(ev) {
         this.picture = $("#cad_image").attr('src', resp);
         $("#page").addClass('hide');
         $("#cad_image").removeClass('hide').show('slow');
-        	var blobFile = $('#cad_image').attr('src');
-          var formData = new FormData();
-          formData.append("fileToUpload", blobFile);
-        	$('#cad_image').val(formData);
+        var blobFile = $('#cad_image').attr('src');
+        var formData = new FormData();
+        formData.append("fileToUpload", blobFile);
+        $('#cad_image').val(formData);
     });
 });
 
