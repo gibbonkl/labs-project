@@ -18,13 +18,34 @@ git clone https://github.com/gibbonkl/game-of-bols
 cd ./game-of-bols
 ```
 
-## Fluxo de uso do repositório:
+## Acessar localmente uma branch existente no repositório:
+```
+git checkout -t origin/sprint-0
+```
 
-![Fluxo de uso do repositório](readme_source/fluxo_basico.png?raw=true "Fluxo de uso do repositório")
+## Criar uma nova branch local (task em doing no trello):
+```
+git checkout -b <branchname>
+``` 
+ 
+## Fazer commit:
+```
+git add <filename>
+git commit -m "<commitmessage>"
+```
+  
+## Enviar a branch para test_dev (task em test dev no trello):
+```
+git checkout test_dev
+git pull
+git merge <branchname>
+git push
+```
 
-## Estrutura MVC do projeto:
-
-![Fluxo de uso do repositório](readme_source/MVC.png?raw=true "MVC")
+## Muda de branch:
+```
+git checkout <branchname>
+```
 
 ## No final da Sprint, fazer merge com a master:
 ```

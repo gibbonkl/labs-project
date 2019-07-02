@@ -11,7 +11,7 @@ var schema_DailyNote = new Schema({
         hoje: { type: String, required: true },
         impedimento: { type: String, required: true }
     },
-    data: { type: Date, required: true, default: date() },
+    data: { type: String, required: true, default: date() },
     ativo: { type: Boolean, required: true, default: true },
     permissao: {type: Boolean, default: false}
 

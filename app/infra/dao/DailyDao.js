@@ -77,7 +77,7 @@ class DailyDao extends TemplateDao {
     */
     listDailyNotesByUser(username = '', skip = '', limit = '') {
         if (username) {
-            return this._find({ usuario: username, ativo: true }, { data: 1, corpo: 1, permissao: 1 }, { sort: { data: -1 }, skip: skip, limit: limit })
+            return this._find({ usuario: username, ativo: true }, { _id: 1, data: 1, corpo: 1, permissao: 1 }, { sort: { data: -1 }, skip: skip, limit: limit })
                 .then(res => res ? res : null)
                 .catch(err => {
                     console.error(err);
@@ -91,16 +91,16 @@ class DailyDao extends TemplateDao {
             *   @param {date} data data da daily note
             *   @returns {object}
         */
-    listDailyNotesByDate(data = '') {
+    listDailyNotesByDate(data = '', skip = '', limit = '') {
         if (data) {
-            return this._find({ data: data, ativo: true }, { usuario: 1, corpo: 1, permissao: 1 },  { skip: skip, limit: limit })
+            return this._find({ data: data, ativo: true }, { _id: 1, usuario: 1, corpo: 1, permissao: 1, data:1 },  { skip: skip, limit: limit })
                 .then(res => res ? res : null)
                 .catch(err => {
                     console.error(err);
                     return ({ detail: "Impossível buscar para essa data", error: err })
                 })
         }
-        return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
+        else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
     }
 }
 module.exports = DailyDao;

@@ -5,34 +5,48 @@ let UserModel = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 
 class DailiesController {
-    constructor(){
+    constructor() {
         throw new Error("Classe estática. Impossível instanciar.");
     }
 
-    static listDailies(req, page=1, batch=20){
-        console.log(req)
+    static listDailies(req, op, page=1, batch=20){
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
-        
         //verificar user
         let user = 'visitante'
-        if(req.session) {
-            user = userDao.checkUserPermission(req.session.user.username)
+        let username = ''
+        if(req.session.user) {
+            user = userDao.checkUserPermission(req.session.user.username);
+            username = req.session.user.username;
         }
 
-        // get dailies
-        return dailyDao.listDailyNotes(req.session.user.username, (page-1)*batch, batch) 
-            .then(dailies => 
-                dailies.map(function(daily){ 
-                    if(user == 'admin' || daily.username == req.session.user.username)
-                        daily['permissao'] = true;
-                    return daily}))
-            .catch(console.error)
+         // get dailies
+        if (op == 'user'){
+            return dailyDao.listDailyNotesByUser(req.body.filtro, (page-1)*batch, batch) 
+                .then(dailies => 
+                    dailies.map(function(daily){ 
+                        if (user == 'admin' || daily.username == username)
+                            daily['permissao'] = true;
+                        return daily}))
+                .catch(console.error)
+        }
+
+        else if(op == 'data'){
+            return dailyDao.listDailyNotesByDate(req.body.filtro, (page-1)*batch, batch) 
+                .then(dailies => 
+                    dailies.map(daily=>{
+                        user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
+                        return daily
+                    })
+                )
+                .catch(console.error)
+        }
+
     }
 
     static addDaily(req){
         
-        let daily = new modelDaily({
+        let daily = new DailyModel({
             usuario : req.session.user.username,
             corpo : 
             {   
@@ -44,31 +58,28 @@ class DailiesController {
 
         let dailyDAO = new DailyDao(DailyModel);
         return dailyDAO.insertDailyNote(daily)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 
     static deleteDaily(req) {
-        
+        let dailyDao = new DailyDao(DailyModel);
         return dailyDao.removeDailyNoteById(req.body.daily_id)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 
     static updateDaily(req) {
-        
+
         let dailyDao = new DailyDao(DailyModel);
         let dailyNote = {
-                usuario : req.body.session.user,
-                corpo: {
-                    ontem: req.body.ontem,
-                    hoje: req.body.hoje,
-                    impedimento: req.body.impedimento
-            },
+                usuario : req.session.user.username,
+                data: req.body.data,
+                corpo: req.body.corpo,
         }
-    
+
         return dailyDao.updateDailyNote(dailyNote)
-            .then(retorno)
+            .then(response => response)
             .catch(console.error)
     }
 }

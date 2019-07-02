@@ -1,15 +1,16 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/home.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/login.css">
     <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+
 <body class="bg-blue-compass">
 
     <!-- Estrutura do menu dropdown da navbar -->
@@ -18,7 +19,7 @@
         <li class="divider"></li>
         <li><a href="/logout" class="blue-compass">Fazer Logout</a></li>
     </ul>
-    
+
     <!-- Navbar -->
     <div>
         <nav class="white">
@@ -40,36 +41,34 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <%if(user.tipo=='user'){%>
-                <div class="row center">
-                    <a class="waves-effect waves-light btn-large bg-yellow-compass rounded">Nova daily note</a>
-                </div>    
-            <%}%>            
+            <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily note</a>
+            </div>
         </div>
     </div>
 
     <!-- Pesquisar nas dailies -->
-   
+
 
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
             <div class="row">
                 <div class="col s12">
-                    <ul class="collapsible expandable">
-                        <li>
+                    <ul id="collapsible_daily" class="collapsible expandable">
+                        <!-- <li id="" class="data">
                             <div class="collapsible-header">
                                 <i class="material-icons">face</i>
-                                <span class="span-margin">Nome da pessoa</span>
+                                <span class="span-margin data" data-name="">Nome da pessoa</span>
                                 <i class="material-icons">event</i>
-                                <span class="span-margin align-right">Data</span>
+                                <span class="span-margin data align-right" data-date="">Data</span>
                             </div>
                             <div class="collapsible-body grey lighten-3">
                                 <div class="row">
                                     <div class="col s6">
-                                        <span>Ontem:</span><br>
-                                        <span>Hoje:</span><br>
-                                        <span>Impedimentos:</span>
+                                        <span class="data" data-ontem="">Ontem:</span><br>
+                                        <span class="data" data-hoje="">Hoje:</span><br>
+                                        <span class="data" data-imp="">Impedimentos:</span>
                                     </div>
                                     <div class="col s6">
                                         <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
@@ -77,38 +76,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header">
-                                <i class="material-icons">face</i>
-                                <span class="span-margin">Nome da pessoa</span>
-                                <i class="material-icons">event</i>
-                                <span class="span-margin align-right">Data</span>
-                            </div>
-                            <div class="collapsible-body grey lighten-3">
-                                <span>Ontem:</span><br>
-                                <span>Hoje:</span><br>
-                                <span>Impedimentos:</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header">
-                                <i class="material-icons">face</i>
-                                <span class="span-margin">Nome da pessoa</span>
-                                <i class="material-icons">event</i>
-                                <span class="span-margin align-right">Data</span>
-                            </div>
-                            <div class="collapsible-body grey lighten-3">
-                                <span>Ontem:</span><br>
-                                <span>Hoje:</span><br>
-                                <span>Impedimentos:</span>
-                            </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- <div class="confirme">
+        <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)">Confirmar</button>
+    </div> -->
+
 
     <footer class="page-footer bg-blue-compass">
         <div class="container">
@@ -124,11 +102,14 @@
                 </div>
             </div>
         </div>
-    </footer>    
+    </footer>
     <script type="text/javascript" src="../public/js/jquery.min.js"></script>
     <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/inicio.js"></script>
+    <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../public/js/crud_daily.js"></script>
     <script type="text/javascript" src="../public/js/dashboard.js"></script>
 </body>
+
 </html>
