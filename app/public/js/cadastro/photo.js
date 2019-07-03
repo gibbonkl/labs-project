@@ -54,6 +54,7 @@ $('.actionCrop').on('click', function(ev) {
     });
 });
 
+//escuta o click na foto e ativa o plugin para corte da foto
 $("#cad_image").click(function() {
     $("input[id='upload']").click();
 });
