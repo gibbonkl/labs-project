@@ -28,3 +28,14 @@ body{
 .alterar-senha-margin-top{
     margin-top: 5%;
 }
+.left-divider{
+    border-left: 1px solid lightgrey;
+}
+.topico:not(:last-child){
+    border-bottom: 1px solid lightgrey;
+}
+.topico-titulo{
+    font-size: 1.5em;
+    line-height: 1.5;
+    font-weight: bold;
+}
