@@ -13,7 +13,7 @@ module.exports = function(app)
             
             if (req.session.user && req.cookies.user_sid) {
 
-                user = {
+                let user = {
                     username: req.session.user.username,
                     tipo: req.session.user.tipo
                 }
@@ -21,7 +21,7 @@ module.exports = function(app)
                 res.render('dashboard', user);
             } else {
 
-                user = {
+                let user = {
                     username: '',
                     tipo: ''
                 }

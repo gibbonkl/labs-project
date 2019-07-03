@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-let Daily = require('./DailyComponent')
+import DailyComponent from './DailyComponent'
 
-class ListDailiesComponent extends Component{
+export default class ListDailiesComponent extends Component{
     renderRow(daily){
-        return (<Daily daily={daily}/>)
+        return (<DailyComponent daily={daily}/>)
     }
 
     render(){
@@ -16,5 +16,3 @@ class ListDailiesComponent extends Component{
         )
     }
   }
-
-module.exports = ListDailiesComponent

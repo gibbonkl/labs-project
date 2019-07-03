@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DailyComponent extends Component {
+export default class DailyComponent extends Component {
   render() {
     return (
         <li>
@@ -19,5 +19,3 @@ class DailyComponent extends Component {
     );
   }
 }
-
-module.exports = DailyComponent

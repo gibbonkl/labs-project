@@ -1,5 +1,6 @@
-let listDailies = require('./ListDailiesComponent')
+import ListDailiesComponent from './ListDailiesComponent'
 
+console.log('aqui')
 dailies = [{
             user:"albano",
             data:"01/01/2019",
@@ -19,8 +20,7 @@ dailies = [{
             }
         }];
 
-let element = <listDailies dailies={dailies}/>;
 ReactDOM.render(
-    element,
-    document.getElementById('listDailies')
+    <ListDailiesComponent dailies={dailies}/>,
+    document.getElementById('collapsible_daily')
 );

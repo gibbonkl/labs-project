@@ -28,10 +28,7 @@
                 <ul class="right hide-on-med-and-down">
                     <!--<li><a href="#"><i class="material-icons blue-compass">search</i></a></li>-->
                     <!-- Em caso de visitante, mostra link login e botão cadastro-->
-                    <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
-                    <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                     <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown -->
-                    <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
                 </ul>
             </div>
         </nav>
@@ -41,9 +38,7 @@
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
                 <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily note</a>
-            </div>
         </div>
     </div>
 
@@ -110,6 +105,12 @@
     <script type="text/javascript" src="../public/js/sweetalert2@8.js"></script>
     <script type="text/javascript" src="../public/js/crud_daily.js"></script>
     <script type="text/javascript" src="../public/js/dashboard.js"></script>
+    <script src="https://unpkg.com/react@16.8.6/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" crossorigin></script>
+    <!--script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script-->
+    <script type="text/babel" src="../public/js/react_components/test.js"></script>
+
+    
 </body>
 
 </html>
