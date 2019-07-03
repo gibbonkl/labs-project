@@ -6,9 +6,10 @@ var schema_postagem = new Schema({
     username: { type: String, required: true },
     postagem: { type: String, required: true },
     data: { type: String, required: true, default: date() },
-    comentarios: [ String ],
-    tags: [ String ],
-    like: { type:Number, required: true, default: 0}
+    comentarios: { type: [String] },
+    tags: { type: [String] },
+    likes: { type: [String]},
+    ativo: { type: Boolean, required: true, default: true }
 
 },{ timestamp: true });
 
