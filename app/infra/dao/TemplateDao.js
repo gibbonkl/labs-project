@@ -39,6 +39,7 @@ class TemplateDao{
                 .catch((err) => console.error(err));
             this._db = mongoose.connection;
         }
+        mongoose.set('useFindAndModify', false);
     }
     /*
         *   Salva um objeto no banco de dados

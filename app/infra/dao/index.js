@@ -5,6 +5,8 @@ let DailyDao = require("./DailyDao");
 let DailyModel = require("../../models/schema_DailyNote");
 let PostagemDao = require("./PostagemDao");
 let PostagemModel = require("../../models/schema_postagem");
+let ComentarioDAO = require("./ComentarioDAO");
+let ComentarioModel = require("../../models/schema_comentario");
 //let obj = new Model({
     // nome: "Goku",
     // sobrenome:"SOn",
@@ -43,14 +45,22 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 //    .then(console.log)
 //    .catch(console.error);
 let postagem = new PostagemModel ({
-    _id: '5d1cca636e14f6045877f123',
-    username: 'vedita',
-    postagem: 'essa postagem editada',
-    likes: ['another']
+    _id: '5d1ce6e2acf2731fc46bed58',
+    username: 'Goku',
+    corpo: 'Quem edita por ultimo edita melhor'
 });
 
 PostagemDao = new PostagemDao(PostagemModel);
-PostagemDao.editarPostagem(postagem)
+PostagemDao.getPostagem('5d1ce6e2acf2731fc46bed58')
     .then(console.log)
-    .catch(console.error)
+
+// let comentario = new ComentarioModel ({
+//     username: 'Goku',
+//     corpo: 'meu comentario'
+// });
+
+// comentarioDAO = new ComentarioDAO(ComentarioModel);
+// comentarioDAO.insertComentario('5d1ce6e2acf2731fc46bed58', comentario)
+//     .then(console.log)
+    // .catch(console.error)
     
