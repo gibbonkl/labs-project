@@ -1,5 +1,5 @@
 function alteraSenha(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
 
     var data = {

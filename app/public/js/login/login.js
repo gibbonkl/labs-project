@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('.modal').modal({
-        startingTop: '10vh',
-        opacity: 0.8,
+        endingTop: '30%',
+        opacity: 0.9,
         onCloseEnd: () => {
-            $("#modal_username").val('');
             $("#modal_email").val('');
+            $(".progress").addClass('hide');
         }
     });
 });
@@ -12,9 +12,10 @@ $(document).ready(function() {
 function recoveryPassword(e) {
     e.preventDefault();
     var data = {
-        username: $("#modal_username").val(),
         email: $("#modal_email").val()
     }
+    $(".progress").removeClass('hide');
+
     fetch("/recuperar_senha", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
