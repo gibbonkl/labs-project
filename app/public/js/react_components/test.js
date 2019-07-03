@@ -19,7 +19,7 @@ dailies = [{
             }
         }];
 
-let element = '<listDailies dailies={dailies}/>';
+let element = <listDailies dailies={dailies}/>;
 ReactDOM.render(
     element,
     document.getElementById('listDailies')
