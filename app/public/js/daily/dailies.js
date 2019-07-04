@@ -41,6 +41,7 @@ $(document).ready(function() {
         ).join(''))
     )
     .catch(console.log)
+    
     $(".dropdown-trigger").dropdown({
         constrainWidth: false,
         coverTrigger: false,
