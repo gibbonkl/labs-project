@@ -69,6 +69,14 @@ module.exports = function(app)
         res.send(listPostagens);
     });
 
+    // Lista Postagens por username
+    app.get('/helpCenter/filtroUsername/:user', (req,res) => {
+            
+        let listPostagens = [postagemDoGoku, postagemDoGoku];
+
+        res.send(listPostagens);
+    });
+
     // Adiciona Postagem
     app.post('/helpCenter', (req,res) => {
             
@@ -88,7 +96,7 @@ module.exports = function(app)
     });
 
     //Inserir Comentário
-    app.put('/helpCenter/:id/insertCommentario', (req,res) => {
+    app.post('/helpCenter/:id/insertCommentario', (req,res) => {
                 
         res.send(comentarioDoVegeta);
     });
@@ -99,13 +107,13 @@ module.exports = function(app)
         res.send(comentarioDoVegeta);
     });
 
-    //Deleta Comentario
+    //Deletar Comentario
     app.delete('/helpCenter/:id/deleteComentario', (req,res) => {
             
         res.send(true);
     });
 
-    // Adiciona Like em uma postagem ou comentário
+    // Adiciona/Remove Like em uma postagem ou comentário
     app.post('/helpCenter/like', (req, res) => {
 
         res.send(true);
