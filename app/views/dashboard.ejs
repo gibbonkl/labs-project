@@ -35,7 +35,8 @@
                         <!-- Em caso de visitante, mostra link login e botão cadastro-->
                         <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
-                        <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown -->
+                        <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
+                        <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</li>
                         <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
                     </ul>
                 </div>
@@ -48,7 +49,7 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily note</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily</a>
             </div>
         </div>
     </div>
@@ -89,26 +90,29 @@
         </div>
     </div>
 
-    <!-- <div class="confirme">
+    <!-- 
+    <div class="confirme">
         <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)">Confirmar</button>
-    </div> -->
-
-
-    <footer class="page-footer bg-blue-compass">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <ul class="pagination center">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active grey"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
-                    </ul>
+    </div> 
+    -->
+    <!--
+        <footer class="page-footer bg-blue-compass">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="pagination center">
+                            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                            <li class="active grey"><a href="#!">1</a></li>
+                            <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
+                            <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
+                            <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    -->
+
     <script type="text/javascript" src="../public/js/jquery.min.js"></script>
     <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/md5.min.js"></script>

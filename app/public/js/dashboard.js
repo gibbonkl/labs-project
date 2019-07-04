@@ -43,8 +43,7 @@ $(document).ready(function() {
     .catch(console.log)
     $(".dropdown-trigger").dropdown({
         constrainWidth: false,
-        coverTrigger: false,
-        hover: true
+        coverTrigger: false
     });
     $('.collapsible').collapsible({
         accordion: false
