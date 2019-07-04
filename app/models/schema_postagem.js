@@ -4,7 +4,7 @@ var date = require('../helper/date_helper');
 
 var schema_postagem = new Schema({
     username: { type: String, required: true },
-    postagem: { type: String, required: true },
+    corpo: { type: String, required: true },
     data: { type: String, required: true, default: date() },
     comentarios: { type: [String] },
     tags: { type: [String] },

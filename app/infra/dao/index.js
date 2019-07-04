@@ -44,23 +44,23 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 //Dao.changePassword('gibbon', 'gibb')
 //    .then(console.log)
 //    .catch(console.error);
-let postagem = new PostagemModel ({
-    _id: '5d1ce6e2acf2731fc46bed58',
-    username: 'Goku',
-    corpo: 'Quem edita por ultimo edita melhor'
-});
-
-PostagemDao = new PostagemDao(PostagemModel);
-PostagemDao.getPostagem('5d1ce6e2acf2731fc46bed58')
-    .then(console.log)
-
-// let comentario = new ComentarioModel ({
+// let postagem = new PostagemModel ({
+//     //_id: '5d1ce6e2acf2731fc46bed58',
 //     username: 'Goku',
-//     corpo: 'meu comentario'
+//     corpo: 'Quem edita por ultimo edita melhor'
 // });
 
-// comentarioDAO = new ComentarioDAO(ComentarioModel);
-// comentarioDAO.insertComentario('5d1ce6e2acf2731fc46bed58', comentario)
-//     .then(console.log)
-    // .catch(console.error)
+// PostagemDao = new PostagemDao(PostagemModel);
+// PostagemDao.getPostagem('5d1de45b456b4f13c81de56f')
+//     .then(res => console.log(res[0].comentarios))
+
+let comentario = new ComentarioModel ({
+    username: 'Goten',
+    corpo: 'comentario do Goten'
+ });
+
+  comentarioDAO = new ComentarioDAO(ComentarioModel);
+  comentarioDAO.insertComentario('5d1de45b456b4f13c81de56f', comentario)
+     .then(console.log)
+     .catch(console.error)
     

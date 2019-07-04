@@ -1,6 +1,5 @@
 const TemplateDao = require('./TemplateDao');
-const ComentarioDAO = require("./ComentarioDAO");
-const ComentarioModel = require("../../models/schema_comentario");
+const mongoose = require('mongoose');
 
 class PostagemDao extends TemplateDao{
 
@@ -164,11 +163,10 @@ class PostagemDao extends TemplateDao{
     */
     getPostagem(id='')
     {
-
+        return this._aggregate([{'$match': {_id: mongoose.Types.ObjectId(id)}}, {'$lookup': {
+            'from': 'comentarios', 'localField': 'comentarios', 'foreignField': '_id', 'as': 'comentarios'
+        }}])
+        .then(res => res ? res : 'erro')
     }
-
-    // listarPostagemByAtividade
-
-
 }
 module.exports = PostagemDao;

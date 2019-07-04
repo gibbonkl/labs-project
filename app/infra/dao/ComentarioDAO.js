@@ -1,27 +1,42 @@
 const TemplateDao = require('./TemplateDao');
+let PostagemDao = require("./PostagemDao");
+let PostagemModel = require("../../models/schema_postagem");
 
 class ComentarioDAO extends TemplateDao{
 
     /*
         *   Salva um comentario no banco de dados
+        *   @param {String} Id Postagem 
         *   @param {Object} comentario para salvar no banco
         *   @returns {object} comentario
     */
-    _insertComentario(comentario){
-        if(comentario){
+    insertComentario(idPostagem, comentario){
+        PostagemDao = new PostagemDao(PostagemModel);
+        if(comentario && idPostagem){
             return this._save(comentario)
-                .then((res, err) => res ? res : err)
+                .then((res, err) => {
+                    try{
+                        PostagemDao.adicionaComentario(idPostagem, res._id);
+                        return res;
+                    }
+                    catch
+                    {
+                        return 'erro';
+                    }
+                })
         }
     }
     /*
         *   Faz update no campo ativo mudando para false
-        *   @param {String} id do comentario 
+        *   @param {String} id do comentario
+        *   @param {String} id da Postagem 
         *   @returns {object} comentario
     */
-    _deleteComentarioById(id){
-        if(id){
-            return this._findOneAndUpdate({_id:id},{$set:{ativo:false}}, {new: true})
-                .then((res,err) => res ? res : err)
+    deleteComentarioById(idComentario, idPostagem){
+        PostagemDao = new PostagemDao(PostagemModel);
+        if(idComentario && idPostagem){
+            return this._findOneAndUpdate({_id:idComentario},{$set:{ativo:false}}, {new: true})
+                .then((res,err) => res ? PostagemDao.removeComentario(idPostagem, res._id) : err)
         }
     }
     /*

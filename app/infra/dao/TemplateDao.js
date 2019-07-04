@@ -123,5 +123,11 @@ class TemplateDao{
             .exec();
     }
 
+    _aggregate(queries)
+    {
+        return this._model.aggregate(queries)
+            .exec();
+    }
+
 }
 module.exports = TemplateDao;
