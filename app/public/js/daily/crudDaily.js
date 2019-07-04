@@ -34,7 +34,6 @@ function create() {
             }
         })
         .then(resultado =>
-
             fetch("/daily", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -47,6 +46,8 @@ function create() {
 }
 
 function render(dados) {
+    teste = dados
+    console.log(teste)
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
@@ -57,9 +58,9 @@ function render(dados) {
                 <div class="collapsible-body grey lighten-3">
                     <div class="row">
                         <div class="col s6">
-                            <span class="bold">Ontem: </span><span class="ontem" data-ontem="${dados.corpo.ontem}">${dados.corpo.ontem}</span><br>
-                            <span class="bold">Hoje: </span><span class="hoje" data-hoje="${dados.corpo.hoje}">${dados.corpo.hoje}</span><br>
-                            <span class="bold">Impedimentos: </span><span class="impedimento" data-imp="${dados.corpo.impedimento}">${dados.corpo.impedimento}</span>
+                            <span class="bold">Ontem: </span><span class="ontem">${dados.corpo.ontem}</span><br>
+                            <span class="bold">Hoje: </span><span class="hoje">${dados.corpo.hoje}</span><br>
+                            <span class="bold">Impedimentos: </span><span class="imp">${dados.corpo.impedimento}</span>
                         </div>
                         <div class="col s6">
                             <a class="btn-floating white right" onclick="remove('${dados._id}')" href="#delete"><i class="material-icons black-text">delete</i></a>
@@ -70,30 +71,75 @@ function render(dados) {
             </li>`
 }
 
+function dateConverter(date = new Date()) {
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+}
+
+function listDailies() {
+
+    fetch("/daily/data", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "filtro": dateConverter()
+            })
+        })
+        .then(response => response.json())
+        .then(dailies => {
+            console.log(dailies)
+            $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+        })
+        .catch(console.log)
+}
+
 function remove(id) {
     Swal.fire({
-        title: 'Tem certeza que deseja excluir a daily?',
-        text: "Você não poderá reverter",
-        type: 'warning',
-        showCancelButton: false,
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'Excluir'
+            title: 'Tem certeza que deseja excluir a daily?',
+            text: "Você não poderá reverter",
+            type: 'warning',
+            reverseButtons: true,
+            showCancelButton: true,
+            confirmButtonColor: '#b3bac5',
+            confirmButtonText: 'Deletar',
+            cancelButtonColor: '#ffffff',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        })
+        .then(resp => {
+            fetch("/daily", {
+                method: "DELETE",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ daily_id: id })
+            })
 
-    }).then((result) => {
-        if (result.value) {
-            Swal.fire(
-                'Excluida!',
-                'A sua daily foi deletada!',
-                'success'
-            )
+            return resp;
+        })
+        .then((result) => {
             $('#' + id).remove(); //remove a li do collapsible
-        }
-    })
-
-
+            if (result.value) {
+                Swal.fire(
+                    'Excluida!',
+                    'A sua daily foi deletada!',
+                    'success'
+                )
+            }
+        })
+        .catch((result) => {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Houve um erro!',
+            })
+        })
 }
 
 function update(id) {
+    var obj = {
+        ontem: $("#" + id + " .ontem").html(),
+        hoje: $("#" + id + " .hoje").html(),
+        imp: $("#" + id + " .imp").html()
+    }
+    console.log(obj)
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
@@ -101,47 +147,55 @@ function update(id) {
             progressSteps: ['1', '2', '3']
         }).queue([{
                 title: 'O que você fez ontem?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.ontem
             },
             {
                 title: 'O que você fará hoje?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.hoje
             },
             {
                 title: 'Há algum impedimento?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.imp
             }
-        ]).then((result) => {
-            console.log(result)
-            if (result.value) {
-                Swal.fire({
-                    position: 'center',
-                    type: 'success',
-                    title: 'Daily editada!',
-                    showConfirmButton: true,
-                    timer: 1500
-                })
-                return {
-                    'ontem': result.value[0],
-                    'hoje': result.value[1],
-                    'impedimento': result.value[2]
-                }
+        ])
+        .then((result) => {
+            return {
+                'ontem': result.value[0],
+                'hoje': result.value[1],
+                'impedimento': result.value[2]
             }
         })
         .then(resp => {
             fetch("/daily", {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    // data: var teste = $('#5d1a22ea4eb4f449ec3d7528 .data').eq(0).html(), 
-                    corpo: resp
-                })
+                body: JSON.stringify(resp)
             })
 
+            return resp;
         })
-        // if (formValues) {
-        //     Swal.fire(JSON.stringify(formValues))
-        // }
-}
+        .then(resp => {
 
-function get(id) {}
+            $("#" + id + " .ontem").html(resp.ontem);
+            $("#" + id + " .hoje").html(resp.hoje);
+            $("#" + id + " .imp").html(resp.impedimento);
+
+            Swal.fire({
+                position: 'center',
+                type: 'success',
+                title: 'Daily editada!',
+                showConfirmButton: true,
+                timer: 1500
+            })
+        })
+        .catch(resp => {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Houve um erro!',
+            })
+        })
+}
