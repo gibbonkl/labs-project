@@ -39,6 +39,7 @@ class TemplateDao{
                 .catch((err) => console.error(err));
             this._db = mongoose.connection;
         }
+        mongoose.set('useFindAndModify', false);
     }
     /*
         *   Salva um objeto no banco de dados
@@ -119,6 +120,12 @@ class TemplateDao{
     _countDocuments(filter={}){
         return this._model
             .countDocuments(filter)
+            .exec();
+    }
+
+    _aggregate(queries)
+    {
+        return this._model.aggregate(queries)
             .exec();
     }
 
