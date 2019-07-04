@@ -81,7 +81,7 @@ module.exports = function(app)
 
     // Adiciona Postagem
     app.post('/helpCenter', (req,res) => {
-            
+        
         res.send(postagemDoGoku);
     });
 
