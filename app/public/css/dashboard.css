@@ -1,5 +1,8 @@
 body{
-    overflow: auto;
+    overflow: auto !important;
+}
+html{
+    overflow: auto !important;
 }
 .nav-padding-left {
     padding-left: 1%;
@@ -29,13 +32,33 @@ body{
     margin-top: 5%;
 }
 .left-divider{
-    border-left: 1px solid lightgrey;
+    border-left: 1px solid #eeeeee;
+    margin-left: 50px;
 }
 .topico:not(:last-child){
     border-bottom: 1px solid lightgrey;
 }
+.topico-nome{
+    font-size: 1.1em;
+    line-height: 2;
+}
 .topico-titulo{
-    font-size: 1.5em;
-    line-height: 1.5;
+    font-size: 1.3em;
+    line-height: 2;
     font-weight: bold;
+}
+.topico-data{
+    line-height: 2;
+}
+.number{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 20px !important;
+    position: relative !important;
+    top: -5 !important;
+}
+.number:not(:last-child){
+    padding-right: 20px;
+}
+.position-relative{
+    position: relative !important;
 }
