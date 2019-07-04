@@ -4,33 +4,33 @@ let captcha_verify = require('../helper/recaptcha_verify');
 let ModeloUsuarioCadastro = require('../models/modelo_usuario_cadastro');
 let ValidacaoCadastro = require('../controllers/validacao_cadastro');
 let controllerCadastraUsuario = require('../controllers/controller_cadastra_usuario');
-
+const multer = require("multer");
+var upload = multer({dest: 'game-of-bols/app/public/uploads'});
 module.exports = function(app) {
-    //middleware de validação
-    app.use('/cadastro', captcha_verify, captcha_render, (req,res,next) => {
-        if(req.method == 'POST')
-        {
-            console.log('Middleware Validação Cadastro');
-
-            let modeloUsuario = new ModeloUsuarioCadastro();
-            modeloUsuario.preencheAutomatico(req.body);
+    // //middleware de validação
+    // app.use('/cadastro', captcha_verify, captcha_render,upload.single('upload'),(req,res,next) => {
+    //     if(req.method == 'POST')
+    //     {
+    //         console.log('Middleware Validação Cadastro');
+    //         let modeloUsuario = new ModeloUsuarioCadastro();
+    //         modeloUsuario.preencheAutomatico(req.body);
 
             
-            let validacao = new ValidacaoCadastro(modeloUsuario);
-            modeloUsuario = validacao.valida();
+    //         let validacao = new ValidacaoCadastro(modeloUsuario);
+    //         modeloUsuario = validacao.valida();
             
-            if (req.recaptcha.error) 
-            {
-                modeloUsuario.erros.push('erro recaptcha');
-                res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
-            } 
-            else if(modeloUsuario.temErro())
-                res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
-            else
-                next();
-        }else
-            next();
-    });
+    //         if (req.recaptcha.error) 
+    //         {
+    //             modeloUsuario.erros.push('erro recaptcha');
+    //             res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
+    //         } 
+    //         else if(modeloUsuario.temErro())
+    //             res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
+    //         else
+    //             next();
+    //     }else
+    //         next();
+    // });
 
     // route for user signup
     app.route('/cadastro')
@@ -38,18 +38,18 @@ module.exports = function(app) {
             let modeloUsuario = new ModeloUsuarioCadastro();
             res.render('cadastro', { user : modeloUsuario.getUser(), captcha:res.recaptcha});
         })
-        .post(sessionCheckerRedDash, (req, res) => {
+        .post(sessionCheckerRedDash,upload.single('upload'),(req, res) => {
             console.log('Rota Cadastro (metodo Post)');
-
             controllerCadastraUsuario(req)
-            .then((retorno) => {
+            .then(retorno => {
+
                 if( retorno.status == 'ok')
                 {
-                    req.session.user = retorno.user;
-                    res.redirect('/');
+                    req.session.user = retorno.user;   
+                    res.redirect('/');                 
                 }else{
                     res.render('cadastro', { user : retorno.user, captcha:res.recaptcha});
                 }
-            }); 
+            })
         });
 }

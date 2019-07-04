@@ -35,7 +35,7 @@
         <div id="nav_form" class="col m8 s12 white z-depth-5 full-height valign-wrapper">
             <div class="row center margin-login">
                 <h2 class="blue-compass center mont-serrat">Criar uma conta</h2>
-                <form action="/cadastro" method="post">
+                <form action="/cadastro" method="post" enctype="multipart/form-data">
                     <div class="col s12">
                         <div class="col s12 center">
                             <!-- <input id="cad_photo" type="file" class="hide" /> -->
@@ -47,7 +47,7 @@
                             <div id="resultado">
                                 <!-- <img src=""> -->
                                 <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>" />
-                                <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
+                                <input type="file" name="upload" id="upload" value="Choose Image" accept="image/*" class="hide">
                             </div>
                         </div>
                         <div class="input-field col s12 m6">
