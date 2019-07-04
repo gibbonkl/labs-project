@@ -37,7 +37,7 @@ module.exports = function(app)
         res.send(listPostagens);
     });
     
-    // Envia Postagem
+    // Envia uma única Postagem
     app.get('/helpCenter/:id', (req,res) => {
     
         let response = {
@@ -47,7 +47,7 @@ module.exports = function(app)
             data : '01/01/2000',
             comentarios : [comentarioDoVegeta],
             like : '8000',
-            tags : ['Goku'],
+            tags : ['Goku']
         };
 
         res.send(response);
@@ -104,5 +104,11 @@ module.exports = function(app)
             
         res.send(true);
     });
+
+    // Adiciona Like em uma postagem ou comentário
+    app.post('/helpCenter/like', (req, res) => {
+
+        res.send(true);
+    })
 
 }
