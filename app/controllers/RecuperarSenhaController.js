@@ -48,10 +48,9 @@ class RecuperarSenhaController{
     */
     changePassword(hash="",newPassword=""){
         return this._userDAO.updatePassword(hash,newPassword)
-            .then(res =>{
-                console.log(res)
-                return res? true:false
-            })
+            .then(res =>
+                res? true:false
+            )
             .catch(err=>{
                 console.log(err);
                 throw new Error(err);
