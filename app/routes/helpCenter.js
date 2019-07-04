@@ -1,21 +1,23 @@
 var postagemDoGoku = {
 
     id : '012371273091283',
+    titulo : 'Postagem do Goku',
     username : 'Goku',
     postagem : 'Oi eu sou o Goku',
     data : '01/01/2000',
     comentarios : ['12312312312'],
-    like : '8000',
+    like : 8000,
     tags : ['Goku'],
 }
 var postagemDoGohan = {
 
     id : '01237127231233091283',
+    titulo : 'Postagem do Gohan',
     username : 'Gohan',
     postagem : 'Oi eu sou o Gohan',
     data : '01/01/2010',
     comentarios : [''],
-    like : '3000',
+    like : 3000,
     tags : ['Gohan'],
 }
 
@@ -24,7 +26,7 @@ var comentarioDoVegeta = {
     username : 'Vegeta',
     comentario : 'Eu sou melhor que voce Kakaroto',
     data : '01/02/2000',
-    like : '5000'
+    like : 5000
 }
 
 module.exports = function(app)
@@ -46,7 +48,7 @@ module.exports = function(app)
             postagem : 'Oi eu sou o Goku',
             data : '01/01/2000',
             comentarios : [comentarioDoVegeta],
-            like : '8000',
+            like : 8000,
             tags : ['Goku']
         };
 
