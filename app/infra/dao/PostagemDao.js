@@ -168,5 +168,21 @@ class PostagemDao extends TemplateDao{
         }}])
         .then(res => res ? res : 'erro')
     }
+    
+    /*
+       *   Lista todas as postagens ordenando por último update
+       *   @param {String} username Usuário das postagens
+       *   @param {Number} skip é o offset
+       *   @param {Number} limit quantidade de postagens desejada
+       *   @returns {Object}
+   */
+    listarPostagemOrderByLastUpdate(skip = '', limit = '') {
+        
+            return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+                .then((res, err) => res ? res : err)
+                .catch(err => {
+                    return ({ detail: "Impossível buscar postagens", error: err })
+                })
+    }
 }
 module.exports = PostagemDao;

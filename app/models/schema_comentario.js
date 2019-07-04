@@ -9,6 +9,6 @@ var schema_comentario = new Schema({
     likes: { type: [String] },
     ativo: { type: Boolean, required: true, default: true }
 
-},{ timestamp: true });
+},{ timestamps: true });
 
 module.exports = mongoose.model('Comentario', schema_comentario);
