@@ -11,6 +11,6 @@ var schema_postagem = new Schema({
     likes: { type: [String]},
     ativo: { type: Boolean, required: true, default: true }
 
-},{ timestamp: true });
+},{ timestamps: true });
 
 module.exports = mongoose.model('Postagem', schema_postagem);
