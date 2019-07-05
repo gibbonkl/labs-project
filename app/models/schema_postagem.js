@@ -4,12 +4,14 @@ var date = require('../helper/date_helper');
 
 var schema_postagem = new Schema({
     username: { type: String, required: true },
-    postagem: { type: String, required: true },
+    titulo: { type: String, required: true },
+    corpo: { type: String, required: true },
     data: { type: String, required: true, default: date() },
-    comentarios: [ String ],
-    tags: [ String ],
-    like: { type:Number, required: true, default: 0}
-
-},{ timestamp: true });
+    comentarios: { type: [String] },
+    tags: { type: [String] },
+    likes: { type: [String]},
+    ativo: { type: Boolean, required: true, default: true },
+    permissao: {type: Boolean, default: false}
+},{ timestamps: true });
 
 module.exports = mongoose.model('Postagem', schema_postagem);

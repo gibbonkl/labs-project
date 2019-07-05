@@ -3,6 +3,10 @@ let UserDao = require("./UserDao");
 let UserModel = require("../../models/schema_Usuario");
 let DailyDao = require("./DailyDao");
 let DailyModel = require("../../models/schema_DailyNote");
+let PostagemDao = require("./PostagemDao");
+let PostagemModel = require("../../models/schema_postagem");
+let ComentarioDAO = require("./ComentarioDAO");
+let ComentarioModel = require("../../models/schema_comentario");
 //let obj = new Model({
     // nome: "Goku",
     // sobrenome:"SOn",
@@ -13,6 +17,7 @@ let DailyModel = require("../../models/schema_DailyNote");
     // imagem:"diego.png",
     // data_nascimento: new Date("1996","09","17")
 //});
+/*
 let obj = new DailyModel({
     usuario: "pessoinha",
      corpo: {
@@ -20,6 +25,7 @@ let obj = new DailyModel({
          hoje: 'controller',
          impedimento: 'não',
      }
+
      //data: "01/7/2019"
     // username:"goku",
     // email:"goku@compasso.com.br",
@@ -28,11 +34,33 @@ let obj = new DailyModel({
     // imagem:"diego.png",
     // data_nascimento: new Date("1996","09","17")
 });
-Dao = new DailyDao(DailyModel);
-Dao.insertDailyNote(obj)
+*/
+/*
+DailyDao = new DailyDao(DailyModel);
+DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
     .then(console.log)
     .catch(console.error);
-
+*/
 //Dao.changePassword('gibbon', 'gibb')
 //    .then(console.log)
 //    .catch(console.error);
+//  let postagem = new PostagemModel ({
+//      _id: '5d1de45b456b4f13c81de56f',
+//      username: 'Goku',
+//      corpo: 'corpo da postagem 4'
+//  });
+
+// PostagemDao = new PostagemDao(PostagemModel);
+// PostagemDao.editarPostagem(postagem)
+//     .then(res => console.log)
+
+//let comentario = new ComentarioModel ({
+ //   username: 'Goten',
+ //   corpo: 'comentario do Goten'
+// });
+
+// PostagemDao = new PostagemDao(PostagemModel);
+// PostagemDao.listarPostagemOrderByLastUpdate()
+//      .then(console.log)
+//      .catch(console.error)
+    
