@@ -37,3 +37,13 @@ controllerHelpCenter.editarPostagem(req).then(res => console.log(res));
 
 controllerHelpCenter.deletarPostagem('5d1de45b456b4f13c81de56f')
     .then(res => console.log(res));
+
+const ComentarioInsertController = require('./ComentarioInsertController');
+let ComentarioModel = require("../models/schema_comentario");
+let comentario = new ComentarioModel({
+
+    username: 'gibbon',
+    corpo: 'Corpo de comentario'
+});
+ComentarioInsertController.insertComentario("5d1f441bea4d892414de8578", comentario)
+    .then(console.log);
