@@ -50,6 +50,20 @@ class HelpCenterController {
         }
     }
 
+    static editarPostagem(req){
+        let postagem = new PostagemModel ({
+            _id: req.body._id,
+            username: req.body.username,
+            corpo: req.body.corpo,
+            //titulo: req.body.titulo
+        });
+        console.log(postagem);
+       
+        return new PostagemDao(PostagemModel).editarPostagem(postagem)
+                .then(res=> res ? res : 'erro ao editar postagem')
+        
+    }
+
 }
 
 module.exports = HelpCenterController;
