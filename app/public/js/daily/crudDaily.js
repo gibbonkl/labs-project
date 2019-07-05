@@ -1,9 +1,23 @@
+function animaLoad() {
+    $(".progress").addClass('hide').hide('slow');
+    $("#show_dailies").fadeIn('fast').removeClass('hide');
+}
+
 function create() {
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
+            reverseButtons: true,
             showCancelButton: true,
-            progressSteps: ['1', '2', '3']
+            cancelButtonColor: '#b3bac5',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false,
+            progressSteps: ['1', '2', '3'],
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Você precisa preencher o campo!'
+                }
+            }
         }).queue([{
                 title: 'O que você fez ontem?',
                 text: 'Cadastrar daily'
@@ -17,7 +31,6 @@ function create() {
                 text: 'Cadastrar daily'
             }
         ]).then((result) => {
-            console.log(result)
             if (result.value) {
                 Swal.fire({
                     position: 'center',
@@ -31,6 +44,8 @@ function create() {
                     'hoje': result.value[1],
                     'impedimento': result.value[2]
                 }
+            } else {
+                return false;
             }
         })
         .then(resultado =>
@@ -86,7 +101,7 @@ function listDailies() {
         })
         .then(response => response.json())
         .then(dailies => {
-            console.log(dailies)
+            animaLoad()
             $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
         })
         .catch(console.log)
@@ -99,24 +114,25 @@ function remove(id) {
             type: 'warning',
             reverseButtons: true,
             showCancelButton: true,
-            confirmButtonColor: '#b3bac5',
+            confirmButtonColor: '#d33',
             confirmButtonText: 'Deletar',
-            cancelButtonColor: '#ffffff',
+            cancelButtonColor: '#b3bac5',
             cancelButtonText: 'Cancelar',
-            reverseButtons: true
+            allowOutsideClick: false
         })
         .then(resp => {
-            fetch("/daily", {
-                method: "DELETE",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ daily_id: id })
-            })
-
-            return resp;
+            if (resp.value) {
+                fetch("/daily", {
+                    method: "DELETE",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ daily_id: id })
+                })
+                return resp;
+            }
         })
         .then((result) => {
-            $('#' + id).remove(); //remove a li do collapsible
             if (result.value) {
+                $('#' + id).remove(); //remove a li do collapsible
                 Swal.fire(
                     'Excluida!',
                     'A sua daily foi deletada!',
@@ -125,11 +141,7 @@ function remove(id) {
             }
         })
         .catch((result) => {
-            Swal.fire({
-                type: 'error',
-                title: 'Oops...',
-                text: 'Houve um erro!',
-            })
+            Swal.close();
         })
 }
 
@@ -139,12 +151,21 @@ function update(id) {
         hoje: $("#" + id + " .hoje").html(),
         imp: $("#" + id + " .imp").html()
     }
-    console.log(obj)
+
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
             showCancelButton: true,
-            progressSteps: ['1', '2', '3']
+            progressSteps: ['1', '2', '3'],
+            cancelButtonColor: '#b3bac5',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false,
+            reverseButtons: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Você precisa preencher o campo!'
+                }
+            }
         }).queue([{
                 title: 'O que você fez ontem?',
                 text: 'Editar daily',
@@ -174,11 +195,9 @@ function update(id) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(resp)
             })
-
             return resp;
         })
         .then(resp => {
-
             $("#" + id + " .ontem").html(resp.ontem);
             $("#" + id + " .hoje").html(resp.hoje);
             $("#" + id + " .imp").html(resp.impedimento);
@@ -192,10 +211,6 @@ function update(id) {
             })
         })
         .catch(resp => {
-            Swal.fire({
-                type: 'error',
-                title: 'Oops...',
-                text: 'Houve um erro!',
-            })
+            Swal.close();
         })
 }
