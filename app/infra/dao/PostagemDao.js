@@ -21,8 +21,8 @@ class PostagemDao extends TemplateDao{
     */
     deletePostagemById(id){
         if(id){
-            return this._findOneAndUpdate({_id:id},{$set:{ativo:false}}, {new: true})
-                .then((res,err) => res ? res : err)
+            return this._findOneAndUpdate({_id:id, ativo:true},{$set:{ativo:false}}, {new: true})
+                .then(res => res ? true : false)
         }
     }
     /*
@@ -33,7 +33,7 @@ class PostagemDao extends TemplateDao{
     editarPostagem(postagem) {
         if (postagem) {
             return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo } }, {new: true})
-                .then((res, err) => res ? res : err)
+                .then((res,err) => res ? res : err)
         }
     }
     /*

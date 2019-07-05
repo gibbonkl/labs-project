@@ -10,8 +10,8 @@ var schema_postagem = new Schema({
     comentarios: { type: [String] },
     tags: { type: [String] },
     likes: { type: [String]},
-    ativo: { type: Boolean, required: true, default: true }
-
+    ativo: { type: Boolean, required: true, default: true },
+    permissao: {type: Boolean, default: false}
 },{ timestamps: true });
 
 module.exports = mongoose.model('Postagem', schema_postagem);
