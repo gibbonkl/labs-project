@@ -51,65 +51,39 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()">Nova daily</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()"><i class="left material-icons">add</i>Nova daily</a>
             </div>
         </div>
     </div>
 
     <!-- Pesquisar nas dailies -->
 
-
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
-            <div class="row">
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <div id="show_dailies" class="row hide">
                 <div class="col s12">
                     <ul id="collapsible_daily" class="collapsible expandable">
-                        <!-- <li id="" class="data">
-                            <div class="collapsible-header">
-                                <i class="material-icons">face</i>
-                                <span class="span-margin data" data-name="">Nome da pessoa</span>
-                                <i class="material-icons">event</i>
-                                <span class="span-margin data align-right" data-date="">Data</span>
-                            </div>
-                            <div class="collapsible-body grey lighten-3">
-                                <div class="row">
-                                    <div class="col s6">
-                                        <span class="data" data-ontem="">Ontem:</span><br>
-                                        <span class="data" data-hoje="">Hoje:</span><br>
-                                        <span class="data" data-imp="">Impedimentos:</span>
-                                    </div>
-                                    <div class="col s6">
-                                        <a class="btn-floating white right" href="#delete"><i class="material-icons black-text">delete</i></a>
-                                        <a class="btn-floating white right btn-margin-right" href="#edit"><i class="material-icons black-text">create</i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li> -->
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 
-    <div class="confirme">
-        <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)">Confirmar</button>
-    </div> 
-    -->
-    <!--
-        <footer class="page-footer bg-blue-compass">
-            <div class="container">
-                <div class="row">
-                    <div class="col s12">
-                        <ul class="pagination center">
-                            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                            <li class="active grey"><a href="#!">1</a></li>
-                            <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
-                            <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
-                            <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
-                        </ul>
-                    </div>
+    <footer class="page-footer bg-blue-compass">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="pagination center">
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="active grey"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
+                        <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
+                        <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>

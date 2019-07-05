@@ -1,9 +1,23 @@
+function animaLoad() {
+    $(".progress").addClass('hide').hide('slow');
+    $("#show_dailies").fadeIn('fast').removeClass('hide');
+}
+
 function create() {
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
+            reverseButtons: true,
             showCancelButton: true,
-            progressSteps: ['1', '2', '3']
+            cancelButtonColor: '#b3bac5',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false,
+            progressSteps: ['1', '2', '3'],
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Você precisa preencher o campo!'
+                }
+            }
         }).queue([{
                 title: 'O que você fez ontem?',
                 text: 'Cadastrar daily'
@@ -17,7 +31,6 @@ function create() {
                 text: 'Cadastrar daily'
             }
         ]).then((result) => {
-            console.log(result)
             if (result.value) {
                 Swal.fire({
                     position: 'center',
@@ -31,10 +44,11 @@ function create() {
                     'hoje': result.value[1],
                     'impedimento': result.value[2]
                 }
+            } else {
+                return false;
             }
         })
         .then(resultado =>
-
             fetch("/daily", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -47,6 +61,8 @@ function create() {
 }
 
 function render(dados) {
+    teste = dados
+    console.log(teste)
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
@@ -57,9 +73,9 @@ function render(dados) {
                 <div class="collapsible-body grey lighten-3">
                     <div class="row">
                         <div class="col s6">
-                            <span class="bold">Ontem: </span><span class="ontem" data-ontem="${dados.corpo.ontem}">${dados.corpo.ontem}</span><br>
-                            <span class="bold">Hoje: </span><span class="hoje" data-hoje="${dados.corpo.hoje}">${dados.corpo.hoje}</span><br>
-                            <span class="bold">Impedimentos: </span><span class="impedimento" data-imp="${dados.corpo.impedimento}">${dados.corpo.impedimento}</span>
+                            <span class="bold">Ontem: </span><span class="ontem">${dados.corpo.ontem}</span><br>
+                            <span class="bold">Hoje: </span><span class="hoje">${dados.corpo.hoje}</span><br>
+                            <span class="bold">Impedimentos: </span><span class="imp">${dados.corpo.impedimento}</span>
                         </div>
                         <div class="col s6">
                             <a class="btn-floating white right" onclick="remove('${dados._id}')" href="#delete"><i class="material-icons black-text">delete</i></a>
@@ -70,78 +86,131 @@ function render(dados) {
             </li>`
 }
 
+function dateConverter(date = new Date()) {
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+}
+
+function listDailies() {
+
+    fetch("/daily/data", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "filtro": dateConverter()
+            })
+        })
+        .then(response => response.json())
+        .then(dailies => {
+            animaLoad()
+            $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+        })
+        .catch(console.log)
+}
+
 function remove(id) {
     Swal.fire({
-        title: 'Tem certeza que deseja excluir a daily?',
-        text: "Você não poderá reverter",
-        type: 'warning',
-        showCancelButton: false,
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'Excluir'
-
-    }).then((result) => {
-        if (result.value) {
-            Swal.fire(
-                'Excluida!',
-                'A sua daily foi deletada!',
-                'success'
-            )
-            $('#' + id).remove(); //remove a li do collapsible
-        }
-    })
-
-
+            title: 'Tem certeza que deseja excluir a daily?',
+            text: "Você não poderá reverter",
+            type: 'warning',
+            reverseButtons: true,
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Deletar',
+            cancelButtonColor: '#b3bac5',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false
+        })
+        .then(resp => {
+            if (resp.value) {
+                fetch("/daily", {
+                    method: "DELETE",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ daily_id: id })
+                })
+                return resp;
+            }
+        })
+        .then((result) => {
+            if (result.value) {
+                $('#' + id).remove(); //remove a li do collapsible
+                Swal.fire(
+                    'Excluida!',
+                    'A sua daily foi deletada!',
+                    'success'
+                )
+            }
+        })
+        .catch((result) => {
+            Swal.close();
+        })
 }
 
 function update(id) {
+    var obj = {
+        ontem: $("#" + id + " .ontem").html(),
+        hoje: $("#" + id + " .hoje").html(),
+        imp: $("#" + id + " .imp").html()
+    }
+
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
             showCancelButton: true,
-            progressSteps: ['1', '2', '3']
+            progressSteps: ['1', '2', '3'],
+            cancelButtonColor: '#b3bac5',
+            cancelButtonText: 'Cancelar',
+            allowOutsideClick: false,
+            reverseButtons: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Você precisa preencher o campo!'
+                }
+            }
         }).queue([{
                 title: 'O que você fez ontem?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.ontem
             },
             {
                 title: 'O que você fará hoje?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.hoje
             },
             {
                 title: 'Há algum impedimento?',
-                text: 'Editar daily'
+                text: 'Editar daily',
+                inputValue: obj.imp
             }
-        ]).then((result) => {
-            console.log(result)
-            if (result.value) {
-                Swal.fire({
-                    position: 'center',
-                    type: 'success',
-                    title: 'Daily editada!',
-                    showConfirmButton: true,
-                    timer: 1500
-                })
-                return {
-                    'ontem': result.value[0],
-                    'hoje': result.value[1],
-                    'impedimento': result.value[2]
-                }
+        ])
+        .then((result) => {
+            return {
+                'ontem': result.value[0],
+                'hoje': result.value[1],
+                'impedimento': result.value[2]
             }
         })
         .then(resp => {
             fetch("/daily", {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    // data: var teste = $('#5d1a22ea4eb4f449ec3d7528 .data').eq(0).html(), 
-                    corpo: resp
-                })
+                body: JSON.stringify(resp)
             })
-
+            return resp;
         })
-        // if (formValues) {
-        //     Swal.fire(JSON.stringify(formValues))
-        // }
-}
+        .then(resp => {
+            $("#" + id + " .ontem").html(resp.ontem);
+            $("#" + id + " .hoje").html(resp.hoje);
+            $("#" + id + " .imp").html(resp.impedimento);
 
-function get(id) {}
+            Swal.fire({
+                position: 'center',
+                type: 'success',
+                title: 'Daily editada!',
+                showConfirmButton: true,
+                timer: 1500
+            })
+        })
+        .catch(resp => {
+            Swal.close();
+        })
+}
