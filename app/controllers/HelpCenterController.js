@@ -11,14 +11,14 @@ class HelpCenterController {
         let postagemDao = new PostagemDao(PostagemModel);
         
         //verificar user
-        let user = 'user'
-        let username = 'Goku'
-        // if(req.session.user) {
-        //     user = req.session.user.tipo;
-        //     username = req.session.user.username;
-        // }
+        let user = 'visitante'
+        let username = ''
+        if(req.session.user) {
+            user = req.session.user.tipo;
+            username = req.session.user.username;
+        }
 
-         // get dailies
+         // get postagens
         if (op == 'lastUpdate'){
             return postagemDao.listarPostagemOrderByLastUpdate((page-1)*batch, batch)
                 .then(postagem => 
