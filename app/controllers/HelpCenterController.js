@@ -50,6 +50,22 @@ class HelpCenterController {
         }
     }
 
+    static insertPostagem(req) {
+        
+        let postagem = new PostagemModel ({
+            username: req.body.username,
+            corpo: req.body.corpo,
+            titulo: req.body.titulo
+        });
+
+        return new PostagemDAO(PostagemModel).insertPostagem(postagem)
+            .then(response => response ? response : null)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    }
+
     static editarPostagem(req){
         let postagem = new PostagemModel ({
             _id: req.body._id,
