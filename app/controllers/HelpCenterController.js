@@ -64,6 +64,11 @@ class HelpCenterController {
         
     }
 
+    static deletarPostagem(id){
+
+        return new PostagemDao(PostagemModel).deletePostagemById(id)
+    }
+
 }
 
 module.exports = HelpCenterController;

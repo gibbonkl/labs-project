@@ -1,4 +1,16 @@
+const PostagemInsertController = require('./PostagemInsertController');
+let PostagemModel = require("../models/schema_postagem");
 const controllerHelpCenter = require('./HelpCenterController');
+
+/* Teste Inserir Postagem
+let postagem = new PostagemModel({
+    titulo: 'POST NOVO',
+    username: 'gibbon',
+    corpo: 'CORPO'
+});
+PostagemInsertController.insertPostagem(postagem)
+    .then(console.log);
+*/
 
 /* Teste Listar Postagens
 let user = {
@@ -25,6 +37,7 @@ PostagemInsertController.insertPostagem(postagem)
     .then(console.log);
 */
 
+/* Teste Editar Postagem
 req = {
     body: {
         _id: '5d1de45b456b4f13c81de56f',
@@ -34,3 +47,9 @@ req = {
 };
 
 controllerHelpCenter.editarPostagem(req).then(res => console.log(res));
+*/
+
+/* Teste Deletar Postagem
+controllerHelpCenter.deletarPostagem('5d1de45b456b4f13c81de56f')
+    .then(res => console.log(res));
+*/
