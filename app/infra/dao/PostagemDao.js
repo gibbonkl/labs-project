@@ -33,7 +33,7 @@ class PostagemDao extends TemplateDao{
     editarPostagem(postagem) {
         if (postagem) {
             return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo } }, {new: true})
-                .then((res, err) => res ? res : err)
+                .then((res,err) => res ? res : err)
         }
     }
     /*

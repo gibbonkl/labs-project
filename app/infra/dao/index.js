@@ -44,14 +44,14 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 //Dao.changePassword('gibbon', 'gibb')
 //    .then(console.log)
 //    .catch(console.error);
- let postagem = new PostagemModel ({
-     //_id: '5d1ce6e2acf2731fc46bed58',
-     username: 'tester',
-     corpo: 'corpo da postagem 4'
- });
+//  let postagem = new PostagemModel ({
+//      _id: '5d1de45b456b4f13c81de56f',
+//      username: 'Goku',
+//      corpo: 'corpo da postagem 4'
+//  });
 
- //PostagemDao = new PostagemDao(PostagemModel);
-//PostagemDao.insertPostagem(postagem)
+// PostagemDao = new PostagemDao(PostagemModel);
+// PostagemDao.editarPostagem(postagem)
 //     .then(res => console.log)
 
 //let comentario = new ComentarioModel ({
@@ -59,8 +59,8 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
  //   corpo: 'comentario do Goten'
 // });
 
- PostagemDao = new PostagemDao(PostagemModel);
-PostagemDao.listarPostagemOrderByLastUpdate()
-     .then(console.log)
-     .catch(console.error)
+// PostagemDao = new PostagemDao(PostagemModel);
+// PostagemDao.listarPostagemOrderByLastUpdate()
+//      .then(console.log)
+//      .catch(console.error)
     
