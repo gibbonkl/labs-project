@@ -1,10 +1,10 @@
 const PostagemInsertController = require('./PostagemInsertController');
-let PostagemModel = require("../../models/schema_postagem");
+let PostagemModel = require("../models/schema_postagem");
 
 let postagem = new PostagemModel({
-    titulo: 'titulo do post',
+    titulo: 'POST NOVO',
     username: 'gibbon',
-    corpo: 'corpo da postagem'
+    corpo: 'CORPO'
 });
 PostagemInsertController.insertPostagem(postagem)
     .then(console.log);

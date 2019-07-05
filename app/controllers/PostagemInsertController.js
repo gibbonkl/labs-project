@@ -9,10 +9,10 @@ class PostagemInsertController {
    //     this._postagemDAO = new PostagemDAO(Model);
    //}
     
-    insertPostagem(postagem) {
+    static insertPostagem(postagem) {
 
-        this._postagemDAO = new PostagemDAO(Model);
-        return _postagemDAO.insertPostagem(postagem)
+        let postagemDAO = new PostagemDAO(Model);
+        return postagemDAO.insertPostagem(postagem)
             .then(response => response ? response : null)
             .catch(error => {
                 console.error(error);
