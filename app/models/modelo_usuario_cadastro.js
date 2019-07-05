@@ -15,7 +15,6 @@ class Modelo_Usuario_Cadastro
     }
     preencheAutomatico(body)
     {
-        console.log(body);
         this.nome = body.nome;
         this.sobrenome = body.sobrenome;
         this.username = body.username;

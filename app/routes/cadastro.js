@@ -11,7 +11,6 @@ module.exports = function(app) {
     app.use('/cadastro',upload.single('upload'), captcha_verify, captcha_render,(req,res,next) => {
         if(req.method == 'POST')
         {
-            console.log(req.body);
             console.log('Middleware Validação Cadastro');
             let modeloUsuario = new ModeloUsuarioCadastro();
             modeloUsuario.preencheAutomatico(req.body);
@@ -39,7 +38,7 @@ module.exports = function(app) {
             let modeloUsuario = new ModeloUsuarioCadastro();
             res.render('cadastro', { user : modeloUsuario.getUser(), captcha:res.recaptcha});
         })
-        .post(sessionCheckerRedDash,upload.single('upload'),(req, res) => {
+        .post(sessionCheckerRedDash,(req, res) => {
             console.log('Rota Cadastro (metodo Post)');
             controllerCadastraUsuario(req)
             .then(retorno => {

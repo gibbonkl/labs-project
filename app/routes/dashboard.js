@@ -5,12 +5,7 @@ module.exports = function(app)
 {
     // route for user's dashboard
     app.route('/')
-        .get((req, res) => {
-    
-            console.log("DASHBOARD");
-            
-            //let count = controller.numberOfDailies()
-            
+        .get((req, res) => {           
             if (req.session.user && req.cookies.user_sid) {
 
                 user = {
