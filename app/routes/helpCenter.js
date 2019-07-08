@@ -1,3 +1,4 @@
+const HelpCenterController = require('../controllers/HelpCenterController');
 var postagemDoGoku = {
 
     id : '012371273091283',
@@ -31,12 +32,15 @@ var comentarioDoVegeta = {
 
 module.exports = function(app)
 {
-    // Lista Postagens
+    // Renderiza Pagina de Postagens
     app.get('/helpCenter', (req,res) => {
         
-        let listPostagens = [postagemDoGoku, postagemDoGohan];
-        
-        res.send(listPostagens);
+        if (req.session.user && req.cookies.user_sid) 
+            var user = {username: req.session.user.username, tipo: req.session.user.tipo}
+        else
+            var user = {username: '', tipo: ''}
+            
+        res.render('helpcenter.ejs', {user : user});
     });
     
     // Envia uma única Postagem
@@ -56,27 +60,27 @@ module.exports = function(app)
     });
     
     // Lista Postagens por data
-    app.get('/helpCenter/filtroData', (req,res) => {
+    app.get('/helpCenter/filtroData/:data', (req,res) => {
 
-        let listPostagens = [postagemDoGohan, postagemDoGoku];
-
-        res.send(listPostagens);
+        HelpCenterController.listarPostagem(req, 'data')
+            .then(response => res.send(response))
+            .catch(err => res.send(err));
     });
 
     // Lista Postagens por atividade
     app.get('/helpCenter/filtroAtividade', (req,res) => {
             
-        let listPostagens = [postagemDoGohan, postagemDoGoku];
-
-        res.send(listPostagens);
+        HelpCenterController.listarPostagem(req, 'lastUpdate')
+            .then(response => res.send(response))
+            .catch(err => res.send(err));
     });
 
     // Lista Postagens por username
-    app.get('/helpCenter/filtroUsername/:user', (req,res) => {
+    app.get('/helpCenter/filtroUsername/:username', (req,res) => {
             
-        let listPostagens = [postagemDoGoku, postagemDoGoku];
-
-        res.send(listPostagens);
+        HelpCenterController.listarPostagem(req, 'username')
+            .then(response => res.send(response))
+            .catch(err => res.send(err));
     });
 
     // Adiciona Postagem
