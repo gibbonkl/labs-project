@@ -2,7 +2,6 @@ var express = require('express');
 var consign = require('consign');
 var bodyParser = require('body-parser');
 var path = require('path');
-
 var sessionExpress = require('./session-express');
 
 module.exports = function() {
