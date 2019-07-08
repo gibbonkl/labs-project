@@ -61,8 +61,7 @@ function create() {
 }
 
 function render(dados) {
-    teste = dados
-    console.log(teste)
+    
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
