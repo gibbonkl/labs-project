@@ -12,6 +12,7 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.19.0",
+        "ckeditor": "^4.12.1",
         "consign": "0.1.6",
         "cookie-parser": "^1.4.4",
         "croppie": "^2.6.4",

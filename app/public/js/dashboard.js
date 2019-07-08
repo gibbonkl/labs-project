@@ -1,19 +1,18 @@
 $(document).ready(function() {
-            function dateConverter(date = new Date()) {
-                return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
-            }
-
-            fetch("/daily/data", {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        "filtro": dateConverter()
-                    })
-                })
-                .then(response => response.json())
-                .then(dailies =>
-                    $('#collapsible_daily').html(dailies.map(daily =>
-                            `<li id="${daily._id}" class="data">
+    function dateConverter(date = new Date()) {
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    }
+    fetch("/daily/data", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "filtro": dateConverter()
+        })
+    })
+    .then(response => response.json())
+    .then(dailies =>
+        $('#collapsible_daily').html(dailies.map(daily =>
+            `<li id="${daily._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
                     <span class="span-margin data" data-name="${daily.usuario}">${daily.usuario}</span>
@@ -48,5 +47,4 @@ $(document).ready(function() {
     $('.collapsible').collapsible({
         accordion: false
     });
-
 });
