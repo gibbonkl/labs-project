@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    list_posts();
+});
+
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
     $("#show_dailies").fadeIn('fast').removeClass('hide');
