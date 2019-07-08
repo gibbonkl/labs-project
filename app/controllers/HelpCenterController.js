@@ -25,29 +25,56 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'data')
         {
-            return postagemDao.listarPostagemByDate('4/7/2019', (page-1)*batch, batch)
+            return postagemDao.listarPostagemByDate(req.body.data, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'username')
         {
-            return postagemDao.listarPostagemByUser('Goku', (page-1)*batch, batch)
+            return postagemDao.listarPostagemByUser(req.body.username, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
+    }
+
+    static insereLikesEComentarios(postagem)
+    {
+        postagem['likes'] = []
+        postagem['comentarios'] = []
+        postagem['numeroLikes'] = postagem.likes.length;
+        postagem['numeroComentarios'] = postagem.comentarios.length;
+    }
+
+    static insertPostagem(req) {
+        
+        let postagem = new PostagemModel ({
+            username: req.body.username,
+            corpo: req.body.corpo,
+            titulo: req.body.titulo
+        });
+
+        return new PostagemDAO(PostagemModel).insertPostagem(postagem)
+            .then(response => response ? response : null)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
     }
 
     static editarPostagem(req){
