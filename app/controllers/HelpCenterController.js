@@ -25,29 +25,42 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'data')
         {
-            return postagemDao.listarPostagemByDate('4/7/2019', (page-1)*batch, batch)
+            var data = req.params.data.replace(/(\d{1})(\d{1})/, "$1/$2/");
+            return postagemDao.listarPostagemByDate(data, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'username')
         {
-            return postagemDao.listarPostagemByUser('Goku', (page-1)*batch, batch)
+            let username = req.params.username;
+            return postagemDao.listarPostagemByUser(username, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
+    }
+
+    static insereLikesEComentarios(postagem)
+    {
+        postagem['likes'] = []
+        postagem['comentarios'] = []
+        postagem['numeroLikes'] = postagem.likes.length;
+        postagem['numeroComentarios'] = postagem.comentarios.length;
     }
 
     static insertPostagem(req) {

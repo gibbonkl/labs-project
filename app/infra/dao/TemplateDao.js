@@ -61,6 +61,7 @@ class TemplateDao{
     _find(filter={}, projection={}, options={}){
         return this._model
             .find(filter, projection, options)
+            .lean(true)
             .exec();
     }
     /*
@@ -115,6 +116,7 @@ class TemplateDao{
     _findOneAndUpdate(filter={},doc={},options={}){
         return this._model
             .findOneAndUpdate(filter,doc,options)
+            .lean(true)
             .exec();
     }
 
@@ -127,6 +129,7 @@ class TemplateDao{
     _aggregate(queries)
     {
         return this._model.aggregate(queries)
+            .lean(true)
             .exec();
     }
 

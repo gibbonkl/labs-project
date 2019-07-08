@@ -1,4 +1,3 @@
-const PostagemInsertController = require('./PostagemInsertController');
 let PostagemModel = require("../models/schema_postagem");
 const controllerHelpCenter = require('./HelpCenterController');
 
@@ -12,7 +11,7 @@ PostagemInsertController.insertPostagem(postagem)
     .then(console.log);
 */
 
-/* Teste Listar Postagens
+//Teste Listar Postagens
 let user = {
     session : {
         user: {
@@ -22,7 +21,7 @@ let user = {
     }
 }
 controllerHelpCenter.listarPostagem(user, 'lastUpdate').then(console.log);
-*/
+
 /* Teste Editar Postagem
 req = {
     body: {
@@ -35,6 +34,7 @@ req = {
 controllerHelpCenter.editarPostagem(req).then(res => console.log(res));
 */
 
+/*
 controllerHelpCenter.deletarPostagem('5d1de45b456b4f13c81de56f')
     .then(res => console.log(res));
 
@@ -47,3 +47,4 @@ let comentario = new ComentarioModel({
 });
 ComentarioInsertController.insertComentario("5d1f441bea4d892414de8578", comentario)
     .then(console.log);
+*/
