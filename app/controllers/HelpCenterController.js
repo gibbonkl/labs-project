@@ -58,7 +58,7 @@ class HelpCenterController {
             titulo: req.body.titulo
         });
 
-        return new PostagemDAO(PostagemModel).insertPostagem(postagem)
+        return new PostagemDao(PostagemModel).insertPostagem(postagem)
             .then(response => response ? response : null)
             .catch(error => {
                 console.error(error);
