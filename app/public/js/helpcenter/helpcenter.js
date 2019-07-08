@@ -8,6 +8,7 @@ function animaLoad() {
 }
 
 function render(dados){
+    console.log(dados)
     return `<div id="${dados._id}" class="topico">
         <a href="#" class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">
@@ -25,7 +26,7 @@ function render(dados){
 }
 
 function list_posts(){
-    fetch("/helpCenter", {
+    fetch("/helpCenter/filtroAtividade", {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     })

@@ -44,20 +44,20 @@ module.exports = function(app)
     });
     
     // Envia uma única Postagem
-    app.get('/helpCenter/:id', (req,res) => {
+    // app.get('/helpCenter/:id', (req,res) => {
     
-        let response = {
-            id : '012371273091283',
-            username : 'Goku',
-            postagem : 'Oi eu sou o Goku',
-            data : '01/01/2000',
-            comentarios : [comentarioDoVegeta],
-            like : 8000,
-            tags : ['Goku']
-        };
+    //     let response = {
+    //         id : '012371273091283',
+    //         username : 'Goku',
+    //         postagem : 'Oi eu sou o Goku',
+    //         data : '01/01/2000',
+    //         comentarios : [comentarioDoVegeta],
+    //         like : 8000,
+    //         tags : ['Goku']
+    //     };
 
-        res.send(response);
-    });
+    //     res.send(response);
+    // });
     
     // Lista Postagens por data
     app.get('/helpCenter/filtroData/:data', (req,res) => {
