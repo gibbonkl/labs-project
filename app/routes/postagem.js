@@ -5,7 +5,7 @@ let comentcontroller = require('../controllers/ComentarioController');
 
 module.exports = function(app) {
 
-    app.route('/testehelpCenter')
+    app.route('/testehelpcenter')
         //inserir postagem
         .post(sessionCheckerRedLogin, (req,res) => {
             controller.insertPostagem(req)
@@ -13,7 +13,7 @@ module.exports = function(app) {
         .catch(console.error)
         })
 
-    app.route('/testehelpCenter/:idpostagem')
+    app.route('/testehelpcenter/:idpostagem')
         //editar postagem
         .put(sessionCheckerRedLogin, (req, res) => {
             controller.editarPostagem(req, req.params.idpostagem)
@@ -27,7 +27,7 @@ module.exports = function(app) {
                 .catch(console.error)
         })
 
-    app.route('/testehelpCenter/:idpostagem/insertComentario')
+    app.route(sessionCheckerRedLogin, '/testehelpcenter/:idpostagem/insertcomentario')
         //Inserir Comentário
         .post((req, res) => {
             comentcontroller.insertComentario(req.params.idpostagem, req.body)
@@ -35,7 +35,14 @@ module.exports = function(app) {
                 .catch(console.error)
         })
 
-
-
+    app.route(sessionCheckerRedLogin, '/editcomentario')
+        //Editar Comentário  
+        .put( (req, res) => {
+            comentcontroller.editarComentario(req)
+                .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível editar comentario"))
+                .catch(console.error)
+        })
+    
+    
 }
 
