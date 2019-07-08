@@ -76,13 +76,16 @@ function render(dados) {
                             <span class="bold">Hoje: </span><span class="hoje">${dados.corpo.hoje}</span><br>
                             <span class="bold">Impedimentos: </span><span class="imp">${dados.corpo.impedimento}</span>
                         </div>
-                        <div class="col s6">
-                            <a class="btn-floating white right" onclick="remove('${dados._id}')" href="#delete"><i class="material-icons black-text">delete</i></a>
-                            <a class="btn-floating white right btn-margin-right" onclick="update('${dados._id}')" href="#edit"><i class="material-icons black-text">create</i></a>
-                        </div>
+                        ${dados.permissao ?
+                            `<div class="col s6">
+                                <a class="btn-floating white right" onclick="remove('${dados._id}')"><i class="material-icons black-text">delete</i></a>
+                                <a class="btn-floating white right btn-margin-right" onclick="update('${dados._id}')"><i class="material-icons black-text">create</i></a>
+                            </div>`
+                            : ``
+                        }
                     </div>
                 </div>
-            </li>`
+            </li>`;
 }
 
 function dateConverter(date = new Date()) {
