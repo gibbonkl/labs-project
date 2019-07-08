@@ -25,7 +25,8 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-                        HelpCenterController.insereLikesEComentarios(postagem);
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
@@ -37,7 +38,8 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-                        HelpCenterController.insereLikesEComentarios(postagem);
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
@@ -49,16 +51,20 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-                        HelpCenterController.insereLikesEComentarios(postagem);
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
     }
 
-    static insereLikesEComentarios(postagem)
+    static apagaLikesEComentarios(postagem)
     {
-        postagem['likes'] = []
-        postagem['comentarios'] = []
+        postagem['likes'] = [];
+        postagem['comentarios'] = [];
+    }
+    static insereNumeroDeLikesEComentarios(postagem)
+    {
         postagem['numeroLikes'] = postagem.likes.length;
         postagem['numeroComentarios'] = postagem.comentarios.length;
     }
@@ -96,6 +102,30 @@ class HelpCenterController {
     static deletarPostagem(id){
 
         return new PostagemDao(PostagemModel).deletePostagemById(id)
+    }
+
+    static getPostagem(req){
+        let user = 'visitante'
+        let username = ''
+        if(req.session.user) {
+            user = req.session.user.tipo;
+            username = req.session.user.username;
+        }
+
+        return new PostagemDao(PostagemModel).getPostagem(req.params.id)
+                .then(postagem => 
+                    {
+                        postagem.map(function(postagem){
+                            HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                            if (user == 'admin' || postagem.username == username)
+                                postagem['permissao'] = true;
+                            else
+                                postagem['permissao'] = false;
+                            return postagem;
+                        })
+                        return postagem[0];
+                    })
+                .catch(console.error)
     }
 
 }
