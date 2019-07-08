@@ -3,10 +3,18 @@ let controller = require('../controllers/HelpCenterController');
 
 module.exports = function(app) {
 
-    app.route('/helpCenter')
-        .post((req,res) => {
+    app.route('/testehelpCenter')
+        //inserir postagem
+        .post(sessionCheckerRedLogin, (req,res) => {
             controller.insertPostagem(req)
-        .then(postagem => res.send(postagem))
+                .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível inserir postagem"))
         .catch(console.error)
+        })
+
+        //editar postagem
+        .put(sessionCheckerRedLogin, (req, res) => {
+            controller.editarPostagem(req)
+                .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível editar postagem"))
+                .catch(console.error)
         })
 }
