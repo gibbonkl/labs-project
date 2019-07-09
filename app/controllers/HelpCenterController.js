@@ -144,7 +144,7 @@ class HelpCenterController {
     {
         if(req.body.like == -1)
         {
-            return new PostagemDao(PostagemModel).removeLike(req.body._id, req.session.username)
+            return new PostagemDao(PostagemModel).removeLike(req.body._id, req.session.user.username)
         }
         else if(req.body.like == 1)
         {

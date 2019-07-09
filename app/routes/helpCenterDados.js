@@ -97,7 +97,7 @@ module.exports = function(app)
     // Adiciona/Remove Like em um comentário
     app.post('/helpcenter/comentario/like', sessionCheckerRedLogin, (req, res) => {
 
-        comentcontroller.like(req)
+        comentcontroller.like(req)                           
             .then(response => res.send(response))
     });
 
