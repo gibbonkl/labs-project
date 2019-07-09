@@ -35,10 +35,10 @@
         <!-- Fim da coluna azul -->
         <!-- Formulário -->
         <div id="nav_form" class="col m8 s12 btn-margin-top">
+            <form action="/cadastro" method="post" enctype="multipart/form-data">
             <div class="container center">
                 <h3 class="blue-compass center mont-serrat">Criar uma conta</h3>
                 <div class="row center">
-                    <form action="/cadastro" method="post" enctype="multipart/form-data">
                         <div id="resultado" class="btn-margin-top">
                             <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1 form-photo" name="photo" value="<%= user.photo%>" />
                             <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
@@ -91,7 +91,7 @@
                     <%= er%>
                 </li>
                 <% }) %>
-                    </form>
+            </form>
         </div>
         <!-- Fim do formulário -->
     </div>
@@ -103,7 +103,7 @@
     <script type="text/javascript" src="../public/js/libs/croppie.min.js"></script>
     <script type="text/javascript" src="../public/js/login/inicio.js"></script>
     <script type="text/javascript" src="../public/js/cadastro/photo.js"></script>
-    <!--script type="text/javascript" src="../public/js/cadastro/cadastro.js"></script-->
+    <script type="text/javascript" src="../public/js/cadastro/cadastro.js"></script>
     <!-- Ordem de carregamento de script -->
 </body>
 
