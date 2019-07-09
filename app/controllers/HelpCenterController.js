@@ -32,7 +32,7 @@ class HelpCenterController {
         }
         else if(op == 'data')
         {
-            var data = req.params.data.replace(/(\d{1})(\d{1})/, "$1/$2/");
+            var data = req.params.data.replace(/-/g,'/');
             return postagemDao.listarPostagemByDate(data, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
@@ -56,6 +56,19 @@ class HelpCenterController {
                         return postagem}))
                 .catch(console.error)
         }
+        else if(op == 'busca')
+        {
+            let busca = req.params.dados.replace(/-/g,' ');
+            return postagemDao.search(busca, (page-1)*batch, batch)
+                .then(postagem => 
+                    postagem.map(function(postagem){
+                        if (user == 'admin' || postagem.username == username)
+                            postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
+                        return postagem}))
+                .catch(console.error)
+        }
     }
 
     static apagaLikesEComentarios(postagem)
@@ -70,7 +83,6 @@ class HelpCenterController {
     }
 
     static insertPostagem(req) {
-        
         let postagem = new PostagemModel ({
             username: req.body.username,
             corpo: req.body.corpo,
@@ -126,6 +138,18 @@ class HelpCenterController {
                         return postagem[0];
                     })
                 .catch(console.error)
+    }
+
+    static like(req)
+    {
+        if(req.body.like == -1)
+        {
+            return new PostagemDao(PostagemModel).removeLike(req.body._id, req.session.user.username)
+        }
+        else if(req.body.like == 1)
+        {
+            return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
+        }
     }
 
 }
