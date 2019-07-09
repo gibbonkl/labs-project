@@ -12,7 +12,7 @@ module.exports = function(app)
             .catch(err => res.send('Deu brete' + err));
     });
     
-    // Lista Postagens por busca
+    // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/busca/:dados/:pagina', (req,res) => {
         
         HelpCenterController.listarPostagem(req, 'busca', req.params.pagina)
@@ -20,7 +20,7 @@ module.exports = function(app)
             .catch(err => res.send(err));
     });
 
-    // Lista Postagens por data
+    // Lista Postagens por data (:data = 8-7-2019)
     app.get('/helpcenter/filtrodata/:data/:pagina', (req,res) => {
         
         HelpCenterController.listarPostagem(req, 'data', req.params.pagina)
@@ -49,7 +49,7 @@ module.exports = function(app)
         //inserir postagem
         .post(sessionCheckerRedLogin, (req,res) => {
             
-            controller.insertPostagem(req)
+            HelpCenterController.insertPostagem(req)
                 .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível inserir postagem"))
                 .catch(console.error)
         })
@@ -57,7 +57,7 @@ module.exports = function(app)
         //editar postagem
         .put(sessionCheckerRedLogin, (req, res) => {
             
-            controller.editarPostagem(req)
+            HelpCenterController.editarPostagem(req)
                 .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível editar postagem"))
                 .catch(console.error)
         })
@@ -65,7 +65,7 @@ module.exports = function(app)
         //deletar Postagem
         .delete(sessionCheckerRedLogin, (req, res) => {
             
-            controller.deletarPostagem(req.body.idpostagem)
+            HelpCenterController.deletarPostagem(req.body.idpostagem)
                 .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível deletar postagem"))
                 .catch(console.error)
         })
@@ -75,7 +75,7 @@ module.exports = function(app)
         //Inserir Comentário
         .post(sessionCheckerRedLogin, (req,res) => {
             
-            comentcontroller.insertComentario(req.params.idpostagem, req.body)
+            comentcontroller.insertComentario(req.body.idpostagem, req.body)
                 .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível inserir comentario"))
                 .catch(console.error)
         })
@@ -91,7 +91,7 @@ module.exports = function(app)
         //Deletar Comentario
         .delete(sessionCheckerRedLogin, (req,res) => {
                 
-            comentcontroller.deletarComentario(req.body._id_comentario, req.body._id_postagem)
+            comentcontroller.deletarComentario(req.body.idcomentario, req.body.idpostagem)
                 .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível deletar comentario"))
                 .catch(console.error)
         });
