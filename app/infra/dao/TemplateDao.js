@@ -129,7 +129,6 @@ class TemplateDao{
     _aggregate(queries)
     {
         return this._model.aggregate(queries)
-            .lean(true)
             .exec();
     }
 

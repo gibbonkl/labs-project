@@ -61,14 +61,11 @@ class PostagemDao extends TemplateDao{
         *   @returns {Object}
     */
     listarPostagemByUser(username = '', skip = '', limit = '') {
-        if (username) {
-            return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
-                .then((res, err) => res ? res : err)
-                .catch(err => {
-                    return ({ detail: "Impossível buscar para esse usuário", error: err })
-                })
-        }
-        else return ({ detail: "Impossível realizar busca"})
+        return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar para esse usuário", error: err })
+            })
     }
 
     /*
@@ -155,19 +152,41 @@ class PostagemDao extends TemplateDao{
             .then((res, err) => res ? res.likes.length : 'Não foi possível acessar os likes da postagem')
             .catch(() => 'error');
     }
-
-    /*
+/*
        *   Pega uma postagem 
        *   @param {id} postagem
        *   @returns {postagem} postagem e todos os comentarios associados
     */
-    getPostagem(id='')
-    {
-        return this._aggregate([{'$match': {_id: mongoose.Types.ObjectId(id)}}, {'$lookup': {
-            'from': 'comentarios', 'localField': 'comentarios', 'foreignField': '_id', 'as': 'comentarios'
-        }}])
-        .then(res => res ? res : 'erro')
-    }
+   getPostagem(id=''){
+       return this._aggregate([
+           {'$match': 
+               {_id: mongoose.Types.ObjectId(id)}
+           },
+           {'$lookup': {
+                   'from': 'comentarios', 
+                   'localField': 'comentarios', 
+                   'foreignField': '_id',
+                   'as': 'comentarios.comentario'
+               }
+           },
+           {'$lookup': {
+                   'from': 'usuarios', 
+                   'localField': 'username', 
+                   'foreignField': 'username', 
+                   'as': 'user'
+               }
+           },
+           {'$lookup': {
+                   'from': 'usuarios', 
+                   'localField': 'comentarios.comentario.username', 
+                   'foreignField': 'username', 
+                   'as': 'comentarios.user'
+               }
+           }
+       ])
+       .then(res => res ? res : 'error')
+       .catch(console.error)
+   }
     
     /*
        *   Lista todas as postagens ordenando por último update
