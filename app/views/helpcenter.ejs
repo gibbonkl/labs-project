@@ -47,7 +47,7 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="novo_topico()"><i class="left material-icons">add</i>Novo tópico</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="new_topic()"><i class="left material-icons">add</i>Novo tópico</a>
             </div>
         </div>
     </div>
@@ -69,7 +69,6 @@
     </div>
 
     <!-- Paginação -->
-    <!--
     <footer class="page-footer bg-blue-compass">
         <div class="container">
             <div class="row">
@@ -85,7 +84,6 @@
             </div>
         </div>
     </footer>
-    -->
 
    <!-- Ordem de carregamento de script -->
     <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>

@@ -30,4 +30,4 @@ var config = {
       }
     ]
 }
-CKEDITOR.replace( 'editor1', config);
+CKEDITOR.replace('corpo', config);

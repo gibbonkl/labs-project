@@ -56,6 +56,7 @@ function create() {
             })
         )
         .then(response => response.json())
+        .then(response => {response['permissao'] = true; return response})
         .then(response => $('#collapsible_daily').append(render(response)))
         .catch(console.log);
 }

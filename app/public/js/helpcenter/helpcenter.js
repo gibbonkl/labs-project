@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    list_posts();
+    list_topics();
 });
 
 function animaLoad() {
@@ -8,8 +8,8 @@ function animaLoad() {
 }
 
 function render(dados){
-    console.log(dados)
-    return `<div id="${dados._id}" class="topico">
+
+    return `<div id="${dados._id}" class="topico" onclick="enter_topic()">
         <a href="#" class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">
             <span class="black-text topico-nome">${dados.username}</span><br>
@@ -25,8 +25,8 @@ function render(dados){
     </div>`;
 }
 
-function list_posts(){
-    fetch("/helpCenter/filtroAtividade", {
+function list_topics(pagina=1){
+    fetch("/helpCenter/filtroAtividade/"+pagina, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     })
@@ -38,10 +38,10 @@ function list_posts(){
     .catch(console.log);
 }
 
-function novo_topico(){
+function new_topic(){
     window.location.href = "helpcenter/novo";
 }
 
-function enter_post(){
-
+function enter_topic(){
+    console.log('eae man')
 }
