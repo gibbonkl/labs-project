@@ -39,63 +39,61 @@
                 <h3 class="blue-compass center mont-serrat">Criar uma conta</h3>
                 <div class="row center">
                     <form action="/cadastro" method="post" enctype="multipart/form-data">
+                        <div id="resultado" class="btn-margin-top">
+                            <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1 form-photo" name="photo" value="<%= user.photo%>" />
+                            <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
+                        </div>
                 </div>
-                <div id="resultado" class="btn-margin-top">
-                    <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1 form-photo" name="photo" value="<%= user.photo%>" />
-                    <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
+                <div class="input-field col s12 m6">
+                    <input id="nome" placeholder=" " name="nome" type="text" class="active <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="sobrenome" placeholder=" " name="sobrenome" type="text" class="active <%if(user.sobrenome == ''){%><%=user.invalidClass%> <%}%>" value=<%=user.sobrenome%>>
+                    <label for="sobrenome">Sobrenome</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="username" placeholder=" " name="username" type="text" class="active <%if(user.username == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9]{4,20}$" value=<%=user.username%>>
+                    <label for="username">Nome de usuário</label>
+                    <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="data_nascimento" placeholder=" " name="data_nasc" type="date" class="active <%if(user.data_nasc == ''){%><%=user.invalidClass%>" <%}%> >
+                    <label for="data_nascimento">Data de Nascimento</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="email" placeholder=" " name="email" type="email" class="active <%if(user.email == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%=user.email%>>
+                    <label for="email">Email</label>
+                    <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
+                </div>
+                <div class="col s12">
+                    <span class="font-key grey-text text-darken-2">Insira uma combinação de pelo menos 6 caracteres</span>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="senha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="senha">
+                    <label for="senha">Senha</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="repsenha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="repsenha">
+                    <label for="repsenha">Repetir senha</label>
                 </div>
             </div>
-            <div class="input-field col s12 m6">
-                <input id="nome" placeholder=" " name="nome" type="text" class="active <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
-                <label for="nome">Nome</label>
+            <div class="col s12 center">
+                <% if(captcha){ %>
+                    <%- captcha %>
+                        <% } %>
             </div>
-            <div class="input-field col s12 m6">
-                <input id="sobrenome" placeholder=" " name="sobrenome" type="text" class="active <%if(user.sobrenome == ''){%><%=user.invalidClass%> <%}%>" value=<%=user.sobrenome%>>
-                <label for="sobrenome">Sobrenome</label>
+            <div class="col s12 center btn-margin-top">
+                <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
             </div>
-            <div class="input-field col s12 m6">
-                <input id="username" placeholder=" " name="username" type="text" class="active <%if(user.username == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9]{4,20}$" value=<%=user.username%>>
-                <label for="username">Nome de usuário</label>
-                <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
-            </div>
-            <div class="input-field col s12 m6">
-                <input id="data_nascimento" placeholder=" " name="data_nasc" type="date" class="active <%if(user.data_nasc == ''){%><%=user.invalidClass%>" <%}%> >
-                <label for="data_nascimento">Data de Nascimento</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="email" placeholder=" " name="email" type="email" class="active <%if(user.email == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%=user.email%>>
-                <label for="email">Email</label>
-                <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
-            </div>
-            <div class="col s12">
-                <span class="font-key grey-text text-darken-2">Insira uma combinação de pelo menos 6 caracteres</span>
-            </div>
-            <div class="input-field col s12 m6">
-                <input id="senha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="senha">
-                <label for="senha">Senha</label>
-            </div>
-            <div class="input-field col s12 m6">
-                <input id="repsenha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="repsenha">
-                <label for="repsenha">Repetir senha</label>
-            </div>
+            <% user.erros.forEach(function(er){ %>
+                <li>
+                    <%= er%>
+                </li>
+                <% }) %>
+                    </form>
         </div>
-        <div class="col s12 center">
-            <% if(captcha){ %>
-                <%- captcha %>
-                    <% } %>
-        </div>
-        <div class="col s12 center btn-margin-top">
-            <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
-        </div>
-        <% user.erros.forEach(function(er){ %>
-            <li>
-                <%= er%>
-            </li>
-            <% }) %>
-                </form>
-    </div>
-    </div>
-    <!-- Fim do formulário -->
+        <!-- Fim do formulário -->
     </div>
     <!-- Ordem de carregamento de script -->
     <script type="text/javascript" src="../public/js/libs/ejs.js"></script>
