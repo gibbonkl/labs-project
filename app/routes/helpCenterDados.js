@@ -12,7 +12,7 @@ var comentarioDoVegeta = {
 module.exports = function(app)
 {
     // Envia uma única Postagem
-    app.get('/helpCenter/post/:id', (req,res) => {
+    app.get('/helpcenter/post/:id', (req,res) => {
     
         HelpCenterController.getPostagem(req)
             .then(response => res.send(response))
@@ -20,30 +20,30 @@ module.exports = function(app)
     });
     
     // Lista Postagens por data
-    app.get('/helpCenter/filtroData/:data', (req,res) => {
+    app.get('/helpcenter/filtrodata/:data/:pagina', (req,res) => {
 
-        HelpCenterController.listarPostagem(req, 'data')
+        HelpCenterController.listarPostagem(req, 'data', req.params.pagina)
             .then(response => res.send(response))
             .catch(err => res.send(err));
     });
 
     // Lista Postagens por atividade
-    app.get('/helpCenter/filtroAtividade', (req,res) => {
+    app.get('/helpcenter/filtroatividade/:pagina', (req,res) => {
             
-        HelpCenterController.listarPostagem(req, 'lastUpdate')
+        HelpCenterController.listarPostagem(req, 'lastUpdate', req.params.pagina)
             .then(response => res.send(response))
             .catch(err => res.send(err));
     });
 
     // Lista Postagens por username
-    app.get('/helpCenter/filtroUsername/:username', (req,res) => {
+    app.get('/helpcenter/filtrousername/:username/:pagina', (req,res) => {
             
-        HelpCenterController.listarPostagem(req, 'username')
+        HelpCenterController.listarPostagem(req, 'username', req.params.pagina)
             .then(response => res.send(response))
             .catch(err => res.send(err));
     });
 
-    app.route('/helpCenter')
+    app.route('/helpcenter')
         //inserir postagem
         .post(sessionCheckerRedLogin, (req,res) => {
             controller.insertPostagem(req)
@@ -81,12 +81,12 @@ module.exports = function(app)
         });
 
     // Adiciona/Remove Like em uma postagem
-    app.post('/helpCenter/like', (req, res) => {
+    app.post('/helpcenter/like', (req, res) => {
 
         res.send(true);
     });
     // Adiciona/Remove Like em um comentário
-    app.post('/helpCenter/comentario/like', (req, res) => {
+    app.post('/helpcenter/comentario/like', (req, res) => {
 
         res.send(true);
     });
