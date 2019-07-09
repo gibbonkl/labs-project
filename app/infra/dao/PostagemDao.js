@@ -184,7 +184,7 @@ class PostagemDao extends TemplateDao{
                }
            }
        ])
-       .then(res => res ? res : 'erro')
+       .then(res => res ? res : 'error')
        .catch(console.error)
    }
     
