@@ -165,7 +165,21 @@ class PostagemDao extends TemplateDao{
         }}])
         .then(res => res ? res : 'erro')
     }
-    
+    /*
+        *   Busca uma postagem na base de dados pelo título
+        *   @param {string} searched A busca a ser realizada no banco
+        *   @param {Number} skip
+        *   @param {Number} limit Limite de postagens para busca
+        *   @returns {Array}
+    */
+    search(searched,skip = '', limit = ''){
+        return this._find({titulo: searched},{},{skip: skip,limit:limit})
+            .then((res,err)=> res? res: err)
+            .catch(err=>{
+                return ({detail: "Impossível buscar postagens", error: err})
+            })
+    }
+ 
     /*
        *   Lista todas as postagens ordenando por último update
        *   @param {String} username Usuário das postagens
