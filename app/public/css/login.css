@@ -1,26 +1,20 @@
+body {
+    height: 100vh
+}
+
 @media screen and (max-width: 435px) {
     body {
         overflow-y: scroll;
         overflow-x: hidden;
     }
     .full-height {
-        max-height: 100vh;
+        height: 80vh !important;
     }
     .height-title {
-        font-size: 2.56rem;
+        font-size: 2.00rem;
     }
 }
-@media only screen and (max-width: 992px) {
-    .modal {
-      width: 80%;
-      overflow-x: hidden
-    }
-}
-.modal
-input[type=text]:not(.browser-default) + label,
-input[type=email]:not(.browser-default) +label,
-textarea.materialize-textarea {
-    width: 350px !important;
-    overflow-x: hidden;
-    padding-left: 10px;
+
+.margin-login {
+    margin: 10%;
 }
