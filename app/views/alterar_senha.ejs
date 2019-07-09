@@ -1,15 +1,18 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/alterar_senha.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/home.css">
+    <!-- Ordem de carregamento de css -->
+    <link rel="stylesheet" type="text/css" href="../public/css/materialize.css"></link>
+    <link rel="stylesheet" type="text/css" href="../public/css/home.css"></link>
+    <link rel="stylesheet" type="text/css" href="../public/css/dashboard.css"></link>
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
-    <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2"></link>
+    <!-- Ordem de carregamento de css -->
 </head>
+
 <body class="bg-blue-compass">
     <header>
         <!-- Estrutura do menu dropdown da navbar -->
@@ -63,19 +66,17 @@
                     </div>
                 </div>
                 <div class="row center">
-                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alterar_senha_logado(event)" >Confirmar</button>
-                </div>
-                <div class="row">
-                    <ul id="erros">
-                    </ul>
+                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alteraSenha(event)">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script type="text/javascript" src="../public/js/dashboard.js"></script>
-<script type="text/javascript" src="../public/js/jquery.min.js"></script>
-<script type="text/javascript" src="../public/js/materialize.js"></script>
-<script type="text/javascript" src="../public/js/alterar_senha_logado.js"></script>
-<script type="text/javascript" src="../public/js/dashboard.js"></script>
+<!-- Ordem de carregamento de script -->
+<script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+<script type="text/javascript" src="../public/js/daily/dailies.js"></script>
+<script type="text/javascript" src="../public/js/alterasenha/alteraSenha.js"></script>
+<!-- Ordem de carregamento de script -->
+
 </html>

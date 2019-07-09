@@ -1,39 +1,43 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Ordem de carregamento de css -->
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/home.css">
     <link rel="stylesheet" type="text/css" href="../public/css/login.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <!-- Ordem de carregamento de css -->
 </head>
+
 <body>
     <div class="row">
         <!-- Formulário -->
         <div id="nav_form" class="col m8 s12 white z-depth-5 full-height valign-wrapper">
-            <div class="row center margin-login">
+            <div class="container center">
                 <h2 class="blue-compass center mont-serrat height-title">Acessar sua conta</h2>
-                <form action="/login" method="post">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <input id="login_email" type="text" class="active" name="username" required>
-                            <label for="login_email">E-mail ou nome de usuário</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input id="login_senha" type="password" class="active" name="senha" required>
-                            <label for="login_senha">Senha</label>
-                        </div>
-                        <div class="col s12 margin-forgot-pass">
-                            <a class="blue-text modal-trigger" href="#modal_key">Esqueci a senha</a>
-                        </div>
-                    </div>                    
+                <form action="/login" method="post" class="col s12">
+                    <div class="input-field col s12">
+                        <input id="login_email" type="text" class="active" name="username" required>
+                        <label for="login_email">E-mail ou nome de usuário</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="login_senha" type="password" class="active" name="senha" required>
+                        <label for="login_senha">Senha</label>
+                    </div>
+                    <div class="col s12 margin-forgot-pass">
+                        <a class="blue-text modal-trigger" href="#modal_key">Esqueci a senha</a>
+                    </div>
                     <% if(errorMessage != '') { %>
-                        <li><%= errorMessage %></li>
-                    <% } %>                    
-                    <div class="row center">
-                        <input class="btn bg-blue-compass rounded" type="submit" value="Entrar" />
-                    </div>                    
+                        <li>
+                            <%= errorMessage %>
+                        </li>
+                        <% } %>
+                            <div class="row center">
+                                <input class="btn bg-blue-compass rounded" type="submit" value="Entrar" />
+                            </div>
                 </form>
             </div>
         </div>
@@ -41,16 +45,14 @@
         <div id="modal_key" class="modal">
             <form>
                 <div class="modal-content">
-                    <h6 class="blue-compass center mont-serrat margin-bottom">Nos ajude a recuperar sua senha. Enviaremos um link para o seu e-mail</h6>
-                    <div class="input-field">
-                        <input id="modal_username" type="text" class="active" name="modal_username" pattern="[a-zA-Z0-9]{4,20}$" required>
-                        <label for="email">Nome de usuário</label>
-                        <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
-                    </div>
+                    <h6 class="blue-compass center mont-serrat margin-bottom">Nos ajude a recuperar sua senha! Enviaremos um link para o seu e-mail</h6>
                     <div class="input-field">
                         <input id="modal_email" type="email" name="modal_email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
                         <label for="modal_email">Email</label>
                         <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
+                    </div>
+                    <div class="progress hide">
+                        <div class="indeterminate"></div>
                     </div>
                 </div>
                 <div class="row center">
@@ -61,7 +63,7 @@
         <!-- fim modal -->
         <!-- Fim do formulário -->
         <!-- Coluna azul -->
-        <div id="nav_btn" class="col m4 s12 gradient-compass valign-wrapper center">
+        <div id="nav_btn" class="col m4 s12 gradient-compass valign-wrapper center full-height">
             <div class="row nav-btn-padding">
                 <div class="row">
                     <h4 class="white-text mont-serrat">Novo por aqui?</h4>
@@ -79,10 +81,13 @@
         </div>
         <!-- Fim da coluna azul -->
     </div>
-    <script type="text/javascript" src="../public/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/js/login.js"></script>
-    <script type="text/javascript" src="../public/js/materialize.js"></script>
-    <script type="text/javascript" src="../public/js/md5.min.js"></script>
-    <script type="text/javascript" src="../public/js/inicio.js"></script>    
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../public/js/login/inicio.js"></script>
+    <script type="text/javascript" src="../public/js/login/login.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
-</html>
+
+</html>y
