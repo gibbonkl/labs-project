@@ -67,17 +67,23 @@ module.exports = function(app)
     app.route('/helpCenter/comentario')
         //Inserir Comentário
         .post(sessionCheckerRedLogin, (req,res) => {
-            res.send(comentarioDoVegeta);
+            comentcontroller.insertComentario(req.params.idpostagem, req.body)
+                .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível inserir comentario"))
+                .catch(console.error)
         })
 
         //Editar Comentário
         .put(sessionCheckerRedLogin, (req,res) => {
-            res.send(comentarioDoVegeta);
+            comentcontroller.editarComentario(req)
+                .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível editar comentario"))
+                .catch(console.error)
         })
 
         //Deletar Comentario
         .delete(sessionCheckerRedLogin, (req,res) => {
-            res.send(true);
+                comentcontroller.deletarComentario(req.body._id_comentario, req.body._id_postagem)
+                    .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível deletar comentario"))
+                    .catch(console.error)
         });
 
     // Adiciona/Remove Like em uma postagem

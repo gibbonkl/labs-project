@@ -21,14 +21,14 @@ class ComentarioController {
             corpo: req.body.corpo,
         });
        
-        return new ComentarioDao(ComentarioModel).editarComentario(comentario)
+        return new ComentarioDAO(ComentarioModel).editarComentario(comentario)
                 .then(res=> res ? res : 'erro ao editar comentario')
         
     }
 
     static deletarComentario(idComentario, idPostagem){
 
-        return new ComentarioDao(ComentarioModel).deleteComentarioById(idComentario, idPostagem)
+        return new ComentarioDAO(ComentarioModel).deleteComentarioById(idComentario, idPostagem)
                 .then(res => res? true: false)
     }
 
