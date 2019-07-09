@@ -1,13 +1,6 @@
 const HelpCenterController = require('../controllers/HelpCenterController');
+const comentcontroller = require('../controllers/ComentarioController');
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
-
-var comentarioDoVegeta = {
-    id : '12312312312',
-    username : 'Vegeta',
-    comentario : 'Eu sou melhor que voce Kakaroto',
-    data : '01/02/2000',
-    like : 5000
-}
 
 module.exports = function(app)
 {
@@ -19,6 +12,14 @@ module.exports = function(app)
             .catch(err => res.send('Deu brete' + err));
     });
     
+    // Lista Postagens por busca
+    app.get('/helpcenter/busca/:dados/:pagina', (req,res) => {
+
+        HelpCenterController.listarPostagem(req, 'busca', req.params.pagina)
+            .then(response => res.send(response))
+            .catch(err => res.send(err));
+    });
+
     // Lista Postagens por data
     app.get('/helpcenter/filtrodata/:data/:pagina', (req,res) => {
 
@@ -64,7 +65,7 @@ module.exports = function(app)
                 .catch(console.error)
         })
 
-    app.route('/helpCenter/comentario')
+    app.route('/helpcenter/comentario')
         //Inserir Comentário
         .post(sessionCheckerRedLogin, (req,res) => {
             comentcontroller.insertComentario(req.params.idpostagem, req.body)
@@ -87,14 +88,17 @@ module.exports = function(app)
         });
 
     // Adiciona/Remove Like em uma postagem
-    app.post('/helpcenter/like', (req, res) => {
+    app.post('/helpcenter/like', sessionCheckerRedLogin, (req, res) => {
 
-        res.send(true);
+        HelpCenterController.like(req)
+            .then(response => res.send(response))    
     });
-    // Adiciona/Remove Like em um comentário
-    app.post('/helpcenter/comentario/like', (req, res) => {
 
-        res.send(true);
+    // Adiciona/Remove Like em um comentário
+    app.post('/helpcenter/comentario/like', sessionCheckerRedLogin, (req, res) => {
+
+        comentcontroller.like(req)
+            .then(response => res.send(response))
     });
 
 }

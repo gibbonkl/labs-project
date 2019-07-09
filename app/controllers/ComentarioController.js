@@ -32,5 +32,17 @@ class ComentarioController {
                 .then(res => res? true: false)
     }
 
+    static like(req)
+    {
+        if(req.body.like == -1)
+        {
+            return new ComentarioDAO(ComentarioModel).removeLike(req.body._id, req.session.user.username)
+        }
+        else
+        {
+            return new ComentarioDAO(ComentarioModel).adicionaLike(req.body._id, req.session.user.username)
+        }
+    }
+
 }
 module.exports = ComentarioController;

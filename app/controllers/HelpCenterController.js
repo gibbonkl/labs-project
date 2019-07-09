@@ -56,6 +56,19 @@ class HelpCenterController {
                         return postagem}))
                 .catch(console.error)
         }
+        else if(op == 'busca')
+        {
+            let busca = req.params.dados.replace(/-/g,' ');
+            return postagemDao.search(busca, (page-1)*batch, batch)
+                .then(postagem => 
+                    postagem.map(function(postagem){
+                        if (user == 'admin' || postagem.username == username)
+                            postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
+                        return postagem}))
+                .catch(console.error)
+        }
     }
 
     static apagaLikesEComentarios(postagem)
@@ -126,6 +139,18 @@ class HelpCenterController {
                         return postagem[0];
                     })
                 .catch(console.error)
+    }
+
+    static like(req)
+    {
+        if(req.body.like == -1)
+        {
+            return new PostagemDao(PostagemModel).removeLike(req.body._id, req.session.username)
+        }
+        else if(req.body.like == 1)
+        {
+            return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
+        }
     }
 
 }
