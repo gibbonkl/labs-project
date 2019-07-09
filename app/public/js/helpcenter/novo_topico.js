@@ -1,5 +1,5 @@
 var config = {
-    extraPlugins: 'codesnippet',
+    //extraPlugins: 'codesnippet, widget',
     codeSnippet_theme: 'monokai_sublime',
     height: 356,
     removePlugins: 'wsc',
@@ -30,4 +30,4 @@ var config = {
       }
     ]
 }
-CKEDITOR.replace( 'editor1', config,);
+CKEDITOR.replace( 'editor1', config);

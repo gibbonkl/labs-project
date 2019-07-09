@@ -13,7 +13,7 @@ module.exports = function(app)
         res.render('helpcenter.ejs', {user : user});
     });
     
-    app.get('/helpCenter/novoTopico', sessionCheckerRedLogin, (req,res) => {
+    app.get('/helpCenter/novo', sessionCheckerRedLogin, (req,res) => {
         
         var user = {username: req.session.user.username, tipo: req.session.user.tipo}
             
