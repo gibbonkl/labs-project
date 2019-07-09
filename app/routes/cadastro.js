@@ -6,6 +6,7 @@ let ValidacaoCadastro = require('../controllers/validacao_cadastro');
 let controllerCadastraUsuario = require('../controllers/controller_cadastra_usuario');
 const multer = require("multer");
 var upload = multer({dest: 'app/public/binary'});
+
 module.exports = function(app) {
     //middleware de validação
     app.use('/cadastro',upload.single('upload'), captcha_verify, captcha_render,(req,res,next) => {
