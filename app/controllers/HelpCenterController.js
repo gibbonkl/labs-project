@@ -32,7 +32,7 @@ class HelpCenterController {
         }
         else if(op == 'data')
         {
-            var data = req.params.data.replace(/(\d{1})(\d{1})/, "$1/$2/");
+            var data = req.params.data.replace(/-/g,'/');
             return postagemDao.listarPostagemByDate(data, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
