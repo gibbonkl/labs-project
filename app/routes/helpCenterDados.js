@@ -64,7 +64,7 @@ module.exports = function(app)
                 .catch(console.error)
         })
 
-    app.route('helpCenter/comentario')
+    app.route('/helpCenter/comentario')
         //Inserir Comentário
         .post(sessionCheckerRedLogin, (req,res) => {
             res.send(comentarioDoVegeta);
