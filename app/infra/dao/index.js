@@ -50,7 +50,10 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 //      corpo: 'corpo da postagem 4'
 //  });
 
-// PostagemDao = new PostagemDao(PostagemModel);
+PostagemDao = new PostagemDao(PostagemModel);
+PostagemDao.search("Postagem","","")
+    .then(console.log)
+    .catch(console.log)
 // PostagemDao.editarPostagem(postagem)
 //     .then(res => console.log)
 
