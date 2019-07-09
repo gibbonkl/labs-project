@@ -1,6 +1,3 @@
-function novotopico(){
-    window.location.href = "helpcenter/novo";
-}
 var config = {
     extraPlugins: 'codesnippet',
     codeSnippet_theme: 'monokai_sublime',

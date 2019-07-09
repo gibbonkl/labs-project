@@ -38,8 +38,8 @@ function list_posts(){
     .catch(console.log);
 }
 
-function create_post(){
-
+function novo_topico(){
+    window.location.href = "helpcenter/novo";
 }
 
 function enter_post(){

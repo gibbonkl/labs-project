@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
     <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/home.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
 </head>
@@ -35,6 +35,7 @@
                         <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                         <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown -->
+                        <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</li>                                                
                         <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
                     </ul>
                 </div>
@@ -81,6 +82,7 @@
     <script type="text/javascript" src="../public/js/md5.min.js"></script>
     <script type="text/javascript" src="../../node_modules/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="../public/js/helpcenter/novo_topico.js"></script>
+    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
 </body>
 
 </html>

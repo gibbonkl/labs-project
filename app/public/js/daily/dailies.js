@@ -1,9 +1,5 @@
 $(document).ready(function() {
-    listDailies()
-    $(".dropdown-trigger").dropdown({
-        constrainWidth: false,
-        coverTrigger: false
-    });
+    listDailies();
     $('.collapsible').collapsible({
         accordion: false
     });
