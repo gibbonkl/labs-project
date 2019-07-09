@@ -4,29 +4,31 @@
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Ordem de carregamento de css -->
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/home.css">
     <link rel="stylesheet" type="text/css" href="../public/css/cadastro.css">
     <link rel="stylesheet" type="text/css" href="../public/css/croppie.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <!-- Ordem de carregamento de css -->
 </head>
 
 <body>
     <div class="row">
         <!-- Coluna azul -->
-        <div id="nav_btn" class="col m4 s12 gradient-compass valign-wrapper center">
-            <div class="row nav-btn-padding">
-                <div class="row">
+        <div id="nav_btn" class="col m4 s12 full-height valign-wrapper gradient-compass">
+            <div class="nav-btn-padding center">
+                <div class="container">
                     <h4 class="white-text mont-serrat">Já é nosso membro?</h4>
-                </div>
-                <div class="row">
-                    <span class="white-text mont-serrat">Se você já possui uma conta, faça seu login a seguir. Sentimos sua falta!</span>
-                </div>
-                <div class="row">
-                    <button id="btn_log" class="btn bg-blue-compass rounded waves-effect" onclick="login()">Acessar sua conta</button>
-                </div>
-                <div class="row">
-                    <button id="btn_visit" class="btn bg-blue-compass rounded waves-effect" onclick="visit()">Sou visitante</button>
+                    <div class="row">
+                        <span class="white-text mont-serrat">Se você já possui uma conta, faça seu login a seguir. Sentimos sua falta!</span>
+                    </div>
+                    <div class="row">
+                        <button id="btn_log" class="btn bg-blue-compass rounded waves-effect" onclick="login()">Acessar sua conta</button>
+                    </div>
+                    <div class="row">
+                        <button id="btn_visit" class="btn bg-blue-compass rounded waves-effect" onclick="visit()">Sou visitante</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,66 +52,73 @@
                                 <input type="file" name="upload" id="upload" value="Choose Image" accept="image/*" class="hide">
                             </div>
                         </div>
-                        <div class="input-field col s12 m6">
-                            <input id="nome" name="nome" type="text" class="validate <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
-                            <label class="active" for="nome">Nome</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input id="sobrenome" name="sobrenome" type="text" class="validate <%if(user.sobrenome == ''){%><%=user.invalidClass%> <%}%>" value=<%=user.sobrenome%>>
-                            <label class="active" for="sobrenome">Sobrenome</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input id="username" name="username" type="text" class="validate <%if(user.username == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9]{4,20}$" value=<%=user.username%>>
-                            <label class="active" for="username">Nome de usuário</label>
-                            <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input id="data_nascimento" name="data_nasc" type="date" class="validate <%if(user.data_nasc == ''){%><%=user.invalidClass%>" <%}%> >
-                            <label class="active" for="data_nascimento"></label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input id="email" name="email" type="email" class="validate <%if(user.email == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%=user.email%>>
-                            <label class="active" for="email">Email</label>
-                            <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
-                        </div>
-                        <div class="col s12">
-                            <span class="font-key grey-text text-darken-2">Insira uma combinação de pelo menos 6 caracteres</span>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input id="senha" type="password" class="validate <%=user.invalidClass%>" name="senha">
-                            <label class="active" for="senha">Senha</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input id="repsenha" type="password" class="validate <%=user.invalidClass%>" name="repsenha">
-                            <label class="active" for="repsenha">Repetir senha</label>
+                        <div id="resultado" class="btn-margin-top">
+                            <img id="cad_image" src="../public/img/user.png" class="circle z-depth-1" name="photo" value="<%= user.photo%>" />
+                            <input type="file" id="upload" value="Choose Image" accept="image/*" class="hide">
                         </div>
                     </div>
-                    <div class="col s12 center">
-                        <% if(captcha){ %>
-                            <%- captcha %>
-                                <% } %>
+                    <div class="input-field col s12 m6">
+                        <input id="nome" placeholder=" " name="nome" type="text" class="active <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
+                        <label for="nome">Nome</label>
                     </div>
-                    <div class="col s12 center btn-margin-top">
-                        <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
+                    <div class="input-field col s12 m6">
+                        <input id="sobrenome" placeholder=" " name="sobrenome" type="text" class="active <%if(user.sobrenome == ''){%><%=user.invalidClass%> <%}%>" value=<%=user.sobrenome%>>
+                        <label for="sobrenome">Sobrenome</label>
                     </div>
-                    <% user.erros.forEach(function(er){ %>
-                        <li>
-                            <%= er%>
-                        </li>
-                        <% }) %>
-                </form>
+                    <div class="input-field col s12 m6">
+                        <input id="username" placeholder=" " name="username" type="text" class="active <%if(user.username == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9]{4,20}$" value=<%=user.username%>>
+                        <label for="username">Nome de usuário</label>
+                        <span class="helper-text" data-error="nome de usuário deve ter de 4-20 caracteres alfanuméricos" data-success="nome de usuário válido"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="data_nascimento" placeholder=" " name="data_nasc" type="date" class="active <%if(user.data_nasc == ''){%><%=user.invalidClass%>" <%}%> >
+                        <label for="data_nascimento">Data de Nascimento</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="email" placeholder=" " name="email" type="email" class="active <%if(user.email == ''){%><%=user.invalidClass%> <%}%>" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" value=<%=user.email%>>
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="email inválido" data-success="email válido"></span>
+                    </div>
+                    <div class="col s12">
+                        <span class="font-key grey-text text-darken-2">Insira uma combinação de pelo menos 6 caracteres</span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="senha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="senha">
+                        <label for="senha">Senha</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="repsenha" type="password" class="active <%=user.invalidClass%>" placeholder=" " name="repsenha">
+                        <label for="repsenha">Repetir senha</label>
+                    </div>
             </div>
+            <div class="col s12 center">
+                <% if(captcha){ %>
+                    <%- captcha %>
+                        <% } %>
+            </div>
+            <div class="col s12 center btn-margin-top">
+                <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
+            </div>
+            <% user.erros.forEach(function(er){ %>
+                <li>
+                    <%= er%>
+                </li>
+                <% }) %>
+                    </form>
         </div>
-        <!-- Fim do formulário -->
     </div>
-    <script type="text/javascript" src="../public/js/ejs.js"></script>
-    <script type="text/javascript" src="../public/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/js/materialize.js"></script>
-    <script type="text/javascript" src="../public/js/md5.min.js"></script>
-    <script type="text/javascript" src="../public/js/inicio.js"></script>
-    <script type="text/javascript" src="../public/js/croppie.min.js"></script>
-    <script type="text/javascript" src="../public/js/photo.js"></script>
-    <script type="text/javascript" src="../public/js/cadastro.js"></script>
+    <!-- Fim do formulário -->
+    </div>
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../public/js/libs/ejs.js"></script>
+    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/croppie.min.js"></script>
+    <script type="text/javascript" src="../public/js/login/inicio.js"></script>
+    <script type="text/javascript" src="../public/js/cadastro/photo.js"></script>
+    <script type="text/javascript" src="../public/js/cadastro/cadastro.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
 
 </html>
