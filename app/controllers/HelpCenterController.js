@@ -83,7 +83,6 @@ class HelpCenterController {
     }
 
     static insertPostagem(req) {
-        
         let postagem = new PostagemModel ({
             username: req.body.username,
             corpo: req.body.corpo,
