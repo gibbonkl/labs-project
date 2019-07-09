@@ -42,7 +42,15 @@ module.exports = function(app) {
                 .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível editar comentario"))
                 .catch(console.error)
         })
+      
     
+    app.route('/testehelpcenter/deletecomentario')
+        //Delete Comentário   
+        .delete((req, res) => {
+            comentcontroller.deletarComentario(req.body._id_comentario, req.body._id_postagem)
+                .then(comentario => comentario ? res.send(comentario) : res.send("Não foi possível deletar comentario"))
+                .catch(console.error)
+        })
     
 }
 
