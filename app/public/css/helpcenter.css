@@ -1,0 +1,24 @@
+.topico:not(:last-child){
+    border-bottom: 1px solid lightgrey;
+}
+.topico-nome{
+    font-size: 1.1em;
+    line-height: 2;
+}
+.topico-titulo{
+    font-size: 1.3em;
+    line-height: 2;
+    font-weight: bold;
+}
+.topico-data{
+    line-height: 2;
+}
+.number{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 20px !important;
+    position: relative !important;
+    top: -5 !important;
+}
+.number:not(:last-child){
+    padding-right: 20px;
+}

@@ -1,0 +1,20 @@
+html{
+    overflow: auto !important;
+}
+.nav-padding-left {
+    padding-left: 1%;
+}
+.position-relative{
+    position: relative !important;
+}
+.left-divider{
+    border-left: 1px solid #eeeeee;
+    margin-left: 50px;
+}
+.logo-img {
+    background-image: url("../img/logo_compasso_mini.png");
+    background-repeat: no-repeat;
+    background-color: white;
+    height: 50px;
+    width: 50px;
+}
