@@ -48,11 +48,16 @@
         <div class="section">
             <div class="row">
                 <div class="col s12">
-                    <div class="card-panel white">
-                        <div class="row">
+                    <div class="card-panel grey lighten-2">
+                        <div class="row z-depth-2 div-topico white">
                             <!-- Título do tópico -->
-                            <h5 id="titulo-topico" class="blue-compass mont-serrat"><%= response.titulo %></h5>
-                            <div class="divider"></div> 
+                            <div class="col s10">
+                                <h5 class="blue-compass mont-serrat">Como fazer paginação dinâmica utilizando ejs e js?</h5>
+                            </div> 
+                            <div class="col s2">
+                                <h5 class="grey-text text-darken-2 mont-serrat right topico-data">10/07/2019</h5>
+                            </div>  
+                            <p></p>
                             <div class="div-margin col s12">
                                 <!-- Corpo do tópico -->
                                 <div id="corpo-topico" class="black-text">
@@ -71,14 +76,76 @@
 
                             <div class="div-margin col s12">
                                 <a href="#responder" class="grey-text text-darken-1 grey lighten-3 responder-padding rounded">Responder</a>
-                            </div>
-                            
-                            <div class="div-margin col s12 divider"></div>
+                            </div>                            
+                        </div>
+
+                        <div class="row div-topico white">                            
+                            <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
 
                             <!-- Respostas -->
-                            
                             <div class="div-margin col s12 divider"></div>
+                            <div class="col s12 white resposta">
+                                <div class="col s10">
+                                    <span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>Sérgio Silva</span>
+                                </div>
+                                <div class="col s2">
+                                    <span class="grey-text right">10/07/2019</h5>
+                                </div>  
+                                <p class="col s12 black-text corpo-resposta">
+                                    Bom dia....<br>
+
+                                    Não sei se entendi direito, mas vê se isso resolve teu problema...<br>
+                                    
+                                    UPDATE IDENTIFICADOR_ETIQUETA SET CD_UNI_PRO =<br>
+                                    (SELECT UNI_PRO.CD_UNI_PRO <br>
+                                    FROM UNI_PRO<br>
+                                    JOIN PRODUTO ON PRODUTO.CD_PRODUTO = UNI_PRO.CD_PRODUTO<br>
+                                    WHERE PRODUTO.CD_ESPECIE = ''''''''1''''''''<br>
+                                    AND UNI_PRO.CD_UNIDADE = ''''''''UN''''''''<br>
+                                    AND UNI_PRO.SN_ATIVO = ''''''''S''''''''<br>
+                                    AND PRODUTO.CD_PRODUTO = 128)<br>
+                                    WHERE IDENTIFICADOR_ETIQUETA.CD_PRODUTO = 128<br>
+                                    
+                                    Se a sua amarração de tabelas estiver correta acho que isso resolve o problema.<br>
+                                    
+                                    Abraço
+                                </p>
+                            </div>
+                            <div class="div-margin col s12 divider"></div>
+                            <div class="col s12 white resposta">
+                                <div class="col s10">
+                                    <span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>Sérgio Silva</span>
+                                </div>
+                                <div class="col s2">
+                                    <span class="grey-text right">10/07/2019</h5>
+                                </div>  
+                                <p class="col s12 black-text corpo-resposta">
+                                    Bom dia....<br>
+
+                                    Não sei se entendi direito, mas vê se isso resolve teu problema...<br>
+                                    
+                                    UPDATE IDENTIFICADOR_ETIQUETA SET CD_UNI_PRO =<br>
+                                    (SELECT UNI_PRO.CD_UNI_PRO <br>
+                                    FROM UNI_PRO<br>
+                                    JOIN PRODUTO ON PRODUTO.CD_PRODUTO = UNI_PRO.CD_PRODUTO<br>
+                                    WHERE PRODUTO.CD_ESPECIE = ''''''''1''''''''<br>
+                                    AND UNI_PRO.CD_UNIDADE = ''''''''UN''''''''<br>
+                                    AND UNI_PRO.SN_ATIVO = ''''''''S''''''''<br>
+                                    AND PRODUTO.CD_PRODUTO = 128)<br>
+                                    WHERE IDENTIFICADOR_ETIQUETA.CD_PRODUTO = 128<br>
+                                    
+                                    Se a sua amarração de tabelas estiver correta acho que isso resolve o problema.<br>
+                                    
+                                    Abraço
+                                </p>
+                            </div>
+                            
+                            
+
+                        </div>
+                        <div class="row div-topico white">
+                            <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 
                             <!-- Formulário para responder ao tópico -->
