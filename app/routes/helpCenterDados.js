@@ -110,4 +110,11 @@ module.exports = function(app)
             .then(response => res.send(response))
     });
 
+    // retorna numero de paginas
+    app.post('/helpcenter/numerodepaginas', (req,res) => {        
+        
+        HelpCenterController.getPaginas(req)
+            .then(res => res.send(res))
+    });
+
 }
