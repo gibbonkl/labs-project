@@ -189,7 +189,8 @@ function update(id) {
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2]
+                'impedimento': result.value[2],
+                '_id': id
             }
         })
         .then(resp => {
