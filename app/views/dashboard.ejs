@@ -17,63 +17,7 @@
 <body class="bg-blue-compass">
     <header>
         <!-- Estrutura do menu dropdown da navbar -->
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="/alterar_senha" class="blue-compass">Alterar senha</a></li>
-            <li class="divider"></li>
-            <li><a href="/logout" class="blue-compass">Fazer Logout</a></li>
-        </ul>
-        <!-- Navbar -->
-        <div>
-            <nav class="white">
-                <div class="nav-wrapper nav-padding-left">
-                    <div class="left">
-                        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-small-only"><i class="material-icons black-text">menu</i></a>
-                        <a href="/" class="left blue-compass brand-logo position-relative hide-on-med-and-down"><i class="logo-img"></i>Game of Bols</a>
-                        <ul class="left hide-on-med-and-down position-relative left-divider show show-on-med-and-up">
-                            <li class="hide"><a href="/" class="blue-compass">Home</a></li>
-                            <li class="active"><a href="/" class="blue-compass">Daily Notes</a></li>
-                            <li><a href="/helpcenter" class="blue-compass">Help Center</a></li>
-                        </ul>
-                    </div>
-                    <ul class="right hide-on-med-and-down">
-                        <!-- Em caso de visitante, mostra link login e botão cadastro-->
-                        <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
-                        <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
-                        <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
-                        <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %></li>
-                        <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons hide-on-med-and-down">face</i></a></li>
-                    </ul>
-                </div>
-            </nav>
-                <ul id="slide-out" class="sidenav">
-                        <li><div class="user-view">
-                            <div class="background">
-                                <img class="responsive-img" src="../public/img/sidebar-background.jpg">
-                            </div>
-                      <a href="#user"><img class="circle" src="../public/img/user.png"></a>
-
-
-                      <!-- caso usuário logado, mostra olá e o username no sidenav  -->
-                      <a href="#name"><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</span></a>
-                      <!-- caso usuário não esteja logado, mostra só olá -->
-                      <a href="#name"><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá <%= user.username %>!</span></a>
-
-                             </div>
-                        </li>
-                    <li><a href="#!"><i class="logo-nav"></i>GAME OF BOLS</a></li>
-                    <!-- <li><a href="#!">Second Link</a></li> -->
-                    <li><div class="divider"></div></li>
-                    <!-- <li><a class="subheader">Subheader</a></li> -->
-                    <li><a class="waves-effect" href="/">Daily Notes</a></li>
-                    <li><a class="waves-effect" href="/helpcenter">Help Center</a></li>
-                    <li><a class="waves-effect" href="/alterar_senha">Alterar Senha</a></li>
-                     
-                    <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
-                    <li><a href="/cadastro" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastre-se</a></li>
-                     <!-- caso usuário esteja logado, mostra a opção logout  -->
-                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/logout">Logout</a></li>
-                </ul>
-        </div>
+        <% include ./includes/navbar.ejs %>
     </header>
     <!-- Botão nova daily aparece apenas se usuário está logado e é do tipo user -->
     <div class="section no-pad-bot">
@@ -90,8 +34,7 @@
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
-            <div class="card-filter">
-                <div class="row">
+                <div class="row white">
                     <div class="col m2 s12">
                         <label>Filtrar por:</label>
                         <div class="switch-field margin-top">
@@ -113,7 +56,6 @@
                         <button class="btn bg-blue-compass">filtrar</button>
                     </div>
                 </div>
-            </div>
             <div class="progress">
                 <div class="indeterminate"></div>
             </div>
