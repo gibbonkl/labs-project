@@ -39,3 +39,22 @@
 .padding-titulo{
     padding-left: 0 !important;
 }
+.div-topico{
+    padding: 2% !important;
+    margin-top: -9 !important;
+}
+.topico-data{
+    font-size: 1rem !important;
+    padding-top: 7 !important;
+}
+.nome-user-resposta{
+    position: relative !important;
+    left: -3 !important;
+    top: 1 !important;
+}
+.resposta{
+    padding: 2% 2% 0 2% !important;
+}
+.corpo-resposta{
+    padding: 2% 2% 0 2% !important;
+}
