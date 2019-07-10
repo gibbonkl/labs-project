@@ -1,19 +1,3 @@
-body{
-    overflow: auto !important;
-}
-html{
-    overflow: auto !important;
-}
-.nav-padding-left {
-    padding-left: 1%;
-}
-.logo-img {
-    background-image: url("../img/logo_compasso_mini.png");
-    background-repeat: no-repeat;
-    background-color: white;
-    height: 50px;
-    width: 50px;
-}
 .span-margin{
     margin: 0 14px 0 0;
 }
@@ -24,41 +8,4 @@ html{
     width: 115px;
     margin-left: auto;
     margin-right: auto;
-}
-/*nav .brand-logo {
-    font-size: 1rem !important;
-}*/
-.alterar-senha-margin-top{
-    margin-top: 5%;
-}
-.left-divider{
-    border-left: 1px solid #eeeeee;
-    margin-left: 50px;
-}
-.topico:not(:last-child){
-    border-bottom: 1px solid lightgrey;
-}
-.topico-nome{
-    font-size: 1.1em;
-    line-height: 2;
-}
-.topico-titulo{
-    font-size: 1.3em;
-    line-height: 2;
-    font-weight: bold;
-}
-.topico-data{
-    line-height: 2;
-}
-.number{
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 20px !important;
-    position: relative !important;
-    top: -5 !important;
-}
-.number:not(:last-child){
-    padding-right: 20px;
-}
-.position-relative{
-    position: relative !important;
 }

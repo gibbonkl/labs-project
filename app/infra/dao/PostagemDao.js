@@ -152,12 +152,12 @@ class PostagemDao extends TemplateDao{
             .then((res, err) => res ? res.likes.length : 'Não foi possível acessar os likes da postagem')
             .catch(() => 'error');
     }
-/*
-       *   Pega uma postagem 
-       *   @param {id} postagem
-       *   @returns {postagem} postagem e todos os comentarios associados
+    /*
+        *   Pega uma postagem 
+        *   @param {id} postagem
+        *   @returns {postagem} postagem e todos os comentarios associados
     */
-   getPostagem(id=''){
+    getPostagem(id=''){
        return this._aggregate([
            {'$match': 
                {_id: mongoose.Types.ObjectId(id)}
@@ -186,8 +186,22 @@ class PostagemDao extends TemplateDao{
        ])
        .then(res => res ? res : 'error')
        .catch(console.error)
-   }
-    
+    }
+    /*
+        *   Busca uma postagem na base de dados pelo título
+        *   @param {string} searched A busca a ser realizada no banco
+        *   @param {Number} skip
+        *   @param {Number} limit Limite de postagens para busca
+        *   @returns {Array}
+    */
+    search(searched,skip = '', limit = ''){
+        return this._find({titulo: {'$regex': searched,'$options':'i'}},{},{skip: skip,limit:limit})
+            .then((res,err)=> res? res: err)
+            .catch(err=>{
+                return ({detail: "Impossível buscar postagens", error: err})
+            })
+    }
+ 
     /*
        *   Lista todas as postagens ordenando por último update
        *   @param {String} username Usuário das postagens

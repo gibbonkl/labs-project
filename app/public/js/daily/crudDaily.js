@@ -56,13 +56,13 @@ function create() {
             })
         )
         .then(response => response.json())
+        .then(response => {response['permissao'] = true; return response})
         .then(response => $('#collapsible_daily').append(render(response)))
         .catch(console.log);
 }
 
 function render(dados) {
-    teste = dados
-    console.log(teste)
+    
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
@@ -77,13 +77,16 @@ function render(dados) {
                             <span class="bold">Hoje: </span><span class="hoje">${dados.corpo.hoje}</span><br>
                             <span class="bold">Impedimentos: </span><span class="imp">${dados.corpo.impedimento}</span>
                         </div>
-                        <div class="col s6">
-                            <a class="btn-floating white right" onclick="remove('${dados._id}')" href="#delete"><i class="material-icons black-text">delete</i></a>
-                            <a class="btn-floating white right btn-margin-right" onclick="update('${dados._id}')" href="#edit"><i class="material-icons black-text">create</i></a>
-                        </div>
+                        ${dados.permissao ?
+                            `<div class="col s6">
+                                <a class="btn-floating white right" onclick="remove('${dados._id}')"><i class="material-icons black-text">delete</i></a>
+                                <a class="btn-floating white right btn-margin-right" onclick="update('${dados._id}')"><i class="material-icons black-text">create</i></a>
+                            </div>`
+                            : ``
+                        }
                     </div>
                 </div>
-            </li>`
+            </li>`;
 }
 
 function dateConverter(date = new Date()) {
@@ -186,7 +189,8 @@ function update(id) {
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2]
+                'impedimento': result.value[2],
+                '_id': id
             }
         })
         .then(resp => {

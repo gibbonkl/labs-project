@@ -44,15 +44,17 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 //Dao.changePassword('gibbon', 'gibb')
 //    .then(console.log)
 //    .catch(console.error);
-//  let postagem = new PostagemModel ({
-//      _id: '5d1de45b456b4f13c81de56f',
-//      username: 'Goku',
-//      corpo: 'corpo da postagem 4'
+// let postagem = new PostagemModel ({
+//     titulo: 'Titulo postagem',
+//     username: 'Albano',
+//     corpo: 'corpo da postagem 4',
+//     likes: ['asd','asd','asde'],
+//     comentarios: ['asd','asd','asde']
 //  });
 
 // PostagemDao = new PostagemDao(PostagemModel);
-// PostagemDao.editarPostagem(postagem)
-//     .then(res => console.log)
+// PostagemDao.insertPostagem(postagem)
+//     .then(res => console.log(res))
 
 //let comentario = new ComentarioModel ({
  //   username: 'Goten',
