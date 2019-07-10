@@ -152,18 +152,40 @@ class PostagemDao extends TemplateDao{
             .then((res, err) => res ? res.likes.length : 'Não foi possível acessar os likes da postagem')
             .catch(() => 'error');
     }
-
     /*
        *   Pega uma postagem 
        *   @param {id} postagem
        *   @returns {postagem} postagem e todos os comentarios associados
     */
-    getPostagem(id='')
-    {
-        return this._aggregate([{'$match': {_id: mongoose.Types.ObjectId(id)}}, {'$lookup': {
-            'from': 'comentarios', 'localField': 'comentarios', 'foreignField': '_id', 'as': 'comentarios'
-        }}])
-        .then(res => res ? res : 'erro')
+   getPostagem(id=''){
+        return this._aggregate([
+            {'$match': 
+                {_id: mongoose.Types.ObjectId(id)}
+            },
+            {'$lookup': {
+                    'from': 'comentarios', 
+                    'localField': 'comentarios', 
+                    'foreignField': '_id',
+                    'as': 'comentarios.comentario'
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'comentarios.comentario.username', 
+                    'foreignField': 'username', 
+                    'as': 'comentarios.user'
+                }
+            }
+        ])
+        .then(res => res ? res : 'error')
+        .catch(console.error)
     }
     /*
         *   Busca uma postagem na base de dados pelo título
@@ -179,7 +201,6 @@ class PostagemDao extends TemplateDao{
                 return ({detail: "Impossível buscar postagens", error: err})
             })
     }
- 
     /*
        *   Lista todas as postagens ordenando por último update
        *   @param {String} username Usuário das postagens
@@ -194,6 +215,13 @@ class PostagemDao extends TemplateDao{
                 .catch(err => {
                     return ({ detail: "Impossível buscar postagens", error: err })
                 })
+    }
+    getPagesNumber(filter){
+        return this._countDocuments(filter)
+            .then(number => number? Math.ceil((number/20)) : 0)
+            .catch(err=> {
+                return ({detail: "Impossível retornar o número de páginas", error : err})
+            })
     }
 }
 module.exports = PostagemDao;
