@@ -146,8 +146,12 @@ class DailiesController {
         let dailyDao = new DailyDao(DailyModel);
         let dailyNote = {
                 usuario : req.session.user.username,
-                data: req.body.data,
-                corpo: req.body.corpo,
+                _id: req.body.id,
+                corpo: {
+                    ontem: req.body.ontem,
+                    hoje: req.body.hoje,
+                    impedimento: req.body.impedimento,
+                }
         }
 
         return dailyDao.updateDailyNote(dailyNote)

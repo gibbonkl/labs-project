@@ -38,6 +38,15 @@ class DailyDao extends TemplateDao {
 
         return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
     }
+    // estou com pressa
+    validateDailyNoteById(dailyNote) {
+        return this._findOne({ usuario: dailyNote.usuario, _id: dailyNote._id, ativo: true })
+            .then(res => res ? res : null)
+            .catch(err => {
+                console.error(err);
+                return ({ detail: "Impossível realizar operação", error: err })
+            })
+    }
     /*
         *   Verifica se a daily note existe no banco com: username e date
         *   Se existir, faz update dos campos ontem, hoje e impedimentos
@@ -46,16 +55,14 @@ class DailyDao extends TemplateDao {
         *   @returns {object}
     */
     updateDailyNote(dailyNote) {
-        if (dailyNote) {
-            return this.validateDailyNote(dailyNote)
-                .then(res => res ? this._findOneAndUpdate(
-                    { usuario: dailyNote.usuario, data: dailyNote.data, ativo: true },
-                    { $set: { corpo: dailyNote.corpo } }) : null)
-                .catch(err => {
-                    console.log(err);
-                    return ({ detail: "Impossível fazer update" })
-                })
-        }
+        return this.validateDailyNoteById(dailyNote)
+            .then(res => res ? this._findOneAndUpdate(
+                { usuario: dailyNote.usuario, _id: dailyNote._id, ativo: true },
+                { $set: { corpo: dailyNote.corpo } }) : null)
+            .catch(err => {
+                console.log(err);
+                return ({ detail: "Impossível fazer update" })
+            })
     }
     /*
         *   Faz update no campo ativo mudando para false

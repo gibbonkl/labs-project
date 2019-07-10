@@ -37,6 +37,7 @@ module.exports = function(app) {
         })
         .put(sessionCheckerRedLogin, (req, res) => {
 
+            console.log(req);
             controller.updateDaily(req)
                 .then(retorno => {
                     if(!retorno)
