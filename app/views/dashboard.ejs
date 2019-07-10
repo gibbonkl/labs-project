@@ -39,7 +39,8 @@
                         <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                         <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
-                        <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</li>
+                        <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá,
+                            <%= user.username %>!</li>
                         <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
                     </ul>
                 </div>
@@ -62,14 +63,36 @@
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
+            <div class="card-filter">
+                <div class="row">
+                    <div class="col m2 s12">
+                        <label>Filtrar por:</label>
+                        <div class="switch-field margin-top">
+                            <input onclick="showData()" type="radio" id="radio-one" name="switch-one" value="true" checked/>
+                            <label for="radio-one" class="tooltipped" data-position="left"  data-tooltip="Data"><i class="material-icons icons-font">date_range</i></label>
+                            <input onclick="showUser()" type="radio" id="radio-two" name="switch-one" value="false" />
+                            <label for="radio-two" class="tooltipped" data-position="right"  data-tooltip="Nome de usuário"><i class="material-icons icons-font">account_circle</i></label>
+                        </div>
+                    </div>
+                    <div id="div_username" class="input-field col m8 s12 hide">
+                        <input placeholder=" " id="filter_username" type="text" class="active">
+                        <label for="filter_username">Nome de usuário</label>
+                    </div>
+                    <div id="div_data" class="input-field col m8 s12">
+                        <input placeholder=" " type="text" class="datepicker">
+                        <label for="filter_data">Data</label>
+                    </div>
+                    <div class="input-field col m2 s12">
+                        <button class="btn bg-blue-compass">filtrar</button>
+                    </div>
+                </div>
+            </div>
             <div class="progress">
                 <div class="indeterminate"></div>
             </div>
             <div id="show_dailies" class="row hide">
-                <div class="col s12">
-                    <ul id="collapsible_daily" class="collapsible expandable">
-                    </ul>
-                </div>
+                <ul id="collapsible_daily" class="collapsible expandable">
+                </ul>
             </div>
         </div>
     </div>
