@@ -1,5 +1,6 @@
 body {
-    height: 100vh
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 435px) {
