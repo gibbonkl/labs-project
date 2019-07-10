@@ -1,3 +1,11 @@
+$(document).ready(function() {
+    load_topic();
+});
+
+function load_topic(){
+    
+}
+
 function edit_topic(){
 
 }

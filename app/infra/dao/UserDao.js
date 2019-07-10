@@ -42,11 +42,11 @@ class UserDao extends TemplateDao{
         }
         return({detail:"Impossível realizar operação",error:"Usuário null ou undefined"})
     }
-    updateHash(username, email){
-        if(username && email){
+    updateHash(email){
+        if(email){
             
             let newHash =  createHash(Math.random().toString(36).substring(7));
-            return this._updateOne({username:username, email:email},{$set:{hash: newHash}})
+            return this._updateOne({email:email},{$set:{hash: newHash}})
                 .then(() => newHash)
                 .catch(console.error);
                 
