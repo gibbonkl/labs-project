@@ -34,10 +34,9 @@
                         <!-- Em caso de visitante, mostra link login e botão cadastro-->
                         <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
-                        <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown
+                        <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown-->
                         <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</li>                                                
-                        <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
-                        -->
+                        <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li> 
                     </ul>
                 </div>
             </nav>
@@ -52,11 +51,11 @@
                     <div class="card-panel white">
                         <div class="row">
                             <!-- Título do tópico -->
-                            <h5 class="blue-compass mont-serrat">Como fazer paginação dinâmica utilizando ejs e js?</h5>
+                            <h5 id="titulo-topico" class="blue-compass mont-serrat">Como fazer paginação dinâmica utilizando ejs e js?</h5>
                             <div class="divider"></div> 
                             <div class="div-margin col s12">
                                 <!-- Corpo do tópico -->
-                                <p class="black-text">
+                                <p id="corpo-topico" class="black-text">
                                     E ae, galera da DevMedia.
 
                                     Estou com um problema para transformar uma array em json utilizando o json_encode, quando a um valor te acento ele define o valor como null.
@@ -67,11 +66,11 @@
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
                                 <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                <span class="grey-text text-darken-2 nome-user">Hugo</span>
+                                <span id="username-topico" class="grey-text text-darken-2 nome-user">Hugo</span>
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
-                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span class="number-likes">2</span></a>
+                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span id="likes-topico" class="number-likes">2</span></a>
                             </div>
 
                             <div class="div-margin col s12">

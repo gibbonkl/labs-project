@@ -54,13 +54,13 @@
                             <div class="divider"></div> 
                             <div class="div-margin col s12">
                                 <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                <span class="grey-text text-darken-2 nome-user">Nome do usuário</span>
+                                <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                             </div>
-                            <form action="/helpcenter" method="post">
+                            <form action="/helpcenter" method="post" id="topico-form">
                                 <div class="div-margin col s12">
                                     <div class="input-field col s12">
                                         <input id="titulo" type="text" class="active" name="titulo" required>
-                                        <label for="login_email">Título do post</label>
+                                        <label for="titulo">Título do post</label>
                                     </div>
                                     <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         Digite aqui o conteúdo do seu post.

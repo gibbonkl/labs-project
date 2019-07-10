@@ -10,7 +10,7 @@ function animaLoad() {
 function render(dados){
 
     return `<div id="${dados._id}" class="topico" onclick="enter_topic()">
-        <a href="#" class="collection-item avatar">
+        <a href="" class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">
             <span class="black-text topico-nome">${dados.username}</span><br>
             <span class="black-text topico-titulo">${dados.titulo}</span><br>
