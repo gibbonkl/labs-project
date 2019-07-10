@@ -218,3 +218,13 @@ function update(id) {
             Swal.close();
         })
 }
+
+function showData(){
+    $("#div_username").addClass('hide');
+    $("#div_data").removeClass('hide');
+    
+}
+function showUser(){
+    $("#div_username").removeClass('hide');
+    $("#div_data").addClass('hide');
+}
