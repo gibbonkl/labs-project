@@ -173,7 +173,7 @@ class PostagemDao extends TemplateDao{
         *   @returns {Array}
     */
     search(searched,skip = '', limit = ''){
-        return this._find({titulo: {'$regex': searched}},{},{skip: skip,limit:limit})
+        return this._find({titulo: {'$regex': searched,'$options':'i'}},{},{skip: skip,limit:limit})
             .then((res,err)=> res? res: err)
             .catch(err=>{
                 return ({detail: "Impossível buscar postagens", error: err})
