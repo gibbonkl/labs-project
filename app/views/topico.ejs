@@ -3,12 +3,12 @@
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
-    <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
-    <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/novo_topico.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/material-icons.css">
+    <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <link rel="stylesheet" type="text/css" href="../../public/css/menu.css">
 </head>
 <body class="bg-blue-compass">
     <header>
@@ -51,26 +51,22 @@
                     <div class="card-panel white">
                         <div class="row">
                             <!-- Título do tópico -->
-                            <h5 id="titulo-topico" class="blue-compass mont-serrat">Como fazer paginação dinâmica utilizando ejs e js?</h5>
+                            <h5 id="titulo-topico" class="blue-compass mont-serrat"><%= response.titulo %></h5>
                             <div class="divider"></div> 
                             <div class="div-margin col s12">
                                 <!-- Corpo do tópico -->
-                                <p id="corpo-topico" class="black-text">
-                                    E ae, galera da DevMedia.
-
-                                    Estou com um problema para transformar uma array em json utilizando o json_encode, quando a um valor te acento ele define o valor como null.
-                                    
-                                    Alguém sabe como resolver esse problema?                                    
-                                </p>
+                                <div id="corpo-topico" class="black-text">
+                                    <%- response.corpo %>                                 
+                                </div>
                             </div>
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
-                                <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                <span id="username-topico" class="grey-text text-darken-2 nome-user">Hugo</span>
+                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
-                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span id="likes-topico" class="number-likes">2</span></a>
+                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span id="likes-topico" class="number-likes"><%= response.numeroLikes %></span></a>
                             </div>
 
                             <div class="div-margin col s12">
@@ -86,13 +82,13 @@
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 
                             <!-- Formulário para responder ao tópico -->
-                            <form id="responder" class="div-margin col s12" action="/helpcenter/topico" method="post">
+                            <form id="responder" class="div-margin col s12" action="/helpCenter/comentario" method="post">
                                 <div class="input-field col s12">
-                                    <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                    <span class="grey-text text-darken-2 nome-user">Anna Flávia Zimmermann Brandão</span>
+                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                 </div>
                                 <div>
-                                    <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                    <textarea name="corpo-coment" id="corpo-coment" rows="10" cols="80" form="topico-form">
                                         Digite aqui o conteúdo da sua resposta.
                                     </textarea>
                                 </div>        
@@ -108,12 +104,14 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="../public/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/js/materialize.js"></script>
-    <script type="text/javascript" src="../public/js/md5.min.js"></script>
-    <script type="text/javascript" src="../../node_modules/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="../public/js/helpcenter/novo_topico.js"></script>
-    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
 
 </html>
