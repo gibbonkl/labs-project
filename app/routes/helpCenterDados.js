@@ -114,7 +114,7 @@ module.exports = function(app)
     app.post('/helpcenter/numerodepaginas', (req,res) => {        
         
         HelpCenterController.getPaginas(req)
-            .then(res => res.send(res))
+            .then(response => res.send('' + response))
     });
 
 }

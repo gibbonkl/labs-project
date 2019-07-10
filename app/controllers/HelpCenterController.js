@@ -116,28 +116,68 @@ class HelpCenterController {
         return new PostagemDao(PostagemModel).deletePostagemById(id)
     }
 
+      /*
+        *   Retorna uma postagem com a foto do usuário
+        *   Junto a um array com os comentários e as fotos de cada usuário,
+        *   Um array com usuários que deram like na postagem
+        *   E outro array com as tags da postagem
+        *   @param {Request} req Requisição do usuário
+        *   @return {object}
+    */
     static getPostagem(req){
         let user = 'visitante'
         let username = ''
+        /*
+            *   Verifica se o usuário é admin
+            *   ou dono da postagem
+        */
         if(req.session.user) {
-            user = req.session.user.tipo;
-            username = req.session.user.username;
-        }
+            if(req.session.user.tipo == "admin")
+                user = "admin"
+            else{
+                user = userDao.checkUserPermission(req.session.user.username);
+                username = req.session.user.username;
+            }
 
+        }
+        /*
+            *   Busca na base de dados a postagem,
+            *   a foto do usuário, e as fotos para os comentários
+        */
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
-                .then(postagem => 
-                    {
-                        postagem.map(function(postagem){
-                            HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                            if (user == 'admin' || postagem.username == username)
-                                postagem['permissao'] = true;
-                            else
-                                postagem['permissao'] = false;
-                            return postagem;
-                        })
-                        return postagem[0];
-                    })
-                .catch(console.error)
+            /*
+                *   @warning: Frágil
+                *   Retorna a primeira posição do array de postagens
+            */
+            .then(postagens => postagens[0])
+            .then(postagem =>{
+                /*
+                    *   Adiciona o campo imagem ao comentário
+                    *   a partir do array de usuários
+                */
+                for(i=0;i<postagem.comentarios.comentario.length;i++){
+                    postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
+                    /*
+                        *   Se o usuário for admin ou dono da postagem,
+                        *   Seta as permissões para verdadeiro
+                        *   Caso contrário, falso
+                    */
+                    user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+                }
+                /*
+                    *   Desfaz o array de comentários para o campo comentário
+                    *   Remove o array de usuário da postagem e adiciona a foto ao objeto
+                */
+                postagem.comentarios = postagem.comentarios.comentario;
+                postagem.imagem = postagem.user[0].imagem;
+                delete(postagem.user);
+                return postagem;
+            })
+            .then(postagem => {
+                HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                return(postagem);
+            })
+            .catch(console.error)
     }
 
     static like(req)
@@ -157,7 +197,6 @@ class HelpCenterController {
         let filtro = req.body.filtro;
         filtro.ativo = true;
         return new PostagemDao(PostagemModel).getPagesNumber(filtro)
-            //.then(res => console.log(res))
     }
 
 }
