@@ -48,7 +48,7 @@ module.exports = function(app)
         
         //inserir postagem
         .post(sessionCheckerRedLogin, (req,res) => {
-            
+            console.log(req.body)
             HelpCenterController.insertPostagem(req)
                 .then(postagem => postagem ? res.render('helpcenter') : res.send("Não foi possível inserir postagem"))
                 .catch(console.error)

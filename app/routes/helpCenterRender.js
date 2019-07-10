@@ -29,7 +29,10 @@ module.exports = function(app)
             var user = {username: '', tipo: ''}
         
         HelpCenterController.getPostagem(req)
-            .then(response => res.render('topico.ejs', {dados : user, response: response}))
+            .then(response => {
+                console.log(response);
+                res.render('topico.ejs', {user : user, response: response})
+            })
             .catch(err => res.render(err))
         
     });

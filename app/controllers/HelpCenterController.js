@@ -1,5 +1,7 @@
 let PostagemDao = require("../infra/dao/PostagemDao");
 let PostagemModel = require("../models/schema_postagem");
+let userDao = require("../infra/dao/UserDao");
+let userModel = require("../models/schema_usuario");
 
 class HelpCenterController {
     constructor() {
@@ -132,18 +134,14 @@ class HelpCenterController {
             *   ou dono da postagem
         */
         if(req.session.user) {
-            if(req.session.user.tipo == "admin")
-                user = "admin"
-            else{
-                user = userDao.checkUserPermission(req.session.user.username);
-                username = req.session.user.username;
-            }
-
+            user = req.session.user.tipo;
+            username = req.session.user.username;
         }
         /*
             *   Busca na base de dados a postagem,
             *   a foto do usuário, e as fotos para os comentários
         */
+        console.log(req.params.id);
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
             /*
                 *   @warning: Frágil
@@ -155,7 +153,7 @@ class HelpCenterController {
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários
                 */
-                for(i=0;i<postagem.comentarios.comentario.length;i++){
+                for(let i=0;i<postagem.comentarios.comentario.length;i++){
                     postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,

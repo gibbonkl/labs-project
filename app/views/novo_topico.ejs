@@ -52,17 +52,17 @@
                         <div class="row">
                             <h5 class="blue-compass mont-serrat">Novo tópico</h5>
                             <div class="divider"></div>                            
-                            <form action="/helpcenter" method="post">
+                            <form action="/helpcenter" method="post" id='topico-form'>
                                 <div class="div-margin col s12">                                    
                                     <div class="padding-titulo input-field col s12">
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
-                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="topico-titulo" type="text" class="active">
+                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="titulo" type="text" class="active">
                                     </div>
                                 </div>
                                 <div class="div-margin col s12">     
                                     <div class="input-field col s12">
                                         <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                        <span class="grey-text text-darken-2 nome-user">Anna Flávia Zimmermann Brandão</span>
+                                        <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                     </div>
                                     <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         Digite aqui o conteúdo do seu post.
