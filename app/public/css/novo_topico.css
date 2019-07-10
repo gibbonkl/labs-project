@@ -30,3 +30,12 @@
 .responder-padding{
     padding: 5 10 5 10;
 }
+.titulo-label{
+    top: -30 !important;
+}
+#topico-titulo{
+    border: 1px solid #d1d1d1 !important;
+}
+.padding-titulo{
+    padding-left: 0 !important;
+}

@@ -4,11 +4,11 @@
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
 </head>
 <body class="bg-blue-compass">
     <header>
@@ -51,16 +51,18 @@
                     <div class="card-panel white">
                         <div class="row">
                             <h5 class="blue-compass mont-serrat">Novo tópico</h5>
-                            <div class="divider"></div> 
-                            <div class="div-margin col s12">
-                                <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                <span class="grey-text text-darken-2 nome-user">Nome do usuário</span>
-                            </div>
+                            <div class="divider"></div>                            
                             <form action="/helpcenter" method="post">
-                                <div class="div-margin col s12">
+                                <div class="div-margin col s12">                                    
+                                    <div class="padding-titulo input-field col s12">
+                                        <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
+                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="topico-titulo" type="text" class="active">
+                                    </div>
+                                </div>
+                                <div class="div-margin col s12">     
                                     <div class="input-field col s12">
-                                        <input id="login_email" type="text" class="active" name="username" required>
-                                        <label for="login_email">Título do post</label>
+                                        <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                        <span class="grey-text text-darken-2 nome-user">Anna Flávia Zimmermann Brandão</span>
                                     </div>
                                     <textarea name="editor1" id="editor1" rows="10" cols="80">
                                         Digite aqui o conteúdo do seu post.
