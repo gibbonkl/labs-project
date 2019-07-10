@@ -5,9 +5,8 @@
     width: 50px;
     border-radius: 50%;
 }
-.user{
+.div-margin{
     margin-top: 3%;
-    margin-bottom: 3%;
 }
 .nome-user{
     font-size: 1.1em;
@@ -15,8 +14,28 @@
     position: relative !important;
     top: -18;
     margin-left: 2%;
+}
+.div-like-botao{
+    position: relative !important;
+    top: 5 !important;
+}
+.like-botao{
+    position: absolute !important;
+    right: 15 !important;
+}
+.number-likes{
+    font-size: 1.1em;
     font-weight: bold;
 }
-.div-botao{
-    margin-top: 3%;
+.responder-padding{
+    padding: 5 10 5 10;
+}
+.titulo-label{
+    top: -30 !important;
+}
+#topico-titulo{
+    border: 1px solid #d1d1d1 !important;
+}
+.padding-titulo{
+    padding-left: 0 !important;
 }

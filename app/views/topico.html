@@ -4,11 +4,11 @@
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
 </head>
 <body class="bg-blue-compass">
     <header>
@@ -34,44 +34,74 @@
                         <!-- Em caso de visitante, mostra link login e botão cadastro-->
                         <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
-                        <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown -->
+                        <!-- Em caso de usuário logado (user ou admin), mostra o menu dropdown
                         <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</li>                                                
                         <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons">face</i></a></li>
+                        -->
                     </ul>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Novo tópico -->
+    <!-- Tópico -->
     <div class="container">
         <div class="section">
             <div class="row">
                 <div class="col s12">
                     <div class="card-panel white">
                         <div class="row">
-                            <h5 class="blue-compass mont-serrat">Novo tópico</h5>
-                            <div class="divider"></div>                            
-                            <form action="/helpcenter" method="post">
-                                <div class="div-margin col s12">                                    
-                                    <div class="padding-titulo input-field col s12">
-                                        <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
-                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="topico-titulo" type="text" class="active">
-                                    </div>
+                            <!-- Título do tópico -->
+                            <h5 class="blue-compass mont-serrat">Como fazer paginação dinâmica utilizando ejs e js?</h5>
+                            <div class="divider"></div> 
+                            <div class="div-margin col s12">
+                                <!-- Corpo do tópico -->
+                                <p class="black-text">
+                                    E ae, galera da DevMedia.
+
+                                    Estou com um problema para transformar uma array em json utilizando o json_encode, quando a um valor te acento ele define o valor como null.
+                                    
+                                    Alguém sabe como resolver esse problema?                                    
+                                </p>
+                            </div>
+                            <!-- Usuário dono do tópico -->
+                            <div class="div-margin col s6">
+                                <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                <span class="grey-text text-darken-2 nome-user">Hugo</span>
+                            </div>
+                            <!-- Número de likes do tópico e opção de curtir -->
+                            <div class="div-margin col s6 div-like-botao">
+                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span class="number-likes">2</span></a>
+                            </div>
+
+                            <div class="div-margin col s12">
+                                <a href="#responder" class="grey-text text-darken-1 grey lighten-3 responder-padding rounded">Responder</a>
+                            </div>
+                            
+                            <div class="div-margin col s12 divider"></div>
+                            <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
+
+                            <!-- Respostas -->
+                            
+                            <div class="div-margin col s12 divider"></div>
+                            <h5 class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
+
+                            <!-- Formulário para responder ao tópico -->
+                            <form id="responder" class="div-margin col s12" action="/helpcenter/topico" method="post">
+                                <div class="input-field col s12">
+                                    <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                    <span class="grey-text text-darken-2 nome-user">Anna Flávia Zimmermann Brandão</span>
                                 </div>
-                                <div class="div-margin col s12">     
-                                    <div class="input-field col s12">
-                                        <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                        <span class="grey-text text-darken-2 nome-user">Anna Flávia Zimmermann Brandão</span>
-                                    </div>
+                                <div>
                                     <textarea name="editor1" id="editor1" rows="10" cols="80">
-                                        Digite aqui o conteúdo do seu post.
+                                        Digite aqui o conteúdo da sua resposta.
                                     </textarea>
                                 </div>        
                                 <div class="div-margin col s12 center">
-                                    <input class="btn bg-blue-compass rounded" type="submit" value="Enviar" />
+                                    <input class="btn bg-blue-compass rounded" type="submit" value="Responder" />
                                 </div>                    
                             </form>
+
                         </div>
                     </div>
                 </div>

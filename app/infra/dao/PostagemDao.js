@@ -61,14 +61,11 @@ class PostagemDao extends TemplateDao{
         *   @returns {Object}
     */
     listarPostagemByUser(username = '', skip = '', limit = '') {
-        if (username) {
-            return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
-                .then((res, err) => res ? res : err)
-                .catch(err => {
-                    return ({ detail: "Impossível buscar para esse usuário", error: err })
-                })
-        }
-        else return ({ detail: "Impossível realizar busca"})
+        return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar para esse usuário", error: err })
+            })
     }
 
     /*

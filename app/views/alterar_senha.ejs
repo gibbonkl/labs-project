@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <title>Game of Bols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Ordem de carregamento de css -->
     <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="../public/css/alterar_senha.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
-    <!-- Ordem de carregamento de css -->
 </head>
 
 <body class="bg-blue-compass">
@@ -67,7 +66,11 @@
                     </div>
                 </div>
                 <div class="row center">
-                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alteraSenha(event)">Confirmar</button>
+                    <button class="modal-close btn waves-effect bg-blue-compass rounded" onclick="alteraSenha(event)" >Confirmar</button>
+                </div>
+                <div class="row">
+                    <ul id="erros">
+                    </ul>
                 </div>
             </div>
         </div>

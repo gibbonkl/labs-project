@@ -34,10 +34,17 @@ class ComentarioDAO extends TemplateDao{
     */
     deleteComentarioById(idComentario, idPostagem){
         PostagemDao = new PostagemDao(PostagemModel);
-        if(idComentario && idPostagem){
-            return this._findOneAndUpdate({_id:idComentario},{$set:{ativo:false}}, {new: true})
-                .then((res,err) => res ? PostagemDao.removeComentario(idPostagem, res._id) : err)
-        }
+        return this._findOneAndUpdate({_id:idComentario},{$set:{ativo:false}}, {new: true})
+            .then((res,err) => {
+                try{
+                    PostagemDao.removeComentario(idPostagem, res._id);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            })
     }
     /*
        *   Faz update no comentario 

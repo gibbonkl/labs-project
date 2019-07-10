@@ -25,29 +25,64 @@ class HelpCenterController {
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'data')
         {
-            return postagemDao.listarPostagemByDate('4/7/2019', (page-1)*batch, batch)
+            var data = req.params.data.replace(/(\d{1})(\d{1})/, "$1/$2/");
+            return postagemDao.listarPostagemByDate(data, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
         else if(op == 'username')
         {
-            return postagemDao.listarPostagemByUser('Goku', (page-1)*batch, batch)
+            let username = req.params.username;
+            return postagemDao.listarPostagemByUser(username, (page-1)*batch, batch)
                 .then(postagem => 
                     postagem.map(function(postagem){
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem}))
                 .catch(console.error)
         }
+    }
+
+    static apagaLikesEComentarios(postagem)
+    {
+        postagem['likes'] = [];
+        postagem['comentarios'] = [];
+    }
+    static insereNumeroDeLikesEComentarios(postagem)
+    {
+        postagem['numeroLikes'] = postagem.likes.length;
+        postagem['numeroComentarios'] = postagem.comentarios.length;
+    }
+
+    static insertPostagem(req) {
+        
+        let postagem = new PostagemModel ({
+            username: req.body.username,
+            corpo: req.body.corpo,
+            titulo: req.body.titulo
+        });
+
+        return new PostagemDao(PostagemModel).insertPostagem(postagem)
+            .then(response => response ? response : null)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
     }
 
     static editarPostagem(req){
@@ -67,6 +102,30 @@ class HelpCenterController {
     static deletarPostagem(id){
 
         return new PostagemDao(PostagemModel).deletePostagemById(id)
+    }
+
+    static getPostagem(req){
+        let user = 'visitante'
+        let username = ''
+        if(req.session.user) {
+            user = req.session.user.tipo;
+            username = req.session.user.username;
+        }
+
+        return new PostagemDao(PostagemModel).getPostagem(req.params.id)
+                .then(postagem => 
+                    {
+                        postagem.map(function(postagem){
+                            HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                            if (user == 'admin' || postagem.username == username)
+                                postagem['permissao'] = true;
+                            else
+                                postagem['permissao'] = false;
+                            return postagem;
+                        })
+                        return postagem[0];
+                    })
+                .catch(console.error)
     }
 
 }
