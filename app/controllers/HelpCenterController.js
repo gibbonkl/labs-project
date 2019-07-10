@@ -197,7 +197,6 @@ class HelpCenterController {
         let filtro = req.body.filtro;
         filtro.ativo = true;
         return new PostagemDao(PostagemModel).getPagesNumber(filtro)
-            //.then(res => console.log(res))
     }
 
 }
