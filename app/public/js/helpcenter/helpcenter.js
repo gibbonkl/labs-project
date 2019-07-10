@@ -9,8 +9,8 @@ function animaLoad() {
 
 function render(dados){
 
-    return `<div id="${dados._id}" class="topico" onclick="enter_topic()">
-        <a href="#" class="collection-item avatar">
+    return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
+        <a class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">
             <span class="black-text topico-nome">${dados.username}</span><br>
             <span class="black-text topico-titulo">${dados.titulo}</span><br>
@@ -42,6 +42,6 @@ function new_topic(){
     window.location.href = "helpcenter/novo";
 }
 
-function enter_topic(){
-    console.log('eae man')
+function enter_topic(id){
+    window.location.href = "helpCenter/topico/" + id
 }

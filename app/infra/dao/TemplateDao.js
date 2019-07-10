@@ -131,8 +131,9 @@ class TemplateDao{
         return this._model.aggregate(queries)
             .exec();
     }
-    _countDocuments(filter){
-        return this._model.countDocuments(filter)
+    _count(filter){
+        return this._model.find(filter)
+            .countDocuments()
             .exec();
     }
 

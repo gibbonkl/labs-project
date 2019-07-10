@@ -217,11 +217,9 @@ class PostagemDao extends TemplateDao{
                 })
     }
     getPagesNumber(filter){
-        return this._countDocuments(filter)
-            .then(number => number? Math.ceil((number/20)) : 0)
-            .catch(err=> {
-                return ({detail: "Impossível retornar o número de páginas", error : err})
-            })
+
+        return this._count(filter)
+            .then(res => res ? Math.ceil(res/20) : 1)
     }
 }
 module.exports = PostagemDao;

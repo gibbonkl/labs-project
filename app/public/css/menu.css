@@ -1,5 +1,5 @@
 html{
-    overflow: auto !important;
+    overflow-y: auto !important;
 }
 .nav-padding-left {
     padding-left: 1%;
