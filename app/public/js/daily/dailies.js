@@ -22,7 +22,7 @@ $(document).ready(function() {
         selectMonths: true,
         selectYears: 15,
         },
-        format: 'dd mmmm, yyyy',
+        format: 'd/m/yyyy',
         container: 'body',
     });
 });
