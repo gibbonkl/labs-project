@@ -157,35 +157,35 @@ class PostagemDao extends TemplateDao{
         *   @param {id} postagem
         *   @returns {postagem} postagem e todos os comentarios associados
     */
-    getPostagem(id=''){
-       return this._aggregate([
-           {'$match': 
-               {_id: mongoose.Types.ObjectId(id)}
-           },
-           {'$lookup': {
-                   'from': 'comentarios', 
-                   'localField': 'comentarios', 
-                   'foreignField': '_id',
-                   'as': 'comentarios.comentario'
-               }
-           },
-           {'$lookup': {
-                   'from': 'usuarios', 
-                   'localField': 'username', 
-                   'foreignField': 'username', 
-                   'as': 'user'
-               }
-           },
-           {'$lookup': {
-                   'from': 'usuarios', 
-                   'localField': 'comentarios.comentario.username', 
-                   'foreignField': 'username', 
-                   'as': 'comentarios.user'
-               }
-           }
-       ])
-       .then(res => res ? res : 'error')
-       .catch(console.error)
+   getPostagem(id=''){
+        return this._aggregate([
+            {'$match': 
+                {_id: mongoose.Types.ObjectId(id)}
+            },
+            {'$lookup': {
+                    'from': 'comentarios', 
+                    'localField': 'comentarios', 
+                    'foreignField': '_id',
+                    'as': 'comentarios.comentario'
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'comentarios.comentario.username', 
+                    'foreignField': 'username', 
+                    'as': 'comentarios.user'
+                }
+            }
+        ])
+        .then(res => res ? res : 'error')
+        .catch(console.error)
     }
     /*
         *   Busca uma postagem na base de dados pelo título
@@ -201,7 +201,6 @@ class PostagemDao extends TemplateDao{
                 return ({detail: "Impossível buscar postagens", error: err})
             })
     }
- 
     /*
        *   Lista todas as postagens ordenando por último update
        *   @param {String} username Usuário das postagens
@@ -216,6 +215,11 @@ class PostagemDao extends TemplateDao{
                 .catch(err => {
                     return ({ detail: "Impossível buscar postagens", error: err })
                 })
+    }
+    getPagesNumber(filter){
+
+        return this._count(filter)
+            .then(res => res ? Math.ceil(res/20) : 1)
     }
 }
 module.exports = PostagemDao;

@@ -116,7 +116,7 @@ class HelpCenterController {
         return new PostagemDao(PostagemModel).deletePostagemById(id)
     }
 
-    /*
+      /*
         *   Retorna uma postagem com a foto do usuário
         *   Junto a um array com os comentários e as fotos de cada usuário,
         *   Um array com usuários que deram like na postagem
@@ -124,7 +124,7 @@ class HelpCenterController {
         *   @param {Request} req Requisição do usuário
         *   @return {object}
     */
-   static getPostagem(req){
+    static getPostagem(req){
         let user = 'visitante'
         let username = ''
         /*
@@ -173,6 +173,10 @@ class HelpCenterController {
                 delete(postagem.user);
                 return postagem;
             })
+            .then(postagem => {
+                HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                return(postagem);
+            })
             .catch(console.error)
     }
 
@@ -186,6 +190,13 @@ class HelpCenterController {
         {
             return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
         }
+    }
+
+    static getPaginas(req)
+    {
+        let filtro = req.body.filtro;
+        filtro.ativo = true;
+        return new PostagemDao(PostagemModel).getPagesNumber(filtro)
     }
 
 }

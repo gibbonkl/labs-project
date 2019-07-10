@@ -25,8 +25,8 @@ class RecuperarSenhaController{
         *   @param {string} email Email de usuário
         *   @returns {bool}
     */
-    recoveryPassword(user="",email=""){
-        return this._userDAO.updateHash(user,email)
+    recoveryPassword(email=""){
+        return this._userDAO.updateHash(email)
             .then(hash=> 
                 hash? Email.send(email,hash) : null
             )
