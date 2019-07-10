@@ -59,8 +59,10 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
  //   corpo: 'comentario do Goten'
 // });
 
-// PostagemDao = new PostagemDao(PostagemModel);
+PostagemDao = new PostagemDao(PostagemModel);
 // PostagemDao.listarPostagemOrderByLastUpdate()
 //      .then(console.log)
 //      .catch(console.error)
-    
+PostagemDao.getPagesNumber()
+    .then(console.log)
+    .catch(console.log)
