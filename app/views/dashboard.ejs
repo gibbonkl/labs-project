@@ -34,7 +34,8 @@
     <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
-                <div class="row white">
+            <div class="card-filter">	 
+                <div class="row">
                     <div class="col m2 s12">
                         <label>Filtrar por:</label>
                         <div class="switch-field margin-top">
@@ -55,28 +56,17 @@
                     <div class="input-field col m2 s12">
                         <button class="btn bg-blue-compass center">filtrar</button>
                     </div>
-                </div>
-                <div id="div_username" class="input-field col m8 s12 hide">
-                    <input placeholder=" " id="filter_username" type="text" class="active">
-                    <label for="filter_username">Nome de usuário</label>
-                </div>
-                <div id="div_data" class="input-field col m8 s12">
-                    <input placeholder=" " type="text" class="datepicker">
-                    <label for="filter_data">Data</label>
-                </div>
-                <div class="input-field col m2 s12 center">
-                    <button class="btn bg-blue-compass">filtrar</button>
-                </div>
-            </div>
-            <div class="progress">
-                <div class="indeterminate"></div>
-            </div>
-            <div id="show_dailies" class="row hide">
-                <ul id="collapsible_daily" class="collapsible expandable">
-                </ul>
-            </div>
+                </div>    
+        </div>
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div id="show_dailies" class="row hide">
+            <ul id="collapsible_daily" class="collapsible expandable">
+            </ul>
         </div>
     </div>
+    
 
     <!--footer class="page-footer bg-blue-compass">
         <div class="container">
