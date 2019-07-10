@@ -16,7 +16,6 @@ module.exports = function(app)
         )
         .post(sessionCheckerRedDash, (req, res, next) => {
             let user = {
-                username: req.body.username,
                 email: req.body.email
             };
             /*
@@ -24,7 +23,7 @@ module.exports = function(app)
                 *   com a nova hash para trocar a senha
                 *   @returns {string}
             */
-           passwordController.recoveryPassword(user.username,user.email)
+           passwordController.recoveryPassword(user.email)
             .then(response => 
                 response? res.send('Email enviado com sucesso.'):res.send('Não foi possível enviar o email.')
             )
@@ -37,6 +36,8 @@ module.exports = function(app)
         .post(sessionCheckerRedDash, (req,res)=>{
             const hash = req.params.hash;
             const newPassword = req.body.newPassword;
+            console.log(hash);
+            console.log(newPassword);
             /*
                 *   Tenta trocar a senha do usuário
                 *   Se for possível, troca a hash do usuário
