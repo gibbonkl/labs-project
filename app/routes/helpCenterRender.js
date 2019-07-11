@@ -30,7 +30,8 @@ module.exports = function(app)
         
         HelpCenterController.getPostagem(req)
             .then(response => {
-                //console.log(response);
+                console.log("RESPONSE HELPCENTER")
+                console.log(response);
                 res.render('topico.ejs', {user : user, response: response})
             })
             .catch(err => res.render(err))
