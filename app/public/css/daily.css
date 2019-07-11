@@ -5,6 +5,7 @@
 .btn-margin-right {
     margin-right: 1%;
 }
+
 .margin-top {
     margin-top: 1%;
 }
@@ -17,8 +18,8 @@
 
 .switch-field {
     display: flex;
-    /* margin-bottom: 36px; */
     overflow: hidden;
+    justify-content: center;
 }
 
 .switch-field input {
@@ -37,7 +38,7 @@
     line-height: 1;
     font-weight: 500;
     text-align: center;
-    padding: 8px 16px;
+    padding: 5px 13px;
     margin-right: -1px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     transition: all 0.1s ease-in-out;
@@ -62,16 +63,4 @@
 
 .switch-field label:last-of-type {
     border-radius: 0 2rem 2rem 0;
-}
-
-.card-filter {
-    -webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
-    transition: box-shadow .25s, -webkit-box-shadow .25s;
-    padding: 10px;
-    margin: .5rem 0 0.5rem 0;
-    border-radius: 2px;
-    background-color: #fff;
-    height:6rem;
 }
