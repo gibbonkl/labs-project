@@ -30,3 +30,31 @@
 .responder-padding{
     padding: 5 10 5 10;
 }
+.titulo-label{
+    top: -30 !important;
+}
+#topico-titulo{
+    border: 1px solid #d1d1d1 !important;
+}
+.padding-titulo{
+    padding-left: 0 !important;
+}
+.div-topico{
+    padding: 2% !important;
+    margin-top: -9 !important;
+}
+.topico-data{
+    font-size: 1rem !important;
+    padding-top: 7 !important;
+}
+.nome-user-resposta{
+    position: relative !important;
+    left: -3 !important;
+    top: 1 !important;
+}
+.resposta{
+    padding: 2% 2% 0 2% !important;
+}
+.corpo-resposta{
+    padding: 2% 2% 0 2% !important;
+}

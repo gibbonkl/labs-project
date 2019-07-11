@@ -29,13 +29,9 @@ class TemplateDao{
         }
         else if(config.get() == 'remoto')
         {
-            mongoose.connect("mongodb://gob-db.documents.azure.com:10255/" + "?ssl=true&replicaSet=globaldb", {
-                auth: {
-                    user: "gob-db",
-                    password: "4NMC2w09k4tC3dzOvTLlMDSvgZan2x44I0oq0EHBcNudnE3ZDUchSncSqfqHjUxM6wcTVpq0r7Gezct2qRckOw=="
-                }
-            })
-                .then(() => console.log('Connection to CosmosDB successful'))
+            mongoose.connect("mongodb+srv://gobuser:gobpass@gob-p1-mfcdq.azure.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
+              
+                .then(() => console.log('Connection to Atlas successful'))
                 .catch((err) => console.error(err));
             this._db = mongoose.connection;
         }

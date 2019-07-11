@@ -16,7 +16,7 @@ class LoginController {
         let userDAO = new UserDAO(Model);
         return userDAO.login(user, password)
             .then((user) => {
-                console.log(user)
+                //console.log(user)
                 if(user) return {"status":"ok", "user":user};
                 else return {"status":"Credenciais inválidas.", "user":""};
             })

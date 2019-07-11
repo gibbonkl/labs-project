@@ -23,6 +23,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 158px;
+    transform-origin: left top;
+    -webkit-transform-origin: left top;
 }
 
 .btn-margin-top {
@@ -32,4 +34,8 @@ body {
 .form-photo:hover {
     opacity: 0.6;
     cursor: pointer;
+}
+
+.input-field {
+    margin-bottom: unset !important;
 }

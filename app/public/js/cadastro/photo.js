@@ -2,13 +2,13 @@
 var $uploadCroppedPhoto
 $uploadCroppedPhoto = $('#main-cropper').croppie({
     viewport: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         type: 'circle'
     },
     boundary: {
-        width: 220,
-        height: 220
+        width: 200,
+        height: 200
     },
     showZoomer: true,
     enableExif: true

@@ -94,7 +94,6 @@ function dateConverter(date = new Date()) {
 }
 
 function listDailies() {
-
     fetch("/daily/data", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -217,4 +216,68 @@ function update(id) {
         .catch(resp => {
             Swal.close();
         })
+}
+
+function showData(){
+    $("#div_username").addClass('hide');
+    $("#div_data").removeClass('hide');
+    $("input[name='filter_username']").val('');
+
+}
+function showUser(){
+    $("#div_username").removeClass('hide');
+    $("#div_data").addClass('hide');
+    $("input[name='filter_data']").val('');
+
+
+}
+function loadByDate(data){
+    fetch("/daily/data", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            filtro: data
+        })
+    })
+    .then(response => response.json())
+    .then(dailies => {
+        if(dailies.length){
+            animaLoad();
+            $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+        }
+        else{
+            M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
+        }
+
+    })
+    .catch(console.log);
+}
+function loadByName(name){
+    fetch("/daily/user", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            filtro:name
+        })
+    })
+    .then(response => response.json())
+    .then(dailies => {
+        if(dailies.length){
+            animaLoad();
+            $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+        }
+        else{
+            M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
+        }
+
+
+    })
+    .catch(console.log);
+}
+function filtrar(){
+    let data = $("input[name='filter_data']").val();
+    let name = $("input[name='filter_username']").val();
+    if(name.length) loadByName(name)
+    else data.length? loadByDate(data) : listDailies()
+
 }
