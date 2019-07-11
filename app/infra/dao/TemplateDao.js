@@ -17,8 +17,7 @@ class TemplateDao{
         this._model = model
         var config = new Class_config();
 
-        if(config.get() == 'local')
-        {
+        if(config.get() == 'local') {
             this._host = process.env.host;
             this._port = process.env.port;
             this._dbName = process.env.dbname;
@@ -27,15 +26,9 @@ class TemplateDao{
             mongoose.connect(this._uri,{useNewUrlParser: true});
             this._db = mongoose.connection;
         }
-        else if(config.get() == 'remoto')
-        {
-            mongoose.connect("mongodb://gob-db.documents.azure.com:10255/" + "?ssl=true&replicaSet=globaldb", {
-                auth: {
-                    user: "gob-db",
-                    password: "4NMC2w09k4tC3dzOvTLlMDSvgZan2x44I0oq0EHBcNudnE3ZDUchSncSqfqHjUxM6wcTVpq0r7Gezct2qRckOw=="
-                }
-            })
-                .then(() => console.log('Connection to CosmosDB successful'))
+        else if(config.get() == 'remoto'){
+            mongoose.connect("mongodb+srv://gobuser:gobpass@gob-p1-mfcdq.azure.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true })
+                .then(() => console.log('Connection to Atlas successful'))
                 .catch((err) => console.error(err));
             this._db = mongoose.connection;
         }
