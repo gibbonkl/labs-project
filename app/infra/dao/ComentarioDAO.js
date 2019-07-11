@@ -10,13 +10,13 @@ class ComentarioDAO extends TemplateDao{
         *   @param {Object} comentario para salvar no banco
         *   @returns {object} comentario
     */
-    insertComentario(idPostagem, comentario){
-        PostagemDao = new PostagemDao(PostagemModel);
+    insertComentario(idPostagem, comentario, user){
+        let postagemDao = new PostagemDao(PostagemModel);
         if(comentario && idPostagem){
-            return this._save(comentario)
+            return this._save({corpo:comentario, username:user})
                 .then((res, err) => {
                     try{
-                        PostagemDao.adicionaComentario(idPostagem, res._id);
+                        postagemDao.adicionaComentario(idPostagem, res._id);
                         return res;
                     }
                     catch

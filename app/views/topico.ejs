@@ -43,7 +43,10 @@
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
-                                <a class="waves-effect waves-light btn bg-blue-compass rounded like-botao" onclick="curtir()"><i class="left material-icons">thumb_up</i><span id="likes-topico" class="number-likes"><%= response.numeroLikes %></span></a>
+                                <a id="like-button" class="waves-effect waves-light btn bg-blue-compass rounded like-botao liked" onclick="like()">
+                                    <i class="left material-icons">thumb_up</i>
+                                    <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
+                                </a>
                             </div>
 
                             <div class="div-margin col s12">
@@ -56,80 +59,22 @@
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
 
                             <!-- Respostas -->
-                            <div class="div-margin col s12 divider"></div>
-                            <div class="col s12 white resposta">
-                                <div class="col s10">
-                                    <span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>Sérgio Silva</span>
-                                </div>
-                                <div class="col s2">
-                                    <span class="grey-text right">10/07/2019</h5>
-                                </div>  
-                                <p class="col s12 black-text corpo-resposta">
-                                    Bom dia....<br>
-
-                                    Não sei se entendi direito, mas vê se isso resolve teu problema...<br>
-                                    
-                                    UPDATE IDENTIFICADOR_ETIQUETA SET CD_UNI_PRO =<br>
-                                    (SELECT UNI_PRO.CD_UNI_PRO <br>
-                                    FROM UNI_PRO<br>
-                                    JOIN PRODUTO ON PRODUTO.CD_PRODUTO = UNI_PRO.CD_PRODUTO<br>
-                                    WHERE PRODUTO.CD_ESPECIE = ''''''''1''''''''<br>
-                                    AND UNI_PRO.CD_UNIDADE = ''''''''UN''''''''<br>
-                                    AND UNI_PRO.SN_ATIVO = ''''''''S''''''''<br>
-                                    AND PRODUTO.CD_PRODUTO = 128)<br>
-                                    WHERE IDENTIFICADOR_ETIQUETA.CD_PRODUTO = 128<br>
-                                    
-                                    Se a sua amarração de tabelas estiver correta acho que isso resolve o problema.<br>
-                                    
-                                    Abraço
-                                </p>
-                            </div>
+                                <div id="list_comments"></div>
                             <!-- Fim Respostas -->
-
-                            <div class="div-margin col s12 divider"></div>
-                            <div class="col s12 white resposta">
-                                <div class="col s10">
-                                    <span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>Sérgio Silva</span>
-                                </div>
-                                <div class="col s2">
-                                    <span class="grey-text right">10/07/2019</h5>
-                                </div>  
-                                <p class="col s12 black-text corpo-resposta">
-                                    Bom dia....<br>
-
-                                    Não sei se entendi direito, mas vê se isso resolve teu problema...<br>
-                                    
-                                    UPDATE IDENTIFICADOR_ETIQUETA SET CD_UNI_PRO =<br>
-                                    (SELECT UNI_PRO.CD_UNI_PRO <br>
-                                    FROM UNI_PRO<br>
-                                    JOIN PRODUTO ON PRODUTO.CD_PRODUTO = UNI_PRO.CD_PRODUTO<br>
-                                    WHERE PRODUTO.CD_ESPECIE = ''''''''1''''''''<br>
-                                    AND UNI_PRO.CD_UNIDADE = ''''''''UN''''''''<br>
-                                    AND UNI_PRO.SN_ATIVO = ''''''''S''''''''<br>
-                                    AND PRODUTO.CD_PRODUTO = 128)<br>
-                                    WHERE IDENTIFICADOR_ETIQUETA.CD_PRODUTO = 128<br>
-                                    
-                                    Se a sua amarração de tabelas estiver correta acho que isso resolve o problema.<br>
-                                    
-                                    Abraço
-                                </p>
-                            </div>
-                            
-                            
-
+            
                         </div>
-                        <div class="row div-topico white">
+                        <div class="row div-topico white <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
                             <!-- <div class="div-margin col s12 divider"></div> -->
-                            <h5 class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
+                            <h5 id="responder"class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 
                             <!-- Formulário para responder ao tópico -->
-                            <form id="responder" class="div-margin col s12" action="/helpCenter/comentario" method="post">
+                            <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
                                 <div class="input-field col s12">
                                     <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                     <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                 </div>
                                 <div>
-                                    <textarea name="corpo-coment" id="corpo-coment" rows="10" cols="80" form="topico-form">
+                                    <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
                                         Digite aqui o conteúdo da sua resposta.
                                     </textarea>
                                 </div>        

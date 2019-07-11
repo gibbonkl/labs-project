@@ -106,7 +106,7 @@ class HelpCenterController {
             corpo: req.body.corpo,
             //titulo: req.body.titulo
         });
-        console.log(postagem);
+        //console.log(postagem);
        
         return new PostagemDao(PostagemModel).editarPostagem(postagem)
                 .then(res=> res ? res : 'erro ao editar postagem')
@@ -141,7 +141,7 @@ class HelpCenterController {
             *   Busca na base de dados a postagem,
             *   a foto do usuário, e as fotos para os comentários
         */
-        console.log(req.params.id);
+        //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
             /*
                 *   @warning: Frágil
@@ -154,7 +154,7 @@ class HelpCenterController {
                     *   a partir do array de usuários
                 */
                 for(let i=0;i<postagem.comentarios.comentario.length;i++){
-                    postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
+                    //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,
                         *   Seta as permissões para verdadeiro

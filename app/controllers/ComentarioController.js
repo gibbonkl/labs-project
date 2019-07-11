@@ -3,10 +3,11 @@ const ComentarioDAO = require('../infra/dao/ComentarioDAO');
 
 class ComentarioController {
 
-    static insertComentario(id_postagem, comentario) {
+    static insertComentario(id_postagem, comentario, user) {
 
         let comentarioDAO = new ComentarioDAO(ComentarioModel);
-        return comentarioDAO.insertComentario(id_postagem, comentario)
+
+        return comentarioDAO.insertComentario(id_postagem, comentario, user)
             .then(response => response ? response : null)
             .catch(error => {
                 console.error(error);
