@@ -5,7 +5,6 @@ class DailyCrud
     constructor()
     {
         this.dailyController = new DailyController();
-        this.listar();
     }
 
     inserir()
@@ -215,6 +214,7 @@ class DailyCrud
         })
         .then(response => response.json())
         .then(dailies => {
+            console.log(dailies);
             this.dailyController.listarDailiesDOM(dailies);
         })
         .catch(console.log)

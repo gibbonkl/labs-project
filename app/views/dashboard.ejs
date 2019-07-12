@@ -24,7 +24,8 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" id="create" onclick=""><i class="left material-icons">add</i>Nova daily</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" id="inserir" onclick="">
+                <i class="left material-icons">add</i>Nova daily</a>
             </div>
         </div>
     </div>
@@ -91,7 +92,7 @@
         
         <script type="module" src="../public/js/daily/DailyController.js"></script>
         <script type="module" src="../public/js/daily/DailyCrud.js"></script>
-        <script type="module" src="../public/js/daily/DailyUser.js"></script>
+        <script type="module" src="../public/js/daily/DailyListener.js"></script>
 
         <!-- script type="text/javascript" src="../public/js/daily/crudDaily.js"></script -->
         <!-- Ordem de carregamento de script -->

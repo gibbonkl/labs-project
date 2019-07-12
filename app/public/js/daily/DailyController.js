@@ -2,7 +2,7 @@ export class DailyController
 {
     constructor()
     {
-        this.datePicker();
+        //this.datePicker();
     }
 
     dailyHTML(daily)
@@ -23,8 +23,8 @@ export class DailyController
                     </div>
                     ${daily.permissao ?
                         `<div class="col s6">
-                            <a class="btn-floating white right" onclick=""><i class="material-icons black-text">delete</i></a>
-                            <a class="btn-floating white right btn-margin-right" onclick=""><i class="material-icons black-text">create</i></a>
+                            <a class="btn-floating white right" onclick="" ><i name="deletarDaily" class="material-icons black-text">delete</i></a>
+                            <a class="btn-floating white right btn-margin-right" onclick="" name="editarDaily"><i class="material-icons black-text">create</i></a>
                         </div>`
                         : ``
                     }
