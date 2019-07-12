@@ -24,7 +24,7 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()"><i class="left material-icons">add</i>Nova daily</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" id="create" onclick=""><i class="left material-icons">add</i>Nova daily</a>
             </div>
         </div>
     </div>
@@ -38,9 +38,9 @@
                 <div class="col m2 s12">
                     <label>Filtrar por:</label>
                     <div class="switch-field margin-top">
-                        <input onclick="showData()" type="radio" id="radio-one" name="switch-one" value="true" checked/>
+                        <input onclick="" type="radio" id="radio-one" name="switch-one" value="true" checked/>
                         <label for="radio-one" class="tooltipped" data-position="left" data-tooltip="Data"><i class="material-icons icons-font">date_range</i></label>
-                        <input onclick="showUser()" type="radio" id="radio-two" name="switch-one" value="false" />
+                        <input onclick="" type="radio" id="radio-two" name="switch-one" value="false" />
                         <label for="radio-two" class="tooltipped" data-position="right" data-tooltip="Nome de usuário"><i class="material-icons icons-font">account_circle</i></label>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <label for="filter_data">Data</label>
                 </div>
                 <div class="input-field col m2 s12 center">
-                    <button class="btn bg-blue-compass" onclick="filtrar()">filtrar</button>
+                    <button class="btn bg-blue-compass" id="filtro" onclick="">filtrar</button>
                 </div>
             </div>
             <div class="progress">
@@ -89,9 +89,9 @@
         <script type="text/javascript" src="../public/js/daily/dailies.js"></script>
         <script type="text/javascript" src="../public/js/menu/menu.js"></script>
         
-        <script type="module" language="JavaScript" src="../public/js/daily/DailyController.js"></script>
-        <script type="module" language="JavaScript" src="../public/js/daily/DailyCrud.js"></script>
-        <script type="module" language="JavaScript" src="../public/js/daily/DailyUser.js"></script>
+        <script type="module" src="../public/js/daily/DailyController.js"></script>
+        <script type="module" src="../public/js/daily/DailyCrud.js"></script>
+        <script type="module" src="../public/js/daily/DailyUser.js"></script>
 
         <!-- script type="text/javascript" src="../public/js/daily/crudDaily.js"></script -->
         <!-- Ordem de carregamento de script -->

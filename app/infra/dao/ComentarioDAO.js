@@ -19,7 +19,7 @@ class ComentarioDAO extends TemplateDao{
                         postagemDao.adicionaComentario(idPostagem, res._id);
                         return res;
                     }
-                    catch
+                    catch(e)
                     {
                         return 'erro';
                     }
@@ -40,7 +40,7 @@ class ComentarioDAO extends TemplateDao{
                     PostagemDao.removeComentario(idPostagem, res._id);
                     return true;
                 }
-                catch
+                catch(e)
                 {
                     return false;
                 }

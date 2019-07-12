@@ -1,14 +1,23 @@
-import { DailyController } from './DailyController';
-import { DailyCrud } from './DailyCrud';
+import { DailyController } from './DailyController.js';
+import { DailyCrud } from './DailyCrud.js';
 
 class DailyUser
 {
     constructor()
     {
-        dailyController = new DailyController();
-        dailyCrud       = new DailyCrud();
+        this.dailyController = new DailyController();
+        this.dailyCrud       = new DailyCrud();
     }
 
+    listeners()
+    {
+        $("#radio-one").click(this.showData());
+        $("#radio-two").click(this.showUser());
+        $("#filtro").click(this.filtrar());
+        $("#create").click(this.inserir());
+        //$("#remove").click(this.deletar( $("#remove").closest('ul').attr('id')) );
+        //$("#editar").click(this.editar( $("#editar").closest('ul').attr('id')) );
+    }
     filtrar()
     {
         let data = $("input[name='filter_data']").val();
@@ -19,13 +28,30 @@ class DailyUser
 
     showData()
     {
-        dailyController.showData();
+
+        this.dailyController.showData();
     }
 
     showUser()
     {
-        dailyController.showUser();
+        this.dailyController.showUser();
+    }
+
+    inserir()
+    {
+        this.dailyCrud.inserir();
+    }
+
+    deletar()
+    {
+        this.dailyCrud.deletar(id);
+    }
+
+    editar()
+    {
+        this.dailyCrud.editar(id);
     }
 }
 
-let start = new DailyUser();
+let daily = new DailyUser();
+daily.listeners();

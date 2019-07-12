@@ -1,4 +1,4 @@
-class DailyController
+export class DailyController
 {
     constructor()
     {
@@ -23,8 +23,8 @@ class DailyController
                     </div>
                     ${daily.permissao ?
                         `<div class="col s6">
-                            <a class="btn-floating white right" onclick="remove('${daily._id}')"><i class="material-icons black-text">delete</i></a>
-                            <a class="btn-floating white right btn-margin-right" onclick="update('${daily._id}')"><i class="material-icons black-text">create</i></a>
+                            <a class="btn-floating white right" onclick=""><i class="material-icons black-text">delete</i></a>
+                            <a class="btn-floating white right btn-margin-right" onclick=""><i class="material-icons black-text">create</i></a>
                         </div>`
                         : ``
                     }
@@ -120,5 +120,3 @@ class DailyController
         });
     }
 }
-
-export {DailyController};

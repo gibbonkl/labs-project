@@ -1,14 +1,14 @@
-import { DailyController } from './DailyController';
+import { DailyController } from './DailyController.js';
 
 class DailyCrud
 {
     constructor()
     {
-        dailyController = new DailyController();
+        this.dailyController = new DailyController();
         this.listar();
     }
 
-    criar()
+    inserir()
     {
         Swal.mixin({
             input: 'text',
@@ -67,7 +67,7 @@ class DailyCrud
         .catch(console.log);
     }
 
-    editar()
+    editar(id)
     {
         var obj = {
             ontem: $("#" + id + " .ontem").html(),
