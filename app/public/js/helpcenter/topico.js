@@ -69,9 +69,7 @@ function like() {
 
 	let likes = parseInt(document.getElementById("number-likes").innerHTML)
 	let like
-	console.log(element.classList.contains('not-liked'))
 	element.classList.contains('not-liked') ? like = 1 : like = -1
-	console.log(like)
 
 	fetch("/helpcenter/like", {
 			method: "POST",
@@ -82,7 +80,6 @@ function like() {
 			if(response) {
 				document.getElementById("number-likes").innerHTML = likes + like;
 				if(like>0){
-					console.log("Not-liked")
 					element.classList.remove('not-liked');
 					element.classList.add('bg-blue-compass');
 				} 
