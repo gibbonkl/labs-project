@@ -48,8 +48,9 @@ function inserir()
                 message('error', response.erro);
             else
             {
+                response["permissao"] = true;
                 adicionarDailyDOM(response);
-                message('succes', 'Daily registrada!')
+                message('success', 'Daily registrada!')
             }
         })
         .catch(message('error', 'Unexpected Error'))
@@ -89,7 +90,7 @@ function deletar(id)
                 else
                 {
                     removerElementDOM(id);
-                    message('succes', 'A Sua Daily Foi Deletada!')
+                    message('success', 'Sua Daily Foi Deletada!')
                 }
             })
             .catch(message('error', 'Unexpected Error'))
@@ -207,8 +208,6 @@ function editar(id)
             .then(response => response.json())
             .then(response => {
                 
-                console.log(response.corpo.ontem);
-                console.log($("#" + id + " .ontem").html());
                 if(response.erro)
                     message('error', response.erro);
                 else
@@ -216,7 +215,7 @@ function editar(id)
                     $("#" + id + " .ontem").html(response.corpo.ontem);
                     $("#" + id + " .hoje").html(response.corpo.hoje);
                     $("#" + id + " .imp").html(response.corpo.impedimento);
-                    message('succes', 'Daily Editada!');
+                    message('success', 'Daily Editada!');
                 }
                 
             })

@@ -28,9 +28,9 @@ function dailyHTML(daily)
 
 function adicionarDailyDOM(daily)
 {
-    this.animaLoad();
+    animaLoad();
     limparTelaSemResultado();
-    $('#collapsible_daily').append(this.dailyHTML(daily));
+    $('#collapsible_daily').append(dailyHTML(daily));
 }
 
 function removerElementDOM(id)
@@ -40,27 +40,26 @@ function removerElementDOM(id)
 
 function mensagemParaPesquisaSemResultado()
 {
-    limparTelaSemResultado();
     $('#collapsible_daily').html('');
     $('#show_dailies').append(`<div id="dirt"> <h4> Sua Busca Não Encontrou Resultados ... </h4></div>`);
 }
 
 function limparTelaSemResultado()
 {
-    this.removerElementDOM('dirt');
+    removerElementDOM('dirt');
 }
 
 function listarDailiesDOM(dailyList)
 {
-    this.animaLoad();
+    limparTelaSemResultado();
     if(dailyList.length > 0)
     {
-        limparTelaSemResultado();
-        $('#collapsible_daily').html(dailyList.map(daily => this.dailyHTML(daily)).join(''));
+        animaLoad();
+        $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }
     else 
     {
-        this.mensagemParaPesquisaSemResultado();
+        mensagemParaPesquisaSemResultado();
     }
 }
 
