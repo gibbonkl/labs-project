@@ -69,20 +69,26 @@ function like() {
 
 	let likes = parseInt(document.getElementById("number-likes").innerHTML)
 	let like
-	
-	element.classList.contains('liked') ? like = 1 : like = -1
-	console.log(like)
+	element.classList.contains('not-liked') ? like = 1 : like = -1
 
 	fetch("/helpcenter/like", {
-		method: "POST",
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({_id:topic_id(), like: like})
+			method: "POST",
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({_id:topic_id(), like: like})
 		})
 		.then(response => {
 			if(response) {
 				document.getElementById("number-likes").innerHTML = likes + like;
-				element.classList.contains('liked') ? element.classList.remove('liked') : element.classList.add('liked')
-				// TROCA A COR DO BOTAO
+				if(like>0){
+					element.classList.remove('not-liked');
+					element.classList.add('bg-blue-compass');
+				} 
+				else{
+					console.log("Liked")
+					element.classList.remove('bg-blue-compass') ;
+					element.classList.add('not-liked');
+
+				}
 			}
 
 		})

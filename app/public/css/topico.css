@@ -17,3 +17,13 @@
     margin-left: 2%;
     font-weight: bold;
 }
+.like{
+    background-color: #707070;
+}
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+  }
