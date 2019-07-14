@@ -15,7 +15,7 @@
     <header>
         <% include ./includes/navbar.ejs %>       
     </header>
-
+    <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>>
     <!-- Tópico -->
     <div class="container">
         <div class="section">
@@ -95,6 +95,7 @@
     <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
     <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
     <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
     <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
