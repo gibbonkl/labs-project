@@ -1,5 +1,7 @@
 const sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
+const userModel = require("../models/schema_usuario");
 
+const userDao = require("../infra/dao/UserDao");
 const Controller = require("../controllers/RecuperarSenhaController");
 const passwordController = new Controller();
 
@@ -23,11 +25,13 @@ module.exports = function(app)
                 *   com a nova hash para trocar a senha
                 *   @returns {string}
             */
-           passwordController.recoveryPassword(user.email)
-            .then(response => 
-                response? res.send('Email enviado com sucesso.'):res.send('Não foi possível enviar o email.')
-            )
-            .catch(error=> res.send('Ocorreu um erro ao enviar o email.'))
+            const dao = new userDao(userModel);
+            dao.checkEmail(user.email)
+                .then(response => response?  passwordController.recoveryPassword(user.email) : false)
+                .then(response => 
+                    response? res.send('Email enviado com sucesso.'):res.send('E-mail inexistente. Verifique se você digitou de forma correta.')
+                )
+                .catch(error=> res.send('Ocorreu um erro ao enviar o email.'))
         });
     app.route('/recuperar_senha/:hash')
         .get(sessionCheckerRedDash, (req,res)=>

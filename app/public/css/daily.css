@@ -64,3 +64,9 @@
 .switch-field label:last-of-type {
     border-radius: 0 2rem 2rem 0;
 }
+
+.btn-margin-filter {
+    vertical-align: middle;
+    margin-top: 1%;
+    height: 40px !important;
+}
