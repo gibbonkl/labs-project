@@ -11,7 +11,7 @@ var schema_postagem = new Schema({
     data: { type: String, required: true, default: date() },
     comentarios: { type: [ObjectId] },
     tags: { type: [String] },
-    interacoes: { type: Number},
+    interacoes: { type: Number, required: true, default: 1 },
     likes: { type: [String]},
     ativo: { type: Boolean, required: true, default: true },
     permissao: {type: Boolean, default: false}
