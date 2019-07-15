@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    listDailies();
+    //listDailies();
     $('.collapsible').collapsible({
         accordion: false
     });

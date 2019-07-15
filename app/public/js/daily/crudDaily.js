@@ -56,13 +56,13 @@ function create() {
             })
         )
         .then(response => response.json())
-        .then(response => {response['permissao'] = true; return response})
+        .then(response => { response['permissao'] = true; return response })
         .then(response => $('#collapsible_daily').append(render(response)))
         .catch(console.log);
 }
 
 function render(dados) {
-    
+
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                     <i class="material-icons">face</i>
@@ -243,9 +243,11 @@ function loadByDate(data){
     .then(dailies => {
         if(dailies.length){
             animaLoad();
+            $("#collapsible_daily").removeClass("hide");
             $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
         }
         else{
+            $("#collapsible_daily").addClass("hide");
             M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
         }
 
@@ -264,9 +266,11 @@ function loadByName(name){
     .then(dailies => {
         if(dailies.length){
             animaLoad();
+            $("#collapsible_daily").removeClass("hide");
             $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
         }
         else{
+            $("#collapsible_daily").addClass("hide");
             M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
         }
 
@@ -277,7 +281,7 @@ function loadByName(name){
 function filtrar(){
     let data = $("input[name='filter_data']").val();
     let name = $("input[name='filter_username']").val();
-    if(name.length) loadByName(name)
+    if (name.length) loadByName(name)
     else data.length? loadByDate(data) : listDailies()
 
 }

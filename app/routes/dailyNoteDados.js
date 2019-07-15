@@ -16,7 +16,7 @@ module.exports = function(app) {
             controller.addDaily(req)
                 .then(retorno => {
                     if(!retorno)
-                        res.send('Não é possível Adicionar Essa Daily');
+                        res.send({erro:'Já Existe Uma Daily Registrada Nesse Dia'});
                     else{
                         res.send(retorno)
                     }
@@ -28,7 +28,7 @@ module.exports = function(app) {
             controller.deleteDaily(req)
                 .then(retorno => {
                     if(!retorno)
-                        res.send('erro');
+                        res.send({erro: 'Não Foi Possível Deletar a Daily No Momento'});
                     else{
                         res.send(retorno)
                     }
@@ -40,7 +40,7 @@ module.exports = function(app) {
             controller.updateDaily(req)
                 .then(retorno => {
                     if(!retorno)
-                        res.send('Não foi possível fazer update');
+                        res.send({erro: 'Não foi possível fazer update'});
                     else{
                         res.send(retorno)
                     }

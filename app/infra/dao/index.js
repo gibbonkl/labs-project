@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 let UserDao = require("./UserDao");
-let UserModel = require("../../models/schema_Usuario");
+let UserModel = require("../../models/schema_usuario");
 let DailyDao = require("./DailyDao");
 let DailyModel = require("../../models/schema_DailyNote");
 let PostagemDao = require("./PostagemDao");
@@ -62,9 +62,9 @@ DailyDao.removeDailyNoteById('5d1a0cbebccab74284faeb7e')
 // });
 
 PostagemDao = new PostagemDao(PostagemModel);
-// PostagemDao.listarPostagemOrderByLastUpdate()
-//      .then(console.log)
-//      .catch(console.error)
-PostagemDao.getPagesNumber()
-    .then(console.log)
-    .catch(console.log)
+PostagemDao.listarPostagemOrderByLastUpdate(5,2)
+     .then(res => console.log(res))
+     .catch(console.error)
+// PostagemDao.getPagesNumber()
+//     .then(console.log)
+//     .catch(console.log)
