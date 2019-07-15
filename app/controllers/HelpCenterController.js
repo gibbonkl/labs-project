@@ -1,7 +1,7 @@
 let PostagemDao = require("../infra/dao/PostagemDao");
 let PostagemModel = require("../models/schema_postagem");
 
-const batchPadrao = 10;
+const batchPadrao = 5;
 class HelpCenterController {
     constructor() {
         throw new Error("Classe estática. Impossível instanciar.");
@@ -93,16 +93,21 @@ class HelpCenterController {
     }
 
     static editarPostagem(req){
+        //console.log(req.body)
         let postagem = new PostagemModel ({
             _id: req.body._id,
-            username: req.body.username,
+            username: req.session.user.username,
             corpo: req.body.corpo,
-            //titulo: req.body.titulo
+            titulo: req.body.titulo
         });
-        //console.log(postagem);
+        console.log(postagem);
        
         return new PostagemDao(PostagemModel).editarPostagem(postagem)
-                .then(res=> res ? res : 'erro ao editar postagem')
+            .then(res=> res ? res : 'erro ao editar postagem')
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
         
     }
 
@@ -112,10 +117,7 @@ class HelpCenterController {
     }
 
       /*
-        *   Retorna uma postagem com a foto do usuário
-        *   Junto a um array com os comentários e as fotos de cada usuário,
-        *   Um array com usuários que deram like na postagem
-        *   E outro array com as tags da postagem
+        *   Retorna uma postagem
         *   @param {Request} req Requisição do usuário
         *   @return {object}
     */

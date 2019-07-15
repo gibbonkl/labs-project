@@ -23,6 +23,10 @@ class PostagemDao extends TemplateDao{
         if(id){
             return this._findOneAndUpdate({_id:id, ativo:true},{$set:{ativo:false}}, {new: true})
                 .then(res => res ? true : false)
+                .catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                })
         }
     }
     /*
@@ -32,8 +36,12 @@ class PostagemDao extends TemplateDao{
     */
     editarPostagem(postagem) {
         if (postagem) {
-            return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo } }, {new: true})
+            return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo, titulo:postagem.titulo } }, {new: true})
                 .then((res,err) => res ? res : err)
+                .catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                })
         }
     }
     /*
@@ -263,6 +271,7 @@ class PostagemDao extends TemplateDao{
                             { "$limit": parseInt(limit)}
                         ],
                         "totalCount": [
+                            { "$match": { $and: [{ativo: true}] }},
                             { "$count": "count" }
                         ]
                       }}
