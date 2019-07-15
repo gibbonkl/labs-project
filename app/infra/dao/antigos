@@ -1,0 +1,46 @@
+listarPostagemOrderByLastUpdate(skip = '', limit = '') {
+        
+    return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+        .then((res, err) => res ? res : err)
+        .catch(err => {
+            return ({ detail: "Impossível buscar postagens", error: err })
+        })
+}
+
+getPagesNumber(filter){
+
+    return this._count(filter)
+        .then(res => res ? Math.ceil(res/20) : 1)
+}
+
+/*
+        *   Lista todas as postagens por Data
+        *   @param {Date} data data das postagens
+        *   @param {Number} skip é o offset
+        *   @param {Number} limit quantidade de postagens desejada
+        *   @returns {Object}
+    */
+    listarPostagemByDate(data = '', skip = '', limit = '') {
+        if (data) {
+            return this._find({ data: data, ativo: true }, { }, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+                .then((res, err) => res ? res : err)
+                .catch(err => {
+                    return ({ detail: "Impossível buscar para essa data", error: err })
+                })
+        }
+        else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
+    }
+    /*
+        *   Lista todas as postagens por Usuário
+        *   @param {String} username Usuário das postagens
+        *   @param {Number} skip é o offset
+        *   @param {Number} limit quantidade de postagens desejada
+        *   @returns {Object}
+    */
+    listarPostagemByUser(username = '', skip = '', limit = '') {
+        return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar para esse usuário", error: err })
+            })
+    }

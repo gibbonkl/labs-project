@@ -9,14 +9,12 @@ class DailyDao extends TemplateDao {
         *   @returns {object}
     */
     insertDailyNote(dailyNote) {
-        if (dailyNote) {
-            return this.validateDailyNote(dailyNote)
-                .then(res => !res ? this._save(dailyNote) : null)
-                .catch(err => {
-                    console.log(err);
-                    return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
-                })
-        }
+        return this.validateDailyNote(dailyNote)
+            .then(res => !res ? this._save(dailyNote) : null)
+            .catch(err => {
+                console.log(err);
+                return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
+            })
     }
     /*
         *   Verifica se a daily note existe no banco com: username e date
@@ -58,7 +56,7 @@ class DailyDao extends TemplateDao {
         return this.validateDailyNoteById(dailyNote)
             .then(res => res ? this._findOneAndUpdate(
                 { usuario: dailyNote.usuario, _id: dailyNote._id, ativo: true },
-                { $set: { corpo: dailyNote.corpo } }) : null)
+                { $set: { corpo: dailyNote.corpo } }, {new: true}) : null)
             .catch(err => {
                 console.log(err);
                 return ({ detail: "Impossível fazer update" })

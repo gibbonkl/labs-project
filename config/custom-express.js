@@ -12,6 +12,9 @@ module.exports = function() {
 
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, './../app/views/'));
+
+    app.use(express.static(path.join(__dirname, './../app/public/js/daily')));
+
     
     console.log(path.join(__dirname + './../app'));
     

@@ -94,6 +94,17 @@ class UserDao extends TemplateDao{
                 return({detail:"Impossível realizar autenticação.",error:err})
         });
     }
+    checkEmail(email = ''){
+        if(email){
+            return this._findOne({email:email})
+                .then(res=> res? true:false)
+                .catch(err=>{
+                    console.error(err);
+                    return(false);
+                })
+        }
+        return(false)
+    }
     /*
         *   Busca por um usuário pelo username e senha
         *   @param {string} username Nome de usuário

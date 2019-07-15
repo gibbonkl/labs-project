@@ -16,12 +16,12 @@
     <header>
         <% include ./includes/navbar.ejs %>
     </header>
-    <!-- Botão novo topico aparece apenas se usuário está logado e é do tipo user -->
+    <!-- Botão novo topico aparece ativo apenas se usuário está logado -->
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="new_topic()"><i class="left material-icons">add</i>Novo tópico</a>
+            <div class="row center">
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded <%if(user.tipo==''){%><%='disabled'%><%}%>" onclick="new_topic()"><i class="left material-icons">add</i>Novo tópico</a>
             </div>
         </div>
     </div>
@@ -48,11 +48,6 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="pagination center">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active grey"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
                     </ul>
                 </div>
             </div>
