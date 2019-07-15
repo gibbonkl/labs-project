@@ -14,16 +14,18 @@ function topic_id(){
 
 function render_comment(comment){
 	return `
-		<div class="div-margin col s12 divider"></div>
-		<div class="col s12 white resposta">
-			<div class="col s10">
-				<span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>${comment.username}</span>
-			</div>
-			<div class="col s2">
-				<span class="grey-text right">${comment.data}</h5>
-			</div>  
-			<div class="col s12 black-text corpo-resposta">
-				${comment.corpo}
+		<div id="${comment._id}">
+			<div class="div-margin col s12 divider"></div>
+			<div class="col s12 white resposta">
+				<div class="col s10">
+					<span class="grey-text text-darken-1 div-margin nome-user-resposta"><i class="left material-icons">person</i>${comment.username}</span>
+				</div>
+				<div class="col s2">
+					<span class="grey-text right">${comment.data}</h5>
+				</div>  
+				<div class="col s12 black-text corpo-resposta">
+					${comment.corpo}
+				</div>
 			</div>
 		</div>`
 }
@@ -34,6 +36,12 @@ function list_comments(id){
             headers: { 'Content-Type': 'application/json' },
 		})
 		.then(response => response.json())
+		.then(response => {
+			if(response.erro)
+				console.log(response.erro)
+			else
+				return response
+		})
 		.then(response => response.comentarios)
         .then(comments => {
             animaLoad()
@@ -69,20 +77,26 @@ function like() {
 
 	let likes = parseInt(document.getElementById("number-likes").innerHTML)
 	let like
-	
-	element.classList.contains('liked') ? like = 1 : like = -1
-	console.log(like)
+	element.classList.contains('not-liked') ? like = 1 : like = -1
 
 	fetch("/helpcenter/like", {
-		method: "POST",
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({_id:topic_id(), like: like})
+			method: "POST",
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({_id:topic_id(), like: like})
 		})
 		.then(response => {
 			if(response) {
 				document.getElementById("number-likes").innerHTML = likes + like;
-				element.classList.contains('liked') ? element.classList.remove('liked') : element.classList.add('liked')
-				// TROCA A COR DO BOTAO
+				if(like>0){
+					element.classList.remove('not-liked');
+					element.classList.add('bg-blue-compass');
+				} 
+				else{
+					console.log("Liked")
+					element.classList.remove('bg-blue-compass') ;
+					element.classList.add('not-liked');
+
+				}
 			}
 
 		})
@@ -96,10 +110,90 @@ function edit_topic(){
 
 function delete_topic(){
 
+	id = topic_id();
+	console.log(id);
+	Swal.fire({
+        title: 'Tem certeza que deseja excluir este topico?',
+        text: "Você não poderá reverter",
+        type: 'warning',
+        reverseButtons: true,
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Deletar',
+        cancelButtonColor: '#b3bac5',
+        cancelButtonText: 'Cancelar',
+        allowOutsideClick: false
+    })
+    .then(resp => {
+        if (resp.value) {
+            fetch("/helpcenter", {
+				method: "DELETE",
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({idpostagem: id})
+			})
+			.then(response => response.json())
+			.then(response => {
+				if(response.erro)
+				message('error', response.erro)
+				else
+				{
+					Swal.fire({
+						position: 'center',
+						type: 'success',
+						title: 'Topico Deletado!',
+						showConfirmButton: true,
+						timer: 1500
+					})
+					.then(res => forum());
+				}
+			})
+            .catch(message('error', 'Unexpected Error'))
+        }
+    })
+    .catch(console.log)
 }
 
-function delete_comment(){
+function forum()
+{
+	window.location.href = "/helpcenter";
+}
 
+function delete_comment(idC)
+{
+	idP = topic_id();
+	Swal.fire({
+        title: 'Tem certeza que deseja excluir este topico?',
+        text: "Você não poderá reverter",
+        type: 'warning',
+        reverseButtons: true,
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Deletar',
+        cancelButtonColor: '#b3bac5',
+        cancelButtonText: 'Cancelar',
+        allowOutsideClick: false
+    })
+    .then(resp => {
+        if (resp.value) {
+            fetch("/helpcenter/comentario", {
+				method: "DELETE",
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({idpostagem: idP, idComentario: idC})
+			})
+			.then(response => response.json())
+			.then(response => {
+				if(response.erro)
+				message('error', response.erro)
+				else
+				{
+					message('success', 'Topico Deletado!')
+					$(`#${idC}`).remove();
+				}
+			})
+            .catch(message('error', 'Unexpected Error'))   
+        }
+    })
+    .catch(console.log)
 }
 
 function edit_comment(){
@@ -139,3 +233,14 @@ var config = {
     ]
 }
 CKEDITOR.replace('corpo_comment', config);
+
+function message(type, title)
+{
+    Swal.fire({
+        position: 'center',
+        type: type,
+        title: title,
+        showConfirmButton: true,
+        timer: 1500
+    })
+}

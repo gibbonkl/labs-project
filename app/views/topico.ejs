@@ -9,12 +9,13 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/material-icons.css">
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" type="text/css" href="../../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/topico.css">
 </head>
 <body class="bg-blue-compass">
     <header>
         <% include ./includes/navbar.ejs %>       
     </header>
-
+    <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>>
     <!-- Tópico -->
     <div class="container">
         <div class="section">
@@ -43,14 +44,14 @@
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
-                                <a id="like-button" class="waves-effect waves-light btn bg-blue-compass rounded like-botao liked" onclick="like()">
+                                <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
                                     <i class="left material-icons">thumb_up</i>
                                     <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
                                 </a>
                             </div>
 
                             <div class="div-margin col s12">
-                                <a href="#responder" class="grey-text text-darken-1 grey lighten-3 responder-padding rounded">Responder</a>
+                                <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
                             </div>                            
                         </div>
 
@@ -94,6 +95,7 @@
     <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
     <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
     <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
     <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>

@@ -24,7 +24,8 @@
         <div class="container">
             <br><br>
             <div class="row center <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" onclick="create()"><i class="left material-icons">add</i>Nova daily</a>
+                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded" id="inserir" onclick="inserir()">
+                <i class="left material-icons">add</i>Nova daily</a>
             </div>
         </div>
     </div>
@@ -56,9 +57,11 @@
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="filtrar()">filtrar</button>
                 </div>
             </div>
+
             <div class="progress">
                 <div class="indeterminate"></div>
             </div>
+
             <div id="show_dailies" class="row hide">
                 <ul id="collapsible_daily" class="collapsible expandable">
                 </ul>
@@ -86,9 +89,14 @@
         <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
         <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
         <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
-        <script type="text/javascript" src="../public/js/daily/dailies.js"></script>
+        <!--script type="text/javascript" src="../public/js/daily/dailies.js"></script-->
         <script type="text/javascript" src="../public/js/menu/menu.js"></script>
-        <script type="text/javascript" src="../public/js/daily/crudDaily.js"></script>
+        
+        <script type="text/javascript" src="../public/js/daily/DailyDOM.js"></script>
+        <script type="text/javascript" src="../public/js/daily/DailyCrud.js"></script>
+        <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>
+        
+        <!--script type="text/javascript" src="../public/js/daily/crudDaily.js"></script-->
         <!-- Ordem de carregamento de script -->
 </body>
 
