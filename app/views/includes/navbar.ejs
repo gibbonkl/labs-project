@@ -22,7 +22,7 @@
                         <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                         <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
                         <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %></li>
-                        <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><i class="material-icons hide-on-med-and-down">face</i></a></li>
+                        <li><a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1"><img class="circle" src="<%= user? `../public/uploads/${user.username}.jpg`    : '../public/img/user.png'%>"></a></li>
                     </ul>
                 </div>
             </nav>
@@ -31,7 +31,7 @@
                             <div class="background">
                                 <img class="responsive-img" src="../public/img/sidebar-background.jpg">
                             </div>
-                      <a href="#user"><img class="circle" src="../public/img/user.png"></a>
+                      <a href="#user"></a>
 
 
                       <!-- caso usuário logado, mostra olá e o username no sidenav  -->

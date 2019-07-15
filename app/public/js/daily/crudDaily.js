@@ -265,6 +265,7 @@ function loadByName(name){
         if(dailies.length){
             animaLoad();
             $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+            console.log(dailies);
         }
         else{
             M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})

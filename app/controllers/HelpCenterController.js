@@ -82,6 +82,7 @@ class HelpCenterController {
     {
         postagem['numeroLikes'] = postagem.likes.length;
         postagem['numeroComentarios'] = postagem.comentarios.length;
+        return postagem;
     }
 
     static insertPostagem(req) {
@@ -144,7 +145,6 @@ class HelpCenterController {
         //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
             /*
-                *   @warning: Frágil
                 *   Retorna a primeira posição do array de postagens
             */
             .then(postagens => postagens[0])
@@ -153,7 +153,7 @@ class HelpCenterController {
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários
                 */
-                for(let i=0;i<postagem.comentarios.comentario.length;i++){
+                for(let i=0;i<postagem.comentarios.length;i++){
                     //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,
@@ -162,19 +162,13 @@ class HelpCenterController {
                     */
                     user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
                 }
-                /*
-                    *   Desfaz o array de comentários para o campo comentário
-                    *   Remove o array de usuário da postagem e adiciona a foto ao objeto
-                */
-                postagem.comentarios = postagem.comentarios.comentario;
-                postagem.imagem = postagem.user[0].imagem;
-                delete(postagem.user);
+                console.log(postagem);
+
                 return postagem;
             })
-            .then(postagem => {
+            .then(postagem => 
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
-                return(postagem);
-            })
+            )
             .catch(console.error)
     }
 

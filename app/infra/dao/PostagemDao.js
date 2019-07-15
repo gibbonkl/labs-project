@@ -166,21 +166,7 @@ class PostagemDao extends TemplateDao{
                     'from': 'comentarios', 
                     'localField': 'comentarios', 
                     'foreignField': '_id',
-                    'as': 'comentarios.comentario'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'username', 
-                    'foreignField': 'username', 
-                    'as': 'user'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'comentarios.comentario.username', 
-                    'foreignField': 'username', 
-                    'as': 'comentarios.user'
+                    'as': 'comentarios'
                 }
             }
         ])
@@ -209,7 +195,6 @@ class PostagemDao extends TemplateDao{
        *   @returns {Object}
    */
     listarPostagemOrderByLastUpdate(skip = '', limit = '') {
-        
             return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
                 .then((res, err) => res ? res : err)
                 .catch(err => {
