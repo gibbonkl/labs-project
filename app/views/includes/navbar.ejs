@@ -8,7 +8,8 @@
             <nav class="white">
                 <div class="nav-wrapper nav-padding-left">
                     <div class="left">
-                        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-small-only"><i class="material-icons black-text">menu</i></a>
+
+                            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-small-only"><i class="material-icons black-text">menu</i></a>
                         <a href="/" class="left blue-compass brand-logo position-relative hide-on-med-and-down"><i class="logo-img"></i>Game of Bols</a>
                         <ul class="left hide-on-med-and-down position-relative left-divider show show-on-med-and-up">
                             <li class="hide"><a href="/" class="blue-compass">Home</a></li>
@@ -45,14 +46,15 @@
                     <!-- <li><a href="#!">Second Link</a></li> -->
                     <li><div class="divider"></div></li>
                     <!-- <li><a class="subheader">Subheader</a></li> -->
-                    <li><a class="waves-effect" href="/dailynote">Daily Notes</a></li>
-                    <li><a class="waves-effect" href="/helpcenter">Help Center</a></li>
-                    <li><a class="waves-effect" href="/alterar_senha">Alterar Senha</a></li>
-                     
+                    <li><a class="waves-effect" href="/dailynote"><i class="material-icons">home</i>Home</a></li>
+                    <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>                   
+                    <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
+                     <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
+                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>alterar senha</a></li>                     
                     <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
-                    <li><a href="/cadastro" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastre-se</a></li>
-                     <!-- caso usuário esteja logado, mostra a opção logout  -->
-                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/logout">Logout</a></li>
+                    <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
+                    <!-- caso usuário esteja logado, mostra a opção logout  -->
+                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
                 </ul>
         </div>
     <script> 
@@ -62,3 +64,4 @@
         });
     </script>
     
+   
