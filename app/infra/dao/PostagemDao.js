@@ -272,6 +272,30 @@ class PostagemDao extends TemplateDao{
                 return ({ detail: "Impossível buscar postagens", error: err })
             })
     }
+    /*
+        *   Encontra postagem e soma uma interação
+        *   @param {id} postagem
+        *   @returns {postagem} postagem
+    */
+    addInteracao(idPostagem) {
+        return this._findOneAndUpdate({ _id: idPostagem }, { $inc: { interacoes: 1 } }, { new: true })
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível adicionar interação", error: err })
+            })
+    }
+    /*
+        *   Pega uma postagem
+        *   @param {id} postagem
+        *   @returns {Number} quantidades de interacoes da postagem
+    */
+    getInteracoes(idPostagem) {
+        return this._findOne({ _id: idPostagem },{ interacoes: 1})
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar interações", error: err })
+            })
+    }
 
 }
 module.exports = PostagemDao;
