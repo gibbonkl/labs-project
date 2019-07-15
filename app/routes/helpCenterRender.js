@@ -31,10 +31,8 @@ module.exports = function(app)
             var user = {username: '', tipo: ''}
         
         HelpCenterController.getPostagem(req)
-            .then(response => 
-                res.render('topico.ejs', {user : user, response: response})
-            )
-            .catch(err => res.render(err))
+            .then(response => response ? res.render('topico.ejs', {user : user, response: response}) : res.send('Página não encontrada'))
+            .catch(err => res.send('Página não encontrada'))
         
     });
 }
