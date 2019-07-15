@@ -1,3 +1,6 @@
+var pagina = 1;
+var tamanho = 1;
+
 $(document).ready(function() {
     list_topics();
 });
@@ -25,15 +28,22 @@ function render(dados){
     </div>`;
 }
 
-function list_topics(pagina=1){
+function list_topics(){
     fetch("/helpCenter/filtroAtividade/"+pagina, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
     })
     .then(response => response.json())
     .then(posts => {
-        animaLoad()
-        $('#list-posts').html(posts.map(post => render(post)).join(''));
+        if(posts.erro)
+            console.log(posts.erro);
+        else
+        {
+            animaLoad()
+            $('#list-posts').html(posts.postagens.map(post => render(post)).join(''));
+            tamanho = posts.count;
+            paginacaoView('list_topics');
+        }
     })
     .catch(console.log);
 }
@@ -44,4 +54,36 @@ function new_topic(){
 
 function enter_topic(id){
     window.location.href = "helpCenter/topico/" + id
+}
+
+function paginacaoView(fList)
+{
+    let espaco = 2;
+    let inicioJanela = pagina - espaco;
+    let fimJanela = parseInt(pagina) + parseInt(espaco);
+
+    if(inicioJanela < 1)
+        inicioJanela = 1;
+    if(fimJanela > tamanho)
+        fimJanela = tamanho;
+
+    $('.pagination').html(`<li class="waves-effect"><a onclick="paginacaoFetch('${1}', '${fList}')" class="white-text"><i class="material-icons">chevron_left</i></a></li>`);
+    for (let index = inicioJanela; index <= fimJanela; index++) 
+    {
+        if(index == pagina)
+            $('.pagination')
+            .append(`<li class="active grey"><a onclick="paginacaoFetch('${index}', '${fList}')">${index}</a></li>`);
+        else
+            $('.pagination')
+            .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${index}', '${fList}')" class="white-text">${index}</a></li>`);
+    }
+    $('.pagination')
+    .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${tamanho}', '${fList}')" class="white-text"><i class="material-icons">chevron_right</i></a></li>`);
+}
+
+function paginacaoFetch(pag, fList)
+{
+    pagina = parseInt(pag);
+    if(fList == 'list_topics')
+        list_topics();
 }

@@ -119,8 +119,6 @@ class DailiesController {
 
         let dailyDAO = new DailyDao(DailyModel);
         return dailyDAO.insertDailyNote(daily)
-            .then(response => response)
-            .catch(console.error)
     }
     /*
         *   Remove uma daily da base dados

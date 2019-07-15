@@ -44,14 +44,23 @@ class PostagemDao extends TemplateDao{
         *   @returns {Object}
     */
     listarPostagemByDate(data = '', skip = '', limit = '') {
-        if (data) {
-            return this._find({ data: data, ativo: true }, { }, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+            return this._aggregate([
+                    { "$facet": {
+                        "totalData": [
+                            { "$match": { $and: [{ativo: true}, {data: data}]}},
+                            { "$skip" : parseInt(skip)},
+                            { "$limit": parseInt(limit)}
+                        ],
+                        "totalCount": [
+                        { "$match": { $and: [{ativo: true}, {data: data}]}},
+                        { "$count": "count" }
+                        ]
+                    }}
+                ])
                 .then((res, err) => res ? res : err)
                 .catch(err => {
                     return ({ detail: "Impossível buscar para essa data", error: err })
                 })
-        }
-        else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
     }
     /*
         *   Lista todas as postagens por Usuário
@@ -61,7 +70,19 @@ class PostagemDao extends TemplateDao{
         *   @returns {Object}
     */
     listarPostagemByUser(username = '', skip = '', limit = '') {
-        return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+        return this._aggregate([
+                { "$facet": {
+                    "totalData": [
+                        { "$match": { $and: [{ativo: true}, {username: username}]}},
+                        { "$skip" : parseInt(skip)},
+                        { "$limit": parseInt(limit)}
+                    ],
+                    "totalCount": [
+                        { "$match": { $and: [{ativo: true}, {username: username}]}},
+                        { "$count": "count" }
+                    ]
+                }}
+            ])
             .then((res, err) => res ? res : err)
             .catch(err => {
                 return ({ detail: "Impossível buscar para esse usuário", error: err })
@@ -158,6 +179,17 @@ class PostagemDao extends TemplateDao{
         *   @returns {postagem} postagem e todos os comentarios associados
     */
    getPostagem(id=''){
+        return this._findOne({ _id: id, ativo: true })
+        .then(res => res ? res : 'error')
+        .catch(console.error)
+    }
+
+    /*
+        *   Pega uma postagem 
+        *   @param {id} postagem
+        *   @returns {postagem} postagem e todos os comentarios associados
+    */
+    getComentarios(id=''){
         return this._aggregate([
             {'$match': 
                 {_id: mongoose.Types.ObjectId(id)}
@@ -195,7 +227,19 @@ class PostagemDao extends TemplateDao{
         *   @returns {Array}
     */
     search(searched,skip = '', limit = ''){
-        return this._find({titulo: {'$regex': searched,'$options':'i'}},{},{skip: skip,limit:limit})
+        return this._aggregate([
+                { "$facet": {
+                    "totalData": [
+                        { "$match": { $and: [{ativo: true} , {titulo: {'$regex': searched,'$options':'i'}}] }},
+                        { "$skip" : parseInt(skip)},
+                        { "$limit": parseInt(limit)}
+                    ],
+                    "totalCount": [
+                        { "$match": { $and: [{ativo: true}, {titulo: {'$regex': searched,'$options':'i'}}]}},
+                        { "$count": "count" }
+                    ]
+                }}
+            ])
             .then((res,err)=> res? res: err)
             .catch(err=>{
                 return ({detail: "Impossível buscar postagens", error: err})
@@ -210,16 +254,24 @@ class PostagemDao extends TemplateDao{
    */
     listarPostagemOrderByLastUpdate(skip = '', limit = '') {
         
-            return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
-                .then((res, err) => res ? res : err)
-                .catch(err => {
-                    return ({ detail: "Impossível buscar postagens", error: err })
-                })
+        return this._aggregate([
+                    { "$facet": {
+                        "totalData": [
+                            { "$match": { $and: [{ativo: true}] }},
+                            { "$sort": {updatedAt: -1}},
+                            { "$skip" : parseInt(skip)},
+                            { "$limit": parseInt(limit)}
+                        ],
+                        "totalCount": [
+                            { "$count": "count" }
+                        ]
+                      }}
+                ])
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar postagens", error: err })
+            })
     }
-    getPagesNumber(filter){
 
-        return this._count(filter)
-            .then(res => res ? Math.ceil(res/20) : 1)
-    }
 }
 module.exports = PostagemDao;

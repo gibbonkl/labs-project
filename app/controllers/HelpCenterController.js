@@ -1,14 +1,31 @@
 let PostagemDao = require("../infra/dao/PostagemDao");
 let PostagemModel = require("../models/schema_postagem");
-let userDao = require("../infra/dao/UserDao");
-let userModel = require("../models/schema_usuario");
 
+const batchPadrao = 10;
 class HelpCenterController {
     constructor() {
         throw new Error("Classe estática. Impossível instanciar.");
     }
 
-    static listarPostagem(req, op, page=1, batch=10){
+    static listHelper(promise, username, user)
+    {
+        return promise
+            .then(postagem => postagem[0])
+            .then(postagem =>{ 
+                    postagem.totalData = postagem.totalData.map(function(postagem)
+                    {
+                        if (user == 'admin' || postagem.username == username)
+                            postagem['permissao'] = true;
+                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
+                        HelpCenterController.apagaLikesEComentarios(postagem);
+                        return postagem
+                    })
+                    return  { postagens: postagem.totalData, count: Math.ceil(postagem.totalCount[0].count/batchPadrao)}
+                })
+            .catch(console.error)
+    }
+
+    static listarPostagem(req, op, page=1, batch=batchPadrao){
         
         let postagemDao = new PostagemDao(PostagemModel);
         
@@ -22,54 +39,30 @@ class HelpCenterController {
 
          // get postagens
         if (op == 'lastUpdate'){
-            return postagemDao.listarPostagemOrderByLastUpdate((page-1)*batch, batch)
-                .then(postagem => 
-                    postagem.map(function(postagem){
-                        if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
-                .catch(console.error)
+            return this.listHelper(
+                postagemDao.listarPostagemOrderByLastUpdate((page-1)*batch, batch),
+                username,user)
         }
         else if(op == 'data')
         {
-            var data = req.params.data.replace(/-/g,'/');
-            return postagemDao.listarPostagemByDate(data, (page-1)*batch, batch)
-                .then(postagem => 
-                    postagem.map(function(postagem){
-                        if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
-                .catch(console.error)
+            let data = req.params.data.replace(/-/g,'/');
+            return this.listHelper(
+                postagemDao.listarPostagemByDate(data, (page-1)*batch, batch),
+                username,user)
         }
         else if(op == 'username')
         {
             let username = req.params.username;
-            return postagemDao.listarPostagemByUser(username, (page-1)*batch, batch)
-                .then(postagem => 
-                    postagem.map(function(postagem){
-                        if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
-                .catch(console.error)
+            return this.listHelper(
+                postagemDao.listarPostagemByUser(username, (page-1)*batch, batch),
+                username,user)   
         }
         else if(op == 'busca')
         {
             let busca = req.params.dados.replace(/-/g,' ');
-            return postagemDao.search(busca, (page-1)*batch, batch)
-                .then(postagem => 
-                    postagem.map(function(postagem){
-                        if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                        HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
-                .catch(console.error)
+            return this.listHelper(
+                postagemDao.search(busca, (page-1)*batch, batch),
+                username,user)  
         }
     }
 
@@ -129,6 +122,25 @@ class HelpCenterController {
     static getPostagem(req){
         let user = 'visitante'
         let username = ''
+        
+        if(req.session.user) {
+            user = req.session.user.tipo;
+            username = req.session.user.username;
+        }
+        
+        return new PostagemDao(PostagemModel).getPostagem(req.params.id)
+            .then(postagem =>{
+                if (user == 'admin' || postagem.username == username)
+                            postagem['permissao'] = true;
+                HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                return postagem;
+            })
+            .catch(console.error)
+    }
+
+    static getComentarios(req){
+        let user = 'visitante'
+        let username = ''
         /*
             *   Verifica se o usuário é admin
             *   ou dono da postagem
@@ -142,7 +154,7 @@ class HelpCenterController {
             *   a foto do usuário, e as fotos para os comentários
         */
         //console.log(req.params.id);
-        return new PostagemDao(PostagemModel).getPostagem(req.params.id)
+        return new PostagemDao(PostagemModel).getComentarios(req.params.id)
             /*
                 *   @warning: Frágil
                 *   Retorna a primeira posição do array de postagens
@@ -189,14 +201,6 @@ class HelpCenterController {
             return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
         }
     }
-
-    static getPaginas(req)
-    {
-        let filtro = req.body.filtro;
-        filtro.ativo = true;
-        return new PostagemDao(PostagemModel).getPagesNumber(filtro)
-    }
-
 }
 
 module.exports = HelpCenterController;

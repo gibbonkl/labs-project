@@ -4,7 +4,7 @@ let controller = require('../controllers/DailiesController');
 module.exports = function(app)
 {
     // route for user's dashboard
-    app.route('/')
+    app.route('/dailynote')
         .get((req, res) => {           
             if (req.session.user && req.cookies.user_sid) {
 
@@ -13,14 +13,14 @@ module.exports = function(app)
                     tipo: req.session.user.tipo
                 }
 
-                res.render('dashboard', user);
+                res.render('dailyNote', user);
             } else {
 
                 user = {
                     username: '',
                     tipo: ''
                 }
-                res.render('dashboard', user);                
+                res.render('dailyNote', user);                
             }      
         })
 }
