@@ -51,10 +51,10 @@ function limparTelaSemResultado()
 
 function listarDailiesDOM(dailyList)
 {
+    animaLoad();
     limparTelaSemResultado();
     if(dailyList.length > 0)
     {
-        animaLoad();
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }
     else 
