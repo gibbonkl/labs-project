@@ -22,7 +22,7 @@ body {
 .g-recaptcha {
     margin-left: auto;
     margin-right: auto;
-    width: 158px;
+    width: 300px;
     transform-origin: left top;
     -webkit-transform-origin: left top;
 }
