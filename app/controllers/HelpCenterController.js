@@ -84,6 +84,7 @@ class HelpCenterController {
     {
         postagem['numeroLikes'] = postagem.likes.length;
         postagem['numeroComentarios'] = postagem.comentarios.length;
+        return postagem;
     }
 
     static insertPostagem(req) {
@@ -146,11 +147,11 @@ class HelpCenterController {
         //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
             /*
-                *   @warning: Frágil
                 *   Retorna a primeira posição do array de postagens
             */
             .then(postagens => postagens[0])
             .then(postagem =>{
+                console.log(postagem);
                 /*
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários
@@ -176,10 +177,9 @@ class HelpCenterController {
                return postagem;
 
             })
-            .then(postagem => {
+            .then(postagem => 
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
-                return(postagem);
-            })
+            )
             .catch(console.error)
     }
 

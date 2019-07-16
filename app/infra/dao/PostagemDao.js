@@ -190,7 +190,7 @@ class PostagemDao extends TemplateDao{
     /*
         *   Busca uma postagem na base de dados pelo título
         *   @param {string} searched A busca a ser realizada no banco
-        *   @param {Number} skip
+        *   @param {Number} skipq
         *   @param {Number} limit Limite de postagens para busca
         *   @returns {Array}
     */
@@ -209,7 +209,6 @@ class PostagemDao extends TemplateDao{
        *   @returns {Object}
    */
     listarPostagemOrderByLastUpdate(skip = '', limit = '') {
-        
             return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
                 .then((res, err) => res ? res : err)
                 .catch(err => {
