@@ -8,7 +8,6 @@ function animaLoad() {
 }
 
 function render(dados){
-
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">

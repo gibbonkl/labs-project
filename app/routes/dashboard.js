@@ -10,7 +10,8 @@ module.exports = function(app)
 
                 user = {
                     username: req.session.user.username,
-                    tipo: req.session.user.tipo
+                    tipo: req.session.user.tipo,
+                    imagem: req.session.user.imagem
                 }
 
                 res.render('dashboard', user);
@@ -18,7 +19,8 @@ module.exports = function(app)
 
                 user = {
                     username: '',
-                    tipo: ''
+                    tipo: '',
+                    imagem: ''
                 }
                 res.render('dashboard', user);                
             }      

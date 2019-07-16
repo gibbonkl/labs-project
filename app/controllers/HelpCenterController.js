@@ -29,7 +29,9 @@ class HelpCenterController {
                             postagem['permissao'] = true;
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
+                        return postagem
+                    })
+                )
                 .catch(console.error)
         }
         else if(op == 'data')
@@ -154,22 +156,25 @@ class HelpCenterController {
                     *   a partir do array de usuários
                 */
                 for(let i=0;i<postagem.comentarios.comentario.length;i++){
-                    //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
+                    postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,
                         *   Seta as permissões para verdadeiro
                         *   Caso contrário, falso
                     */
-                    user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+
+
                 }
                 /*
                     *   Desfaz o array de comentários para o campo comentário
                     *   Remove o array de usuário da postagem e adiciona a foto ao objeto
                 */
-                postagem.comentarios = postagem.comentarios.comentario;
-                postagem.imagem = postagem.user[0].imagem;
-                delete(postagem.user);
-                return postagem;
+               user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+               postagem.comentarios = postagem.comentarios.comentario;
+               postagem.imagem = postagem.user[0].imagem;
+               delete(postagem.user);
+               return postagem;
+
             })
             .then(postagem => {
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
