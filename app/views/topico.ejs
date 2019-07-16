@@ -15,7 +15,7 @@
     <header>
         <% include ./includes/navbar.ejs %>       
     </header>
-    <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>>
+    
     <!-- Tópico -->
     <div class="container">
         <div class="section">
@@ -49,10 +49,15 @@
                                     <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
                                 </a>
                             </div>
-
                             <div class="div-margin col s12">
                                 <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
-                            </div>                            
+                            </div>  
+
+                            <!-- class="<%= user.username == response.username? '':'isDisabled'  %>"-->
+                            <div class="div-margin col s12">
+                                <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>   
+                                <button onclick="edit_topic('<%= response._id %>')">editar topico</button>
+                            </div>
                         </div>
 
                         <div class="row div-topico white">                            

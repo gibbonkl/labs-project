@@ -49,11 +49,11 @@ function list_topics(){
 }
 
 function new_topic(){
-    window.location.href = "helpcenter/novo";
+    window.location.href = "/helpcenter/novo";
 }
 
 function enter_topic(id){
-    window.location.href = "helpCenter/topico/" + id
+    window.location.href = "/helpCenter/topico/" + id
 }
 
 function paginacaoView(fList)

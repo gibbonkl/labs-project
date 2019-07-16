@@ -104,8 +104,8 @@ function like() {
 
 }
 
-function edit_topic(){
-
+function edit_topic(id){
+	window.location.href = "/helpCenter/editar/" + id
 }
 
 function delete_topic(){

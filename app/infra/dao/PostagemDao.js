@@ -23,6 +23,10 @@ class PostagemDao extends TemplateDao{
         if(id){
             return this._findOneAndUpdate({_id:id, ativo:true},{$set:{ativo:false}}, {new: true})
                 .then(res => res ? true : false)
+                .catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                })
         }
     }
     /*
@@ -31,16 +35,17 @@ class PostagemDao extends TemplateDao{
        *   @returns {object} postagem
     */
     editarPostagem(postagem) {
-        if (postagem) {
-            return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo } }, {new: true})
-                .then((res,err) => {
-                try {
+        return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo, titulo:postagem.titulo } }, {new: true})
+            .then((res,err) => {
+                try{
                     this.addInteracao(postagem._id, 1);
+                    return res;
                 }
-                    catch (e)
-                { res ? res : err }
+                catch (e){ 
+                    return err;
+                }
             })
-        }
+            .catch(err => console.error(err.message))
     }
     /*
         *   Lista todas as postagens por Data
@@ -105,11 +110,13 @@ class PostagemDao extends TemplateDao{
         return this._findOneAndUpdate({ _id: id, likes: {$ne: username} }, { $addToSet:{ likes: username} }, {new: true})
             .then((res, err) => 
             {
-                try {
+                try{
                     this.addInteracao(id, 1);
+                    return true;
                 }
-                catch (e) 
-                { res ? true : false }
+                catch (e){ 
+                    return false;
+                }
             })
             .catch(() => false);
     }
@@ -124,10 +131,14 @@ class PostagemDao extends TemplateDao{
         return this._findOneAndUpdate({ _id: id, likes: {$eq: username} }, { $pull:{ likes: username} }, {new: true})
             .then((res, err) => 
             {
-                try {
+                try{
                     this.addInteracao(id, -1);
+                    return true;
                 }
-                catch (e) { res ? true : false }
+                catch (e){ 
+                    return false;
+                }
+                
             })
             .catch(() => false);
     }
@@ -166,10 +177,13 @@ class PostagemDao extends TemplateDao{
     adicionaComentario(idPostagem='', idComentario='') {
         return this._findOneAndUpdate({ _id: idPostagem, comentarios: {$ne: idComentario} }, { $addToSet:{ comentarios: idComentario} }, {new: true})
             .then((res, err) => {
-                try {
+                try{
                     this.addInteracao(idPostagem, 1);
+                    return true;
                 }
-                catch (e) { res ? true : false }
+                catch (e){ 
+                    return false;
+                }
             })
             .catch(() => false);
     }
@@ -287,6 +301,7 @@ class PostagemDao extends TemplateDao{
                             { "$limit": parseInt(limit)}
                         ],
                         "totalCount": [
+                            { "$match": { $and: [{ativo: true}] }},
                             { "$count": "count" }
                         ]
                       }}
