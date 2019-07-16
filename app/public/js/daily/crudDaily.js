@@ -56,16 +56,19 @@ function create() {
             })
         )
         .then(response => response.json())
-        .then(response => {response['permissao'] = true; return response})
+        .then(response => { response['permissao'] = true; return response })
         .then(response => $('#collapsible_daily').append(render(response)))
         .catch(console.log);
 }
 
 function render(dados) {
-    
+    console.log(dados);
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
-                    <i class="material-icons">face</i>
+                ${dados.img  ?
+                     `<img class="circle resize-photo" src="../public/uploads/${dados.img}.png">`
+                    : `<i class="material-icons">face</i>`
+                }
                     <span class="span-margin data" data-name="${dados.usuario}">${dados.usuario}</span>
                     <i class="material-icons">event</i>
                     <span class="span-margin data align-right dia" data-date="${dados.data}">${dados.data}</span>
