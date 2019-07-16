@@ -106,12 +106,14 @@ class HelpCenterController {
         
     }
 
-    static deletarPostagem(id){
+    static deletarPostagem(req){
 
-        return new PostagemDao(PostagemModel).deletePostagemById(id)
+        return new PostagemDao(PostagemModel).deletePostagemById(req.body.idpostagem, req.session.user.username)
+            .then(res => res ? res : false)
+            .catch(err => console.log(err.message))
     }
 
-      /*
+    /*
         *   Retorna uma postagem com a foto do usuário
         *   Junto a um array com os comentários e as fotos de cada usuário,
         *   Um array com usuários que deram like na postagem

@@ -19,11 +19,10 @@ class PostagemDao extends TemplateDao{
         *   @param {String} id da postagem 
         *   @returns {object} postagem
     */
-    deletePostagemById(id){
-        if(id){
-            return this._findOneAndUpdate({_id:id, ativo:true},{$set:{ativo:false}}, {new: true})
+    deletePostagemById(id='', username=''){
+            return this._findOneAndUpdate({_id:id, username: username, ativo:true},{$set:{ativo:false}}, {new: true})
                 .then(res => res ? true : false)
-        }
+                .catch(err => console.log(err.message))
     }
     /*
        *   Faz update na postagem 

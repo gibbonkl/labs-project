@@ -129,7 +129,7 @@ class DailiesController {
     */
     static deleteDaily(req) {
         let dailyDao = new DailyDao(DailyModel);
-        return dailyDao.removeDailyNoteById(req.body.daily_id)
+        return dailyDao.removeDailyNoteById(req.body.daily_id, req.session.user.username)
             .then(response => response)
             .catch(console.error)
     }

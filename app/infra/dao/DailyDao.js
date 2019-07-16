@@ -68,11 +68,10 @@ class DailyDao extends TemplateDao {
         *   @returns {object}
     */
     
-    removeDailyNoteById(id=''){
-        if(id){
-            return this._findOneAndUpdate({_id:id},{$set:{ativo:false}})       
-        }
-        return({detail:"Impossível remover"});
+    removeDailyNoteById(id='', username=''){
+            return this._findOneAndUpdate({_id:id, usuario:username},{$set:{ativo:false}})
+                .then(res => res ? res : false)
+                .catch(err => console.log(err.message))       
     }
    
     /*

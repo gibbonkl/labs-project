@@ -32,9 +32,9 @@ class ComentarioDAO extends TemplateDao{
         *   @param {String} id da Postagem 
         *   @returns {object} comentario
     */
-    deleteComentarioById(idComentario, idPostagem){
+    deleteComentarioById(idComentario, idPostagem, username=''){
         PostagemDao = new PostagemDao(PostagemModel);
-        return this._findOneAndUpdate({_id:idComentario},{$set:{ativo:false}}, {new: true})
+        return this._findOneAndUpdate({_id:idComentario, username:username},{$set:{ativo:false}}, {new: true})
             .then((res,err) => {
                 try{
                     PostagemDao.removeComentario(idPostagem, res._id);
