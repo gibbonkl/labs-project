@@ -13,14 +13,14 @@ module.exports = function(app)
                     tipo: req.session.user.tipo
                 }
 
-                res.render('dailyNote', user);
+                res.render('dailyNote.ejs', user);
             } else {
 
                 user = {
                     username: '',
                     tipo: ''
                 }
-                res.render('dailyNote', user);                
+                res.render('dailyNote.ejs', user);                
             }      
         })
 }

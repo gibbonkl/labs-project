@@ -23,6 +23,10 @@ class PostagemDao extends TemplateDao{
         if(id){
             return this._findOneAndUpdate({_id:id, ativo:true},{$set:{ativo:false}}, {new: true})
                 .then(res => res ? true : false)
+                .catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                })
         }
     }
     /*
@@ -31,10 +35,17 @@ class PostagemDao extends TemplateDao{
        *   @returns {object} postagem
     */
     editarPostagem(postagem) {
-        if (postagem) {
-            return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo } }, {new: true})
-                .then((res,err) => res ? res : err)
-        }
+        return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo, titulo:postagem.titulo } }, {new: true})
+            .then((res,err) => {
+                try{
+                    this.addInteracao(postagem._id, 1);
+                    return res;
+                }
+                catch (e){ 
+                    return err;
+                }
+            })
+            .catch(err => console.error(err.message))
     }
     /*
         *   Lista todas as postagens por Data
@@ -97,7 +108,16 @@ class PostagemDao extends TemplateDao{
     */
     adicionaLike(id='', username='') {
         return this._findOneAndUpdate({ _id: id, likes: {$ne: username} }, { $addToSet:{ likes: username} }, {new: true})
-            .then((res, err) => res ? true : false)
+            .then((res, err) => 
+            {
+                try{
+                    this.addInteracao(id, 1);
+                    return true;
+                }
+                catch (e){ 
+                    return false;
+                }
+            })
             .catch(() => false);
     }
 
@@ -109,7 +129,17 @@ class PostagemDao extends TemplateDao{
     */
     removeLike(id='', username='') {
         return this._findOneAndUpdate({ _id: id, likes: {$eq: username} }, { $pull:{ likes: username} }, {new: true})
-            .then((res, err) => res ? true : false)
+            .then((res, err) => 
+            {
+                try{
+                    this.addInteracao(id, -1);
+                    return true;
+                }
+                catch (e){ 
+                    return false;
+                }
+                
+            })
             .catch(() => false);
     }
 
@@ -146,7 +176,15 @@ class PostagemDao extends TemplateDao{
 
     adicionaComentario(idPostagem='', idComentario='') {
         return this._findOneAndUpdate({ _id: idPostagem, comentarios: {$ne: idComentario} }, { $addToSet:{ comentarios: idComentario} }, {new: true})
-            .then((res, err) => res ? true : false)
+            .then((res, err) => {
+                try{
+                    this.addInteracao(idPostagem, 1);
+                    return true;
+                }
+                catch (e){ 
+                    return false;
+                }
+            })
             .catch(() => false);
     }
 
@@ -263,6 +301,7 @@ class PostagemDao extends TemplateDao{
                             { "$limit": parseInt(limit)}
                         ],
                         "totalCount": [
+                            { "$match": { $and: [{ativo: true}] }},
                             { "$count": "count" }
                         ]
                       }}
@@ -270,6 +309,30 @@ class PostagemDao extends TemplateDao{
             .then((res, err) => res ? res : err)
             .catch(err => {
                 return ({ detail: "Impossível buscar postagens", error: err })
+            })
+    }
+    /*
+        *   Encontra postagem e soma uma interação
+        *   @param {id} postagem
+        *   @returns {postagem} postagem
+    */
+    addInteracao(idPostagem, int) {
+        return this._findOneAndUpdate({ _id: idPostagem }, { $inc: { interacoes: int } }, { new: true })
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível adicionar interação", error: err })
+            })
+    }
+    /*
+        *   Pega uma postagem
+        *   @param {id} postagem
+        *   @returns {Number} quantidades de interacoes da postagem
+    */
+    getInteracoes(idPostagem) {
+        return this._findOne({ _id: idPostagem },{ interacoes: 1})
+            .then((res, err) => res ? res : err)
+            .catch(err => {
+                return ({ detail: "Impossível buscar interações", error: err })
             })
     }
 
