@@ -1,5 +1,6 @@
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 const HelpCenterController = require('../controllers/HelpCenterController');
+let tags = require("../infra/dao/tagList");
 
 module.exports = function(app)
 {
@@ -18,8 +19,8 @@ module.exports = function(app)
     app.get('/helpCenter/novo', sessionCheckerRedLogin, (req,res) => {
         
         var user = {username: req.session.user.username, tipo: req.session.user.tipo}
-            
-        res.render('novo_topico.ejs', {user : user});
+        
+        res.render('novo_topico.ejs', {user : user}, {tags: tags});
     });
 
     // Renderiza Pagina da postagem
@@ -47,7 +48,7 @@ module.exports = function(app)
         
         HelpCenterController.getPostagem(req)
             .then(response => 
-                res.render('edita_topico.ejs', {user : user, response: response})
+                res.render('edita_topico.ejs', { user: user, response: response }, { tags: tags })
             )
             .catch(err => res.render(err))
         
