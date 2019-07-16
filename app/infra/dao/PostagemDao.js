@@ -181,7 +181,7 @@ class PostagemDao extends TemplateDao{
    getPostagem(id=''){
         return this._findOne({ _id: id, ativo: true })
         .then(res => res ? res : false)
-        .catch(console.error)
+        .catch(err => console.log('Erro ao realizar busca: ' + err.message))
     }
 
     /*
