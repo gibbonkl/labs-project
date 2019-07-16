@@ -155,8 +155,8 @@ class HelpCenterController {
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários
                 */
-                for(let i=0;i<postagem.comentarios.comentario.length;i++){
-                    postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
+                //for(let i=0;i<postagem.comentarios.comentario.length;i++){
+                    //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,
                         *   Seta as permissões para verdadeiro
@@ -164,7 +164,7 @@ class HelpCenterController {
                     */
 
 
-                }
+                //}
                 /*
                     *   Desfaz o array de comentários para o campo comentário
                     *   Remove o array de usuário da postagem e adiciona a foto ao objeto
