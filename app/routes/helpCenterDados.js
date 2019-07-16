@@ -46,7 +46,7 @@ module.exports = function(app)
     //editar postagem
     app.post('/helpcenter/editar',sessionCheckerRedLogin, (req, res) => {
         HelpCenterController.editarPostagem(req)
-            .then(postagem => postagem ? res.render('helpcenter') : res.send("Não foi possível editar postagem"))
+            .then(postagem => postagem ? res.redirect('/helpcenter') : res.send("Não foi possível editar postagem"))
             .catch(console.error)
     })
 

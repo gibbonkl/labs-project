@@ -100,10 +100,10 @@ class HelpCenterController {
             corpo: req.body.corpo,
             titulo: req.body.titulo
         });
-        console.log(postagem);
+        //console.log(postagem);
        
         return new PostagemDao(PostagemModel).editarPostagem(postagem)
-            .then(res=> res ? res : 'erro ao editar postagem')
+            .then(res=> res ? res : false)
             .catch(error => {
                 console.error(error);
                 throw new Error(error);
