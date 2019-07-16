@@ -35,7 +35,7 @@ class PostagemDao extends TemplateDao{
        *   @returns {object} postagem
     */
     editarPostagem(postagem) {
-        return this._findOneAndUpdate({ _id: postagem._id, username:postagem.username }, { $set: { corpo: postagem.corpo, titulo:postagem.titulo } }, {new: true})
+        return this._findOneAndUpdate({ _id: postagem._id }, { $set: { corpo: postagem.corpo, titulo:postagem.titulo } }, {new: true})
             .then((res,err) => res ? res : err)
             .catch(error => {
                 console.error(error);
