@@ -43,6 +43,12 @@ module.exports = function(app)
             .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
+    //editar postagem
+    app.post('/helpcenter/editar',sessionCheckerRedLogin, (req, res) => {
+        HelpCenterController.editarPostagem(req)
+            .then(postagem => postagem ? res.redirect('/helpcenter') : res.send("Não foi possível editar postagem"))
+            .catch(console.error)
+    })
 
     app.route('/helpcenter')
         //inserir postagem
@@ -50,14 +56,6 @@ module.exports = function(app)
             console.log(req.body)
             HelpCenterController.insertPostagem(req)
                 .then(postagem => postagem ? res.render('helpcenter') : res.send("Não foi possível inserir postagem"))
-                .catch(console.error)
-        })
-
-        //editar postagem
-        .put(sessionCheckerRedLogin, (req, res) => {
-            
-            HelpCenterController.editarPostagem(req)
-                .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível editar postagem"))
                 .catch(console.error)
         })
         

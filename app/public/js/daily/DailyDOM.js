@@ -41,7 +41,7 @@ function removerElementDOM(id)
 function mensagemParaPesquisaSemResultado()
 {
     $('#collapsible_daily').html('');
-    $('#show_dailies').append(`<div id="dirt"> <h4> Sua Busca Não Encontrou Resultados ... </h4></div>`);
+    $('#show_dailies').append(`<div id="dirt"> <h4>Sua Busca Não Encontrou Resultados ... </h4></div>`);
 }
 
 function limparTelaSemResultado()
@@ -62,6 +62,12 @@ function listarDailiesDOM(dailyList)
         mensagemParaPesquisaSemResultado();
     }
 }
+
+// function procurarDailyPorUserDOM(user, data){
+//     if($('span[data-name="'+ user +'"]').length && $('span[data-date="'+ data +'"]').length){
+//         $('#inserir').attr("disabled", true);
+//     }
+// }
 
 function dateConverter(date = new Date()) 
 {
