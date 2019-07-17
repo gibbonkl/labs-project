@@ -210,14 +210,10 @@ class HelpCenterController {
             _id: req.body._id,
             username: req.session.user.username,
         });
-        console.log(req.session.user.username);
        
         return new PostagemDao(PostagemModel).resolvido(postagem, req.session.user.tipo)
-            .then(res=> res ? res : false)
-            .catch(error => {
-                console.error(error.message);
-                throw new Error(error);
-            })
+            .then(res=> res ? true : false)
+            .catch(error => console.error(error.message))
     }
 }
 
