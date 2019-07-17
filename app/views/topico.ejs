@@ -54,7 +54,7 @@
                             </div>  
 
                             <!-- class="<%= user.username == response.username? '':'isDisabled'  %>"-->
-                            <div class="div-margin col s12">
+                            <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
                                 <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>   
                                 <button onclick="edit_topic('<%= response._id %>')">editar topico</button>
                             </div>
@@ -69,7 +69,7 @@
                             <!-- Fim Respostas -->
             
                         </div>
-                        <div class="row div-topico white <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
+                        <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
                             <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 id="responder"class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 
