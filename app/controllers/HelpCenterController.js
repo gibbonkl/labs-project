@@ -203,6 +203,21 @@ class HelpCenterController {
             return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
         }
     }
+
+    static resolvido(req)
+    {
+        let postagem = new PostagemModel ({
+            _id: req.body._id,
+            username: req.session.user.username,
+        });
+       
+        return new PostagemDao(PostagemModel).resolvido(postagem, req.session.user.username)
+            .then(res=> res ? res : false)
+            .catch(error => {
+                console.error(error.message);
+                throw new Error(error);
+            })
+    }
 }
 
 module.exports = HelpCenterController;

@@ -336,5 +336,17 @@ class PostagemDao extends TemplateDao{
             })
     }
 
+    resolvido(postagem, tipoUser)
+    {
+        if( tipoUser == 'admin')
+            return this._findOneAndUpdate({_id: postagem._id, ativo: true}, {resolvido: true}, { new: true})
+                .then(res => res ? res : false)
+                .catch(err => console.log(err.message))
+        else
+            return this._findOneAndUpdate({_id: postagem._id, ativo: true, username: postagem.username}, {resolvido: true}, { new: true})
+                .then(res => res ? res : false)
+                .catch(err => console.log(err.message))
+    }
+
 }
 module.exports = PostagemDao;
