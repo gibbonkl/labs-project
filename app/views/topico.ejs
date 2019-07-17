@@ -39,7 +39,12 @@
                             </div>
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
-                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <% if(response.imagem){ %>
+    
+                                    <img class="circle" src="../../public/uploads/<%=response.imagem %>"></a>
+                                <% } else { %>
+                                    <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                <% } %>
                                 <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->

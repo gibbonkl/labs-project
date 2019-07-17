@@ -19,10 +19,15 @@ class PostagemDao extends TemplateDao{
         *   @param {String} id da postagem 
         *   @returns {object} postagem
     */
-    deletePostagemById(id='', username=''){
-            return this._findOneAndUpdate({_id:id, username: username, ativo:true},{$set:{ativo:false}}, {new: true})
+    deletePostagemById(req='', tipo=''){
+        if(tipo == 'admin')
+            return this._findOneAndUpdate({_id:req.body.idpostagem, ativo:true},{$set:{ativo:false}}, {new: true})
                 .then(res => res ? true : false)
                 .catch(err => console.log(err.message))
+        else
+            return this._findOneAndUpdate({_id:req.body.idpostagem, username: req.session.user.username, ativo:true},{$set:{ativo:false}}, {new: true})
+            .then(res => res ? true : false)
+            .catch(err => console.log(err.message))
     }
     /*
        *   Faz update na postagem 
@@ -46,9 +51,28 @@ class PostagemDao extends TemplateDao{
             return this._aggregate([
                     { "$facet": {
                         "totalData": [
-                            { "$match": { $and: [{ativo: true}, {data: data}]}},
-                            { "$skip" : parseInt(skip)},
-                            { "$limit": parseInt(limit)}
+                            {"$match":{
+                                    data: data,
+                                    ativo: true
+                                }
+                            },
+                            {'$lookup': {
+                                'from': 'usuarios', 
+                                'localField': 'username', 
+                                'foreignField': 'username', 
+                                'as': 'user'
+                                }
+                            },
+                            {"$sort":{
+                                    updatedAt: -1
+                                }
+                            },
+                            {
+                                "$skip": skip
+                            },
+                            {
+                                "$limit": limit
+                            }
                         ],
                         "totalCount": [
                         { "$match": { $and: [{ativo: true}, {data: data}]}},
@@ -72,9 +96,28 @@ class PostagemDao extends TemplateDao{
         return this._aggregate([
                 { "$facet": {
                     "totalData": [
-                        { "$match": { $and: [{ativo: true}, {username: username}]}},
-                        { "$skip" : parseInt(skip)},
-                        { "$limit": parseInt(limit)}
+                        {"$match": {
+                                username:{"$regex": username, "$options":'i'},   
+                                ativo: true
+                            }
+                        },
+                        {'$lookup': {
+                            'from': 'usuarios', 
+                            'localField': 'username', 
+                            'foreignField': 'username', 
+                            'as': 'user'
+                            }
+                        },
+                        {"$sort":{
+                                updatedAt: -1
+                            }
+                        },
+                        {
+                            "$skip": skip
+                        },
+                        {
+                            "$limit": limit
+                        }
                     ],
                     "totalCount": [
                         { "$match": { $and: [{ativo: true}, {username: username}]}},
@@ -221,7 +264,7 @@ class PostagemDao extends TemplateDao{
     /*
         *   Busca uma postagem na base de dados pelo título
         *   @param {string} searched A busca a ser realizada no banco
-        *   @param {Number} skip
+        *   @param {Number} skipq
         *   @param {Number} limit Limite de postagens para busca
         *   @returns {Array}
     */
@@ -229,9 +272,25 @@ class PostagemDao extends TemplateDao{
         return this._aggregate([
                 { "$facet": {
                     "totalData": [
-                        { "$match": { $and: [{ativo: true} , {titulo: {'$regex': searched,'$options':'i'}}] }},
-                        { "$skip" : parseInt(skip)},
-                        { "$limit": parseInt(limit)}
+                        {
+                                    "$match": { $and: [ 
+                                        {titulo:{"$regex": searched, "$options":'i'}}, 
+                                        {ativo: true} ]
+                                    },
+                                },
+                                {'$lookup': {
+                                    'from': 'usuarios', 
+                                    'localField': 'username', 
+                                    'foreignField': 'username', 
+                                    'as': 'user'
+                                    }
+                                },
+                                {
+                                    "$skip": skip
+                                },
+                                {
+                                    "$limit": limit
+                                }
                     ],
                     "totalCount": [
                         { "$match": { $and: [{ativo: true}, {titulo: {'$regex': searched,'$options':'i'}}]}},
@@ -239,10 +298,6 @@ class PostagemDao extends TemplateDao{
                     ]
                 }}
             ])
-            .then((res,err)=> res? res: err)
-            .catch(err=>{
-                return ({detail: "Impossível buscar postagens", error: err})
-            })
     }
     /*
        *   Lista todas as postagens ordenando por último update
@@ -256,12 +311,26 @@ class PostagemDao extends TemplateDao{
         return this._aggregate([
                     { "$facet": {
                         "totalData": [
-                            { "$match": { $and: [{ativo: true}] }},
-                            { "$sort": {updatedAt: -1}},
-                            { "$skip" : parseInt(skip)},
-                            { "$limit": parseInt(limit)}
+                            {'$lookup': {
+                                'from': 'usuarios', 
+                                'localField': 'username', 
+                                'foreignField': 'username', 
+                                'as': 'user'
+                                }
+                            },
+                            {"$sort":{
+                                    updatedAt: -1
+                                }
+                            },
+                            {
+                                "$skip": skip
+                            },
+                            {
+                                "$limit": limit
+                            }
                         ],
                         "totalCount": [
+                            { "$match": { $and: [{ativo: true}] }},
                             { "$count": "count" }
                         ]
                       }}

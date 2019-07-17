@@ -33,7 +33,11 @@
                                 </div>
                                 <div class="div-margin col s12">     
                                     <div class="input-field col s12">
-                                        <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                            <% if(user.imagem){ %>
+                                                <img class="circle resize-photo" src="../public/uploads/<%= user.imagem %>"></a>
+                                            <% } else { %>
+                                                <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                                            <% } %>
                                         <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                     </div>
                                     <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">

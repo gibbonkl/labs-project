@@ -29,10 +29,8 @@ class ComentarioController {
 
     static deletarComentario(req){
 
-        let idComentario = req.body.idComentario;
-        let idPostagem = req.body.idPostagem;
-        let username = req.session.user.username;
-        return new ComentarioDAO(ComentarioModel).deleteComentarioById(idComentario, idPostagem, username)
+        let tipo = req.session.user.tipo;
+        return new ComentarioDAO(ComentarioModel).deleteComentarioById(req, tipo)
                 .then(res => res ? true: false)
     }
 

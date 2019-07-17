@@ -20,7 +20,10 @@ class HelpCenterController {
                         HelpCenterController.apagaLikesEComentarios(postagem);
                         return postagem
                     })
-                    return  { postagens: postagem.totalData, count: Math.ceil(postagem.totalCount[0].count/batchPadrao)}
+                    if(postagem.totalCount.length > 0)
+                        return  { postagens: postagem.totalData, count: Math.ceil(postagem.totalCount[0].count/batchPadrao)}
+                    else
+                        return  { postagens: postagem.totalData, count:1}
                 })
             .catch(console.error)
     }
@@ -32,13 +35,14 @@ class HelpCenterController {
         //verificar user
         let user = 'visitante'
         let username = ''
-        if(req.session.user) {
-            user = req.session.user.tipo;
-            username = req.session.user.username;
-        }
+        // if(req.session.user) {
+        //     user = req.session.user.tipo;
+        //     username = req.session.user.username;
+        // }
 
-         // get postagens
-        if (op == 'lastUpdate'){
+        // get postagens
+        if (op == 'lastUpdate')
+        {
             return this.listHelper(
                 postagemDao.listarPostagemOrderByLastUpdate((page-1)*batch, batch),
                 username,user)
@@ -75,6 +79,7 @@ class HelpCenterController {
     {
         postagem['numeroLikes'] = postagem.likes.length;
         postagem['numeroComentarios'] = postagem.comentarios.length;
+        return postagem;
     }
 
     static insertPostagem(req) {
@@ -108,7 +113,7 @@ class HelpCenterController {
 
     static deletarPostagem(req){
 
-        return new PostagemDao(PostagemModel).deletePostagemById(req.body.idpostagem, req.session.user.username)
+        return new PostagemDao(PostagemModel).deletePostagemById(req, req.session.user.tipo)
             .then(res => res ? res : false)
             .catch(err => console.log(err.message))
     }
@@ -158,7 +163,6 @@ class HelpCenterController {
         //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getComentarios(req.params.id)
             /*
-                *   @warning: Frágil
                 *   Retorna a primeira posição do array de postagens
             */
             .then(postagens => postagens[0])
@@ -167,28 +171,30 @@ class HelpCenterController {
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários
                 */
-                for(let i=0;i<postagem.comentarios.comentario.length;i++){
+                //for(let i=0;i<postagem.comentarios.comentario.length;i++){
                     //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
                     /*
                         *   Se o usuário for admin ou dono da postagem,
                         *   Seta as permissões para verdadeiro
                         *   Caso contrário, falso
                     */
-                    user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
-                }
+
+
+                //}
                 /*
                     *   Desfaz o array de comentários para o campo comentário
                     *   Remove o array de usuário da postagem e adiciona a foto ao objeto
                 */
-                postagem.comentarios = postagem.comentarios.comentario;
-                postagem.imagem = postagem.user[0].imagem;
-                delete(postagem.user);
-                return postagem;
+               user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+               postagem.comentarios = postagem.comentarios.comentario;
+               postagem.imagem = postagem.user[0].imagem;
+               delete(postagem.user);
+               return postagem;
+
             })
-            .then(postagem => {
+            .then(postagem => 
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
-                return(postagem);
-            })
+            )
             .catch(console.error)
     }
 
