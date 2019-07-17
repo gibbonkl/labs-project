@@ -81,7 +81,8 @@ class HelpCenterController {
         let postagem = new PostagemModel ({
             username: req.session.user.username,
             corpo: req.body.corpo,
-            titulo: req.body.titulo
+            titulo: req.body.titulo,
+            tags: req.body.tags
         });
 
         return new PostagemDao(PostagemModel).insertPostagem(postagem)
