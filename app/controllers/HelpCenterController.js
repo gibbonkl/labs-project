@@ -211,12 +211,9 @@ class HelpCenterController {
             username: req.session.user.username,
         });
        
-        return new PostagemDao(PostagemModel).resolvido(postagem, req.session.user.username)
-            .then(res=> res ? res : false)
-            .catch(error => {
-                console.error(error.message);
-                throw new Error(error);
-            })
+        return new PostagemDao(PostagemModel).resolvido(postagem, req.session.user.tipo)
+            .then(res=> res ? true : false)
+            .catch(error => console.error(error.message))
     }
 }
 
