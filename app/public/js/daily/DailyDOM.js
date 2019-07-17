@@ -40,8 +40,10 @@ function removerElementDOM(id)
 
 function mensagemParaPesquisaSemResultado()
 {
-    $('#collapsible_daily').html('');
-    $('#show_dailies').append(`<div id="dirt"> <h4>Sua Busca Não Encontrou Resultados ... </h4></div>`);
+    //$('#collapsible_daily').html('');
+    //$('#show_dailies').append(`<div id="dirt"> <h4>Sua Busca Não Encontrou Resultados ... </h4></div>`);
+    $("#collapsible_daily").addClass("hide");
+    M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
 }
 
 function limparTelaSemResultado()
@@ -55,6 +57,7 @@ function listarDailiesDOM(dailyList)
     limparTelaSemResultado();
     if(dailyList.length > 0)
     {
+        $("#collapsible_daily").removeClass("hide");
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }
     else 
