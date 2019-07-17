@@ -45,7 +45,31 @@ class PostagemDao extends TemplateDao{
     */
     listarPostagemByDate(data = '', skip = '', limit = '') {
         if (data) {
-            return this._find({ data: data, ativo: true }, { }, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+            return this._aggregate([
+                {
+                    "$match":{
+                        data: data,
+                        ativo: true
+                    }
+                },
+                {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                    }
+                },
+                {"$sort":{
+                        updatedAt: -1
+                    }
+                },
+                {
+                    "$skip": skip
+                },
+                {
+                    "$limit": limit
+                }
+            ])
                 .then((res, err) => res ? res : err)
                 .catch(err => {
                     return ({ detail: "Impossível buscar para essa data", error: err })
@@ -61,7 +85,31 @@ class PostagemDao extends TemplateDao{
         *   @returns {Object}
     */
     listarPostagemByUser(username = '', skip = '', limit = '') {
-        return this._find({ username: username, ativo: true }, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
+        return this._aggregate([
+                {
+                    "$match":{
+                        username: username,
+                        ativo: true
+                    }
+                },
+                {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                    }
+                },
+                {"$sort":{
+                        updatedAt: -1
+                    }
+                },
+                {
+                    "$skip": skip
+                },
+                {
+                    "$limit": limit
+                }
+            ])
             .then((res, err) => res ? res : err)
             .catch(err => {
                 return ({ detail: "Impossível buscar para esse usuário", error: err })
@@ -195,6 +243,29 @@ class PostagemDao extends TemplateDao{
         *   @returns {Array}
     */
     search(searched,skip = '', limit = ''){
+        return this._aggregate([
+            {
+                "$match": {
+                    titulo:{
+                        "$regex": searched,
+                        "$options":i
+                    }
+                },
+            },
+            {'$lookup': {
+                'from': 'usuarios', 
+                'localField': 'username', 
+                'foreignField': 'username', 
+                'as': 'user'
+                }
+            },
+            {
+                "$skip": skip
+            },
+            {
+                "$limit": limit
+            }
+        ])
         return this._find({titulo: {'$regex': searched,'$options':'i'}},{},{skip: skip,limit:limit})
             .then((res,err)=> res? res: err)
             .catch(err=>{
@@ -209,6 +280,25 @@ class PostagemDao extends TemplateDao{
        *   @returns {Object}
    */
     listarPostagemOrderByLastUpdate(skip = '', limit = '') {
+        return this._aggregate([
+            {'$lookup': {
+                'from': 'usuarios', 
+                'localField': 'username', 
+                'foreignField': 'username', 
+                'as': 'user'
+                }
+            },
+            {"$sort":{
+                    updatedAt: -1
+                }
+            },
+            {
+                "$skip": skip
+            },
+            {
+                "$limit": limit
+            }
+        ])
             return this._find({}, {}, { sort: { updatedAt: -1 }, skip: skip, limit: limit })
                 .then((res, err) => res ? res : err)
                 .catch(err => {

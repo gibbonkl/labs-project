@@ -36,8 +36,8 @@ class Image{
     */
     static save(file,username){
         this._originalName = file.originalname;
-        this._format = this.type(this._originalName);
-        this._filename = `${username}.${this._format}`;
+        this._format = this.type(this._originalName).toLowerCase();
+        this._filename = `${uuidv4()}.${this._format}`;
         this._targetPath = path.join(__dirname, `../public/uploads/${this._filename}`);
         this._tempPath = file.path;
         if (path.extname(this._originalName).toLowerCase() === `.${this._format}`) {

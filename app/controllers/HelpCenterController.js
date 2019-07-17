@@ -29,7 +29,9 @@ class HelpCenterController {
                             postagem['permissao'] = true;
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem
+                        postagem.imagem = postagem.user[0].imagem;
+                        delete(postagem.user);
+                        return postagem;
                     })
                 )
                 .catch(console.error)
@@ -44,7 +46,11 @@ class HelpCenterController {
                             postagem['permissao'] = true;
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
+                        postagem.imagem = postagem.user[0].imagem;
+                        delete(postagem.user);
+                        return postagem;
+                        })
+                    )
                 .catch(console.error)
         }
         else if(op == 'username')
@@ -57,7 +63,12 @@ class HelpCenterController {
                             postagem['permissao'] = true;
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
+                        postagem.imagem = postagem.user[0].imagem;
+                        delete(postagem.user);
+                        console.log(postagem);
+                        return postagem;
+                    })
+                )
                 .catch(console.error)
         }
         else if(op == 'busca')
@@ -70,7 +81,11 @@ class HelpCenterController {
                             postagem['permissao'] = true;
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
-                        return postagem}))
+                        postagem.imagem = postagem.user[0].imagem;
+                        delete(postagem.user);
+                        return postagem
+                    })
+                )
                 .catch(console.error)
         }
     }
@@ -151,7 +166,6 @@ class HelpCenterController {
             */
             .then(postagens => postagens[0])
             .then(postagem =>{
-                console.log(postagem);
                 /*
                     *   Adiciona o campo imagem ao comentário
                     *   a partir do array de usuários

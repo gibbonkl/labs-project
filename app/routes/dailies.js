@@ -18,6 +18,8 @@ module.exports = function(app) {
                     if(!retorno)
                         res.send('Não é possível Adicionar Essa Daily');
                     else{
+                        retorno = retorno.toObject();
+                        retorno.imagem = req.session.user.imagem;
                         res.send(retorno)
                     }
             })
