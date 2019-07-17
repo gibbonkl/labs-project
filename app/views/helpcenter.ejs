@@ -25,9 +25,36 @@
             </div>
         </div>
     </div>
-
     <!-- Buscar nos tópicos -->
-
+    <div class="container">
+        <div class="row white">
+            <div class="input-field col s12 m2">
+                <select id="search_select" onchange="searchOp()">
+                      <option value="date" selected>Data</option>
+                      <option value="username">Nome de usuário</option>
+                      <option value="title">Título</option>
+                      <option value="tag">Tag</option>                      
+                    </select>
+                <label>Buscar por:</label>
+            </div>
+            <div id="div_date" class="input-field input-search col l8 m7 s12">
+                <input placeholder=" " name="search_date" type="text" class="datepicker">
+                <label for="search_date">Data</label>
+            </div>
+            <div id="div_username" class="input-field input-search col l8 m7 s12 hide">
+                <input placeholder=" " name="search_username" type="text" class="active">
+                <label for="search_username">Nome de usuário</label>
+            </div>
+            <div id="div_title" class="input-field input-search col l8 m7 s12 hide">
+                <input placeholder=" " name="search_title" type="text" class="active">
+                <label for="search_title">Título</label>
+            </div>
+            <div id="div_tag" class="chips chips-autocomplete input-search col l8 m7 s12 hide"></div>
+            <div class="input-field col l1 m2 s12 center">
+                <button class="btn bg-blue-compass btn-margin-filter">buscar</button>
+            </div>
+        </div>
+    </div>
     <!-- Ordenar tópicos -->
 
     <!-- Tabela de tópicos -->
@@ -61,7 +88,9 @@
     <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
     <script type="text/javascript" src="../public/js/login/inicio.js"></script>
     <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="helper/custom_materialize.js"></script>
     <script type="text/javascript" src="../public/js/helpcenter/helpcenter.js"></script>
+
     <!-- Ordem de carregamento de script -->
 
 
