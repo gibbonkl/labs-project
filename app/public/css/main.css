@@ -138,3 +138,6 @@ input[type=password]:not(.browser-default),
 textarea.materialize-textarea {
     padding-left: 10px;
 }
+select {
+	display: block !important;
+}
