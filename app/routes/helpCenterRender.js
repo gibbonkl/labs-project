@@ -31,8 +31,23 @@ module.exports = function(app)
             var user = {username: '', tipo: '',imagem: ''}
         
         HelpCenterController.getPostagem(req)
-            .then(response => res.render('topico.ejs', {user : user, response: response}))
-            .catch(err => res.send(err))
+            .then(response => response ? res.render('topico.ejs', {user : user, response: response}) : res.send('Página não encontrada'))
+            .catch(err => res.send('Página não encontrada'))
+        
+    });
+
+    app.get('/helpCenter/editar/:id', sessionCheckerRedLogin, (req,res) => {
+        
+        if (req.session.user && req.cookies.user_sid) 
+            var user = {username: req.session.user.username, tipo: req.session.user.tipo}
+        else
+            var user = {username: '', tipo: ''}
+        
+        HelpCenterController.getPostagem(req)
+            .then(response => 
+                res.render('edita_topico.ejs', {user : user, response: response})
+            )
+            .catch(err => res.render(err))
         
     });
 }

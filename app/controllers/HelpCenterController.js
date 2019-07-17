@@ -1,7 +1,7 @@
 let PostagemDao = require("../infra/dao/PostagemDao");
 let PostagemModel = require("../models/schema_postagem");
 
-const batchPadrao = 10;
+const batchPadrao = 5;
 class HelpCenterController {
     constructor() {
         throw new Error("Classe estática. Impossível instanciar.");
@@ -12,12 +12,18 @@ class HelpCenterController {
         return promise
             .then(postagem => postagem[0])
             .then(postagem =>{ 
+                
                     postagem.totalData = postagem.totalData.map(function(postagem)
                     {
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
+
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
                         HelpCenterController.apagaLikesEComentarios(postagem);
+                        
+                        postagem.imagem = postagem.user[0].imagem;
+                        delete(postagem.user);
+                        
                         return postagem
                     })
                     if(postagem.totalCount.length > 0)
@@ -34,7 +40,7 @@ class HelpCenterController {
         
         //verificar user
         let user = 'visitante'
-        let username = ''
+        // let username = ''
         // if(req.session.user) {
         //     user = req.session.user.tipo;
         //     username = req.session.user.username;
@@ -56,7 +62,8 @@ class HelpCenterController {
         }
         else if(op == 'username')
         {
-            let username = req.params.username;
+            // let username = req.params.username;
+            let username = 'vegeta';
             return this.listHelper(
                 postagemDao.listarPostagemByUser(username, (page-1)*batch, batch),
                 username,user)   
@@ -98,16 +105,21 @@ class HelpCenterController {
     }
 
     static editarPostagem(req){
+        //console.log(req.body)
         let postagem = new PostagemModel ({
             _id: req.body._id,
-            username: req.body.username,
+            username: req.session.user.username,
             corpo: req.body.corpo,
-            //titulo: req.body.titulo
+            titulo: req.body.titulo
         });
         //console.log(postagem);
        
         return new PostagemDao(PostagemModel).editarPostagem(postagem)
-                .then(res=> res ? res : 'erro ao editar postagem')
+            .then(res=> res ? res : false)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
         
     }
 
@@ -119,10 +131,7 @@ class HelpCenterController {
     }
 
     /*
-        *   Retorna uma postagem com a foto do usuário
-        *   Junto a um array com os comentários e as fotos de cada usuário,
-        *   Um array com usuários que deram like na postagem
-        *   E outro array com as tags da postagem
+        *   Retorna uma postagem
         *   @param {Request} req Requisição do usuário
         *   @return {object}
     */
@@ -136,11 +145,16 @@ class HelpCenterController {
         }
         
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
-            .then(postagem =>{
-                if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
-                return postagem;
+            .then(postagem => {
+                if(postagem)
+                {
+                    if (user == 'admin' || postagem.username == username)
+                                postagem['permissao'] = true;
+                    HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                    return postagem;
+                }
+                else
+                    return false;
             })
             .catch(console.error)
     }

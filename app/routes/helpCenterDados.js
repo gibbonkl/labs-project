@@ -4,14 +4,6 @@ let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function(app)
 {
-    // Envia uma única Postagem
-    app.get('/helpcenter/post/:id', (req,res) => {
-    
-        HelpCenterController.getPostagem(req)
-            .then(response => res.send(response))
-            .catch(err => res.send('Deu brete' + err));
-    });
-    
     // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/busca/:dados/:pagina', (req,res) => {
         
@@ -43,21 +35,19 @@ module.exports = function(app)
             .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
+    //editar postagem
+    app.post('/helpcenter/editar',sessionCheckerRedLogin, (req, res) => {
+        HelpCenterController.editarPostagem(req)
+            .then(postagem => postagem ? res.redirect('/helpcenter') : res.send("Não foi possível editar postagem"))
+            .catch(console.error)
+    })
 
     app.route('/helpcenter')
         //inserir postagem
         .post(sessionCheckerRedLogin, (req,res) => {
             console.log(req.body)
             HelpCenterController.insertPostagem(req)
-                .then(postagem => postagem ? res.render('helpcenter') : res.send("Não foi possível inserir postagem"))
-                .catch(console.error)
-        })
-
-        //editar postagem
-        .put(sessionCheckerRedLogin, (req, res) => {
-            
-            HelpCenterController.editarPostagem(req)
-                .then(postagem => postagem ? res.send(postagem) : res.send("Não foi possível editar postagem"))
+                .then(postagem => postagem ? res.redirect('/helpcenter') : res.send("Não foi possível inserir postagem"))
                 .catch(console.error)
         })
         

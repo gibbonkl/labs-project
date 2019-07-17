@@ -14,7 +14,7 @@ module.exports = function(app)
                     imagem: req.session.user.imagem
                 }
 
-                res.render('dailyNote', user);
+                res.render('dailyNote.ejs', user);
             } else {
 
                 user = {
@@ -22,7 +22,7 @@ module.exports = function(app)
                     tipo: '',
                     imagem: ''
                 }
-                res.render('dailyNote', user);                
+                res.render('dailyNote.ejs', user);                
             }      
         })
 }

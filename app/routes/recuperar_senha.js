@@ -40,8 +40,6 @@ module.exports = function(app)
         .post(sessionCheckerRedDash, (req,res)=>{
             const hash = req.params.hash;
             const newPassword = req.body.newPassword;
-            console.log(hash);
-            console.log(newPassword);
             /*
                 *   Tenta trocar a senha do usuário
                 *   Se for possível, troca a hash do usuário
