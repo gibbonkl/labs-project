@@ -53,10 +53,9 @@
                                 <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
                             </div>  
 
-                            <!-- class="<%= user.username == response.username? '':'isDisabled'  %>"-->
                             <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                                <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>   
-                                <button onclick="edit_topic('<%= response._id %>')">editar topico</button>
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar tópico</button>   
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar tópico</button>
                             </div>
                         </div>
 
