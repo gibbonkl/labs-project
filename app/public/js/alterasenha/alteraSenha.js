@@ -3,9 +3,9 @@ function alteraSenha(e) {
 
 
     var data = {
-        senha: $("#card_senhaatual").val(),
-        novasenha: $("#card_novasenha").val(),
-        confirmacaosenha: $("#card_confsenha").val()
+        senha: md5($("#card_senhaatual").val()),
+        novasenha: md5($("#card_novasenha").val()),
+        confirmacaosenha: md5($("#card_confsenha").val())
     }
 
     if (valido(data)) {

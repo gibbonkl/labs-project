@@ -3,7 +3,7 @@ function changePassword(e){
     let tmp = location.href.split("=");
     let hash = tmp[1];
     var data = {
-        newPassword: document.querySelector("#card_novasenha").value, 
+        newPassword: md5(document.querySelector("#card_novasenha").value), 
     }
     fetch(`/recuperar_senha/${hash}`,{
         method: "POST",
