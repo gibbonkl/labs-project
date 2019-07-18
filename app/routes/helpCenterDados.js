@@ -4,14 +4,6 @@ let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function(app)
 {
-    // Envia uma única Postagem
-    app.get('/helpcenter/post/:id', (req,res) => {
-    
-        HelpCenterController.getPostagem(req)
-            .then(response => res.send(response))
-            .catch(err => res.send('Deu brete' + err));
-    });
-    
     // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/busca/:dados/:pagina', (req,res) => {
         
@@ -62,7 +54,7 @@ module.exports = function(app)
         //deletar Postagem
         .delete(sessionCheckerRedLogin, (req, res) => {
             
-            HelpCenterController.deletarPostagem(req.body.idpostagem)
+            HelpCenterController.deletarPostagem(req)
                 .then(postagem => postagem ? res.send(postagem) : res.send({erro: "Não foi possível deletar postagem"}))
                 .catch(console.error)
         })
@@ -95,7 +87,7 @@ module.exports = function(app)
         //Deletar Comentario
         .delete(sessionCheckerRedLogin, (req,res) => {
                 
-            comentcontroller.deletarComentario(req.body.idcomentario, req.body.idpostagem)
+            comentcontroller.deletarComentario(req)
                 .then(comentario => comentario ? res.send(comentario) : res.send({erro: "Não foi possível deletar comentario"}))
                 .catch(err => { res.send({erro: "Unexpected Error"});console.log(err)})
         });
@@ -112,5 +104,12 @@ module.exports = function(app)
         
         comentcontroller.like(req)                           
             .then(response => res?res.send(response):res.send({erro:'Não foi possivel completar a ação'}))
+    });
+
+    // Seta Resolvido em Postagem
+    app.post('/helpcenter/resolvido', sessionCheckerRedLogin, (req, res) => {
+
+        HelpCenterController.resolvido(req)
+            .then(response => res ? res.send(response) : res.send({ erro: 'Não foi possivel completar a ação' }))
     });
 }
