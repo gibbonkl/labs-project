@@ -28,8 +28,13 @@ function render(dados) {
     </div>`;
 }
 
-function list_topics() {
-    fetch("/helpCenter/filtroAtividade/" + pagina, {
+function list_topics(busca='atividade', dados='') {
+
+    let endpoint = '';
+    if(dados) endpoint = busca + '/' + dados + '/' + pagina;
+    else endpoint = busca + '/' + pagina;
+
+    fetch("/helpCenter/" + endpoint, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
         })
@@ -81,7 +86,8 @@ function paginacaoView(fList) {
 function paginacaoFetch(pag, fList) {
     pagina = parseInt(pag);
     if (fList == 'list_topics')
-        list_topics();
+        //list_topics();
+        buscar();
 }
 
 function searchOp() {
@@ -91,4 +97,12 @@ function searchOp() {
     $("#div_" + option).removeClass('hide');
 
     $('.input-field').children().val('');
+}
+
+function buscar(){
+    let option = $('select#search_select').val();
+    let value  = $("#div_" + option).children().val();
+
+    value != '' ? list_topics(option, value.replace(/\//g, '-')) 
+                : list_topics()
 }
