@@ -42,6 +42,12 @@
                                 <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                 <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
+                            <!--Resolvido-->
+                            <div class="div-resolvido col s6">
+                                <button class="btn btn-resolvido grey"><i class="left material-icons">check</i>Resolvido</button>
+
+                            </div>
+
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
                                 <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">

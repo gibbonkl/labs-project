@@ -19,7 +19,10 @@ function render(dados){
             <span class="black-text topico-titulo">${dados.titulo}</span><br>
             <span class="grey-text topico-data">${dados.data}</span>
             <span class="secondary-content">
-                <i class="material-icons grey-text">thumb_up</i>
+            ${dados.resolvido ? `<i class="material-icons green-text" value="${dados.resolvido}">check_circle</i>` : 
+                `<i class="material-icons grey-text" value="${dados.resolvido}">check_circle</i>`}
+            <span class="material-icons number grey-text"></span>
+               <i class="material-icons grey-text">thumb_up</i>
                 <span class="material-icons number grey-text">${dados.numeroLikes}</span>
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>

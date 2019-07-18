@@ -104,6 +104,27 @@ function like() {
 
 }
 
+function resolvido() {
+	let owner = $("#username-topico").html();
+	
+	if(owner == )
+	fetch("/helpcenter/resolvido", {
+		method: "POST",
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ _id: topic_id() })
+	})
+		.then(response => {
+			if (response) {
+				document.getElementById("resolvido").innerHTML = true;
+				if (resolvido == true) {
+					element.classList.remove('not-resolvido');
+					element.classList.add('bg-blue-compass');
+				}
+			}
+		})
+		.catch(console.log);
+}
+
 function edit_topic(id){
 	window.location.href = "/helpCenter/editar/" + id
 }
