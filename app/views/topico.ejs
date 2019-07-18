@@ -39,7 +39,12 @@
                             </div>
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
-                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <% if(response.imagem){ %>
+    
+                                    <img class="circle" src="../../public/uploads/<%=response.imagem %>"></a>
+                                <% } else { %>
+                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <% } %>
                                 <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
                             <!-- Número de likes do tópico e opção de curtir -->
@@ -53,10 +58,9 @@
                                 <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
                             </div>  
 
-                            <!-- class="<%= user.username == response.username? '':'isDisabled'  %>"-->
-                            <div class="div-margin col s12">
-                                <button onclick="delete_topic('<%= response._id %>')">deletar topico</button>   
-                                <button onclick="edit_topic('<%= response._id %>')">editar topico</button>
+                            <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar tópico</button>   
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar tópico</button>
                             </div>
                         </div>
 
@@ -69,7 +73,7 @@
                             <!-- Fim Respostas -->
             
                         </div>
-                        <div class="row div-topico white <%if(user.tipo=='' || user.tipo=='admin'){%><%='hide'%><%}%>">
+                        <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
                             <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 id="responder"class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 

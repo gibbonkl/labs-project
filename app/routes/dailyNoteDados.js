@@ -18,6 +18,8 @@ module.exports = function(app) {
                     if(!retorno)
                         res.send({erro:'Já Existe Uma Daily Registrada Nesse Dia'});
                     else{
+                        retorno = retorno.toObject();
+                        retorno.imagem = req.session.user.imagem;
                         res.send(retorno)
                     }
             })
