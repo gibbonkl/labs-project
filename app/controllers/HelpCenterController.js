@@ -131,11 +131,16 @@ class HelpCenterController {
         }
         
         return new PostagemDao(PostagemModel).getPostagem(req.params.id)
-            .then(postagem =>{
-                if (user == 'admin' || postagem.username == username)
-                            postagem['permissao'] = true;
-                HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
-                return postagem;
+            .then(postagem => {
+                if(postagem)
+                {
+                    if (user == 'admin' || postagem.username == username)
+                                postagem['permissao'] = true;
+                    HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                    return postagem;
+                }
+                else
+                    return false;
             })
             .catch(console.error)
     }
