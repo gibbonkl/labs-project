@@ -34,9 +34,9 @@ class Image{
         *   @param {object} file Imagem recebida do formulário
         *   @return {string}
     */
-    static save(file){
+    static save(file,username){
         this._originalName = file.originalname;
-        this._format = this.type(this._originalName);
+        this._format = this.type(this._originalName).toLowerCase();
         this._filename = `${uuidv4()}.${this._format}`;
         this._targetPath = path.join(__dirname, `../public/uploads/${this._filename}`);
         this._tempPath = file.path;

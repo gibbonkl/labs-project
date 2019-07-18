@@ -72,7 +72,9 @@ class DailiesController {
                 .then(dailies => 
                     dailies.map((daily)=>{
                         user == 'admin' || daily['usuario'] == username ? daily['permissao'] = true : daily['permissao'] = false
-                        return daily
+                        daily.imagem = daily.user[0].imagem
+                        delete(daily.user);
+                        return daily;
 
                     }))
                 .catch(console.error)
@@ -89,6 +91,8 @@ class DailiesController {
                 .then(dailies => 
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
+                        daily.imagem = daily.user[0].imagem
+                        delete(daily.user);
                         return daily
                     })
                 )
@@ -129,7 +133,7 @@ class DailiesController {
     */
     static deleteDaily(req) {
         let dailyDao = new DailyDao(DailyModel);
-        return dailyDao.removeDailyNoteById(req.body.daily_id)
+        return dailyDao.removeDailyNoteById(req)
             .then(response => response)
             .catch(console.error)
     }

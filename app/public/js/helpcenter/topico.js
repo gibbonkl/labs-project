@@ -104,6 +104,24 @@ function like() {
 
 }
 
+function resolvido(id) {
+	
+		fetch("/helpcenter/resolvido", {
+			method: "POST",
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ _id: id })
+		})
+			.then(response => {
+				if (response) {
+					$("#resolvido-icone").removeClass("grey-text");
+					$("#resolvido-icone").addClass("green-text");
+					$('.btn-resolvido').addClass("grey");
+					$('.btn-resolvido').removeClass("bg-blue-compass");
+				}
+			})
+			.catch(console.log);
+}
+
 function edit_topic(id){
 	window.location.href = "/helpCenter/editar/" + id
 }

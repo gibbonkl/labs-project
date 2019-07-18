@@ -138,3 +138,8 @@ input[type=password]:not(.browser-default),
 textarea.materialize-textarea {
     padding-left: 10px;
 }
+
+.resize-photo {
+    height: 3rem;
+    margin-top: 20%;
+}
