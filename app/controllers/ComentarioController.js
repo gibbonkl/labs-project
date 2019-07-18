@@ -27,10 +27,11 @@ class ComentarioController {
         
     }
 
-    static deletarComentario(idComentario, idPostagem){
+    static deletarComentario(req){
 
-        return new ComentarioDAO(ComentarioModel).deleteComentarioById(idComentario, idPostagem)
-                .then(res => res? true: false)
+        let tipo = req.session.user.tipo;
+        return new ComentarioDAO(ComentarioModel).deleteComentarioById(req, tipo)
+                .then(res => res ? true: false)
     }
 
     static like(req)

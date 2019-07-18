@@ -68,11 +68,15 @@ class DailyDao extends TemplateDao {
         *   @returns {object}
     */
     
-    removeDailyNoteById(id=''){
-        if(id){
-            return this._findOneAndUpdate({_id:id},{$set:{ativo:false}})       
-        }
-        return({detail:"Impossível remover"});
+    removeDailyNoteById(req=''){
+        if(req.session.user.tipo == 'admin')
+            return this._findOneAndUpdate({_id:req.body.daily_id},{$set:{ativo:false}})
+                .then(res => res ? res : false)
+                .catch(err => console.log(err.message))       
+        else
+            return this._findOneAndUpdate({_id:req.body.daily_id, usuario:req.session.user.username},{$set:{ativo:false}})
+            .then(res => res ? res : false)
+            .catch(err => console.log(err.message))    
     }
    
     /*
@@ -82,7 +86,29 @@ class DailyDao extends TemplateDao {
     */
     listDailyNotesByUser(username = '', skip = '', limit = '') {
         if (username) {
-            return this._find({ usuario: username, ativo: true }, { _id: 1, usuario: 1,data: 1, corpo: 1, permissao: 1 }, { sort: { data: -1 }, skip: skip, limit: limit })
+            return this._aggregate([
+                {
+                    '$match': {
+                      'usuario': username, 
+                      'ativo': true
+                    }
+                  },
+                {
+                    '$skip': skip
+                },
+                {
+                      '$limit': limit
+                
+                },
+                  {
+                    '$lookup': {
+                      'from': 'usuarios', 
+                      'localField': 'usuario', 
+                      'foreignField': 'username', 
+                      'as': 'user'
+                    }
+                  }
+            ])
                 .then(res => res ? res : null)
                 .catch(err => {
                     console.error(err);
@@ -98,11 +124,33 @@ class DailyDao extends TemplateDao {
         */
     listDailyNotesByDate(data = '', skip = '', limit = '') {
         if (data) {
-            return this._find({ data: data, ativo: true }, { _id: 1, usuario: 1, corpo: 1, permissao: 1, data:1 },  { skip: skip, limit: limit })
-                .then(res => res ? res : null)
+            return this._aggregate([
+                {
+                    '$match': {
+                      'data': data, 
+                      'ativo': true
+                    }
+                  },
+                {
+                    '$skip': skip
+                },
+                {
+                      '$limit': limit
+                
+                },
+                  {
+                    '$lookup': {
+                      'from': 'usuarios', 
+                      'localField': 'usuario', 
+                      'foreignField': 'username', 
+                      'as': 'user'
+                    }
+                  }
+            ])
+                .then(res => res? res : null)
                 .catch(err => {
                     console.error(err);
-                    return ({ detail: "Impossível buscar para essa data", error: err })
+                    return ({ detail: "Impossível buscar para esse usuário", error: err })
                 })
         }
         else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
