@@ -54,7 +54,7 @@ module.exports = function(app)
         //deletar Postagem
         .delete(sessionCheckerRedLogin, (req, res) => {
             
-            HelpCenterController.deletarPostagem(req.body.idpostagem)
+            HelpCenterController.deletarPostagem(req)
                 .then(postagem => postagem ? res.send(postagem) : res.send({erro: "Não foi possível deletar postagem"}))
                 .catch(console.error)
         })
@@ -87,7 +87,7 @@ module.exports = function(app)
         //Deletar Comentario
         .delete(sessionCheckerRedLogin, (req,res) => {
                 
-            comentcontroller.deletarComentario(req.body.idcomentario, req.body.idpostagem)
+            comentcontroller.deletarComentario(req)
                 .then(comentario => comentario ? res.send(comentario) : res.send({erro: "Não foi possível deletar comentario"}))
                 .catch(err => { res.send({erro: "Unexpected Error"});console.log(err)})
         });
