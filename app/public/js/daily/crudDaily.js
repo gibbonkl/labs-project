@@ -62,10 +62,17 @@ function create() {
 }
 
 function render(dados) {
+<<<<<<< HEAD
 
+=======
+    console.log(dados);
+>>>>>>> s3-fix-fotos
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
-                    <i class="material-icons">face</i>
+                ${dados.imagem ?
+                     `<img class="circle" src="../public/uploads/${dados.imagem}">`
+                    : `<i class="material-icons">face</i>`
+                }
                     <span class="span-margin data" data-name="${dados.usuario}">${dados.usuario}</span>
                     <i class="material-icons">event</i>
                     <span class="span-margin data align-right dia" data-date="${dados.data}">${dados.data}</span>
@@ -268,6 +275,7 @@ function loadByName(name){
             animaLoad();
             $("#collapsible_daily").removeClass("hide");
             $('#collapsible_daily').html(dailies.map(daily => render(daily)).join(''));
+            console.log(dailies);
         }
         else{
             $("#collapsible_daily").addClass("hide");

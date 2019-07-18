@@ -10,11 +10,13 @@ function animaLoad() {
     $("#show_dailies").fadeIn('fast').removeClass('hide');
 }
 
-function render(dados) {
-
+function render(dados){
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
-            <img src="../public/img/user.png" alt="" class="circle">
+            ${dados.imagem ?
+                `<img class="circle" src="../public/uploads/${dados.imagem}">`:
+                `<img src="../public/img/user.png" alt="" class="circle">`
+            }
             <span class="black-text topico-nome">${dados.username}</span><br>
             <span class="black-text topico-titulo">${dados.titulo}</span><br>
             <span class="grey-text topico-data">${dados.data}</span>

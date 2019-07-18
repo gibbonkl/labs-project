@@ -7,7 +7,7 @@ module.exports = function(req)
 {
     console.log('Controller cadastra usuario');
     if(req.file){
-        var filename = Image.save(req.file);
+        var filename = Image.save(req.file, req.body.username);
     }
     let user = new Model({
         nome: req.body.nome,
