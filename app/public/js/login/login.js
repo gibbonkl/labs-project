@@ -8,7 +8,9 @@ $(document).ready(function() {
         }
     });
 });
-
+$("form").submit((event)=> {
+    $("#login_senha").val(md5($("#login_senha").val()))
+})
 function recoveryPassword(e) {
     e.preventDefault();
     var data = {
