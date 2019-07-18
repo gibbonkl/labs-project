@@ -345,6 +345,7 @@ class PostagemDao extends TemplateDao{
         return this._aggregate([
                     { "$facet": {
                         "totalData": [
+                            {'$match': { ativo: true}},
                             {'$lookup': {
                                 'from': 'usuarios', 
                                 'localField': 'username', 
