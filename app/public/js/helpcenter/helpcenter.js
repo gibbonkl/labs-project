@@ -23,12 +23,16 @@ function render(dados){
             <span class="secondary-content">
             ${dados.resolvido ? `<i class="material-icons green-text" value="${dados.resolvido}">check_circle</i>` : 
                 `<i class="material-icons grey-text" value="${dados.resolvido}">check_circle</i>`}
-            <span class="material-icons number grey-text"></span>
-               <i class="material-icons grey-text">thumb_up</i>
+                <span class="material-icons number grey-text"></span>
+                <i class="material-icons grey-text">thumb_up</i>
                 <span class="material-icons number grey-text">${dados.numeroLikes}</span>
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span>
+            <div class="right">            
+                ${dados.tags.map(tag => `<i class="chip">${tag}</i>`).join("")}
+                <span class="material-icons number"></span>
+            </div>
         </a>
     </div>`;
 }
