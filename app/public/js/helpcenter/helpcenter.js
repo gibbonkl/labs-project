@@ -45,10 +45,17 @@ function list_topics(busca='atividade', dados='') {
             if (posts.erro)
                 console.log(posts.erro);
             else {
-                animaLoad()
-                $('#list-posts').html(posts.postagens.map(post => render(post)).join(''));
-                tamanho = posts.count;
-                paginacaoView('list_topics');
+                if(posts.postagens.length > 0) {
+                    animaLoad()
+                    $("#list-posts").removeClass("hide");
+                    $('#list-posts').html(posts.postagens.map(post => render(post)).join(''));
+                    tamanho = posts.count;
+                    paginacaoView('list_topics');
+                }
+                else {
+                    $("#list-posts").addClass("hide");
+                    M.toast({html: 'Nenhum tópico encontrado.',displayLength: 2000})
+                }
             }
         })
         .catch(console.log);
@@ -93,6 +100,9 @@ function paginacaoFetch(pag, fList) {
 }
 
 function searchOp() {
+    tamanho = 0;
+    pagina = 1;
+    
     let option = $('select#search_select').val();
 
     $(".input-search").addClass('hide');
