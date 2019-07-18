@@ -255,7 +255,22 @@ class PostagemDao extends TemplateDao{
         *   @returns {postagem} postagem e todos os comentarios associados
     */
    getPostagem(id=''){
-        return this._findOne({ _id: id, ativo: true })
+        // return this._findOne({ _id: id, ativo: true })
+        return this._aggregate([
+            {'$match': {
+                    _id: mongoose.Types.ObjectId(id),
+                    ativo: true
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                }
+            }
+        ])
+        .then(res=> res[0])
         .then(res => res ? res : false)
         .catch(err => console.log('Erro ao realizar busca: ' + err.message))
     }
@@ -274,24 +289,11 @@ class PostagemDao extends TemplateDao{
                     'from': 'comentarios', 
                     'localField': 'comentarios', 
                     'foreignField': '_id',
-                    'as': 'comentarios.comentario'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'username', 
-                    'foreignField': 'username', 
-                    'as': 'user'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'comentarios.comentario.username', 
-                    'foreignField': 'username', 
-                    'as': 'comentarios.user'
+                    'as': 'comentarios'
                 }
             }
         ])
+        .then(res => res[0])
         .then(res => res ? res : 'error')
         .catch(console.error)
     }

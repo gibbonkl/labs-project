@@ -149,6 +149,9 @@ class HelpCenterController {
                     if (user == 'admin' || postagem.username == username)
                                 postagem['permissao'] = true;
                     HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                    postagem.comentarios = postagem.comentarios.comentario;
+                    postagem.imagem = postagem.user[0].imagem;
+                    delete(postagem.user);
                     return postagem;
                 }
                 else
@@ -177,7 +180,6 @@ class HelpCenterController {
             /*
                 *   Retorna a primeira posição do array de postagens
             */
-            .then(postagens => postagens[0])
             .then(postagem =>{
                 /*
                     *   Adiciona o campo imagem ao comentário
@@ -198,9 +200,7 @@ class HelpCenterController {
                     *   Remove o array de usuário da postagem e adiciona a foto ao objeto
                 */
                user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
-               postagem.comentarios = postagem.comentarios.comentario;
-               postagem.imagem = postagem.user[0].imagem;
-               delete(postagem.user);
+            //    postagem.comentarios = postagem.comentarios.comentario;
                return postagem;
 
             })
