@@ -28,6 +28,14 @@ module.exports = function(app)
             .catch(err => console.log(err));
     });
 
+    // Lista Postagens por tags
+    app.get('/helpcenter/filtrotags/:tags/:pagina', (req,res) => {       
+        
+        HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
+            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .catch(err => console.log(err));
+    });
+
     // Lista Postagens por username
     app.get('/helpcenter/filtrousername/:username/:pagina', (req,res) => {        
         
