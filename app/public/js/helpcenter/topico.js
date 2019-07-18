@@ -104,25 +104,22 @@ function like() {
 
 }
 
-function resolvido() {
-	let owner = $("#username-topico").html();
+function resolvido(id) {
 	
-	if(owner == )
-	fetch("/helpcenter/resolvido", {
-		method: "POST",
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ _id: topic_id() })
-	})
-		.then(response => {
-			if (response) {
-				document.getElementById("resolvido").innerHTML = true;
-				if (resolvido == true) {
-					element.classList.remove('not-resolvido');
-					element.classList.add('bg-blue-compass');
-				}
-			}
+		fetch("/helpcenter/resolvido", {
+			method: "POST",
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ _id: id })
 		})
-		.catch(console.log);
+			.then(response => {
+				if (response) {
+					$("#resolvido-icone").removeClass("grey-text");
+					$("#resolvido-icone").addClass("green-text");
+					$('.btn-resolvido').addClass("grey");
+					$('.btn-resolvido').removeClass("bg-blue-compass");
+				}
+			})
+			.catch(console.log);
 }
 
 function edit_topic(id){
