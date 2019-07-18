@@ -4,14 +4,6 @@ let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function(app)
 {
-    // Envia uma única Postagem
-    app.get('/helpcenter/post/:id', (req,res) => {
-    
-        HelpCenterController.getPostagem(req)
-            .then(response => res.send(response))
-            .catch(err => res.send('Deu brete' + err));
-    });
-    
     // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/query/:dados/:pagina', (req,res) => {
         
