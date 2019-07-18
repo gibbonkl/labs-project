@@ -40,10 +40,10 @@ class HelpCenterController {
         //verificar user
         let user = 'visitante'
         let username = ''
-        if(req.session.user) {
-            user = req.session.user.tipo;
-            username = req.session.user.username;
-        }
+        // if(req.session.user) {
+        //     user = req.session.user.tipo;
+        //     username = req.session.user.username;
+        // }
 
         // get postagens
         if (op == 'lastUpdate')
@@ -61,7 +61,8 @@ class HelpCenterController {
         }
         else if(op == 'username')
         {
-            let username = req.params.username;
+            // let username = req.params.username;
+            let username = 'foto';
             return this.listHelper(
                 postagemDao.listarPostagemByUser(username, (page-1)*batch, batch),
                 username,user)   

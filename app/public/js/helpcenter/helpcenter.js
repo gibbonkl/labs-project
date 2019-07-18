@@ -50,7 +50,7 @@ function list_topics(busca='atividade', dados='') {
                     $("#list-posts").removeClass("hide");
                     $('#list-posts').html(posts.postagens.map(post => render(post)).join(''));
                     tamanho = posts.count;
-                    paginacaoView('list_topics');
+                    paginacaoView(busca, dados);
                 }
                 else {
                     $("#list-posts").addClass("hide");
@@ -69,7 +69,7 @@ function enter_topic(id) {
     window.location.href = "/helpCenter/topico/" + id
 }
 
-function paginacaoView(fList) {
+function paginacaoView(busca, dados) {
     let espaco = 2;
     let inicioJanela = pagina - espaco;
     let fimJanela = parseInt(pagina) + parseInt(espaco);
@@ -79,24 +79,22 @@ function paginacaoView(fList) {
     if (fimJanela > tamanho)
         fimJanela = tamanho;
 
-    $('.pagination').html(`<li class="waves-effect"><a onclick="paginacaoFetch('${1}', '${fList}')" class="white-text"><i class="material-icons">chevron_left</i></a></li>`);
+    $('.pagination').html(`<li class="waves-effect"><a onclick="paginacaoFetch('${1}', '${busca}', '${dados}')" class="white-text"><i class="material-icons">chevron_left</i></a></li>`);
     for (let index = inicioJanela; index <= fimJanela; index++) {
         if (index == pagina)
             $('.pagination')
-            .append(`<li class="active grey"><a onclick="paginacaoFetch('${index}', '${fList}')">${index}</a></li>`);
+            .append(`<li class="active grey"><a onclick="paginacaoFetch('${index}', '${busca}', '${dados}')">${index}</a></li>`);
         else
             $('.pagination')
-            .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${index}', '${fList}')" class="white-text">${index}</a></li>`);
+            .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${index}', '${busca}', '${dados}')" class="white-text">${index}</a></li>`);
     }
     $('.pagination')
-        .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${tamanho}', '${fList}')" class="white-text"><i class="material-icons">chevron_right</i></a></li>`);
+        .append(`<li class="waves-effect"><a onclick="paginacaoFetch('${tamanho}', '${busca}', '${dados}')" class="white-text"><i class="material-icons">chevron_right</i></a></li>`);
 }
 
-function paginacaoFetch(pag, fList) {
+function paginacaoFetch(pag, busca, dados) {
     pagina = parseInt(pag);
-    if (fList == 'list_topics')
-        //list_topics();
-        buscar();
+    list_topics(busca, dados);
 }
 
 function searchOp() {
