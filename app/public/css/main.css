@@ -143,3 +143,6 @@ textarea.materialize-textarea {
     height: 3rem;
     margin-top: 20%;
 }
+select {
+	display: block !important;
+}
