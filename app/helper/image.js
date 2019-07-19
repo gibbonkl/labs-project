@@ -25,7 +25,7 @@ class Image{
     */
     static type(file){
         let tmp = file.split(".");
-        return tmp[1];
+        return tmp[tmp.length - 1];
     }
     /*
         *   Salva o arquivo na pasta: /public/uploads
@@ -35,10 +35,12 @@ class Image{
         *   @return {string}
     */
     static save(file,username){
+        const dir = path.join(__dirname, `../public/uploads/`);
+        this.verifyPath(dir);
         this._originalName = file.originalname;
         this._format = this.type(this._originalName).toLowerCase();
         this._filename = `${uuidv4()}.${this._format}`;
-        this._targetPath = path.join(__dirname, `../public/uploads/${this._filename}`);
+        this._targetPath = `${dir}${this._filename}`;
         this._tempPath = file.path;
         if (path.extname(this._originalName).toLowerCase() === `.${this._format}`) {
             fs.rename(this._tempPath, this._targetPath, err => {
@@ -46,6 +48,12 @@ class Image{
             });
         }
         return this._filename;
+    }
+    static verifyPath(dir){
+        if (!fs.existsSync(dir)) this.createDir(dir)
+    }
+    static createDir(dir){
+        fs.mkdirSync(dir,{recursive: true}, err=> err? console.log(`Impossível criar pasta: ${err}`): console.log(`Pasta ${dir} criada`))
     }
 
 }
