@@ -76,7 +76,8 @@ class HelpCenterController {
         else if(op == 'tags')
         {
             //tratar requisição
-            let tags = ['alura'];
+            let tags = req.params.tags.split('+');
+            console.log(tags);
             return this.listHelper(
                 postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
                 username, user)
