@@ -69,7 +69,8 @@ class HelpCenterController {
         }
         else if(op == 'busca')
         {
-            let busca = req.params.dados.replace(/-/g,' ');
+            // let busca = req.params.dados.replace(/-/g,' ');
+            let busca = 'Digite aqui o conte';
             return this.listHelper(
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  

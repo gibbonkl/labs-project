@@ -1,4 +1,4 @@
 const help = require('./HelpCenterController');
 
-help.listarPostagem('','username')
+help.listarPostagem('','busca')
     .then(res=> console.log(res));
