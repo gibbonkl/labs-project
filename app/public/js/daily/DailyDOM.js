@@ -6,9 +6,9 @@ function dailyHTML(daily)
                 `<img class="circle resize-daily" src="../public/uploads/${daily.imagem}">`
                 : `<i class="material-icons">face</i>`
             }            
-            <span class="span-margin data" data-name="${daily.usuario}">${daily.usuario}</span>
-            <i class="material-icons">event</i>
-            <span class="span-margin data align-right dia" data-date="${daily.data}">${daily.data}</span>
+            <span class="span-margin data margin-top-10" data-name="${daily.usuario}">${daily.usuario}</span>
+            <i class="material-icons margin-top-10">event</i>
+            <span class="span-margin data align-right dia margin-top-10" data-date="${daily.data}">${daily.data}</span>
         </div>
         <div class="collapsible-body grey lighten-3">
             <div class="row">

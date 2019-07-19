@@ -62,11 +62,6 @@ function create() {
 }
 
 function render(dados) {
-<<<<<<< HEAD
-
-=======
-    console.log(dados);
->>>>>>> s3-fix-fotos
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                 ${dados.imagem ?
