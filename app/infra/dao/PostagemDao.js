@@ -127,7 +127,7 @@ class PostagemDao extends TemplateDao{
                         }
                     ],
                     "totalCount": [
-                        { "$match": { $and: [{ativo: true}, {username: username}]}},
+                        { "$match": { $and: [{ativo: true}, {username:{"$regex": username, "$options":'i'}}]}},
                         { "$count": "count" }
                     ]
                 }}
