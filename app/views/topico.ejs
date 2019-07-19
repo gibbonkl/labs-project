@@ -45,8 +45,7 @@
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
                                 <% if(response.imagem){ %>
-    
-                                    <img class="circle" src="../../public/uploads/<%=response.imagem %>"></a>
+                                    <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
                                 <% } else { %>
                                     <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                 <% } %>
@@ -88,7 +87,11 @@
                             <!-- Formulário para responder ao tópico -->
                             <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
                                 <div class="input-field col s12">
-                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                        <% if(user.imagem){ %>
+                                            <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
+                                        <% } else { %>
+                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                        <% } %>
                                     <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                 </div>
                                 <div>

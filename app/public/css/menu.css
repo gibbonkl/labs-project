@@ -19,3 +19,6 @@ html{
     height: 50px;
     width: 50px;
 }
+.padding-bottom{
+    padding-bottom: 16% !important;
+}
