@@ -38,7 +38,7 @@ function list_topics(busca='atividade', dados='') {
     let endpoint = '';
     if(dados) endpoint = busca + '/' + dados + '/' + pagina;
     else endpoint = busca + '/' + pagina;
-
+    
     fetch("/helpCenter/" + endpoint, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
@@ -114,7 +114,16 @@ function searchOp() {
 
 function buscar(){
     let option = $('select#search_select').val();
-    let value  = $("#div_" + option).children().val();
+    let value = ''
+    if (option == 'tag') {
+        let chips = []
+        let array = M.Chips.getInstance($('.chips')).chipsData;
+        array.forEach(element => {
+            chips.push(element.tag);
+        });
+        value = chips.join('+');
+    }
+    else {value  = $("#div_" + option).children().val();}
 
     value != '' ? list_topics(option, value.replace(/\//g, '-')) 
                 : list_topics()

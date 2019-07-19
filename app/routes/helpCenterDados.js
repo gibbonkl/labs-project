@@ -29,7 +29,7 @@ module.exports = function(app)
     });
 
     // Lista Postagens por tags
-    app.get('/helpcenter/filtrotags/:tags/:pagina', (req,res) => {       
+    app.get('/helpcenter/tag/:tags/:pagina', (req,res) => {       
         
         HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
             .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
@@ -45,12 +45,12 @@ module.exports = function(app)
     });
 
     // Lista Postagens por tags
-    app.get('/helpcenter/tag/:tag/:pagina', (req,res) => {        
+    // app.get('/helpcenter/tag/:tag/:pagina', (req,res) => {        
         
-        HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
-            //.then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
-            //.catch(err => console.log(err));
-    });
+    //     HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
+    //         //.then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+    //         //.catch(err => console.log(err));
+    // });
 
     //editar postagem
     app.post('/helpcenter/editar',sessionCheckerRedLogin, (req, res) => {

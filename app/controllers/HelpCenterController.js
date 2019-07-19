@@ -69,8 +69,7 @@ class HelpCenterController {
         }
         else if(op == 'busca')
         {
-            // let busca = req.params.dados.replace(/-/g,' ');
-            let busca = 'Digite aqui o conte';
+            let busca = req.params.dados.replace(/-/g,' ');
             return this.listHelper(
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  
@@ -78,8 +77,8 @@ class HelpCenterController {
         else if(op == 'tags')
         {
             //tratar requisição
+            console.log(req.params.tags);
             let tags = req.params.tags.split('+');
-            console.log(tags);
             return this.listHelper(
                 postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
                 username, user)
