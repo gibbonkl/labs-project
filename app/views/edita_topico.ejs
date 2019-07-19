@@ -31,6 +31,7 @@
                                     <div class="padding-titulo input-field col s12">
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
                                         <input id="topico-titulo" value='<%= response.titulo %>' name="titulo" type="text" class="active">
+                                        <!-- tratar o erro do editar -->
                                         <% response.tags[0].split(',').map(element => %><span class="chip waves-effect  <%= response.tags[0].split(',').indexOf(tag)>=0? '  ': '' %>"><%= tag %></span>
                                             <% ).join('') %>
                                                 <input id="tags" name="tags" type="hidden" class="active" value=''>
