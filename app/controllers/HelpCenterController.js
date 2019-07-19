@@ -40,10 +40,10 @@ class HelpCenterController {
         //verificar user
         let user = 'visitante'
         let username = ''
-        if(req.session.user) {
-            user = req.session.user.tipo;
-            username = req.session.user.username;
-        }
+        // if(req.session.user) {
+        //     user = req.session.user.tipo;
+        //     username = req.session.user.username;
+        // }
 
         // get postagens
         if (op == 'lastUpdate')
@@ -68,7 +68,8 @@ class HelpCenterController {
         }
         else if(op == 'busca')
         {
-            let busca = req.params.dados.replace(/-/g,' ');
+            // let busca = req.params.dados.replace(/-/g,' ');
+            let busca = 'Digite aqui o conte';
             return this.listHelper(
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  

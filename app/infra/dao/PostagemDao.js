@@ -308,8 +308,12 @@ class PostagemDao extends TemplateDao{
                     "totalData": [
                         {
                                     "$match": { $and: [ 
-                                        {titulo:{"$regex": searched, "$options":'i'}}, 
-                                        {ativo: true} ]
+                                        {ativo: true}, 
+                                        {$or: [
+                                            {titulo:{"$regex": searched, "$options":'i'}}, 
+                                            {corpo:{"$regex": searched, "$options":'i'}},
+                                        ]}
+                                    ]
                                     },
                                 },
                                 {'$lookup': {
@@ -327,7 +331,12 @@ class PostagemDao extends TemplateDao{
                                 }
                     ],
                     "totalCount": [
-                        { "$match": { $and: [{ativo: true}, {titulo: {'$regex': searched,'$options':'i'}}]}},
+                        { "$match": { $and: [ 
+                                {ativo: true}, 
+                                {$or: [
+                                    {titulo:{"$regex": searched, "$options":'i'}}, 
+                                    {corpo:{"$regex": searched, "$options":'i'}},
+                                ]}]}},
                         { "$count": "count" }
                     ]
                 }}
