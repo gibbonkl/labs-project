@@ -1,3 +1,4 @@
+
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/alterar_senha" class="blue-compass">Alterar senha</a></li>
     <li class="divider"></li>
@@ -25,7 +26,7 @@
                     <%= user.username %>
                 </li>
                 <li>
-                    <a href="#" class="dropdown-trigger blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
+                    <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
                         <% if(user.imagem){ %>
                             <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
                         <% } else { %>

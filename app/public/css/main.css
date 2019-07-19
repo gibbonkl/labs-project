@@ -140,9 +140,33 @@ textarea.materialize-textarea {
 }
 
 .resize-photo {
-    height: 3rem;
-    margin-top: 20%;
+    margin-top: 25%;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
 }
+
 select {
 	display: block!important;
+}
+
+.resize-daily{
+    margin-right: 2%;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.resize-forum{
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+
 }
