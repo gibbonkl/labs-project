@@ -75,6 +75,15 @@ class HelpCenterController {
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  
         }
+        else if(op == 'tags')
+        {
+            //tratar requisição
+            let tags = req.params.tags.split('+');
+            console.log(tags);
+            return this.listHelper(
+                postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
+                username, user)
+        }
     }
 
     static apagaLikesEComentarios(postagem)

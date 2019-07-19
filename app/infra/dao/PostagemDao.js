@@ -421,5 +421,45 @@ class PostagemDao extends TemplateDao{
                 .catch(err => console.log(err.message))
     }
 
+
+    /*
+        *   Busca uma postagem na base de dados pela lista de tags
+        *   @param {lista de strings} tags serem buscas no banco
+        *   @param {Number} skipq
+        *   @param {Number} limit Limite de postagens para busca
+        *   @returns {Array}
+    */
+    listarPostagemByTags(tags, skip = '', limit = ''){
+        return this._aggregate([
+                { "$facet": {
+                    "totalData": [
+                        {
+                                    "$match": { $and: [ 
+                                        { tags: { $all: tags } }, 
+                                        {ativo: true} ]
+                                    },
+                                },
+                                {'$lookup': {
+                                    'from': 'usuarios', 
+                                    'localField': 'username', 
+                                    'foreignField': 'username', 
+                                    'as': 'user'
+                                    }
+                                },
+                                {
+                                    "$skip": skip
+                                },
+                                {
+                                    "$limit": limit
+                                }
+                    ],
+                    "totalCount": [
+                        { "$match": { $and: [ {ativo: true}, { tags: { $all: tags } } ]}},
+                        { "$count": "count" }
+                    ]
+                }}
+            ])
+    }
+
 }
 module.exports = PostagemDao;
