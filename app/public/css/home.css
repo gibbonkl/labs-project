@@ -31,3 +31,6 @@
     left: -3 !important;
     top: 1 !important;
 }
+.not-clickable div{
+    cursor: default !important;
+}
