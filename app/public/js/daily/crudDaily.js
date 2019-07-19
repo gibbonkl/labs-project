@@ -62,7 +62,6 @@ function create() {
 }
 
 function render(dados) {
-    console.log(dados);
     return `<li id="${dados._id}" class="data">
                 <div class="collapsible-header">
                 ${dados.imagem ?
