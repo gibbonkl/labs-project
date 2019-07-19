@@ -17,9 +17,8 @@ class HelpCenterController {
                     {
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentario
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         postagem.imagem = postagem.user[0].imagem;
                         delete(postagem.user);
                         
