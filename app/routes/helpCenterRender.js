@@ -44,7 +44,7 @@ module.exports = function(app) {
 
         HelpCenterController.getPostagem(req)
             .then(response =>
-                res.render('edita_topico.ejs', { user: user, response: response }, { tags: tags })
+                res.render('edita_topico.ejs', { user: user, response: response, tags: tags })
             )
             .catch(err => res.render(err))
 

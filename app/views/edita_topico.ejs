@@ -1,4 +1,5 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
@@ -10,9 +11,10 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/novo_topico.css">
 </head>
+
 <body class="bg-blue-compass">
     <header>
-        <% include ./includes/navbar.ejs %>       
+        <% include ./includes/navbar.ejs %>
     </header>
 
     <!-- Novo tópico -->
@@ -23,15 +25,18 @@
                     <div class="card-panel white">
                         <div class="row">
                             <h5 class="blue-compass mont-serrat">Editar tópico</h5>
-                            <div class="divider"></div>                            
+                            <div class="divider"></div>
                             <form action="/helpcenter/editar" method="post" id='topico-form'>
-                                <div class="div-margin col s12">                                    
+                                <div class="div-margin col s12">
                                     <div class="padding-titulo input-field col s12">
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
                                         <input id="topico-titulo" value='<%= response.titulo %>' name="titulo" type="text" class="active">
+                                        <% response.tags[0].split(',').map(element => %><span class="chip waves-effect  <%= response.tags[0].split(',').indexOf(tag)>=0? '  ': '' %>"><%= tag %></span>
+                                            <% ).join('') %>
+                                                <input id="tags" name="tags" type="hidden" class="active" value=''>
                                     </div>
                                 </div>
-                                <div class="div-margin col s12">     
+                                <div class="div-margin col s12">
                                     <div class="input-field col s12">
                                         <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                         <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
@@ -39,11 +44,11 @@
                                     <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         <%= response.corpo %>
                                     </textarea>
-                                    <input class="hide" name='_id' value="<%= response._id %>"/>
-                                </div>        
+                                    <input class="hide" name='_id' value="<%= response._id %>" />
+                                </div>
                                 <div class="div-margin col s12 center">
                                     <input class="btn bg-blue-compass rounded" type="submit" value="Enviar" />
-                                </div>                    
+                                </div>
                             </form>
                         </div>
                     </div>

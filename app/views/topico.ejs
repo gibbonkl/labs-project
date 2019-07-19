@@ -1,4 +1,5 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
@@ -11,11 +12,12 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/topico.css">
 </head>
+
 <body class="bg-blue-compass">
     <header>
-        <% include ./includes/navbar.ejs %>       
+        <% include ./includes/navbar.ejs %>
     </header>
-    
+
     <!-- Tópico -->
     <div class="container">
         <div class="section">
@@ -27,32 +29,39 @@
                             <div class="col s10">
                                 <h5 class="blue-compass mont-serrat">
                                     <%= response.titulo %>
-                                    <i class="material-icons left <%= (response.resolvido) ? 'green-text' : 'grey-text' %> " id="resolvido-icone">
+                                        <i class="material-icons left <%= (response.resolvido) ? 'green-text' : 'grey-text' %> " id="resolvido-icone">
                                         check
                                     </i>
                                 </h5>
-                            </div> 
+                                <div class="col s12">
+                                    <% response.tags[0].split(',').forEach(function(tag) { %>
+                                        <span class="chip waves-effect select-chip"><%= tag %></span>
+                                        <% }); %>
+                                </div>
+                            </div>
                             <div class="col s2">
-                                <h5 class="grey-text text-darken-2 mont-serrat right topico-data"><%= response.data %></h5>
-                            </div>  
+                                <h5 class="grey-text text-darken-2 mont-serrat right topico-data">
+                                    <%= response.data %>
+                                </h5>
+                            </div>
                             <p></p>
                             <div class="div-margin col s12">
                                 <!-- Corpo do tópico -->
                                 <div id="corpo-topico" class="black-text">
-                                    <%- response.corpo %>                                 
+                                    <%- response.corpo %>
                                 </div>
                             </div>
                             <!-- Usuário dono do tópico -->
                             <div class="div-margin col s6">
                                 <% if(response.imagem){ %>
-    
+
                                     <img class="circle" src="../../public/uploads/<%=response.imagem %>"></a>
-                                <% } else { %>
-                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                <% } %>
-                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
+                                    <% } else { %>
+                                        <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                        <% } %>
+                                            <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
-                            
+
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
                                 <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
@@ -62,28 +71,28 @@
                             </div>
                             <div class="div-margin col s12">
                                 <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
-                            </div>  
+                            </div>
 
                             <!-- Deletar | Editar | Setar Resolvido -->
                             <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar tópico</button>   
-                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar tópico</button>
-                                <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'grey' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">tópico resolvido</button>
+                                <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
                             </div>
                         </div>
-                        
-                        <div class="row div-topico white">                            
+
+                        <div class="row div-topico white">
                             <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
 
                             <!-- Respostas -->
-                                <div id="list_comments"></div>
+                            <div id="list_comments"></div>
                             <!-- Fim Respostas -->
-            
+
                         </div>
                         <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
                             <!-- <div class="div-margin col s12 divider"></div> -->
-                            <h5 id="responder"class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
+                            <h5 id="responder" class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
 
                             <!-- Formulário para responder ao tópico -->
                             <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
@@ -95,10 +104,10 @@
                                     <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
                                         Digite aqui o conteúdo da sua resposta.
                                     </textarea>
-                                </div>        
+                                </div>
                                 <div class="div-margin col s12 center">
                                     <input class="btn bg-blue-compass rounded" type="submit" value="Responder" />
-                                </div>                    
+                                </div>
                             </form>
 
                         </div>

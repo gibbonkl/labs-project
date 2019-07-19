@@ -10,7 +10,9 @@ function animaLoad() {
     $("#show_dailies").fadeIn('fast').removeClass('hide');
 }
 
-function render(dados){
+function render(dados) {
+    teste = dados;
+    console.log(teste)
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
             ${dados.imagem ?
@@ -29,9 +31,10 @@ function render(dados){
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span>
-            <div class="right">            
-                ${dados.tags.map(tag => `<i class="chip">${tag}</i>`).join("")}
-                <span class="material-icons number"></span>
+            <div class="right"> 
+                ${dados.tags[0].split(',').map( element =>
+                    `<span class="chip">${element}</span>`
+                ).join('')}           
             </div>
         </a>
     </div>`;
