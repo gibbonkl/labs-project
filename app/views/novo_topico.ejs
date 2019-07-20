@@ -32,9 +32,12 @@
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
                                         <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="titulo" type="text" class="active" required>
                                         <div class="col s12">
-                                            <% tags.forEach(function(tag) { %>
-                                                <span class="chip waves-effect"><%= tag %></span>
-                                                <% }); %>
+                                            <label>Selecione uma tag:</label>
+                                            <div class="center">
+                                                <% tags.forEach(function(tag) { %>
+                                                    <span class="chip waves-effect"><%= tag %></span>
+                                                    <% }); %>
+                                            </div>
                                         </div>
                                         <input id="tags" name="tags" type="hidden" class="active" value=''>
                                     </div>
