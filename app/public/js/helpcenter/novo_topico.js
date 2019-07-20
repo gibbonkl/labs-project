@@ -1,19 +1,21 @@
 CKEDITOR.replace('corpo');
-/*script chip - escuta o click nas tags*/
+
+/*script chip - Seta cores nas tags no click*/
 $(".chip").click(function(element) {
     ($(this).hasClass("select-chip")) ? $(this).removeClass("select-chip"): $(this).addClass("select-chip")
-        /*verifica se algum foi selecionado*/
     verificaTags();
 });
 
+/*script chip - Envia tags escolhidas*/
 function verificaTags() {
     const array = [];
     $(".chip").each(function(value, index) {
-        /*verifica quais chips foram selecionados*/
-        if ($(index).hasClass("select-chip")) {
-            array.push($(index).text());
-        }
-    })
+            /*verifica quais chips foram selecionados e adiciona no array*/
+            if ($(index).hasClass("select-chip")) {
+                array.push($(index).text());
+            }
+        })
+        /*Preenche os valores no input hidden */
     $("#tags").val(array);
     return array;
 }

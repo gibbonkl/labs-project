@@ -7,12 +7,10 @@ $(document).ready(function() {
 
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
-    $("#show_dailies").fadeIn('fast').removeClass('hide');
+    $("#topics_section").fadeIn('fast').removeClass('hide');
 }
 
 function render(dados) {
-    teste = dados;
-    console.log(teste)
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
             ${dados.imagem ?
@@ -32,9 +30,7 @@ function render(dados) {
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span>
             <div class="right"> 
-                ${dados.tags[0].split(',').map( element =>
-                    `<span class="chip">${element}</span>`
-                ).join('')}           
+                ${dados.tags[0].split(',').map( element => `<span class="chip">${element}</span>`).join('')}           
             </div>
         </a>
     </div>`;

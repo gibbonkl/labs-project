@@ -116,7 +116,7 @@ function resolvido(id) {
             if (response) {
                 $("#resolvido-icone").removeClass("grey-text");
                 $("#resolvido-icone").addClass("green-text");
-                $('.btn-resolvido').addClass("grey");
+                $('.btn-resolvido').addClass("green");
                 $('.btn-resolvido').removeClass("bg-blue-compass");
             }
         })
@@ -224,23 +224,5 @@ function message(type, title) {
         title: title,
         showConfirmButton: true,
         timer: 1500
-    })
-}
-
-/*script chip - escuta o click nas tags*/
-$(".chip").click(function(element) {
-    ($(this).hasClass("blue")) ? $(this).removeClass("blue"): $(this).addClass("blue")
-        /*verifica se algum foi selecionado*/
-});
-
-function verificaTags() {
-    $(".chip").each(function(value, index) {
-        /*verifica quais chips foram selecionados*/
-        const array = [];
-        if ($(index).hasClass("blue")) {
-            /*adiciona no array*/
-            array.push($(index).text());
-        }
-        console.log(array);
     })
 }

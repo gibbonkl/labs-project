@@ -30,42 +30,47 @@
                                 <div class="div-margin col s12">
                                     <div class="padding-titulo input-field col s12">
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
+
                                         <input id="topico-titulo" value='<%= response.titulo %>' name="titulo" type="text" class="active">
-                                        <!-- tratar o erro do editar -->
-                                        <% response.tags[0].split(',').map(element => %><span class="chip waves-effect  <%= response.tags[0].split(',').indexOf(tag)>=0? '  ': '' %>"><%= tag %></span>
-                                            <% ).join('') %>
-                                                <input id="tags" name="tags" type="hidden" class="active" value=''>
+                                        <div class="col s12">
+                                            <label>Selecione uma tag:</label>
+                                            <div class="center">
+                                                <% tags.forEach(function(tag) { %>
+                                                    <span class="chip waves-effect <%= response.tags[0].split(',').indexOf(tag)>=0? 'select-chip': '' %>"><%= tag %></span>
+                                                    <% }); %>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="div-margin col s12">
-                                    <div class="input-field col s12">
-                                        <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                        <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
-                                    </div>
-                                    <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
+                                    <input id="tags" name="tags" type="hidden" class="active" value=''>
+                                    <div class="div-margin col s12">
+                                        <div class="input-field col s12">
+                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                            <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                                        </div>
+                                        <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         <%= response.corpo %>
                                     </textarea>
-                                    <input class="hide" name='_id' value="<%= response._id %>" />
-                                </div>
-                                <div class="div-margin col s12 center">
-                                    <input class="btn bg-blue-compass rounded" type="submit" value="Enviar" />
-                                </div>
+                                        <input class="hide" name='_id' value="<%= response._id %>" />
+                                    </div>
+                                    <div class="div-margin col s12 center">
+                                        <input class="btn bg-blue-compass rounded" type="submit" value="Enviar" />
+                                    </div>
                             </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Ordem de carregamento de script -->
-    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
-    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
-    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
-    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
-    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-    <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
-    <!-- Ordem de carregamento de script -->
+        <!-- Ordem de carregamento de script -->
+        <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+        <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+        <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+        <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+        <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
+        <!-- Ordem de carregamento de script -->
 
 </body>
 
