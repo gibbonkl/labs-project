@@ -28,8 +28,8 @@ function render(dados) {
                 <span class="material-icons number grey-text">${dados.numeroLikes}</span>
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
-            </span>
-            <div class="right"> 
+            </span> 
+            <div class="${dados.tags[0].length==0 ? `hide` : ``} right"> 
                 ${dados.tags[0].split(',').map( element => `<span class="chip">${element}</span>`).join('')}           
             </div>
         </a>
