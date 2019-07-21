@@ -146,7 +146,7 @@ class UserDao extends TemplateDao{
     */
     checkUserPermission(username = "") {
         if (username) {
-            return this._findOne({ username: user.username }, { type: 1 })
+            return this._findOne({ username: username }, { type: 1 })
                 .then(res => res ? res : null)
                 .catch(err => {
                     return ({ detail: "Impossível verificar ", error: err });

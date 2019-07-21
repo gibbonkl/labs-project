@@ -105,4 +105,11 @@ module.exports = function(app)
         comentcontroller.like(req)                           
             .then(response => res?res.send(response):res.send({erro:'Não foi possivel completar a ação'}))
     });
+
+    // Seta Resolvido em Postagem
+    app.post('/helpcenter/resolvido', sessionCheckerRedLogin, (req, res) => {
+
+        HelpCenterController.resolvido(req)
+            .then(response => res ? res.send(response) : res.send({ erro: 'Não foi possivel completar a ação' }))
+    });
 }

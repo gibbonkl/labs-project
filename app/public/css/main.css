@@ -138,7 +138,6 @@ input[type=password]:not(.browser-default),
 textarea.materialize-textarea {
     padding-left: 10px;
 }
-
 .resize-photo {
     margin-top: 25%;
     width: 42px;
@@ -148,11 +147,9 @@ textarea.materialize-textarea {
     display: inline-block;
     vertical-align: middle;
 }
-
-select {
-	display: block!important;
+td select {
+    display: block !important;
 }
-
 .resize-daily{
     margin-right: 2%;
     width: 42px;
@@ -168,5 +165,4 @@ select {
     overflow: hidden;
     left: 15px;
     display: inline-block;
-
 }

@@ -25,7 +25,12 @@
                         <div class="row z-depth-2 div-topico white">
                             <!-- Título do tópico -->
                             <div class="col s10">
-                                <h5 class="blue-compass mont-serrat"><%= response.titulo %></h5>
+                                <h5 class="blue-compass mont-serrat">
+                                    <%= response.titulo %>
+                                    <i class="material-icons left <%= (response.resolvido) ? 'green-text' : 'grey-text' %> " id="resolvido-icone">
+                                        check
+                                    </i>
+                                </h5>
                             </div> 
                             <div class="col s2">
                                 <h5 class="grey-text text-darken-2 mont-serrat right topico-data"><%= response.data %></h5>
@@ -46,6 +51,7 @@
                                 <% } %>
                                 <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                             </div>
+                            
                             <!-- Número de likes do tópico e opção de curtir -->
                             <div class="div-margin col s6 div-like-botao">
                                 <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
@@ -57,12 +63,14 @@
                                 <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
                             </div>  
 
+                            <!-- Deletar | Editar | Setar Resolvido -->
                             <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
                                 <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar tópico</button>   
                                 <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar tópico</button>
+                                <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'grey' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">tópico resolvido</button>
                             </div>
                         </div>
-
+                        
                         <div class="row div-topico white">                            
                             <!-- <div class="div-margin col s12 divider"></div> -->
                             <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>

@@ -33,6 +33,7 @@ function adicionarDailyDOM(daily)
 {
     animaLoad();
     limparTelaSemResultado();
+    $("#collapsible_daily").removeClass("hide");
     $('#collapsible_daily').append(dailyHTML(daily));
 }
 

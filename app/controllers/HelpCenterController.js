@@ -17,9 +17,8 @@ class HelpCenterController {
                     {
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentario
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         postagem.imagem = postagem.user[0].imagem;
                         delete(postagem.user);
                         
@@ -220,6 +219,18 @@ class HelpCenterController {
         {
             return new PostagemDao(PostagemModel).adicionaLike(req.body._id, req.session.user.username)
         }
+    }
+
+    static resolvido(req)
+    {
+        let postagem = new PostagemModel ({
+            _id: req.body._id,
+            username: req.session.user.username,
+        });
+       
+        return new PostagemDao(PostagemModel).resolvido(postagem, req.session.user.tipo)
+            .then(res=> res ? true : false)
+            .catch(error => console.error(error.message))
     }
 }
 
