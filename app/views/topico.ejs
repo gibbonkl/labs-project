@@ -42,20 +42,15 @@
                                                     <% }); %>
                                             </div>
                                             <%} %>
-                                <% if(response.imagem){ %>
-                            <div class="div-margin col s6">
-                                    <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
-                                <% } else { %>
-                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                <% } %>
-                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
-                            </div>
+                                                <div class="div-margin col s6">
+                                                    <% if(response.imagem){ %>
+                                                        <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
+                                                        <% } else { %>
+                                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                                            <% } %>
+                                                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
+                                                </div>
 
-                                            <img class="circle" src="../../public/uploads/<%=response.imagem %>"></a>
-                                            <% } else { %>
-                                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                                <% } %>
-                                                    <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                                     </div>
 
                                     <!-- Número de likes do tópico e opção de curtir -->
@@ -85,18 +80,18 @@
                                 <div id="list_comments"></div>
                                 <!-- Fim Respostas -->
 
-                            <!-- Formulário para responder ao tópico -->
-                            <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
-                                <div class="input-field col s12">
+                                <!-- Formulário para responder ao tópico -->
+                                <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
+                                    <div class="input-field col s12">
                                         <% if(user.imagem){ %>
                                             <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
-                                        <% } else { %>
-                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                        <% } %>
-                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
-                                </div>
-                                <div>
-                                    <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
+                                            <% } else { %>
+                                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                                <% } %>
+                                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                                    </div>
+                                    <div>
+                                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
                                         Digite aqui o conteúdo da sua resposta.
                                     </textarea>
                                     </div>
@@ -112,16 +107,16 @@
             </div>
         </div>
 
-    <!-- Ordem de carregamento de script -->
-    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
-    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
-    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
-    <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
-    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>    
-    <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
-    <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
-    <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
-    <!-- Ordem de carregamento de script -->
+        <!-- Ordem de carregamento de script -->
+        <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+        <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+        <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
+        <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+        <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
+        <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
+        <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
+        <!-- Ordem de carregamento de script -->
 </body>
 
 </html>
