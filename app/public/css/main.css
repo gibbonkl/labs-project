@@ -147,7 +147,7 @@ textarea.materialize-textarea {
     display: inline-block;
     vertical-align: middle;
 }
-select {
+td select {
     display: block !important;
 }
 .resize-daily{
