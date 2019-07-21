@@ -7,10 +7,10 @@ $(document).ready(function() {
 
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
-    $("#show_dailies").fadeIn('fast').removeClass('hide');
+    $("#topics_section").fadeIn('fast').removeClass('hide');
 }
 
-function render(dados){
+function render(dados) {
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
             ${dados.imagem ?
@@ -23,12 +23,15 @@ function render(dados){
             <span class="secondary-content">
             ${dados.resolvido ? `<i class="material-icons green-text" value="${dados.resolvido}">check_circle</i>` : 
                 `<i class="material-icons grey-text" value="${dados.resolvido}">check_circle</i>`}
-            <span class="material-icons number grey-text"></span>
-               <i class="material-icons grey-text">thumb_up</i>
+                <span class="material-icons number grey-text"></span>
+                <i class="material-icons grey-text">thumb_up</i>
                 <span class="material-icons number grey-text">${dados.numeroLikes}</span>
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
-            </span>
+            </span> 
+            <div class="${dados.tags[0].length==0 ? `hide` : ``} right"> 
+                ${dados.tags[0].split(',').map( element => `<span class="chip">${element}</span>`).join('')}           
+            </div>
         </a>
     </div>`;
 }
