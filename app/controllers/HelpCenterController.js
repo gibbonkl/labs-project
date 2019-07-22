@@ -61,6 +61,7 @@ class HelpCenterController {
         else if(op == 'username')
         {
             let username = req.params.username;
+            // let username = 'foto';
             return this.listHelper(
                 postagemDao.listarPostagemByUser(username, (page-1)*batch, batch),
                 username,user)   
@@ -71,6 +72,15 @@ class HelpCenterController {
             return this.listHelper(
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  
+        }
+        else if(op == 'tags')
+        {
+            //tratar requisição
+            console.log(req.params.tags);
+            let tags = req.params.tags.split('+');
+            return this.listHelper(
+                postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
+                username, user)
         }
     }
 

@@ -38,7 +38,7 @@
                                 </div>  
                                 <p></p>
                                 <% if(!response.tags.length){ %>
-                                    <div class="col s12 hide">
+                                    <div class="col s12">
                                         <% } else { %>
                                             <div class="col s12">
                                                 <% response.tags[0].split(',').forEach(function(tag) { %>
@@ -54,13 +54,14 @@
                                                     <%- response.corpo %>                                 
                                                 </div>
                                             </div>
+                                                <!-- Imagem de usuário -->
                                                 <div class="div-margin col s6">
                                                     <% if(response.imagem){ %>
                                                         <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
                                                         <% } else { %>
                                                             <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                                             <% } %>
-                                                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
+                                                            <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                                                 </div>
 
                                     </div>
