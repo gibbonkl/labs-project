@@ -33,15 +33,27 @@
                                         check
                                     </i>
                                 </h5>
-                                <% if(response.tags[0].length==0){ %>
+                                <div class="col s2">
+                                    <h5 class="grey-text text-darken-2 mont-serrat topico-data"><%= response.data %></h5>
+                                </div>  
+                                <p></p>
+                                <% if(!response.tags.length){ %>
                                     <div class="col s12 hide">
                                         <% } else { %>
                                             <div class="col s12">
                                                 <% response.tags[0].split(',').forEach(function(tag) { %>
-                                                    <span class="chip waves-effect select-chip"><%= tag %></span>
-                                                    <% }); %>
+                                                    <% if(tag != '') {%>
+                                                        <span class="chip waves-effect select-chip"><%= tag %></span>
+                                                    <% }%>
+                                                <% }); %>
                                             </div>
                                             <%} %>
+                                            <div class="div-margin col s12">
+                                                <!-- Corpo do tópico -->
+                                                <div id="corpo-topico" class="black-text">
+                                                    <%- response.corpo %>                                 
+                                                </div>
+                                            </div>
                                                 <div class="div-margin col s6">
                                                     <% if(response.imagem){ %>
                                                         <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
