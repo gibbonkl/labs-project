@@ -19,3 +19,11 @@ body {
     margin: 10%;
 }
 
+.margin-forgot-pass{
+    margin-bottom: 40px !important;
+}
+
+.erro{
+    margin-top: 10px;
+    color: red;
+}
