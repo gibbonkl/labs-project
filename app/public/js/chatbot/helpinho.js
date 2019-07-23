@@ -1,6 +1,18 @@
 var element = $('.floating-chat');
 var myStorage = localStorage;
 
+$(function() {
+    let floating_chat = $(".floating-chat"); // seleciona a div específica
+    let web_chat = $("#webchat")
+    $("body").on("click", function (e) {
+        if (floating_chat.has(e.target).length || e.target == floating_chat[0])
+            return;
+        else {
+            closeElement()
+
+        }
+    });
+})
 window.WebChat.renderWebChat(
 {
     directLine: window.WebChat.createDirectLine({
@@ -22,6 +34,7 @@ setTimeout(function() {
 element.click(openElement);
 
 function openElement() {
+    $(".chat").removeClass('hide');
     var messages = element.find('.messages');
     var textInput = element.find('.text-box');
     element.find('>i').hide();

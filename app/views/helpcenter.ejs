@@ -45,21 +45,7 @@
         </div>
     </div>
     
-    <!-- Helpinho -->
-    <div class="floating-chat">
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <div class="chat">
-            <div class="header">
-                <button>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>   
-            </div>
-            <!--
-                iframe src='https://webchat.botframework.com/embed/Helpinho_BOLS?s=3y5fPZhwLfE.ASfIdTbH0uY9l1gl_oNZthZ4J96T5M_S6HssbA8Nty4' style='min-width: 230px; width: 20%; min-height: 350px;'></iframe>
-            -->
-            <div id="webchat" role="main"></div>
-        </div>
-    </div>
+    <% include ./includes/chatbot.ejs %>
 
     <!-- Paginação -->
     <footer class="page-footer bg-blue-compass">
@@ -81,7 +67,7 @@
     <script type="text/javascript" src="../public/js/login/inicio.js"></script>
     <script type="text/javascript" src="../public/js/menu/menu.js"></script>
     <script type="text/javascript" src="../public/js/helpcenter/helpcenter.js"></script>
-    <script type="text/javascript" src="../public/js/helpinho.js"></script>
+    <script type="text/javascript" src="../public/js/chatbot/helpinho.js"></script>
     <!-- Ordem de carregamento de script -->
 
 
