@@ -1,4 +1,5 @@
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <title>Game of Bols</title>
@@ -9,10 +10,13 @@
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="../public/css/novo_topico.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/helpinho.css">
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 </head>
+
 <body class="bg-blue-compass">
     <header>
-        <% include ./includes/navbar.ejs %>       
+        <% include ./includes/navbar.ejs %>
     </header>
 
     <!-- Novo tópico -->
@@ -23,30 +27,39 @@
                     <div class="card-panel white">
                         <div class="row">
                             <h5 class="blue-compass mont-serrat">Novo tópico</h5>
-                            <div class="divider"></div>                            
+                            <div class="divider"></div>
                             <form action="/helpcenter" method="post" id='topico-form'>
-                                <div class="div-margin col s12">                                    
+                                <div class="div-margin col s12">
                                     <div class="padding-titulo input-field col s12">
                                         <!-- <label class="titulo-label" for="topico-titulo">Título do tópico</label> -->
-                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="titulo" type="text" class="active">
+                                        <input id="topico-titulo" placeholder="Digite aqui o título do tópico" name="titulo" type="text" class="active" required>
+                                        <div class="col s12">
+                                            <label>Selecione uma tag:</label>
+                                            <div class="center">
+                                                <% tags.forEach(function(tag) { %>
+                                                    <span class="chip waves-effect"><%= tag %></span>
+                                                    <% }); %>
+                                            </div>
+                                        </div>
+                                        <input id="tags" name="tags" type="hidden" class="active" value=''>
                                     </div>
                                 </div>
-                                <div class="div-margin col s12">     
+                                <div class="div-margin col s12">
                                     <div class="input-field col s12">
-                                            <% if(user.imagem){ %>
-                                                <img class="circle resize-photo" src="../public/uploads/<%= user.imagem %>"></a>
+                                        <% if(user.imagem){ %>
+                                            <img class="circle resize-forum" src="../public/uploads/<%= user.imagem %>"></a>
                                             <% } else { %>
                                                 <img src="../public/img/user.png" alt="" class="circle avatar-user">
-                                            <% } %>
-                                        <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                                                <% } %>
+                                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                     </div>
                                     <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         Digite aqui o conteúdo do seu post.
                                     </textarea>
-                                </div>        
+                                </div>
                                 <div class="div-margin col s12 center">
                                     <input class="btn bg-blue-compass rounded" type="submit" value="Enviar" />
-                                </div>                    
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -54,15 +67,18 @@
             </div>
         </div>
     </div>
-
+    <% include ./includes/chatbot.ejs %>
     <!-- Ordem de carregamento de script -->
-    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
-    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
-    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
-    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-    <script type="text/javascript" src="../public/js/daily/dailies.js"></script>
-    <script type="text/javascript" src="../public/js/helpcenter/novo_topico.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
+    <script type="text/javascript" src="../../public/js/daily/dailies.js"></script>
+    <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
+    <script type="text/javascript" src="../public/js/chatbot/helpinho.js"></script>
+
     <!-- Ordem de carregamento de script -->
 
 </body>

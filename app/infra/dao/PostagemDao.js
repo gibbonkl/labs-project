@@ -127,7 +127,7 @@ class PostagemDao extends TemplateDao{
                         }
                     ],
                     "totalCount": [
-                        { "$match": { $and: [{ativo: true}, {username: username}]}},
+                        { "$match": { $and: [{ativo: true}, {username:{"$regex": username, "$options":'i'}}]}},
                         { "$count": "count" }
                     ]
                 }}
@@ -255,7 +255,22 @@ class PostagemDao extends TemplateDao{
         *   @returns {postagem} postagem e todos os comentarios associados
     */
    getPostagem(id=''){
-        return this._findOne({ _id: id, ativo: true })
+        // return this._findOne({ _id: id, ativo: true })
+        return this._aggregate([
+            {'$match': {
+                    _id: mongoose.Types.ObjectId(id),
+                    ativo: true
+                }
+            },
+            {'$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'username', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                }
+            }
+        ])
+        .then(res=> res[0])
         .then(res => res ? res : false)
         .catch(err => console.log('Erro ao realizar busca: ' + err.message))
     }
@@ -274,24 +289,11 @@ class PostagemDao extends TemplateDao{
                     'from': 'comentarios', 
                     'localField': 'comentarios', 
                     'foreignField': '_id',
-                    'as': 'comentarios.comentario'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'username', 
-                    'foreignField': 'username', 
-                    'as': 'user'
-                }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'comentarios.comentario.username', 
-                    'foreignField': 'username', 
-                    'as': 'comentarios.user'
+                    'as': 'comentarios'
                 }
             }
         ])
+        .then(res => res[0])
         .then(res => res ? res : 'error')
         .catch(console.error)
     }
@@ -308,8 +310,12 @@ class PostagemDao extends TemplateDao{
                     "totalData": [
                         {
                                     "$match": { $and: [ 
-                                        {titulo:{"$regex": searched, "$options":'i'}}, 
-                                        {ativo: true} ]
+                                        {ativo: true}, 
+                                        {$or: [
+                                            {titulo:{"$regex": searched, "$options":'i'}}, 
+                                            {corpo:{"$regex": searched, "$options":'i'}},
+                                        ]}
+                                    ]
                                     },
                                 },
                                 {'$lookup': {
@@ -327,7 +333,12 @@ class PostagemDao extends TemplateDao{
                                 }
                     ],
                     "totalCount": [
-                        { "$match": { $and: [{ativo: true}, {titulo: {'$regex': searched,'$options':'i'}}]}},
+                        { "$match": { $and: [ 
+                                {ativo: true}, 
+                                {$or: [
+                                    {titulo:{"$regex": searched, "$options":'i'}}, 
+                                    {corpo:{"$regex": searched, "$options":'i'}},
+                                ]}]}},
                         { "$count": "count" }
                     ]
                 }}
@@ -410,6 +421,46 @@ class PostagemDao extends TemplateDao{
             return this._findOneAndUpdate({_id: postagem._id, ativo: true, username: postagem.username}, {resolvido: true}, { new: true})
                 .then(res => res ? res : false)
                 .catch(err => console.log(err.message))
+    }
+
+
+    /*
+        *   Busca uma postagem na base de dados pela lista de tags
+        *   @param {lista de strings} tags serem buscas no banco
+        *   @param {Number} skipq
+        *   @param {Number} limit Limite de postagens para busca
+        *   @returns {Array}
+    */
+    listarPostagemByTags(tags, skip = '', limit = ''){
+        return this._aggregate([
+                { "$facet": {
+                    "totalData": [
+                        {
+                                    "$match": { $and: [ 
+                                        { tags: { $all: tags } }, 
+                                        {ativo: true} ]
+                                    },
+                                },
+                                {'$lookup': {
+                                    'from': 'usuarios', 
+                                    'localField': 'username', 
+                                    'foreignField': 'username', 
+                                    'as': 'user'
+                                    }
+                                },
+                                {
+                                    "$skip": skip
+                                },
+                                {
+                                    "$limit": limit
+                                }
+                    ],
+                    "totalCount": [
+                        { "$match": { $and: [ {ativo: true}, { tags: { $all: tags } } ]}},
+                        { "$count": "count" }
+                    ]
+                }}
+            ])
     }
 
 }

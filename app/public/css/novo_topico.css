@@ -1,60 +1,86 @@
-.avatar-user{
+.avatar-user {
     min-height: 50px;
     min-width: 50px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
-.div-margin{
+
+.div-margin {
     margin-top: 3%;
 }
-.nome-user{
+
+.nome-user {
     font-size: 1.1em;
     line-height: 2;
     position: relative !important;
     top: -18;
     margin-left: 2%;
 }
-.div-like-botao{
+
+.div-like-botao {
     position: relative !important;
     top: 5 !important;
 }
-.like-botao{
+
+.like-botao {
     position: absolute !important;
     right: 15 !important;
 }
-.number-likes{
+
+.number-likes {
     font-size: 1.1em;
     font-weight: bold;
 }
-.responder-padding{
+
+.responder-padding {
     padding: 5 10 5 10;
 }
-.titulo-label{
+
+.titulo-label {
     top: -30 !important;
 }
-#topico-titulo{
+
+#topico-titulo {
     border: 1px solid #d1d1d1 !important;
 }
-.padding-titulo{
+
+.padding-titulo {
     padding-left: 0 !important;
 }
-.div-topico{
+
+.div-topico {
     padding: 2% !important;
     margin-top: -9 !important;
 }
-.topico-data{
+
+.topico-data {
     font-size: 1rem !important;
     padding-top: 7 !important;
 }
-.nome-user-resposta{
+
+.nome-user-resposta {
     position: relative !important;
     left: -3 !important;
     top: 1 !important;
 }
-.resposta{
+
+.resposta {
     padding: 2% 2% 0 2% !important;
 }
-.corpo-resposta{
+
+.corpo-resposta {
     padding: 2% 2% 0 2% !important;
+}
+
+.chip:hover {
+    background: #2196f3;
+    opacity: 0.8;
+    cursor: pointer;
+    color: white;
+}
+
+.select-chip {
+    background: #2196f3;
+    color: white;
 }

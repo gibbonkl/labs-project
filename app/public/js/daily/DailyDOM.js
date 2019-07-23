@@ -2,10 +2,13 @@ function dailyHTML(daily)
 {
     return `<li id="${daily._id}" class="data">
         <div class="collapsible-header">
-            <i class="material-icons">face</i>
-            <span class="span-margin data" data-name="${daily.usuario}">${daily.usuario}</span>
-            <i class="material-icons">event</i>
-            <span class="span-margin data align-right dia" data-date="${daily.data}">${daily.data}</span>
+            ${daily.imagem ?
+                `<img class="circle resize-daily" src="../public/uploads/${daily.imagem}">`
+                : `<i class="material-icons">face</i>`
+            }            
+            <span class="span-margin data margin-top-10" data-name="${daily.usuario}">${daily.usuario}</span>
+            <i class="material-icons margin-top-10">event</i>
+            <span class="span-margin data align-right dia margin-top-10" data-date="${daily.data}">${daily.data}</span>
         </div>
         <div class="collapsible-body grey lighten-3">
             <div class="row">
@@ -30,6 +33,7 @@ function adicionarDailyDOM(daily)
 {
     animaLoad();
     limparTelaSemResultado();
+    $("#collapsible_daily").removeClass("hide");
     $('#collapsible_daily').append(dailyHTML(daily));
 }
 
@@ -53,9 +57,10 @@ function limparTelaSemResultado()
 
 function listarDailiesDOM(dailyList)
 {
+    console.log(dailyList)
     animaLoad();
     limparTelaSemResultado();
-    if(dailyList.length > 0)
+    if(dailyList.length >= 0)
     {
         $("#collapsible_daily").removeClass("hide");
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));

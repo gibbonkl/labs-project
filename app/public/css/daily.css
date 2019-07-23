@@ -9,6 +9,9 @@
 .margin-top {
     margin-top: 1%;
 }
+.margin-top-10 {
+    margin-top: 10 !important;
+}
 
 .confirme {
     width: 115px;

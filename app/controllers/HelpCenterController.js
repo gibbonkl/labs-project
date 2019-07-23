@@ -17,9 +17,8 @@ class HelpCenterController {
                     {
                         if (user == 'admin' || postagem.username == username)
                             postagem['permissao'] = true;
-
                         HelpCenterController.insereNumeroDeLikesEComentarios(postagem);
-                        HelpCenterController.apagaLikesEComentario
+                        HelpCenterController.apagaLikesEComentarios(postagem);
                         postagem.imagem = postagem.user[0].imagem;
                         delete(postagem.user);
                         
@@ -62,6 +61,7 @@ class HelpCenterController {
         else if(op == 'username')
         {
             let username = req.params.username;
+            // let username = 'foto';
             return this.listHelper(
                 postagemDao.listarPostagemByUser(username, (page-1)*batch, batch),
                 username,user)   
@@ -72,6 +72,15 @@ class HelpCenterController {
             return this.listHelper(
                 postagemDao.search(busca, (page-1)*batch, batch),
                 username,user)  
+        }
+        else if(op == 'tags')
+        {
+            //tratar requisição
+            console.log(req.params.tags);
+            let tags = req.params.tags.split('+');
+            return this.listHelper(
+                postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
+                username, user)
         }
     }
 
@@ -91,7 +100,8 @@ class HelpCenterController {
         let postagem = new PostagemModel ({
             username: req.session.user.username,
             corpo: req.body.corpo,
-            titulo: req.body.titulo
+            titulo: req.body.titulo,
+            tags: req.body.tags
         });
 
         return new PostagemDao(PostagemModel).insertPostagem(postagem)
@@ -108,7 +118,8 @@ class HelpCenterController {
             _id: req.body._id,
             username: req.session.user.username,
             corpo: req.body.corpo,
-            titulo: req.body.titulo
+            titulo: req.body.titulo,
+            tags: req.body.tags
         });
         //console.log(postagem);
        
@@ -149,6 +160,9 @@ class HelpCenterController {
                     if (user == 'admin' || postagem.username == username)
                                 postagem['permissao'] = true;
                     HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
+                    postagem.comentarios = postagem.comentarios.comentario;
+                    postagem.imagem = postagem.user[0].imagem;
+                    delete(postagem.user);
                     return postagem;
                 }
                 else
@@ -177,7 +191,6 @@ class HelpCenterController {
             /*
                 *   Retorna a primeira posição do array de postagens
             */
-            .then(postagens => postagens[0])
             .then(postagem =>{
                 /*
                     *   Adiciona o campo imagem ao comentário
@@ -198,9 +211,7 @@ class HelpCenterController {
                     *   Remove o array de usuário da postagem e adiciona a foto ao objeto
                 */
                user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
-               postagem.comentarios = postagem.comentarios.comentario;
-               postagem.imagem = postagem.user[0].imagem;
-               delete(postagem.user);
+            //    postagem.comentarios = postagem.comentarios.comentario;
                return postagem;
 
             })
