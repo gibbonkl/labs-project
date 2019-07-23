@@ -1,0 +1,36 @@
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/home.jpg");
+    height: 50%;  
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: inherit;
+}  
+.hero-text {
+    text-align: left;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    color: white;
+}
+.margin-top{
+    margin-top: 5%;
+}
+.margin-bottom{
+    margin-bottom: 3% !important;
+}
+.margin-bottom-0{
+    margin-bottom: 0 !important;
+}
+.top3{
+    padding: 2% 2% 0 2% !important;
+}
+.nome-user-resposta{
+    position: relative !important;
+    left: -3 !important;
+    top: 1 !important;
+}
+.not-clickable div{
+    cursor: default !important;
+}

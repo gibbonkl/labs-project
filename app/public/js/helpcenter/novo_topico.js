@@ -1,33 +1,21 @@
-var config = {
-    //extraPlugins: 'codesnippet, widget',
-    codeSnippet_theme: 'monokai_sublime',
-    height: 356,
-    removePlugins: 'wsc',
-    removeButtons: 'Outdent,Indent,Cut,Copy,Paste,PasteFromWord,Anchor,Styles,Specialchar',
-    toolbarGroups: [{
-        "name": "basicstyles",
-        "groups": ["basicstyles"]
-      },
-      {
-        "name": "links",
-        "groups": ["links"]
-      },
-      {
-        "name": "paragraph",
-        "groups": ["list", "blocks"]
-      },
-      {
-        "name": "document",
-        "groups": ["mode"]
-      },
-      {
-        "name": "insert",
-        "groups": ["insert"]
-      },
-      {
-        "name": "about",
-        "groups": ["about"]
-      }
-    ]
+CKEDITOR.replace('corpo');
+
+/*script chip - Seta cores nas tags no click*/
+$(".chip").click(function(element) {
+    ($(this).hasClass("select-chip")) ? $(this).removeClass("select-chip"): $(this).addClass("select-chip")
+    verificaTags();
+});
+
+/*script chip - Envia tags escolhidas*/
+function verificaTags() {
+    const array = [];
+    $(".chip").each(function(value, index) {
+            /*verifica quais chips foram selecionados e adiciona no array*/
+            if ($(index).hasClass("select-chip")) {
+                array.push($(index).text());
+            }
+        })
+        /*Preenche os valores no input hidden */
+    $("#tags").val(array);
+    return array;
 }
-CKEDITOR.replace('corpo', config);

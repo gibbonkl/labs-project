@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="../public/css/daily.css">
     <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
     <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <link rel="stylesheet" type="text/css" href="../public/css/helpinho.css">
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <!-- Ordem de carregamento de link -->
 </head>
 
@@ -25,7 +27,7 @@
             <br><br>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large bg-yellow-compass rounded <%if(user.tipo=='' || user.tipo=='admin'){%><%='disabled'%><%}%>" id="inserir" onclick="inserir()">
-                <i class="left material-icons">add</i>Nova daily</a>
+                    <i class="left material-icons">add</i>Nova daily</a>
             </div>
         </div>
     </div>
@@ -67,7 +69,7 @@
                 </ul>
             </div>
         </div>
-
+        <% include ./includes/chatbot.ejs %>
 
         <!--footer class="page-footer bg-blue-compass">
         <div class="container">
@@ -91,9 +93,12 @@
         <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
         <!--script type="text/javascript" src="../public/js/daily/dailies.js"></script-->
         <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+        <script type="text/javascript" src="helper/custom_materialize.js"></script>
         <script type="text/javascript" src="../public/js/daily/DailyDOM.js"></script>
         <script type="text/javascript" src="../public/js/daily/DailyCrud.js"></script>
-        <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>        
+        <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>
+        <script type="text/javascript" src="../public/js/chatbot/helpinho.js"></script>
+
         <!--script type="text/javascript" src="../public/js/daily/crudDaily.js"></script-->
         <!-- Ordem de carregamento de script -->
 </body>

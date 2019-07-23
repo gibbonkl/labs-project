@@ -1,0 +1,99 @@
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <title>Game of Bols</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/home.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/helpcenter.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
+    <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <link rel="stylesheet" type="text/css" href="../public/css/daily.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/helpinho.css">
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+</head>
+
+<body class="bg-blue-compass">
+    <header>
+        <% include ./includes/navbar.ejs %>
+    </header>
+
+    <!-- Container de imagem de boas vindas -->
+    <div class="hero-image z-depth-2">
+        <div class="hero-text">
+            <h3 class="mont-serrat">Bem vindo ao Game of Bols</Insira></h1>
+            <h5>O sistema ideal para seu time ágil.</h4>
+        </div>
+    </div>
+
+    <!-- Container de últimas daily notes -->
+    <div class="container margin-top">
+        <div class="card-panel white">
+            <div class="row margin-bottom-0">
+                <h6 class="col s12 blue-compass mont-serrat">Daily notes cadastradas hoje</h6>
+                <div class="divider col s12"></div>
+
+                <div id="show_dailies" class="row">
+                    <ul id="collapsible_daily" class="not-clickable">
+                    </ul>
+                </div>
+                <!-- <div class="col s12 top3">
+                    <div class="col s10">
+                        <span class="grey-text text-darken-1 nome-user-resposta"><i class="left material-icons">person</i>Anna</span>
+                    </div>
+                    <div class="col s2">
+                        <span class="grey-text right">18/07/2019</h5>
+                    </div>  
+                </div> -->
+                <div class="col s12 center">
+                    <button class="btn bg-blue-compass rounded waves-effect" onclick="dailynote()">Ver todas</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+
+    <!-- Container de últimas atualizações no helpcenter -->
+    <div class="container margin-top margin-bottom">
+        <div class="card-panel white">
+            <div class="row margin-bottom-0">
+                <h6 class="col s12 blue-compass mont-serrat">Últimas atualizações do helpcenter</h6>
+                <div class="divider col s12"></div>
+                <div id="list-posts" class="collection mouse-topico"></div>
+                <!-- <div class="col s12 top3">
+                    <div class="col s10">
+                        <span class="grey-text text-darken-1 nome-user-resposta"><i class="left material-icons">person</i>Anna</span>
+                    </div>
+                    <div class="col s2">
+                        <span class="grey-text right">18/07/2019</h5>
+                    </div>  
+                </div> -->
+                <div class="col s12 center">
+                    <button class="btn bg-blue-compass rounded waves-effect" onclick="helpcenter()">Ver todas</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <% include ./includes/chatbot.ejs %>
+
+
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="../public/js/home/home.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyDOM.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyCrud.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>  
+    <script type="text/javascript" src="../public/js/helpcenter/helpcenter.js"></script>  
+    <script type="text/javascript" src="../public/js/chatbot/helpinho.js"></script>
+
+    <!-- Ordem de carregamento de script -->
+
+
+</body>
+
+</html>

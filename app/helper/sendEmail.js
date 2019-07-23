@@ -2,7 +2,7 @@ const mailer = require('nodejs-nodemailer-outlook');
 const Class_config = require('../../config/config_localOUremoto');
 const config = new Class_config();
 const local = `http://localhost:1337`;
-const remote = `https://gob-p1.azurewebsites.net`
+const remote = `https://gob-dev.azurewebsites.net`
 const route = "/recuperar_senha";
 class sendEmail{
     constructor(){
