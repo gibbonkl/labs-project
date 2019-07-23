@@ -1,15 +1,21 @@
-    <!-- Helpinho -->
-    <div class="floating-chat">
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <div class="chat">
-            <div class="header">
-                <button>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>   
-            </div>
-            <!--
-                iframe src='https://webchat.botframework.com/embed/Helpinho_BOLS?s=3y5fPZhwLfE.ASfIdTbH0uY9l1gl_oNZthZ4J96T5M_S6HssbA8Nty4' style='min-width: 230px; width: 20%; min-height: 350px;'></iframe>
-            -->
-            <div id="webchat" role="main"></div>
+<!-- Helpinho -->
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+<link rel="stylesheet" type="text/css" href="../public/css/helpinho.css">
+<div class="floating-chat">
+    <img class="right circle chat-icon tooltipped" data-position="left" data-tooltip="Olá, eu sou o helpinho! Posso te ajudar?" src="public/img/bot-icon-7.jpg" />
+    <!-- <img class="circle chat-icon" src="public/img/icon_chatbot.png" /> -->
+    <div class="chat">
+        <div class="header">
+            <button class="white">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
         </div>
+        <!--
+            iframe src='https://webchat.botframework.com/embed/Helpinho_BOLS?s=3y5fPZhwLfE.ASfIdTbH0uY9l1gl_oNZthZ4J96T5M_S6HssbA8Nty4' style='min-width: 230px; width: 20%; min-height: 350px;'></iframe>
+        -->
+        <div id="webchat" role="main"></div>
     </div>
+</div>
+<script type="text/javascript" src="/public/js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="public/js/chatbot/helpinho.js"></script>
+<script type="text/javascript" src="public/js/chatbot/interface.js"></script>
