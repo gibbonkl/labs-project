@@ -1,4 +1,3 @@
-
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/editar_perfil" class="blue-compass">Editar perfil</a></li>
     <li><a href="/alterar_senha" class="blue-compass">Alterar senha</a></li>
@@ -30,9 +29,9 @@
                     <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
                         <% if(user.imagem){ %>
                             <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
-                        <% } else { %>
-                            <i class="material-icons">face</i>
-                        <% } %>
+                            <% } else { %>
+                                <i class="material-icons">face</i>
+                                <% } %>
                     </a>
                 </li>
             </ul>
@@ -52,28 +51,28 @@
                 <!-- caso usuário não esteja logado, mostra só olá -->
                 <a href="#name"><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá <%= user.username %>!</span></a>
 
-                             </div>
-                        </li>
-                    <li><a href="#!"><i class="logo-nav"></i>GAME OF BOLS</a></li>
-                    <!-- <li><a href="#!">Second Link</a></li> -->
-                    <li><div class="divider"></div></li>
-                    <!-- <li><a class="subheader">Subheader</a></li> -->
-                    <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
-                    <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>                   
-                    <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
-                     <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
-                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>alterar senha</a></li>                     
-                    <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
-                    <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
-                    <!-- caso usuário esteja logado, mostra a opção logout  -->
-                    <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
-                </ul>
-        </div>
-    <script> 
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
-    </script>
-    
-   
+            </div>
+        </li>
+        <li><a href="#!"><i class="logo-nav"></i>GAME OF BOLS</a></li>
+        <!-- <li><a href="#!">Second Link</a></li> -->
+        <li>
+            <div class="divider"></div>
+        </li>
+        <!-- <li><a class="subheader">Subheader</a></li> -->
+        <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
+        <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>
+        <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
+        <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>alterar senha</a></li>
+        <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
+        <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
+        <!-- caso usuário esteja logado, mostra a opção logout  -->
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
+    </ul>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+    });
+</script>
