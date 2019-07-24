@@ -60,10 +60,10 @@
         </li>
         <!-- <li><a class="subheader">Subheader</a></li> -->
         <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
-        <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>
-        <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
+        <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily notes</a></li>
+        <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help center</a></li>
         <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
-        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>alterar senha</a></li>
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>Alterar senha</a></li>
         <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
         <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
         <!-- caso usuário esteja logado, mostra a opção logout  -->
