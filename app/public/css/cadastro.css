@@ -35,11 +35,6 @@ body {
     margin-bottom: 15px;
 }
 
-.form-photo:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
-
 .input-field {
     margin-bottom: unset !important;
 }

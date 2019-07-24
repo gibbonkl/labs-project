@@ -38,6 +38,7 @@
             <form action="/cadastro" method="post" enctype="multipart/form-data">
                 <div class="container center">
                     <h3 class="blue-compass center mont-serrat">Criar uma conta</h3>
+                    <!-- Imagem -->
                     <div class="row center">
                         <div id="page" class="hide">
                             <div id="main-cropper"></div>
@@ -48,6 +49,7 @@
                             <input type="file" name="upload" id="upload" value="Choose Image" accept="image/*" class="hide">
                         </div>
                     </div>
+                    <!-- Fim imagem -->
                     <div class="input-field col s12 m6">
                         <input id="nome" placeholder=" " name="nome" type="text" class="active <%if(user.nome == ''){%><%=user.invalidClass%> <%}%>" value='<%= user.nome%>'>
                         <label for="nome">Nome</label>
@@ -108,9 +110,9 @@
     <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
     <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
     <script type="text/javascript" src="../public/js/libs/croppie.min.js"></script>
-    <script  type="text/javascript" src="../public/js/cadastro/password.js"></script>
+    <script type="text/javascript" src="../public/js/cadastro/password.js"></script>
     <script type="text/javascript" src="../public/js/login/inicio.js"></script>
-    <script type="text/javascript" src="../public/js/cadastro/photo.js"></script>
+    <script type="text/javascript" src="../public/js/foto/photo.js"></script>
     <!-- Ordem de carregamento de script -->
 </body>
 

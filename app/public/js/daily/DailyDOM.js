@@ -12,13 +12,13 @@ function dailyHTML(daily)
         </div>
         <div class="collapsible-body grey lighten-3">
             <div class="row">
-                <div class="col s6">
-                <span class="bold ">  O que você fez ontem: </span><span class="ontem">${daily.corpo.ontem}</span><br>
-                <span class="bold"> O que fará Hoje: </span><span class="hoje">${daily.corpo.hoje}</span><br>
-                <span class="bold"> Impedimentos: </span><span class="imp">${daily.corpo.impedimento}</span>
+                <div class="col s10">
+                    <span class="bold">Ontem: </span><span class="ontem">${daily.corpo.ontem}</span><br>
+                    <span class="bold">Hoje: </span><span class="hoje">${daily.corpo.hoje}</span><br>
+                    <span class="bold">Impedimentos: </span><span class="imp">${daily.corpo.impedimento}</span>
                 </div>
                 ${daily.permissao ?
-                    `<div class="col s6">
+                    `<div class="col s2">
                         <a class="btn-floating white right" onclick="deletar('${daily._id}')" ><i  class="material-icons black-text">delete</i></a>
                         <a class="btn-floating white right btn-margin-right" onclick="editar('${daily._id}')"><i class="material-icons black-text">create</i></a>
                     </div>`
