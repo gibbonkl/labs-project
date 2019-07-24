@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 @media screen and (max-width: 435px) {
@@ -28,7 +28,11 @@ body {
 }
 
 .btn-margin-top {
-    margin-top: 3%;
+    margin-top: 2%;
+}
+
+.btn{
+    margin-bottom: 15px;
 }
 
 .form-photo:hover {
@@ -38,4 +42,8 @@ body {
 
 .input-field {
     margin-bottom: unset !important;
+}
+
+.notificacoes{
+    color: red;
 }

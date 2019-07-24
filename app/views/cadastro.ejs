@@ -90,13 +90,14 @@
                 </div>
                 <div class="col s12 center btn-margin-top">
                     <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
+                <div class="notificacoes">
+                    <% user.erros.forEach(function(er){ %>
+                        <li>
+                            <%= er%>
+                        </li>
+                        <% }) %>
                 </div>
-                <% user.erros.forEach(function(er){ %>
-                    <li>
-                        <%= er%>
-                    </li>
-                    <% }) %>
-                
+            </div>
             </form>
         </div>
         <!-- Fim do formulário -->
