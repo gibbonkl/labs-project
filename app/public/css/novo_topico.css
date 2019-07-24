@@ -53,6 +53,9 @@
     padding: 2% !important;
     margin-top: -9 !important;
 }
+.div-topico:last-of-type{
+    margin-bottom: 0 !important;
+}
 
 .topico-data {
     font-size: 1rem !important;
@@ -83,4 +86,8 @@
 .select-chip {
     background: #2196f3;
     color: white;
+}
+.container{
+    padding: 2% 1% 1% 1% !important;
+    background-color: #e0e0e0;
 }
