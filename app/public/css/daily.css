@@ -73,3 +73,14 @@
     margin-top: 1%;
     height: 40px !important;
 }
+
+.bold{
+  font-weight: bold;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;  */
+font-family: sans-serif;}
+
+.ontem, .hoje, .impedimentos{
+    color: dimgrey;
+    font-family: cursive;
+}
+     
