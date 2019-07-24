@@ -13,9 +13,9 @@ function dailyHTML(daily)
         <div class="collapsible-body grey lighten-3">
             <div class="row">
                 <div class="col s6">
-                    <span class="bold">Ontem: </span><span class="ontem">${daily.corpo.ontem}</span><br>
-                    <span class="bold">Hoje: </span><span class="hoje">${daily.corpo.hoje}</span><br>
-                    <span class="bold">Impedimentos: </span><span class="imp">${daily.corpo.impedimento}</span>
+                <span class="bold ">  O que você fez ontem: </span><span class="ontem">${daily.corpo.ontem}</span><br>
+                <span class="bold"> O que fará Hoje: </span><span class="hoje">${daily.corpo.hoje}</span><br>
+                <span class="bold"> Impedimentos: </span><span class="imp">${daily.corpo.impedimento}</span>
                 </div>
                 ${daily.permissao ?
                     `<div class="col s6">
