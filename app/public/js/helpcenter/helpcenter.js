@@ -69,6 +69,7 @@ function list_topics(busca='atividade', dados='') {
 
 function new_topic() {
     window.location.href = "/helpcenter/novo";
+    
 }
 
 function enter_topic(id) {
