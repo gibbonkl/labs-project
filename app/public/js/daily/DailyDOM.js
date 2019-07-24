@@ -4,7 +4,7 @@ function dailyHTML(daily)
         <div class="collapsible-header">
             ${daily.imagem ?
                 `<img class="circle resize-daily" src="../public/uploads/${daily.imagem}">`
-                : `<i class="material-icons">face</i>`
+                : `<img src="../public/img/user.png" alt="" class="circle resize-daily">`
             }            
             <span class="span-margin data margin-top-10" data-name="${daily.usuario}">${daily.usuario}</span>
             <i class="material-icons margin-top-10">event</i>

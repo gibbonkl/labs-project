@@ -28,10 +28,10 @@
                 <li>
                     <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
                         <% if(user.imagem){ %>
-                            <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
-                            <% } else { %>
-                                <i class="material-icons">face</i>
-                                <% } %>
+                        <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
+                        <% } else { %>
+                        <img  class="circle resize-photo" src="../public/img/user.png" alt="">
+                        <% } %>
                     </a>
                 </li>
             </ul>
