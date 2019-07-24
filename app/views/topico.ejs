@@ -29,91 +29,100 @@
                             <div class="col s10">
                                 <h5 class="blue-compass mont-serrat">
                                     <%= response.titulo %>
-                                        <i class="material-icons left <%= (response.resolvido) ? 'green-text' : 'grey-text' %> " id="resolvido-icone">
+                                    <i class="material-icons left <%= (response.resolvido) ? 'green-text' : 'grey-text' %> " id="resolvido-icone">
                                         check
                                     </i>
                                 </h5>
-                                <div class="col s2">
-                                    <h5 class="grey-text text-darken-2 mont-serrat topico-data"><%= response.data %></h5>
-                                </div>  
-                                <p></p>
-                                <% if(!response.tags.length){ %>
-                                    <div class="col s12">
+                            </div>
+                            <!-- Data do tópico -->
+                            <div class="col s2">
+                                <h5 class="grey-text text-darken-2 mont-serrat topico-data"><%= response.data %></h5>
+                            </div>  
+                            <p></p>
+
+                            <!-- Tags do tópico-->
+                            <% if(!response.tags.length){ %>
+                            <div class="col s12">
+                            <% } else { %>
+                            <div class="col s12">
+                                <% response.tags[0].split(',').forEach(function(tag) { %>
+                                    <% if(tag != '') {%>
+                                        <span class="chip waves-effect select-chip"><%= tag %></span>
+                                    <% }%>
+                                <% }); %>
+                            <%} %>
+                            </div>
+
+                            <!-- Corpo do tópico -->
+                            <div class="div-margin col s12">
+                                <div id="corpo-topico" class="black-text">
+                                    <%- response.corpo %>                                 
+                                </div>
+                            </div>
+                            <!-- Imagem do usuário e nome -->
+                            <div class="div-margin col s6">
+                                <% if(response.imagem){ %>
+                                <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
+                                <% } else { %>
+                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <% } %>
+                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
+                            </div>
+
+                            <!-- Número de likes do tópico e opção de curtir -->
+                            <div class="div-margin col s6 div-like-botao">
+                                <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
+                                    <i class="left material-icons">thumb_up</i>
+                                    <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
+                                </a>
+                            </div>
+                            <!-- Botão responder -->
+                            <div class="div-margin col s12">
+                                <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
+                            </div>
+
+                            <!-- Deletar | Editar | Setar Resolvido -->
+                            <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
+                                <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                                <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
+                            </div>
+                        </div>
+
+                        <div class="row div-topico white">
+                            <!-- <div class="div-margin col s12 divider"></div> -->
+                            <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
+
+                            <!-- Respostas -->
+                            <div id="list_comments"></div>
+                            <!-- Fim Respostas -->
+                        </div>
+                        
+                        <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
+                            <!-- <div class="div-margin col s12 divider"></div> -->
+                            <h5 id="responder"class="div-margin col s12 blue-compass mont-serrat">Responder</h5>
+
+                            <!-- Formulário para responder ao tópico -->
+                            <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
+                                <div class="input-field col s12">
+                                    <% if(user.imagem){ %>
+                                        <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
                                         <% } else { %>
-                                            <div class="col s12">
-                                                <% response.tags[0].split(',').forEach(function(tag) { %>
-                                                    <% if(tag != '') {%>
-                                                        <span class="chip waves-effect select-chip"><%= tag %></span>
-                                                    <% }%>
-                                                <% }); %>
-                                            </div>
-                                            <%} %>
-                                            <div class="div-margin col s12">
-                                                <!-- Corpo do tópico -->
-                                                <div id="corpo-topico" class="black-text">
-                                                    <%- response.corpo %>                                 
-                                                </div>
-                                            </div>
-                                                <!-- Imagem de usuário -->
-                                                <div class="div-margin col s6">
-                                                    <% if(response.imagem){ %>
-                                                        <img class="circle resize-forum" src="../../public/uploads/<%=response.imagem %>">
-                                                        <% } else { %>
-                                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                                            <% } %>
-                                                            <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
-                                                </div>
+                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                            <% } %>
+                                                <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                                </div>
+                                <div>
+                                    <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
+                                    Digite aqui o conteúdo da sua resposta.
+                                </textarea>
+                                </div>
+                                <div class="div-margin col s12 center">
+                                    <input class="btn bg-blue-compass rounded" type="submit" value="Responder" />
+                                </div>
+                            </form>
+                        </div>
 
-                                    </div>
-
-                                    <!-- Número de likes do tópico e opção de curtir -->
-                                    <div class="div-margin col s6 div-like-botao">
-                                        <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
-                                            <i class="left material-icons">thumb_up</i>
-                                            <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
-                                        </a>
-                                    </div>
-                                    <div class="div-margin col s12">
-                                        <a href="#responder" class="grey-text text-darken-1 grey <%= user.tipo? '':'isDisabled'  %>  lighten-3 responder-padding rounded">Responder</a>
-                                    </div>
-
-                                    <!-- Deletar | Editar | Setar Resolvido -->
-                                    <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                                        <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
-                                        <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
-                                        <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
-                                    </div>
-                            </div>
-
-                            <div class="row div-topico white">
-                                <!-- <div class="div-margin col s12 divider"></div> -->
-                                <h5 class="div-margin col s12 blue-compass mont-serrat">Respostas</h5>
-
-                                <!-- Respostas -->
-                                <div id="list_comments"></div>
-                                <!-- Fim Respostas -->
-
-                                <!-- Formulário para responder ao tópico -->
-                                <form id="comment_form" class="div-margin col s12" action="/helpCenter/comentario" method="post">
-                                    <div class="input-field col s12">
-                                        <% if(user.imagem){ %>
-                                            <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
-                                            <% } else { %>
-                                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                                <% } %>
-                                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
-                                    </div>
-                                    <div>
-                                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
-                                        Digite aqui o conteúdo da sua resposta.
-                                    </textarea>
-                                    </div>
-                                    <div class="div-margin col s12 center">
-                                        <input class="btn bg-blue-compass rounded" type="submit" value="Responder" />
-                                    </div>
-                                </form>
-
-                            </div>
                         </div>
                     </div>
                 </div>
