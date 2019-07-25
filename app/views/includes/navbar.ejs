@@ -43,13 +43,19 @@
                 <div class="background">
                     <img class="responsive-img" src="../public/img/sidebar-background.jpg">
                 </div>
-                <a href="#user"></a>
-
+                
+                <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
+                    <% if(user.imagem){ %>
+                        <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
+                    <% } else { %>
+                        <i class="material-icons">face</i>
+                    <% } %>
+                </a>
 
                 <!-- caso usuário logado, mostra olá e o username no sidenav  -->
                 <a href="#name"><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</span></a>
                 <!-- caso usuário não esteja logado, mostra só olá -->
-                <a href="#name"><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá <%= user.username %>!</span></a>
+                <a href="#name"><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá !</span></a>
 
                              </div>
                         </li>
@@ -57,7 +63,7 @@
                     <!-- <li><a href="#!">Second Link</a></li> -->
                     <li><div class="divider"></div></li>
                     <!-- <li><a class="subheader">Subheader</a></li> -->
-                    <li><a class="waves-effect" href="/dailynote"><i class="material-icons">home</i>Home</a></li>
+                    <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
                     <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>                   
                     <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
                      <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
