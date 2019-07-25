@@ -44,8 +44,12 @@
                                     <input id="tags" name="tags" type="hidden" class="active" value=''>
                                     <div class="div-margin col s12">
                                         <div class="input-field col s12">
-                                            <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-                                            <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                                            <% if(user.imagem){ %>
+                                                <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
+                                                <% } else { %>
+                                                    <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                                    <% } %>
+                                             <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                         </div>
                                         <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                         <%= response.corpo %>

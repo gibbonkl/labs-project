@@ -38,9 +38,9 @@ module.exports = function(app) {
     app.get('/helpCenter/editar/:id', sessionCheckerRedLogin, (req, res) => {
 
         if (req.session.user && req.cookies.user_sid)
-            var user = { username: req.session.user.username, tipo: req.session.user.tipo }
+            var user = { username: req.session.user.username, tipo: req.session.user.tipo, imagem: req.session.user.imagem }
         else
-            var user = { username: '', tipo: '' }
+            var user = { username: '', tipo: '', imagem: '' }
 
         HelpCenterController.getPostagem(req)
             .then(response =>
