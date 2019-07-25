@@ -109,7 +109,7 @@
                                     </textarea>
                                     </div>
                                     <div class="div-margin col s12 center">
-                                        <input class="btn bg-blue-compass rounded" type="submit" value="Responder" />
+                                        <input class="btn bg-blue-compass rounded <%if(user.tipo==''){%><%='disabled'%><%}%>" type="submit" value="Responder" />
                                     </div>
                                 </form>
 
