@@ -17,9 +17,9 @@ function render(dados) {
                 `<img class="circle" src="../public/uploads/${dados.imagem}">`:
                 `<img src="../public/img/user.png" alt="" class="circle">`
             }
-            <span class="black-text topico-nome">${dados.username}</span><br>
-            <span class="black-text topico-titulo">${dados.titulo}</span><br>
-            <span class="grey-text topico-data">${dados.data}</span>
+            <span class="black-text topico-nome">${removeTags(dados.username)}</span><br>
+            <span class="black-text topico-titulo">${removeTags(dados.titulo)}</span><br>
+            <span class="grey-text topico-data">${removeTags(dados.data)}</span>
             <span class="secondary-content">
             ${dados.resolvido ? `<i class="material-icons green-text" value="${dados.resolvido}">check_circle</i>` : 
                 `<i class="material-icons grey-text" value="${dados.resolvido}">check_circle</i>`}
@@ -30,7 +30,7 @@ function render(dados) {
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span> 
             <div class="${!dados.tags.length ? `hide` : ``} right"> 
-                ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${element}</span>`).join('') : ''}           
+                ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
             </div>
         </a>
     </div>`;
@@ -116,6 +116,7 @@ function searchOp() {
 }
 
 function buscar(){
+    
     let option = $('select#search_select').val();
     let value = ''
     if (option == 'tag') {
@@ -125,8 +126,9 @@ function buscar(){
             chips.push(element.tag);
         });
         value = chips.join('+');
+    } else {
+        value  = $("#div_" + option).children().val();
     }
-    else {value  = $("#div_" + option).children().val();}
 
     value != '' ? list_topics(option, value.replace(/\//g, '-')) 
                 : list_topics()

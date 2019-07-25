@@ -25,15 +25,5 @@ $(document).ready(function() {
         container: 'body',
     });
 
-    $('.chips-autocomplete').chips({
-        autocompleteOptions: {
-            data: {
-                'Apple': null,
-                'Microsoft': null,
-                'Google': null
-            },
-            maxLength: 1
-        }
-    });
     $('select').formSelect();
 });

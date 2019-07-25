@@ -82,13 +82,12 @@ function deletar(id) {
                     })
                     .then(response => response.json())
                     .then(response => {
-
-                        if (response.erro)
+                        if (response.error) {
                             message('error', response.erro)
-                        else {
-                            removerElementDOM(id);
-                            message('success', 'Sua Daily Foi Deletada!')
+                            return;
                         }
+                        removerElementDOM(id);
+                        message('success', 'Daily deletada!')
                     })
                     .catch(message('error', 'Unexpected Error'))
 
