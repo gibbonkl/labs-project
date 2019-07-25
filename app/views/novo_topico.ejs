@@ -42,13 +42,14 @@
                             <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
                                 Digite aqui o conteúdo do seu post.
                             </textarea>
+
                         </div>
                         <div class="div-margin col s12">
                             <label class="left col s12">Selecione as tags:</label>
                             <div class="div-margin left col s12">
                                 <% tags.forEach(function(tag) { %>
-                                    <span class="chip waves-effect"><%= tag %></span>
-                                    <% }); %>
+                                <span class="chip waves-effect"><%= tag %></span>
+                                <% }); %>
                             </div>
                         </div>
                         <input id="tags" name="tags" type="hidden" class="active" value=''>
@@ -68,7 +69,6 @@
     <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
     <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
     <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
-    <script type="text/javascript" src="../../public/js/daily/dailies.js"></script>
     <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
     <!-- Ordem de carregamento de script -->
 
