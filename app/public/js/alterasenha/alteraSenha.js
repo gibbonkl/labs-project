@@ -1,32 +1,26 @@
 function alteraSenha(e) {
     // e.preventDefault();
-
-
     var data = {
         senha: md5($("#card_senhaatual").val()),
         novasenha: md5($("#card_novasenha").val()),
         confirmacaosenha: md5($("#card_confsenha").val())
     }
-
     if (valido(data)) {
         fetch("/alterar_senha", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(res => res.text())
-            .then(message => {
-
-                M.toast({ html: message, displayLength: 2000 })
-                $("#card_senhaatual").val('');
-                $("#card_novasenha").val('');
-                $("#card_confsenha").val('');
-            })
-            .catch(console.log);
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.text())
+        .then(message => {
+            M.toast({ html: message, displayLength: 2000 })
+            $("#card_senhaatual").val('');
+            $("#card_novasenha").val('');
+            $("#card_confsenha").val('');
+        })
+        .catch(console.log);
     }
-
 }
-
 function valido(data) {
     let val = true;
     if (data.senha == '') {
@@ -46,5 +40,4 @@ function valido(data) {
         val = false;
     }
     return val;
-
 }

@@ -1,6 +1,7 @@
 
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/alterar_senha" class="blue-compass">Alterar senha</a></li>
+    <li><a href="/editar_perfil" class="blue-compass">Editar perfil</a></li>
     <li class="divider"></li>
     <li><a href="/logout" class="blue-compass">Fazer Logout</a></li>
 </ul>
@@ -30,7 +31,7 @@
                         <% if(user.imagem){ %>
                         <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
                         <% } else { %>
-                        <img class="circle avatar-user" src="../../public/img/user.png" alt="">
+                        <img class="circle avatar-user resize-photo" src="../../public/img/user.png" alt="">
                         <% } %>
                     </a>
                 </li>
@@ -62,8 +63,10 @@
         <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
         <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>                   
         <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
-        <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
-        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>Alterar senha</a></li>                     
+        <li><div class="divider"></div></li>
+        <!-- caso usuário esteja logado, mostra a opção alterar senha e editar perfil -->
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>Alterar senha</a></li>
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/editar_perfil"><i class="material-icons">face</i>Editar perfil</a></li>                                 
         <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
         <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
         <!-- caso usuário esteja logado, mostra a opção logout  -->
