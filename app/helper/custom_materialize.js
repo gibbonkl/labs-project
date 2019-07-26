@@ -26,4 +26,18 @@ $(document).ready(function() {
     });
 
     $('select').formSelect();
+
+    $('.chips-autocomplete').chips({
+        autocompleteOptions: {
+            data: {
+                'Alura': null,
+                'Chatbot': null,
+                'LABS': null,
+                'Power BI': null,
+                'RPA': null,
+                'Sales Force': null,
+                'Tecnologias de Mercado': null,
+            },
+        }
+    });
 });

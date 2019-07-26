@@ -32,8 +32,8 @@
             <!-- Buscar nos tópicos -->
             <div class="row white z-depth-2">
                 <div class="input-field col l2 m2 s12">
-                    <select id="search_select" onchange="searchOp()">
-                        <option value="data" selected>Data</option>
+                    <select id="search_select" onchange="searchOp()" placeholder=" ">
+                        <option value="data">Data</option>
                         <option value="username">Usuário</option>
                         <option value="query">Título</option>
                         <option value="tag">Tag</option>                      
@@ -52,14 +52,8 @@
                     <input placeholder=" " name="search_query" type="text" class="active">
                     <label for="search_query">Título</label>
                 </div>
-                <div id="div_tag" class="input-search col l8 m7 s12 hide margin-top">
-                    <span class="chip waves-effect">Alura</span>
-                    <span class="chip waves-effect">Chatbot</span>
-                    <span class="chip waves-effect">LABS</span>
-                    <span class="chip waves-effect">Power BI</span>
-                    <span class="chip waves-effect">RPA</span>
-                    <span class="chip waves-effect">Sales Force</span>
-                    <span class="chip waves-effect">Tecnologias de Mercado</span>
+                <div id="div_tag" class="input-search col l8 m7 s12 hide">
+                    <div class="chips chips-autocomplete"></div>
                 </div>
                 <div class="input-field col l2 m2 s12 center">
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="buscar()">buscar</button>

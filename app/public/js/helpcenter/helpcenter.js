@@ -2,6 +2,7 @@ var pagina = 1;
 var tamanho = 1;
 
 $(document).ready(function() {
+    $('#search_select').val("data").change();
     list_topics();
 });
 
@@ -29,11 +30,11 @@ function render(dados) {
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span> 
-            <div class="${!dados.tags.length ? `hide` : ``} right"> 
-                ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
+            <div class="${dados.tags[0].length ? `right` : `hide` }"> 
+            ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
             </div>
         </a>
-    </div>`;
+    </<span>`;
 }
 
 function list_topics(busca='atividade', dados='') {
@@ -54,7 +55,7 @@ function list_topics(busca='atividade', dados='') {
                 if(posts.postagens.length > 0) {
                     animaLoad()
                     $("#list-posts").removeClass("hide");
-                    $('#list-posts').html(posts.postagens.map(post => render(post)).join(''));
+                    $('#list-posts').html(posts.postagens.map(posts => render(posts)).join(''));
                     tamanho = posts.count;
                     paginacaoView(busca, dados);
                 }
@@ -113,12 +114,14 @@ function searchOp() {
     $("#div_" + option).removeClass('hide');
 
     $('.input-field').children().val('');
+    $("select#search_select").formSelect();
 }
 
 function buscar(){
     
     let option = $('select#search_select').val();
-    let value = ''
+    value = ''
+    
     if (option == 'tag') {
         let chips = []
         let array = M.Chips.getInstance($('.chips')).chipsData;
@@ -129,7 +132,7 @@ function buscar(){
     } else {
         value  = $("#div_" + option).children().val();
     }
-
+    
     value != '' ? list_topics(option, value.replace(/\//g, '-')) 
                 : list_topics()
 }
