@@ -136,3 +136,12 @@ function buscar(){
     value != '' ? list_topics(option, value.replace(/\//g, '-')) 
                 : list_topics()
 }
+
+
+function buscaTags(params, tags) {
+    params.map(function(index){
+        if(index.tags[0].split(',').includes(tags)){
+            console.log(index);
+        };
+    });
+}
