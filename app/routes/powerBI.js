@@ -12,31 +12,41 @@ var DailyModel = require('../models/schema_DailyNote');
 
 module.exports = function(app) 
 {
-    app.get('/pbihelps', (req, res) => {
+    app.get('/pbihelps/:hash', (req, res) => {
+        
         let postagemDAO = new PostagemDAO(PostagemModel);
         
-        postagemDAO.listarPostagens()
-            .then(response => res.send(response)); 
+        if(req.params.hash == '67e4006e39aaa3bfddcf3ed873efef33')     
+            postagemDAO.listarPostagens().then(response => res.send(response));
+        else
+            res.send('Hoje Não!!'); 
     })
 
-    app.get('/pbicomments', (req, res) => {
+    app.get('/pbicomments/:hash', (req, res) => {
         let comentarioDAO = new ComentarioDAO(ComentarioModel);
         
-        comentarioDAO.listarComentarios()
-            .then(response => res.send(response)); 
+        if(req.params.hash == '67e4006e39aaa3bfddcf3ed873efef33')     
+            comentarioDAO.listarComentarios().then(response => res.send(response));
+        else
+            res.send('Hoje Não!!');
     })
 
-    app.get('/pbiusers', (req, res) => {
+    app.get('/pbiusers/:hash', (req, res) => {
+
         let userDAO = new UserDAO(UserModel)
         
-        userDAO.listarUsers()
-            .then(response => res.send(response)); 
+        if(req.params.hash == '67e4006e39aaa3bfddcf3ed873efef33')     
+            userDAO.listarUsers().then(response => res.send(response));
+        else
+            res.send('Hoje Não!!');
     })
 
-    app.get('/pbidailies', (req, res) => {
+    app.get('/pbidailies/:hash', (req, res) => {
         let dailyDAO = new DailyDAO(DailyModel);
         
-        dailyDAO.listarDailies()
-            .then(response => res.send(response)); 
+        if(req.params.hash == '67e4006e39aaa3bfddcf3ed873efef33')     
+            dailyDAO.listarDailies().then(response => res.send(response));
+        else
+            res.send('Hoje Não!!');
     })
 }
