@@ -66,7 +66,7 @@ function render(dados) {
                 <div class="collapsible-header">
                 ${dados.imagem ?
                      `<img class="circle" src="../public/uploads/${dados.imagem}">`
-                    : `<i class="material-icons">face</i>`
+                    : `<img src="../public/img/user.png" alt="" class="circle">`
                 }
                     <span class="span-margin data" data-name="${dados.usuario}">${dados.usuario}</span>
                     <i class="material-icons">event</i>
