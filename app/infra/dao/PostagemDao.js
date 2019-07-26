@@ -462,6 +462,10 @@ class PostagemDao extends TemplateDao{
                 }}
             ])
     }
+    listarPostagens()
+    {
+        return this._find();
+    }
 
 }
 module.exports = PostagemDao;
