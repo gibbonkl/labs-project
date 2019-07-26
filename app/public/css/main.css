@@ -140,8 +140,8 @@ textarea.materialize-textarea {
 }
 .resize-photo {
     margin-top: 25%;
-    width: 42px;
-    height: 42px;
+    width: 42px !important;
+    height: 42px !important;
     overflow: hidden;
     left: 15px;
     display: inline-block;

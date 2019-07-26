@@ -10,27 +10,24 @@ var upload = multer({dest: 'app/public/binary'});
 module.exports = function(app) {
     //middleware de validação
     app.use('/cadastro',upload.single('upload'), captcha_verify, captcha_render,(req,res,next) => {
-        if(req.method == 'POST')
-        {
+        if (req.method == 'POST') {
             console.log('Middleware Validação Cadastro');
             let modeloUsuario = new ModeloUsuarioCadastro();
-            modeloUsuario.preencheAutomatico(req.body);
-
-            
+            modeloUsuario.preencheAutomatico(req.body);            
             let validacao = new ValidacaoCadastro(modeloUsuario);
-            modeloUsuario = validacao.valida();
-            
-            if (req.recaptcha.error) 
-            {
+            modeloUsuario = validacao.valida();            
+            if (req.recaptcha.error) {
                 modeloUsuario.erros.push('erro recaptcha');
                 res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
             } 
-            else if(modeloUsuario.temErro())
+            else if(modeloUsuario.temErro()) {
                 res.render('cadastro', {user : modeloUsuario.getUser(), captcha:res.recaptcha});
-            else
+            } else {
                 next();
-        }else
+            }
+        } else {
             next();
+        }
     });
 
     // route for user signup
@@ -43,12 +40,10 @@ module.exports = function(app) {
             console.log('Rota Cadastro (metodo Post)');
             controllerCadastraUsuario(req)
             .then(retorno => {
-
-                if( retorno.status == 'ok')
-                {
+                if (retorno.status == 'ok') {
                     req.session.user = retorno.user;   
                     res.redirect('/');                 
-                }else{
+                } else {
                     res.render('cadastro', { user : retorno.user, captcha:res.recaptcha});
                 }
             })

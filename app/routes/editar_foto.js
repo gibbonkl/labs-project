@@ -1,25 +1,28 @@
+let sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
+let controllerCadastraUsuario = require('../controllers/controller_cadastra_usuario');
+const multer = require("multer");
+var upload = multer({dest: 'app/public/binary'});
 let Model = require("../models/schema_usuario");
 var UserDAO = require('../infra/dao/UserDao');
 var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function (app) {
     // rota para editar perfil
-    app.route('/editar_perfil')
+    app.route('/editar_foto')
         .get(sessionCheckerRedLogin, (req, res) => {
             let user = {
                 username: req.session.user.username,
                 tipo: req.session.user.tipo,
                 imagem: req.session.user.imagem
             }
-            res.render('editar_perfil', {user: user});
+            res.render('editar_foto', {user: user});
         })
         .post(sessionCheckerRedLogin, (req, res, next) => {
             let user = {
-                senha: req.body.senha
+                username: req.session.user.username,
+                tipo: req.session.user.tipo,
+                imagem: req.session.user.imagem
             }
-            let userDAO = new UserDAO(Model);
-            return userDAO.checkPassword(req.session.user.username, user.senha)
-                .then(response => response ? res.send('Senha atual correta') : res.send('Senha atual incorreta'))
-                .catch((error) => res.send("Um erro inesperado aconteceu"))  
+            res.render('editar_foto', {user: user});
         })
 }
