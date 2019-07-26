@@ -17,12 +17,4 @@ module.exports = function (app) {
             }
             res.render('editar_foto', {user: user});
         })
-        .post(sessionCheckerRedLogin, (req, res, next) => {
-            let user = {
-                username: req.session.user.username,
-                tipo: req.session.user.tipo,
-                imagem: req.session.user.imagem
-            }
-            res.render('editar_foto', {user: user});
-        })
 }
