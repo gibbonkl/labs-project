@@ -29,11 +29,11 @@
 
     <div class="container">
         <div class="section">
-            <!-- Buscar nos tópicos -->         
+            <!-- Buscar nos tópicos -->
             <div class="row white z-depth-2">
                 <div class="input-field col l2 m2 s12">
-                    <select id="search_select" onchange="searchOp()">
-                        <option value="data" selected>Data</option>
+                    <select id="search_select" onchange="searchOp()" placeholder=" ">
+                        <option value="data">Data</option>
                         <option value="username">Usuário</option>
                         <option value="query">Título</option>
                         <option value="tag">Tag</option>                      
@@ -52,7 +52,9 @@
                     <input placeholder=" " name="search_query" type="text" class="active">
                     <label for="search_query">Título</label>
                 </div>
-                <div id="div_tag" class="chips chips-autocomplete input-search col l8 m7 s12 hide"></div>
+                <div id="div_tag" class="input-search col l8 m7 s12 hide">
+                    <div class="chips chips-autocomplete"></div>
+                </div>
                 <div class="input-field col l2 m2 s12 center">
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="buscar()">buscar</button>
                 </div>
@@ -89,6 +91,7 @@
     <script type="text/javascript" src="../public/js/login/inicio.js"></script>
     <script type="text/javascript" src="../public/js/menu/menu.js"></script>
     <script type="text/javascript" src="helper/custom_materialize.js"></script>
+    <script type="text/javascript" src="helper/valida.js"></script>
     <script type="text/javascript" src="../public/js/helpcenter/helpcenter.js"></script>
 
     <!-- Ordem de carregamento de script -->

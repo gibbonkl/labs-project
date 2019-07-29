@@ -25,15 +25,19 @@ $(document).ready(function() {
         container: 'body',
     });
 
+    $('select').formSelect();
+
     $('.chips-autocomplete').chips({
         autocompleteOptions: {
             data: {
-                'Apple': null,
-                'Microsoft': null,
-                'Google': null
+                'Alura': null,
+                'Chatbot': null,
+                'LABS': null,
+                'Power BI': null,
+                'RPA': null,
+                'Sales Force': null,
+                'Tecnologias de Mercado': null,
             },
-            maxLength: 1
         }
     });
-    $('select').formSelect();
 });
