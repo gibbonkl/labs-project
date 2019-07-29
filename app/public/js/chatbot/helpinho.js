@@ -2,7 +2,7 @@ var initial_message = {
     activities: [
         {
             type: 'message',
-            text: "Oi! Eu sou o Helpinho, assistente virtual do Game Of Bols. ↵ Comigo você pode buscar daily notes e tópicos. ↵ No que posso ajudar?",
+            text: "Oi! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
             from: {
                 id: 'helpinho-bot',
                 name: 'helpinho-bot',
@@ -40,7 +40,7 @@ function checkEmptyStore(){
 var store = window.WebChat.createStore(
     loadStore(),
     ({ dispatch }) => next => action => {
-        console.log(action)
+        //console.log(action)
 
         // save user input in localstorage
         if (action.type === 'DIRECT_LINE/POST_ACTIVITY_PENDING') {
