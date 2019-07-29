@@ -34,7 +34,8 @@ function render(dados) {
             ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
             </div>
         </a>
-    </<span>`;
+    </<span>
+</div>`;
 }
 
 function list_topics(busca='atividade', dados='') {
@@ -139,10 +140,10 @@ function buscar(){
 }
 
 
-function buscaTags(params, tags) {
-    params.map(function(index){
-        if(index.tags[0].split(',').includes(tags)){
-            console.log(index);
-        };
-    });
-}
+// function buscaTags(params, tags) {
+//     params.map(function(index){
+//         if(index.tags[0].split(',').includes(tags)){
+//             console.log(index);
+//         };
+//     });
+// }
