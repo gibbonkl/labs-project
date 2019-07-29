@@ -1,27 +1,77 @@
-function setStore(){
-    const reduxStore = window.localStorage.getItem('HELPINHO_REDUX') ? window.localStorage.getItem('HELPINHO_REDUX') : "{}";
-    //console.log(JSON.parse(reduxStore))
+var initial_message = {
+    activities: [
+        {
+            type: 'message',
+            text: "Oi! Eu sou o Helpinho, assistente virtual do Game Of Bols. ↵ Comigo você pode buscar daily notes e tópicos. ↵ No que posso ajudar?",
+            from: {
+                id: 'helpinho-bot',
+                name: 'helpinho-bot',
+                role: 'bot'
+            }
+        }
+    ]
+}
+
+function loadStore(){
+    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX') ? window.localStorage.getItem('HELPINHO_REDUX') : JSON.stringify(initial_message);
+    if (reduxStore == JSON.stringify(initial_message)){
+        window.localStorage.setItem('HELPINHO_REDUX', reduxStore)
+    }
+
     return JSON.parse(reduxStore);
 }
 
-var store = window.WebChat.createStore(
-    setStore(),
-    ({ dispatch }) => next => action => {
-        //console.log(action)
-        if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
-            const event = new Event('webchatincomingactivity');
+function updateStore(activity){
+    //console.log(activity.text)
+    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    reduxStore = JSON.parse(reduxStore);
+    reduxStore['activities'].push(activity)
+    window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
+}
 
-            event.data = action.payload.activity;
-            window.dispatchEvent(event);
+function checkEmptyStore(){
+    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    reduxStore = JSON.parse(reduxStore);
+    if (reduxStore['activities'].length > 0)
+        return false
+    return true
+}
+
+var store = window.WebChat.createStore(
+    loadStore(),
+    ({ dispatch }) => next => action => {
+        console.log(action)
+
+        // save user input in localstorage
+        if (action.type === 'DIRECT_LINE/POST_ACTIVITY_PENDING') {
+            const activity = action.payload.activity;
+            if (activity.type === 'message'){
+                updateStore(activity)
+            }
         }
+
+        // save bot respose in localstorage        
+        if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
+            const activity = action.payload.activity;
+            if (activity.type === 'message' && activity.from.name === 'helpinho-bot'){
+                updateStore(activity)
+            }
+        }
+
+        // if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+        //     if(checkEmptyStore()){
+        //         dispatch({
+        //             type: 'WEB_CHAT/SEND_EVENT',
+        //             payload: {
+        //                 name: 'webchat/join',
+        //             }
+        //         });
+        //     }
+        //   }
+
     return next(action);
     }
 );
-
-store.subscribe(() => {
-    console.log(store.getState())
-    window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(store.getState()));
-});
 
 var styleOptions = {
     botAvatarImage: 'https://docs.microsoft.com/en-us/azure/bot-service/v4sdk/media/logo_bot.svg?view=azure-bot-service-4.0',
@@ -29,16 +79,6 @@ var styleOptions = {
     userAvatarImage: 'https://github.com/compulim.png?size=64',
     userAvatarInitials: 'WC'
 };
-
-window.addEventListener('webchatincomingactivity', ({ data }) => {         
-    //console.log(`Received an activity of type "${ data.type }":`);
-    //console.log('Cpx falou:')
-    //console.log(data);
-    // if (data.text == 'log'){
-    //     alert('foi!');
-    // }
-    //window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(data));
-});
 
 window.WebChat.renderWebChat({
     directLine: window.WebChat.createDirectLine({ token: 'JI8fwLcqlPc.Z2ndfkX9okej3IQNL68SvwcWt0b5si39-ektmyb86dk' }),
