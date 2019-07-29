@@ -138,6 +138,7 @@ input[type=password]:not(.browser-default),
 textarea.materialize-textarea {
     padding-left: 10px;
 }
+
 .resize-photo {
     margin-top: 25%;
     width: 42px !important;
@@ -147,10 +148,12 @@ textarea.materialize-textarea {
     display: inline-block;
     vertical-align: middle;
 }
+
 td select {
     display: block !important;
 }
-.resize-daily{
+
+.resize-daily {
     margin-right: 2%;
     width: 42px;
     height: 42px;
@@ -159,10 +162,15 @@ td select {
     display: inline-block;
     vertical-align: middle;
 }
-.resize-forum{
+
+.resize-forum {
     width: 42px;
     height: 42px;
     overflow: hidden;
     left: 15px;
     display: inline-block;
+}
+
+.chat-opacity {
+    background-color: rgba(10, 23, 55, 0.5);
 }
