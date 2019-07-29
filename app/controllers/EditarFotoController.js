@@ -7,8 +7,12 @@ module.exports = function(req) {
     if(req.file){
         var filename = Image.save(req.file, req.body.username);
     }
-    let user = new Model({
+    console.log(filename);
+    let user = {
         imagem: filename
-    });
+    }
     let userDAO = new UserDAO(Model);
+    return userDAO.updatePhoto(req.session.user.username,user.imagem)
+        .then(response => response ? response: null)
+        .catch((error) => null)
 }

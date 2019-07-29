@@ -71,13 +71,7 @@ class UserDao extends TemplateDao{
         return(false);
     }
 
-    updatePassword(hash="",newPassword=""){
-        if(newPassword && hash){
-            return this._findOneAndUpdate({hash:hash},{$set:{senha: newPassword}})
-                .then(user => this.updateHash(user.username,user.email))
-                .then(hash => hash? true: false)
-        }
-    }
+
     /*
         *   Busca por um usuário pelo username e senha
         *   @param {string} username Nome de usuário
@@ -139,6 +133,23 @@ class UserDao extends TemplateDao{
                 })
         }
     }
+    
+    updatePhoto(username, newPhoto){
+        console.log('UserDao updatePhoto');
+        console.log(username);
+        console.log(newPhoto);
+        if(username && newPhoto){
+            return this._findOneAndUpdate({username: username}, {$set:{imagem: newPhoto}})
+                .then(res =>{ console.log(res);
+                    return res? res : null
+                } )
+                .catch(err=>{
+                    console.erro(err);
+                    return({detail:"Impossível atualizar a foto.", error:err});
+                })
+        }
+    }
+    
     /*
     *   Verifica tipo de permissão de usuário
     *   @param {string} username Nome de usuário
