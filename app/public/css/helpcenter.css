@@ -1,62 +1,37 @@
-.topico:not(:last-child) {
-    border-bottom: 1px solid lightgrey;
-}
-
-.topico-nome {
-    font-size: 1.1em;
-    line-height: 2;
-}
-
-.topico-titulo {
-    font-size: 1.3em;
-    line-height: 2;
-    font-weight: bold;
-}
-
-.topico-data {
-    line-height: 2;
-}
-
-.number {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 20px !important;
-    position: relative !important;
-    top: -5 !important;
-}
-
-.number:not(:last-child) {
-    padding-right: 20px;
-}
-
-.mouse-topico {
-    cursor: pointer;
-}
-
- /* label color */
- .input-field label {
-    color: #000;
-  }
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
-    color: #000;
-  }
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-  }
-  /* valid color */
-  .input-field input[type=text].valid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-  }
-  /* invalid color */
-  .input-field input[type=text].invalid {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-  }
-  /* icon prefix focus color */
-  .input-field .prefix.active {
-    color: #000;
-  }
-      
+    .topico:not(:last-child) {
+        border-bottom: 1px solid lightgrey;
+    }
+    
+    .topico-nome {
+        font-size: 1.1em;
+        line-height: 2;
+    }
+    
+    .topico-titulo {
+        font-size: 1.3em;
+        line-height: 2;
+        font-weight: bold;
+    }
+    
+    .topico-data {
+        line-height: 2;
+    }
+    
+    .number {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 20px !important;
+        position: relative !important;
+        top: -5 !important;
+    }
+    
+    .number:not(:last-child) {
+        padding-right: 20px;
+    }
+    
+    .mouse-topico {
+        cursor: pointer;
+    }
+    
+    .margin-top {
+        margin-top: 2%;
+    }
