@@ -89,7 +89,7 @@ class DailyDao extends TemplateDao {
             return this._aggregate([
                 {
                     '$match': {
-                      'usuario': username, 
+                      'usuario': {"$regex": username, "$options":'i'},   
                       'ativo': true
                     }
                   },
