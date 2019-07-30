@@ -70,8 +70,6 @@ class UserDao extends TemplateDao{
         }
         return(false);
     }
-
-
     /*
         *   Busca por um usuário pelo username e senha
         *   @param {string} username Nome de usuário
@@ -79,8 +77,7 @@ class UserDao extends TemplateDao{
         *   @param {string} email Email do usuário
         *   @returns {object}
     */
-    login(user='', password=''){
-        
+    login(user='', password=''){        
         return this._findOne({ $or: [{ username: user, senha: password }, { email: user, senha: password }], ativo: true })
             .then(res=> res? res: null)
             .catch(err=>{
@@ -132,24 +129,16 @@ class UserDao extends TemplateDao{
                     return ({ detail: "Impossível trocar senha", error: err });
                 })
         }
-    }
-    
+    }    
     updatePhoto(username, newPhoto){
-        console.log('UserDao updatePhoto');
-        console.log(username);
-        console.log(newPhoto);
         if(username && newPhoto){
             return this._findOneAndUpdate({username: username}, {$set:{imagem: newPhoto}})
-                .then(res =>{ console.log(res);
-                    return res? res : null
-                } )
+                .then(res => res? res : null)
                 .catch(err=>{
-                    console.erro(err);
                     return({detail:"Impossível atualizar a foto.", error:err});
                 })
         }
     }
-    
     /*
     *   Verifica tipo de permissão de usuário
     *   @param {string} username Nome de usuário
@@ -164,7 +153,6 @@ class UserDao extends TemplateDao{
                 })
         }
     }
-
     listarUsers()
     {
         return this._find();

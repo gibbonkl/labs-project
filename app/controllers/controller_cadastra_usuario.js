@@ -6,7 +6,7 @@ const Image = require("../helper/image");
 module.exports = function(req) {
     console.log('Controller cadastra usuario');
     if(req.file) {
-        var filename = Image.save(req.file, req.body.username);
+        var filename = Image.save(req.file);
     }
     let user = new Model({
         nome: req.body.nome,

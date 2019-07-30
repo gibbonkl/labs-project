@@ -34,7 +34,7 @@ class Image{
         *   @param {object} file Imagem recebida do formulário
         *   @return {string}
     */
-    static save(file,username){
+    static save(file){
         const dir = path.join(__dirname, `../public/uploads/`);
         this.verifyPath(dir);
         this._originalName = file.originalname;
