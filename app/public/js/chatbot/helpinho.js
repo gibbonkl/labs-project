@@ -2,7 +2,7 @@ var initial_message = {
     activities: [
         {
             type: 'message',
-            text: "Oi! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
+            text: "Olá! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
             from: {
                 id: 'helpinho-bot',
                 name: 'helpinho-bot',
