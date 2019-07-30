@@ -76,7 +76,7 @@ var store = window.WebChat.createStore(
 var styleOptions = {
     botAvatarImage: 'https://docs.microsoft.com/en-us/azure/bot-service/v4sdk/media/logo_bot.svg?view=azure-bot-service-4.0',
     botAvatarInitials: 'BF',
-    userAvatarImage: 'https://github.com/compulim.png?size=64',
+    userAvatarImage: 'https://s3.amazonaws.com/gupy5/production/companies/417/career/410/images/logo.jpg',
     userAvatarInitials: 'WC'
 };
 
