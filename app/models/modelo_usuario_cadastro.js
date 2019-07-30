@@ -1,7 +1,5 @@
-class Modelo_Usuario_Cadastro
-{
-    constructor()
-    {
+class Modelo_Usuario_Cadastro{
+    constructor() {
         this.nome = '';
         this.sobrenome = '';
         this.username = '';
@@ -13,8 +11,7 @@ class Modelo_Usuario_Cadastro
         this.class = '';
         this.tipo = 'user';
     }
-    preencheAutomatico(body)
-    {
+    preencheAutomatico(body) {
         this.nome = body.nome;
         this.sobrenome = body.sobrenome;
         this.username = body.username;
@@ -25,24 +22,17 @@ class Modelo_Usuario_Cadastro
         this.erros = [];
         this.class = '';
     }
-
-    temErro()
-    {
+    temErro() {
         if(this.erros.length > 0)
             return true;
         else 
             return false;
     }
-
-    setErro(erro)
-    {
+    setErro(erro) {
         this.erros.push(erro);
     }
-
-    getUser()
-    {
-        let user = 
-        {
+    getUser(){
+        let user = {
             nome: this.nome,
             sobrenome: this.sobrenome,
             username: this.username,
@@ -54,18 +44,13 @@ class Modelo_Usuario_Cadastro
             invalidClass : this.class,
             tipo: this.tipo
         }
-
         return user;
     }
-
-    erroUsuarioExistente()
-    {
+    erroUsuarioExistente() {
         this.erros.push('Username ou Email Já Existente');
         this.username = '';
         this.email = '';
         this.class = 'invalid';
     }
-
 }
-
 module.exports = Modelo_Usuario_Cadastro;

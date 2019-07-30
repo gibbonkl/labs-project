@@ -1,10 +1,9 @@
-function dailyHTML(daily)
-{
+function dailyHTML(daily) {
     return `<li id="${daily._id}" class="data">
         <div class="collapsible-header">
             ${daily.imagem ?
                 `<img class="circle resize-daily" src="../public/uploads/${daily.imagem}">`
-                : `<i class="material-icons">face</i>`
+                : `<img src="../public/img/user.png" alt="" class="circle resize-daily">`
             }            
             <span class="span-margin data margin-top-10" data-name="${daily.usuario}">${daily.usuario}</span>
             <i class="material-icons margin-top-10">event</i>
@@ -12,13 +11,13 @@ function dailyHTML(daily)
         </div>
         <div class="collapsible-body grey lighten-3">
             <div class="row">
-                <div class="col s6">
-                    <span class="bold">Ontem: </span><span class="ontem">${daily.corpo.ontem}</span><br>
-                    <span class="bold">Hoje: </span><span class="hoje">${daily.corpo.hoje}</span><br>
-                    <span class="bold">Impedimentos: </span><span class="imp">${daily.corpo.impedimento}</span>
+                <div class="col s10 word-wrap">
+                    <span class="bold">Ontem: </span><span class="font-nunito">${removeTags(daily.corpo.ontem)}</span><br>
+                    <span class="bold">Hoje: </span><span class="font-nunito">${removeTags(daily.corpo.hoje)}</span><br>
+                    <span class="bold">Impedimentos: </span><span class="font-nunito">${removeTags(daily.corpo.impedimento)}</span>
                 </div>
                 ${daily.permissao ?
-                    `<div class="col s6">
+                    `<div class="col s2">
                         <a class="btn-floating white right" onclick="deletar('${daily._id}')" ><i  class="material-icons black-text">delete</i></a>
                         <a class="btn-floating white right btn-margin-right" onclick="editar('${daily._id}')"><i class="material-icons black-text">create</i></a>
                     </div>`
@@ -44,8 +43,6 @@ function removerElementDOM(id)
 
 function mensagemParaPesquisaSemResultado()
 {
-    //$('#collapsible_daily').html('');
-    //$('#show_dailies').append(`<div id="dirt"> <h4>Sua Busca Não Encontrou Resultados ... </h4></div>`);
     $("#collapsible_daily").addClass("hide");
     M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
 }
@@ -57,7 +54,6 @@ function limparTelaSemResultado()
 
 function listarDailiesDOM(dailyList)
 {
-    console.log(dailyList)
     animaLoad();
     limparTelaSemResultado();
     if(dailyList.length >= 0)
@@ -99,33 +95,4 @@ function showUser(){
     $("#div_username").removeClass('hide');
     $("#div_data").addClass('hide');
     $("input[name='filter_data']").val('');
-}
-
-function datePicker()
-{
-    $('.collapsible').collapsible({
-        accordion: false
-    });
-    $('.tooltipped').tooltip();
-    $('.datepicker').datepicker({
-        i18n: {
-        months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-        weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
-        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-        weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-        today: 'Hoje',
-        clear: 'Limpar',
-        cancel: 'Sair',
-        done: 'Confirmar',
-        labelMonthNext: 'Próximo mês',
-        labelMonthPrev: 'Mês anterior',
-        labelMonthSelect: 'Selecione um mês',
-        labelYearSelect: 'Selecione um ano',
-        selectMonths: true,
-        selectYears: 15,
-        },
-        format: 'd/m/yyyy',
-        container: 'body',
-    });
 }

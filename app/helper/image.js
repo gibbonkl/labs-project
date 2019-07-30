@@ -55,7 +55,5 @@ class Image{
     static createDir(dir){
         fs.mkdirSync(dir,{recursive: true}, err=> err? console.log(`Impossível criar pasta: ${err}`): console.log(`Pasta ${dir} criada`))
     }
-
 }
-
 module.exports = Image;

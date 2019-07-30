@@ -153,5 +153,10 @@ class UserDao extends TemplateDao{
                 })
         }
     }
+
+    listarUsers()
+    {
+        return this._find();
+    }
 }
 module.exports = UserDao;

@@ -18,13 +18,12 @@
 
 <body class="bg-blue-compass">
     <header>
-        <!-- Estrutura do menu dropdown da navbar -->
         <% include ./includes/navbar.ejs %>
     </header>
     <!-- Botão nova daily aparece ativo apenas se usuário está logado e é do tipo user -->
     <div class="section no-pad-bot">
         <div class="container">
-            <br><br>
+            <br>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large bg-yellow-compass rounded <%if(user.tipo=='' || user.tipo=='admin'){%><%='disabled'%><%}%>" id="inserir" onclick="inserir()">
                     <i class="left material-icons">add</i>Nova daily</a>
@@ -32,11 +31,9 @@
         </div>
     </div>
 
-    <!-- Pesquisar nas dailies -->
-
-    <!-- Tabela de dailies -->
     <div class="container">
         <div class="section">
+            <!-- Filtro de dailies -->
             <div class="row white z-depth-2">
                 <div class="col l2 m3 s12">
                     <label>Filtrar por:</label>
@@ -59,48 +56,31 @@
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="filtrar()">filtrar</button>
                 </div>
             </div>
-
+            <!-- Barra de progresso -->
             <div class="progress">
                 <div class="indeterminate"></div>
             </div>
-
+            <!-- Daily notes -->
             <div id="show_dailies" class="row hide">
                 <ul id="collapsible_daily" class="collapsible expandable">
                 </ul>
             </div>
         </div>
-        <% include ./includes/chatbot.ejs %>
+    <% include ./includes/chatbot.ejs %>
+    </div>
 
-        <!--footer class="page-footer bg-blue-compass">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <ul class="pagination center">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active grey"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">2</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text">3</a></li>
-                        <li class="waves-effect"><a href="#!" class="white-text"><i class="material-icons">chevron_right</i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer-->
-        <!-- Ordem de carregamento de script -->
-        <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
-        <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
-        <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
-        <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
-        <!--script type="text/javascript" src="../public/js/daily/dailies.js"></script-->
-        <script type="text/javascript" src="../public/js/menu/menu.js"></script>
-        <script type="text/javascript" src="helper/custom_materialize.js"></script>
-        <script type="text/javascript" src="../public/js/daily/DailyDOM.js"></script>
-        <script type="text/javascript" src="../public/js/daily/DailyCrud.js"></script>
-        <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>
-        <script type="text/javascript" src="../public/js/chatbot/helpinho.js"></script>
-
-        <!--script type="text/javascript" src="../public/js/daily/crudDaily.js"></script-->
-        <!-- Ordem de carregamento de script -->
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="helper/custom_materialize.js"></script>
+    <script type="text/javascript" src="helper/valida.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyDOM.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyCrud.js"></script>
+    <script type="text/javascript" src="../public/js/daily/DailyStart.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
 
 </html>

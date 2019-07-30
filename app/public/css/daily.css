@@ -9,6 +9,7 @@
 .margin-top {
     margin-top: 1%;
 }
+
 .margin-top-10 {
     margin-top: 10 !important;
 }
@@ -72,4 +73,18 @@
     vertical-align: middle;
     margin-top: 1%;
     height: 40px !important;
+}
+
+.bold {
+    font-weight: bold;
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;  */
+    font-family: sans-serif;
+}
+
+.font-nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+.word-wrap {
+    word-wrap: break-word;
 }

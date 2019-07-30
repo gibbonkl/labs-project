@@ -113,5 +113,10 @@ class ComentarioDAO extends TemplateDao{
             .then((res, err) => res ? res.likes.length : 'Não foi possível acessar os likes do comentario')
             .catch(() => 'error');
     }
+
+    listarComentarios()
+    {
+        return this._find();
+    }
 }
 module.exports = ComentarioDAO;

@@ -161,5 +161,10 @@ class DailyDao extends TemplateDao {
             .then(response => response)
             .catch(console.error)
     }
+
+    listarDailies()
+    {
+        return this._find();
+    }
 }
 module.exports = DailyDao;
