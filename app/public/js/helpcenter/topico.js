@@ -23,11 +23,11 @@ function render_comment(comment) {
 				<div class="col s2">
 					<span class="grey-text right">${comment.data}</h5>
 				</div>  
-				<div class="col s12 black-text corpo-resposta">
-                    ${comment.corpo}
-                    <a class="btn-floating white right" onclick="delete_comment('${comment._id}')" ><i  class="material-icons black-text">delete</i></a>
-                    <a class="btn-floating white right btn-margin-right" onclick="edit_comment('${comment._id}')" ><i  class="material-icons black-text">create</i></a>
-                    </div>
+				<div class="col s12 black-text corpo-resposta">${comment.corpo}</div>
+                <div class="right">
+                    <a class="btn-floating white btn-margin-right" onclick="edit_comment('${comment._id}')" ><i class="material-icons black-text">create</i></a>
+                    <a class="btn-floating white" onclick="delete_comment('${comment._id}')" ><i class="material-icons black-text">delete</i></a>
+                </div>
 			</div>
 		</div>`
 }
@@ -213,11 +213,48 @@ function delete_comment(idC) {
         .catch(console.log)
 }
 
-function edit_comment(id) {    
-    window.location.href = "/helpCenter/edita_comentario/" + id
+function edit_comment(id) {
+    /* editar comentário
+     *   inicializa modal do materialize no click do botão
+     *   escurece o highlight
+     */
+    $("#modal_editcomm").modal({
+        opacity: 0.9
+    }).modal('open');
+
+    /*
+     *   lê o html do comentario especifico do id usuário
+     *  e seta nos campos do ckeditor no modal 
+     */
+    // $("#id_editcomm").val(id);
+    let texto = $("#" + id + " .corpo-resposta").html();
+    CKEDITOR.instances['editcomm'].setData(texto);
+
+    /*
+     * envia json com a edição dos comentários
+     */
+    const dados = {
+        _id: topic_id(),
+        comentario: {
+            _id: id,
+            corpo: CKEDITOR.instances['editcomm'].getData()
+        }
+    }
+
+    $("btn-edit-comm").click(function() {
+        fetch("/helpcenter/comentario", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(response => response.json())
+            .catch(console.log)
+    })
+
 }
 
 CKEDITOR.replace('corpo_comment');
+CKEDITOR.replace('editcomm');
 
 function message(type, title) {
     Swal.fire({

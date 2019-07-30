@@ -34,8 +34,10 @@
                                     </i>
                                 </h5>
                                 <div class="col s2">
-                                    <h5 class="grey-text text-darken-2 mont-serrat topico-data"><%= response.data %></h5>
-                                </div>  
+                                    <h5 class="grey-text text-darken-2 mont-serrat topico-data">
+                                        <%= response.data %>
+                                    </h5>
+                                </div>
                                 <p></p>
                                 <% if(!response.tags.length){ %>
                                     <div class="col s12">
@@ -44,16 +46,16 @@
                                                 <% response.tags[0].split(',').forEach(function(tag) { %>
                                                     <% if(tag != '') {%>
                                                         <span class="chip waves-effect select-chip"><%= tag %></span>
-                                                    <% }%>
-                                                <% }); %>
+                                                        <% }%>
+                                                            <% }); %>
                                             </div>
                                             <%} %>
-                                            <div class="div-margin col s12">
-                                                <!-- Corpo do tópico -->
-                                                <div id="corpo-topico" class="black-text">
-                                                    <%- response.corpo %>                                 
+                                                <div class="div-margin col s12">
+                                                    <!-- Corpo do tópico -->
+                                                    <div id="corpo-topico" class="black-text">
+                                                        <%- response.corpo %>
+                                                    </div>
                                                 </div>
-                                            </div>
                                                 <!-- Imagem de usuário -->
                                                 <div class="div-margin col s6">
                                                     <% if(response.imagem){ %>
@@ -61,7 +63,7 @@
                                                         <% } else { %>
                                                             <img src="../../public/img/user.png" alt="" class="circle avatar-user">
                                                             <% } %>
-                                                            <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
+                                                                <span id="username-topico" class="grey-text text-darken-2 nome-user"><%= response.username %></span>
                                                 </div>
 
                                     </div>
@@ -104,32 +106,58 @@
                                                     <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                                     </div>
                                     <div>
-                                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
+                                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form" placeholder="">
                                         Digite aqui o conteúdo da sua resposta.
-                                    </textarea>
+                                        </textarea>
                                     </div>
                                     <div class="div-margin col s12 center">
                                         <input class="btn bg-blue-compass rounded <%if(user.tipo==''){%><%='disabled'%><%}%>" type="submit" value="Responder" />
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Ordem de carregamento de script -->
-        <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
-        <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
-        <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
-        <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
-        <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
-        <!-- Ordem de carregamento de script -->
+    </div>
+    <div id="modal_editcomm" class="modal">
+        <div class="modal-content">
+            <h5 class="blue-compass">Editar comentário</h5>
+            <div class="divider"></div>
+            <div class="row">
+                <form id="editcomm_form" class="div-margin col s12">
+                    <input id="id_editcomm" type="hidden">
+                    <div class="input-field col s12">
+                        <% if(user.imagem){ %>
+                            <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
+                            <% } else { %>
+                                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                                <% } %>
+                                    <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
+                    </div>
+                    <div>
+                        <textarea name="editcomm" id="text_editcomm" rows="10" cols="80" form="editcomm_form" placeholder="">
+                        Digite aqui o conteúdo da sua resposta.
+                    </textarea>
+                    </div>
+                    <div class="div-margin col s12 center">
+                        <button id="btn-edit-comm" class="btn bg-blue-compass rounded <%if(user.tipo==''){%><%='disabled'%><%}%>" />Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
+    <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
 
 </html>
