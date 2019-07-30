@@ -27,6 +27,6 @@ module.exports = function (app) {
             return userDAO.checkPassword(req.session.user.username, user.senha)
                 .then(response => response ? userDAO.changePassword(username = req.session.user.username, newPassword = user.novasenha) : res.send('Senha Atual Incorreta'))
                 .then(response => response ? res.send('Senha Alterada') : res.send("Não Foi Possível Alterar Sua Senha"))
-                .catch((error) => res.send("Um Erro Inesperado Aconteceu"))  
+                .catch((error) => res.send("Um Erro Inesperado Aconteceu")) 
         })
 }

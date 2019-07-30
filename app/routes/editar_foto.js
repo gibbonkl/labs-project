@@ -1,10 +1,7 @@
-let sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
-let controllerCadastraUsuario = require('../controllers/controller_cadastra_usuario');
+let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
+let EditarFotoController = require('../controllers/EditarFotoController');
 const multer = require("multer");
 var upload = multer({dest: 'app/public/binary'});
-let Model = require("../models/schema_usuario");
-var UserDAO = require('../infra/dao/UserDao');
-var sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 module.exports = function (app) {
     // rota para editar perfil
@@ -17,4 +14,16 @@ module.exports = function (app) {
             }
             res.render('editar_foto', {user: user});
         })
+        .post(upload.single('upload'),sessionCheckerRedLogin, (req, res) => {
+            EditarFotoController(req)
+                .then(retorno => {
+                    if (retorno) {
+                        req.session.user.imagem = retorno;
+                        res.redirect('/');
+                    } else {                        
+                        req.session.user.imagem = retorno.imagem;
+                        res.render('editar_foto', { user: req.session.user});
+                    }
+                })
+        });
 }
