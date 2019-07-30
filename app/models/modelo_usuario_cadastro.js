@@ -9,7 +9,7 @@ class Modelo_Usuario_Cadastro{
         this.repsenha = '';
         this.erros = [];
         this.class = '';
-        this.tipo = '';
+        this.tipo = 'user';
     }
     preencheAutomatico(body) {
         this.nome = body.nome;
