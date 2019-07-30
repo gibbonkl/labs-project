@@ -47,8 +47,8 @@
                         <% if(user.imagem){ %>
                         <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
                         <% } else { %>
-                        <i class="material-icons">face</i>
-                        <% } %>
+                            <img src="../public/img/user.png" alt="" class="circle avatar-user">
+                            <% } %>
                     </p>    
                     <!-- caso usuário logado, mostra olá e o username no sidenav  -->
                     <p><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</span></p>

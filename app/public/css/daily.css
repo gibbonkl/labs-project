@@ -73,3 +73,25 @@
     margin-top: 1%;
     height: 40px !important;
 }
+
+.bold{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+.ontem{
+    font-family: cursive;
+   color: dimgray;
+}
+
+.hoje{
+    font-family: cursive;
+    color: dimgray;
+}
+
+.imp{
+    font-family: cursive;
+    color: dimgray;
+ }
+        
+
