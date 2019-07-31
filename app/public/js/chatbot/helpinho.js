@@ -81,7 +81,7 @@ var styleOptions = {
 };
 
 window.WebChat.renderWebChat({
-    directLine: window.WebChat.createDirectLine({ token: '1N2l4XpDN30.6odQpqy4kendbu8t4XT_lF9TnYOEHlSF__-fSIJiD0c' }),
+    directLine: window.WebChat.createDirectLine({ token: 'KUKrk1PSZL8.Vz3d5xOJkKh3MbhS6y12DiSPPNDLFWwF_9ohMdS43Uo' }),
     store,
     styleOptions
 }, document.getElementById('webchat'));
