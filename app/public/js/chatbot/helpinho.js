@@ -29,13 +29,13 @@ function updateStore(activity){
     window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
 }
 
-function checkEmptyStore(){
-    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
-    reduxStore = JSON.parse(reduxStore);
-    if (reduxStore['activities'].length > 0)
-        return false
-    return true
-}
+// function checkEmptyStore(){
+//     let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+//     reduxStore = JSON.parse(reduxStore);
+//     if (reduxStore['activities'].length > 0)
+//         return false
+//     return true
+// }
 
 var store = window.WebChat.createStore(
     loadStore(),
@@ -81,7 +81,7 @@ var styleOptions = {
 };
 
 window.WebChat.renderWebChat({
-    directLine: window.WebChat.createDirectLine({ token: 'JI8fwLcqlPc.Z2ndfkX9okej3IQNL68SvwcWt0b5si39-ektmyb86dk' }),
+    directLine: window.WebChat.createDirectLine({ token: '1N2l4XpDN30.6odQpqy4kendbu8t4XT_lF9TnYOEHlSF__-fSIJiD0c' }),
     store,
     styleOptions
 }, document.getElementById('webchat'));
