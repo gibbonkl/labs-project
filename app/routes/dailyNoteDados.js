@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.route('/daily/:op')
         .post((req, res) => {
             controller.listDailies(req, req.params.op)
-                .then(dailies => res.send(dailies))
+                .then(dailies => res.status(200).send(dailies))
                 .catch(console.error)
         });
         app.route('/daily')
