@@ -33,14 +33,16 @@ class ComentarioDAO extends TemplateDao{
         *   @returns {object} comentario
     */
     deleteComentarioById(req, tipo){
+        console.log(req.body)
+        var idPostagem = req.body.idPostagem;
         if(tipo == 'admin')
         {
             let idComentario = req.body.idComentario;
-            PostagemDao = new PostagemDao(PostagemModel);
+            var postagemDao = new PostagemDao(PostagemModel);
             return this._findOneAndUpdate({_id:idComentario},{$set:{ativo:false}}, {new: true})
                 .then((res,err) => {
                     try{
-                        PostagemDao.removeComentario(idPostagem, res._id);
+                        postagemDao.removeComentario(idPostagem, res._id);
                         return true;
                     }
                     catch(e)
@@ -52,11 +54,11 @@ class ComentarioDAO extends TemplateDao{
         else
         {
             let idComentario = req.body.idComentario;
-            PostagemDao = new PostagemDao(PostagemModel);
+            var postagemDao = new PostagemDao(PostagemModel);
             return this._findOneAndUpdate({_id:idComentario, username: req.session.user.username},{$set:{ativo:false}}, {new: true})
                 .then((res,err) => {
                     try{
-                        PostagemDao.removeComentario(idPostagem, res._id);
+                        postagemDao.removeComentario(idPostagem, res._id);
                         return true;
                     }
                     catch(e)

@@ -75,7 +75,7 @@ module.exports = function(app)
                 .catch(console.error)
         })
 
-    app.get('/helpCenter/comments/:id', (req,res) => {
+    app.get('/helpcenter/comments/:id', (req,res) => {
     
         HelpCenterController.getComentarios(req)
             .then(response => response ? res.send(response) : res.send({erro:'Erro ao Listar Comentários'}))
