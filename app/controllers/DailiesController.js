@@ -34,7 +34,7 @@ class DailiesController {
         *   @param {Number} batch Número máximo de dailies por retorno
         *   @return {Array}    
     */
-    static listDailies(req, op, page=1, batch=20){
+    static listDailies(req, op, page=1, batch=200){
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
         //verificar user
