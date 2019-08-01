@@ -1,4 +1,8 @@
-CKEDITOR.replace('corpo');
+var editor = CKEDITOR.replace('corpo');
+const validaRequired = editor.on('required', function(evt){
+    editor.showNotification('Insira o conteúdo do tópico.', 'warning');
+    evt.cancel();
+});
 
 /*script chip - Seta cores nas tags no click*/
 $(".chip").click(function(element) {
@@ -18,4 +22,4 @@ function verificaTags() {
         /*Preenche os valores no input hidden */
     $("#tags").val(array);
     return array;
-}
+} 
