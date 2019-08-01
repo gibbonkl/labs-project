@@ -1,3 +1,9 @@
+var editor = CKEDITOR.replace('corpo_comment');
+editor.on('required', function(evt){
+    editor.showNotification('Insira o conteúdo da resposta.', 'warning');
+    evt.cancel();
+});
+
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
     $("#show_dailies").fadeIn('fast').removeClass('hide');
@@ -102,11 +108,9 @@ function like() {
 
         })
         .catch(console.log);
-
 }
 
 function resolvido(id) {
-
     fetch("/helpcenter/resolvido", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -128,7 +132,6 @@ function edit_topic(id) {
 }
 
 function delete_topic() {
-
     id = topic_id();
     console.log(id);
     Swal.fire({
@@ -215,7 +218,6 @@ function edit_comment() {
 
 }
 
-CKEDITOR.replace('corpo_comment');
 
 function message(type, title) {
     Swal.fire({

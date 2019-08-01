@@ -1,5 +1,5 @@
 var editor = CKEDITOR.replace('corpo');
-const validaRequired = editor.on('required', function(evt){
+editor.on('required', function(evt){
     editor.showNotification('Insira o conteúdo do tópico.', 'warning');
     evt.cancel();
 });
