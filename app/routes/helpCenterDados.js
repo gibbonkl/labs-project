@@ -2,8 +2,16 @@ const HelpCenterController = require('../controllers/HelpCenterController');
 const comentcontroller = require('../controllers/ComentarioController');
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
+
+
 module.exports = function(app)
 {
+    app.use( (request, response, next) => {
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    
     // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/query/:dados/:pagina', (req,res) => {
         
