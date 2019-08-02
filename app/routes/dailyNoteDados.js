@@ -2,6 +2,11 @@ let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 let controller = require('../controllers/DailiesController');
 
 module.exports = function(app) {
+    app.use( (request, response, next) => {
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
     // route for user's dashboard
     app.route('/daily/:op')
         .post((req, res) => {
