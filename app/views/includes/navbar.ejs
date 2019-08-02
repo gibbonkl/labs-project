@@ -8,7 +8,7 @@
 <!-- Navbar -->
 <div>
     <nav class="white">
-        <div class="nav-wrapper nav-padding z-depth-5">
+        <div class="nav-wrapper nav-padding z-depth-2">
             <div class="left">
                 <a href="#" data-target="slide-out" class="sidenav-trigger show-on-small-only"><i class="material-icons black-text">menu</i></a>
                 <a href="/" class="left blue-compass brand-logo position-relative hide-on-med-and-down"><i class="logo-img"></i>Game of Bols</a>
@@ -24,7 +24,7 @@
                 <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                 <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
                 <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá,
-                    <%= user.username %>
+                    <%= user.nome %>
                 </li>
                 <li>
                     <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
@@ -53,7 +53,7 @@
                         <% } %>
                     </div>
                 <!-- caso usuário logado, mostra olá e o username no sidenav  -->
-                <p><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.username %>!</span></p>
+                <p><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.nome %>!</span></p>
                 <!-- caso usuário não esteja logado, mostra só olá -->
                 <p><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá!</span></p>
             </div>
