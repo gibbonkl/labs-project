@@ -1,15 +1,15 @@
 var initial_message = {
     activities: [
-        {
-            type: 'message',
-            text: "Olá! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
-            from: {
-                id: 'helpinho-bot',
-                name: 'helpinho-bot',
-                role: 'bot'
-            },
-            timestamp: new Date()
-        }
+        // {
+        //     type: 'message',
+        //     text: "Olá! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
+        //     from: {
+        //         id: 'helpinho-bot',
+        //         name: 'helpinho-bot',
+        //         role: 'bot'
+        //     },
+        //     timestamp: new Date()
+        // }
     ]
 }
 
@@ -30,13 +30,13 @@ function updateStore(activity){
     window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
 }
 
-// function checkEmptyStore(){
-//     let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
-//     reduxStore = JSON.parse(reduxStore);
-//     if (reduxStore['activities'].length > 0)
-//         return false
-//     return true
-// }
+function checkEmptyStore(){
+    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    reduxStore = JSON.parse(reduxStore);
+    if (reduxStore['activities'].length > 0)
+        return false
+    return true
+}
 
 var store = window.WebChat.createStore(
     loadStore(),
@@ -59,16 +59,17 @@ var store = window.WebChat.createStore(
             }
         }
 
-        // if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-        //     if(checkEmptyStore()){
-        //         dispatch({
-        //             type: 'WEB_CHAT/SEND_EVENT',
-        //             payload: {
-        //                 name: 'webchat/join',
-        //             }
-        //         });
-        //     }
-        //   }
+        // wellcome message
+        if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED' && checkEmptyStore()) {
+            if(checkEmptyStore()){
+                dispatch({
+                    type: 'WEB_CHAT/SEND_EVENT',
+                    payload: {
+                        name: 'webchat/join',
+                    }
+                });
+            }
+          }
 
     return next(action);
     }
