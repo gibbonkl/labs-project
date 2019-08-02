@@ -7,7 +7,8 @@ var initial_message = {
                 id: 'helpinho-bot',
                 name: 'helpinho-bot',
                 role: 'bot'
-            }
+            },
+            timestamp: new Date()
         }
     ]
 }
