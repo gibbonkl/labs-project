@@ -32,5 +32,6 @@
     float: right !important;
 }
 .chip {
+    position: static !important;
     float: left !important;
 }
