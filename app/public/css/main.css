@@ -174,3 +174,8 @@ td select {
 .chat-opacity {
     background-color: rgba(10, 23, 55, 0.5);
 }
+.btn-margin-filter {
+    vertical-align: middle !important;
+    margin-top: 1% !important;
+    height: 40px !important;
+}

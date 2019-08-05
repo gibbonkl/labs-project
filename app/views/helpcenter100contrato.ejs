@@ -19,11 +19,6 @@
     <!-- Botão novo topico aparece ativo apenas se usuário está logado -->
     <div class="section no-pad-bot">
         <div class="container">
-            <br>
-            <div class="row center">
-                <a class="waves-effect waves-light btn-large bg-yellow-compass rounded <%if(user.tipo==''){%><%='disabled'%><%}%>" onclick="new_topic()">
-                    <i class="left material-icons">add</i>Novo tópico</a>
-            </div>
         </div>
     </div>
 
@@ -32,7 +27,7 @@
             <!-- Buscar nos tópicos -->
             <div class="row white z-depth-2">
                 <div class="input-field col l2 m2 s12">
-                    <select id="search_select" onchange="searchOp()" placeholder=" ">
+                    <select id="search_select" onchange="searchOp()" placeholder="">
                         <option value="data">Data</option>
                         <option value="username">Usuário</option>
                         <option value="query">Título</option>
@@ -55,7 +50,7 @@
                 <div id="div_tag" class="input-search col l8 m7 s12 hide">
                     <div class="chips chips-autocomplete"></div>
                 </div>
-                <div class="input-field col l1 m2 s12 center">
+                <div class="input-field col l2 m2 s12 center">
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="buscar()">buscar</button>
                 </div>
             </div>
@@ -94,7 +89,8 @@
     <script type="text/javascript" src="../public/js/menu/menu.js"></script>
     <script type="text/javascript" src="helper/custom_materialize.js"></script>
     <script type="text/javascript" src="helper/valida.js"></script>
-    <script type="text/javascript" src="../public/js/helpcenter/helpcenter.js"></script>
+    <script type="text/javascript" src="../public/js/semcontrato/helpStart.js"></script>
+    <script type="text/javascript" src="../public/js/semcontrato/helpCRUD.js"></script>
 
 
 </body>

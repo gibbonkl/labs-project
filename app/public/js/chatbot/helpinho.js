@@ -1,13 +1,66 @@
 var initial_message = {
     activities: [
         {
-            type: 'message',
-            text: "Olá! Eu sou o Helpinho, assistente virtual do Game Of Bols.\nComigo você pode buscar daily notes e tópicos.\nNo que posso ajudar?",
+            type: "message",
+            attachmentLayout: "list",
+            attachments: [
+                {
+                    content: {
+                        type: "AdaptiveCard",
+                        "body": [
+                            {
+                                "type": "Image",
+                                "altText": "Helpinho",
+                                "url": "https://cdn.dribbble.com/users/722835/screenshots/4082720/bot_icon.gif",
+                                "size": "Large",
+                                "horizontalAlignment": "Center"
+                            },
+                            {
+                                "type": "RichTextBlock",
+                                "inlines": [
+                                    {
+                                        "type": "TextRun",
+                                        "text": "Olá! Eu sou o Helpinho, assistente virtual do Game Of Bols."
+                                    }
+                                ],
+                                "horizontalAlignment": "Center",
+                                "height": "stretch"
+                            },
+                            {
+                                "type": "RichTextBlock",
+                                "inlines": [
+                                    {
+                                        "type": "TextRun",
+                                        "text": "Comigo você pode buscar DailyNotes, postagens no nosso HelpCenter ou tirar dúvidas sobre a plataforma!"
+                                    }
+                                ],
+                                "horizontalAlignment": "Center",
+                                "height": "stretch"
+                            },
+                            {
+                                "type": "RichTextBlock",
+                                "inlines": [
+                                    {
+                                        "type": "TextRun",
+                                        "text": "No que posso ajudar?"
+                                    }
+                                ],
+                                "height": "stretch",
+                                "horizontalAlignment": "Center"
+                            }
+                        ],
+                        type: "AdaptiveCard",
+                        version: "1.0",
+                    },
+                    contentType: "application/vnd.microsoft.card.adaptive",
+                }
+            ],
             from: {
                 id: 'helpinho-bot',
                 name: 'helpinho-bot',
                 role: 'bot'
-            }
+            },
+            timestamp: new Date()
         }
     ]
 }
@@ -29,45 +82,28 @@ function updateStore(activity){
     window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
 }
 
-// function checkEmptyStore(){
-//     let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
-//     reduxStore = JSON.parse(reduxStore);
-//     if (reduxStore['activities'].length > 0)
-//         return false
-//     return true
-// }
+function checkEmptyStore(){
+    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    reduxStore = JSON.parse(reduxStore);
+    if (reduxStore['activities'].length > 0)
+        return false
+    return true
+}
 
 var store = window.WebChat.createStore(
     loadStore(),
     ({ dispatch }) => next => action => {
         //console.log(action)
 
-        // save user input in localstorage
-        if (action.type === 'DIRECT_LINE/POST_ACTIVITY_PENDING') {
-            const activity = action.payload.activity;
-            if (activity.type === 'message'){
-                updateStore(activity)
-            }
-        }
-
-        // save bot respose in localstorage        
+        // save conversations in localstorage        
         if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
             const activity = action.payload.activity;
-            if (activity.type === 'message' && activity.from.name === 'helpinho-bot'){
+            if (activity.type === 'message') {
+                activity.timestamp = new Date();
+
                 updateStore(activity)
             }
         }
-
-        // if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-        //     if(checkEmptyStore()){
-        //         dispatch({
-        //             type: 'WEB_CHAT/SEND_EVENT',
-        //             payload: {
-        //                 name: 'webchat/join',
-        //             }
-        //         });
-        //     }
-        //   }
 
     return next(action);
     }
@@ -75,9 +111,9 @@ var store = window.WebChat.createStore(
 
 var styleOptions = {
     botAvatarImage: 'https://docs.microsoft.com/en-us/azure/bot-service/v4sdk/media/logo_bot.svg?view=azure-bot-service-4.0',
-    botAvatarInitials: 'BF',
+    botAvatarInitials: 'HP',
     userAvatarImage: 'https://s3.amazonaws.com/gupy5/production/companies/417/career/410/images/logo.jpg',
-    userAvatarInitials: 'WC'
+    userAvatarInitials: 'US'
 };
 
 window.WebChat.renderWebChat({
