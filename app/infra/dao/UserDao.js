@@ -130,14 +130,17 @@ class UserDao extends TemplateDao{
                 })
         }
     }    
-    updatePhoto(username, newPhoto){
+    updatePhoto(username= "", newPhoto= ""){
         if(username && newPhoto){
             return this._findOneAndUpdate({username: username}, {$set:{imagem: newPhoto}})
                 .then(res => res? res : null)
                 .catch(err=>{
-                    return({detail:"Impossível atualizar a foto.", error:err});
+                    return({detail:"Impossível atualizar a foto.", error: err});
                 })
         }
+        else return({detail:"Impossível atualizar a foto.", error: "Foto vazia"});
+
+
     }
     /*
     *   Verifica tipo de permissão de usuário
