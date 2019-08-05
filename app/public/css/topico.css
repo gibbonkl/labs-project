@@ -27,4 +27,7 @@
     text-decoration: none;
     pointer-events: none;
   }
-
+  .waves-effect {
+    position:static !important;
+    float: right;
+  }

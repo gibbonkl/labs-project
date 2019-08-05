@@ -82,3 +82,7 @@
 .word-wrap {
     word-wrap: break-word;
 }
+
+.row .col.s2 {
+   position: sticky;    
+}
