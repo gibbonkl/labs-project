@@ -4,11 +4,6 @@ editor.on('required', function(evt){
     evt.cancel();
 });
 
-function animaLoad() {
-    $(".progress").addClass('hide').hide('slow');
-    $("#show_dailies").fadeIn('fast').removeClass('hide');
-}
-
 $(document).ready(function() {
     list_comments(topic_id())
 });

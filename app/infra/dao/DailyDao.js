@@ -36,7 +36,6 @@ class DailyDao extends TemplateDao {
 
         return ({ detail: "Impossível realizar operação", error: "Daily Note null ou undefined" })
     }
-    // estou com pressa
     validateDailyNoteById(dailyNote) {
         return this._findOne({ usuario: dailyNote.usuario, _id: dailyNote._id, ativo: true })
             .then(res => res ? res : null)
@@ -66,8 +65,7 @@ class DailyDao extends TemplateDao {
         *   Faz update no campo ativo mudando para false
         *   @param {Model} dailyNote Modelo de daily mongoose
         *   @returns {object}
-    */
-    
+    */    
     removeDailyNoteById(req=''){
         if(req.session.user.tipo == 'admin')
             return this._findOneAndUpdate({_id:req.body.daily_id},{$set:{ativo:false}})
@@ -97,8 +95,7 @@ class DailyDao extends TemplateDao {
                     '$skip': skip
                 },
                 {
-                      '$limit': limit
-                
+                    '$limit': limit
                 },
                   {
                     '$lookup': {
@@ -135,8 +132,7 @@ class DailyDao extends TemplateDao {
                     '$skip': skip
                 },
                 {
-                      '$limit': limit
-                
+                    '$limit': limit
                 },
                   {
                     '$lookup': {
@@ -155,15 +151,45 @@ class DailyDao extends TemplateDao {
         }
         else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
     }
-
+    // Lista as 5 daily notes mais recentes // Controller manda limit = 5
+    listDailyNotesDefault(skip = '', limit = '') {
+        return this._aggregate([
+            {
+                '$sort': { 'data': -1 }
+            },
+            {
+                '$match': { 'ativo': true }
+            },
+            {
+                '$skip': skip
+            },
+            {
+                '$limit': limit
+            },
+            {
+                '$lookup': {
+                    'from': 'usuarios', 
+                    'localField': 'usuario', 
+                    'foreignField': 'username', 
+                    'as': 'user'
+                }
+            },
+            {
+                '$sort': { 'data': 1 }
+            }
+        ])
+        .then(res => res? res : null)
+        .catch(err => {
+            console.error(err);
+            return ({ detail: "Impossível buscar para esse usuário", error: err })
+        })
+    }
     numberOfDailies(){
         return this._countDocuments({ativo: true})
             .then(response => response)
             .catch(console.error)
     }
-
-    listarDailies()
-    {
+    listarDailies(){
         return this._find();
     }
 }

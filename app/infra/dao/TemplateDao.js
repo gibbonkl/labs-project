@@ -6,9 +6,7 @@ require('dotenv').config({ path: ENV_FILE });
 //const async = require('async');
 const mongoose = require('mongoose');
 
-
 class TemplateDao{
-
     /*
         *   Salva um objeto no CosmosDB ou local 
         *   dependendo de qual arquivo é executado (index.js ou server.js)
@@ -115,15 +113,12 @@ class TemplateDao{
             .lean(true)
             .exec();
     }
-
     _countDocuments(filter={}){
         return this._model
             .countDocuments(filter)
             .exec();
     }
-
-    _aggregate(queries)
-    {
+    _aggregate(queries){
         return this._model.aggregate(queries)
             .exec();
     }
@@ -132,6 +127,5 @@ class TemplateDao{
             .countDocuments()
             .exec();
     }
-
 }
 module.exports = TemplateDao;

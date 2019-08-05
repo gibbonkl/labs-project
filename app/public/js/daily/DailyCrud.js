@@ -35,7 +35,6 @@ function inserir() {
             }
         })
         .then(resultado => {
-
             fetch("/daily", {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
@@ -55,11 +54,7 @@ function inserir() {
                 .catch(message('error', 'Unexpected Error'))
         })
         .catch(() => { console.log });
-
 }
-
-
-
 function deletar(id) {
     Swal.fire({
             title: 'Tem certeza que deseja excluir a daily?',
@@ -90,45 +85,47 @@ function deletar(id) {
                         message('success', 'Daily deletada!')
                     })
                     .catch(message('error', 'Unexpected Error'))
-
             }
         })
         .catch(console.log)
 }
-
+// Listar daily notes com data de hoje (default)
 function listar() {
-    fetch("/daily/data", {
+    fetch("/daily/default", {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "filtro": dateConverter()
-            })
+            headers: { 'Content-Type': 'application/json' }
         })
         .then(response => response.json())
-        .then(dailies => {
-            listarDailiesDOM(dailies);
-        })
-        .catch(console.log)
+        .then(dailies => listarDailiesDOM(dailies))
 }
-
+// function listar() {
+//     fetch("/daily/data", {
+//             method: "POST",
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//                 "filtro": dateConverter()
+//             })
+//         })
+//         .then(response => response.json())
+//         .then(dailies => listarDailiesDOM(dailies))
+// }
 function listarPorData(data) {
     fetch("/daily/data", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                filtro: data
+                "filtro": data
             })
         })
         .then(response => response.json())
         .then(dailies => listarDailiesDOM(dailies))
 }
-
 function listarPorUser(name) {
     fetch("/daily/user", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                filtro: name
+                "filtro": name
             })
         })
         .then(response => response.json())
@@ -136,22 +133,18 @@ function listarPorUser(name) {
             listarDailiesDOM(dailies);
         })
 }
-
 function filtrar() {
     let data = $("input[name='filter_data']").val();
     let name = $("input[name='filter_username']").val();
     if (name.length) listarPorUser(name)
     else data.length ? listarPorData(data) : listar()
-
 }
-
 function editar(id) {
     var obj = {
         ontem: $("#" + id + " .ontem").text(),
         hoje: $("#" + id + " .hoje").text(),
         imp: $("#" + id + " .imp").text()
     }
-
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
@@ -199,7 +192,6 @@ function editar(id) {
                 })
                 .then(response => response.json())
                 .then(response => {
-
                     if (response.erro)
                         message('error', response.erro);
                     else {
@@ -208,14 +200,11 @@ function editar(id) {
                         $("#" + id + " .imp").text(response.corpo.impedimento).html();
                         message('success', 'Daily Editada!');
                     }
-
                 })
                 .catch(message('error', 'Unexpected Error'))
-
         })
         .catch(() => { console.log });
 }
-
 function message(type, title) {
     Swal.fire({
         position: 'center',
