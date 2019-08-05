@@ -1,3 +1,5 @@
+var time = 500;
+
 function inserir() {
     Swal.mixin({
             input: 'text',
@@ -27,7 +29,6 @@ function inserir() {
             }
         ])
         .then(result => {
-            console.log(result);
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
@@ -52,7 +53,7 @@ function inserir() {
                         message('success', 'Daily registrada!')
                     }
                 })
-                .catch(message('error', 'Unexpected Error'))
+                .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
         })
         .catch(() => { console.log });
 
@@ -89,8 +90,7 @@ function deletar(id) {
                         removerElementDOM(id);
                         message('success', 'Daily deletada!')
                     })
-                    .catch(message('error', 'Unexpected Error'))
-
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
             }
         })
         .catch(console.log)
@@ -210,7 +210,7 @@ function editar(id) {
                     }
 
                 })
-                .catch(message('error', 'Unexpected Error'))
+                .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
 
         })
         .catch(() => { console.log });

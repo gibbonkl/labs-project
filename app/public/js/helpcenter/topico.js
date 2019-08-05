@@ -1,3 +1,9 @@
+var editor = CKEDITOR.replace('corpo_comment');
+editor.on('required', function(evt){
+    editor.showNotification('Insira o conteúdo da resposta.', 'warning');
+    evt.cancel();
+});
+
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
     $("#show_dailies").fadeIn('fast').removeClass('hide');
@@ -24,8 +30,10 @@ function render_comment(comment) {
 					<span class="grey-text right">${comment.data}</h5>
 				</div>  
 				<div class="col s12 black-text corpo-resposta">
-					${comment.corpo}
-				</div>
+                    ${comment.corpo}
+                    <a class="btn-floating white right" onclick="delete_comment('${comment._id}')" ><i  class="material-icons black-text">delete</i></a>
+                    <a class="btn-floating white right btn-margin-right" onclick="edit_comment('${comment._id}')" ><i  class="material-icons black-text">create</i></a>
+                    </div>
 			</div>
 		</div>`
 }
@@ -102,11 +110,9 @@ function like() {
 
         })
         .catch(console.log);
-
 }
 
 function resolvido(id) {
-
     fetch("/helpcenter/resolvido", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -128,7 +134,6 @@ function edit_topic(id) {
 }
 
 function delete_topic() {
-
     id = topic_id();
     console.log(id);
     Swal.fire({
@@ -178,7 +183,7 @@ function forum() {
 function delete_comment(idC) {
     idP = topic_id();
     Swal.fire({
-            title: 'Tem certeza que deseja excluir este topico?',
+            title: 'Tem certeza que deseja excluir este comentário?',
             text: "Você não poderá reverter",
             type: 'warning',
             reverseButtons: true,
@@ -194,14 +199,14 @@ function delete_comment(idC) {
                 fetch("/helpcenter/comentario", {
                         method: "DELETE",
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ idpostagem: idP, idComentario: idC })
+                        body: JSON.stringify({ idPostagem: idP, idComentario: idC })
                     })
                     .then(response => response.json())
                     .then(response => {
                         if (response.erro)
                             message('error', response.erro)
                         else {
-                            message('success', 'Topico Deletado!')
+                            message('success', 'Comentário Deletado!')
                             $(`#${idC}`).remove();
                         }
                     })
@@ -211,11 +216,10 @@ function delete_comment(idC) {
         .catch(console.log)
 }
 
-function edit_comment() {
-
+function edit_comment(id) {    
+    window.location.href = "/helpCenter/edita_comentario/" + id
 }
 
-CKEDITOR.replace('corpo_comment');
 
 function message(type, title) {
     Swal.fire({

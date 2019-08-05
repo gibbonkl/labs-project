@@ -2,13 +2,21 @@ const HelpCenterController = require('../controllers/HelpCenterController');
 const comentcontroller = require('../controllers/ComentarioController');
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
+
+
 module.exports = function(app)
 {
+    app.use( (request, response, next) => {
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    
     // Lista Postagens por busca (:dados = minha-busca)
     app.get('/helpcenter/query/:dados/:pagina', (req,res) => {
         
         HelpCenterController.listarPostagem(req, 'busca', req.params.pagina)
-            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .then(response => response?res.status(200).send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
 
@@ -16,7 +24,7 @@ module.exports = function(app)
     app.get('/helpcenter/data/:data/:pagina', (req,res) => {
         
         HelpCenterController.listarPostagem(req, 'data', req.params.pagina)
-            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .then(response => response?res.status(200).send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
 
@@ -24,7 +32,7 @@ module.exports = function(app)
     app.get('/helpcenter/atividade/:pagina', (req,res) => {       
         
         HelpCenterController.listarPostagem(req, 'lastUpdate', req.params.pagina)
-            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .then(response => response?res.status(200).send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
 
@@ -32,7 +40,7 @@ module.exports = function(app)
     app.get('/helpcenter/tag/:tags/:pagina', (req,res) => {       
         
         HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
-            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .then(response => response?res.status(200).send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
 
@@ -40,17 +48,9 @@ module.exports = function(app)
     app.get('/helpcenter/username/:username/:pagina', (req,res) => {        
         
         HelpCenterController.listarPostagem(req, 'username', req.params.pagina)
-            .then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
+            .then(response => response?res.status(200).send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
             .catch(err => console.log(err));
     });
-
-    // Lista Postagens por tags
-    // app.get('/helpcenter/tag/:tag/:pagina', (req,res) => {        
-        
-    //     HelpCenterController.listarPostagem(req, 'tags', req.params.pagina)
-    //         //.then(response => response?res.send(response):{erro:'Não Foi Possivel Buscar As Postagens'})
-    //         //.catch(err => console.log(err));
-    // });
 
     //editar postagem
     app.post('/helpcenter/editar',sessionCheckerRedLogin, (req, res) => {
@@ -75,7 +75,7 @@ module.exports = function(app)
                 .catch(console.error)
         })
 
-    app.get('/helpCenter/comments/:id', (req,res) => {
+    app.get('/helpcenter/comments/:id', (req,res) => {
     
         HelpCenterController.getComentarios(req)
             .then(response => response ? res.send(response) : res.send({erro:'Erro ao Listar Comentários'}))

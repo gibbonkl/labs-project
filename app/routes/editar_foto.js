@@ -10,20 +10,27 @@ module.exports = function (app) {
             let user = {
                 username: req.session.user.username,
                 tipo: req.session.user.tipo,
-                imagem: req.session.user.imagem
+                imagem: req.session.user.imagem,
+                nome: req.session.user.nome
             }
             res.render('editar_foto', {user: user});
         })
-        .post(upload.single('upload'),sessionCheckerRedLogin, (req, res) => {
-            EditarFotoController(req)
+        .post(upload.single('upload'),sessionCheckerRedLogin, ( req, res) => {
+            if(req.file){
+                EditarFotoController(req)
                 .then(retorno => {
+                    console.log(retorno)
                     if (retorno) {
                         req.session.user.imagem = retorno;
                         res.redirect('/');
                     } else {                        
-                        req.session.user.imagem = retorno.imagem;
-                        res.render('editar_foto', { user: req.session.user});
+                        res.render('editar_foto', { user: req.session.user.imagem});
                     }
-                })
+                }) 
+            }
+            else {  
+                res.redirect('/')
+            }
+
         });
 }

@@ -18,10 +18,15 @@ function render(dados) {
                 `<img class="circle" src="../public/uploads/${dados.imagem}">`:
                 `<img src="../public/img/user.png" alt="" class="circle">`
             }
+            <div class="row">
+                <div class="col s6">
             <span class="black-text topico-nome">${removeTags(dados.username)}</span><br>
             <span class="black-text topico-titulo">${removeTags(dados.titulo)}</span><br>
             <span class="grey-text topico-data">${removeTags(dados.data)}</span>
-            <span class="secondary-content">
+                </div>
+                
+            <span class="secondary-content col s5">
+                <div class="itens right">
             ${dados.resolvido ? `<i class="material-icons green-text" value="${dados.resolvido}">check_circle</i>` : 
                 `<i class="material-icons grey-text" value="${dados.resolvido}">check_circle</i>`}
                 <span class="material-icons number grey-text"></span>
@@ -30,9 +35,15 @@ function render(dados) {
                 <i class="material-icons grey-text">comment</i>
                 <span class="material-icons number grey-text">${dados.numeroComentarios}</span>
             </span> 
+                </div>
+                
+            </div>
+            <div class="tags">
             <div class="${dados.tags[0].length ? `right` : `hide` }"> 
             ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
             </div>
+            &nbsp;
+                </div>
         </a>
     </<span>
 </div>`;
