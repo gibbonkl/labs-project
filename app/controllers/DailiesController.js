@@ -100,7 +100,7 @@ class DailiesController {
                 *   Ou se o usuário for admin do sistema
                 *   Se não, seta a permissão para false
             */
-            return dailyDao.listDailyNotesDefault((page-1)*5, 5) 
+            return dailyDao.listDailyNotesDefault((page-1)*7, 7) 
                 .then(dailies => 
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
