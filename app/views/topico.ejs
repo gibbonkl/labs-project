@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/novo_topico.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../public/css/main.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/material-icons.css">
     <link rel="stylesheet" href="../../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
     <link rel="stylesheet" type="text/css" href="../../public/css/menu.css">
@@ -66,7 +65,7 @@
                 </div>
                 <!-- Número de likes do tópico e opção de curtir -->
                 <div class="div-margin col s6 div-like-botao">
-                    <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
+                    <a id="like-button" class="btn-static waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
                         <i class="left material-icons">thumb_up</i>
                         <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
                     </a>
@@ -77,9 +76,9 @@
                 </div>
                 <!-- Deletar | Editar | Setar Resolvido -->
                 <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                    <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
-                    <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
-                    <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
                 </div>
             </div>
             <!-- Respostas -->

@@ -27,7 +27,10 @@
     text-decoration: none;
     pointer-events: none;
   }
-  .waves-effect {
-    position:static !important;
-    float: right;
-  }
+.btn-static {
+    position: static !important;
+    float: right !important;
+}
+.chip {
+    float: left !important;
+}
