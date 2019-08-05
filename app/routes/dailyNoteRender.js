@@ -7,14 +7,12 @@ module.exports = function(app)
     app.route('/dailynote')
         .get((req, res) => {           
             if (req.session.user && req.cookies.user_sid) {
-
                 user = {
                     username: req.session.user.username,
                     tipo: req.session.user.tipo,
                     imagem: req.session.user.imagem,
                     nome: req.session.user.nome
                 }
-
                 res.render('dailyNote.ejs', user);
             } else {
                 user = {

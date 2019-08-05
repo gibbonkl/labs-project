@@ -27,70 +27,45 @@ function dailyHTML(daily) {
         </div>
     </li>`;
 }
-
-function adicionarDailyDOM(daily)
-{
+function adicionarDailyDOM(daily){
     animaLoad();
     limparTelaSemResultado();
     $("#collapsible_daily").removeClass("hide");
     $('#collapsible_daily').append(dailyHTML(daily));
 }
-
-function removerElementDOM(id)
-{
+function removerElementDOM(id){
     $('#' + id).remove();
 }
-
-function mensagemParaPesquisaSemResultado()
-{
+function mensagemParaPesquisaSemResultado(){
     $("#collapsible_daily").addClass("hide");
     M.toast({html: 'Nenhuma daily encontrada.',displayLength: 2000})
 }
-
-function limparTelaSemResultado()
-{
+function limparTelaSemResultado(){
     removerElementDOM('dirt');
 }
-
-function listarDailiesDOM(dailyList)
-{
+function listarDailiesDOM(dailyList){
     animaLoad();
     limparTelaSemResultado();
-    if(dailyList.length >= 0)
-    {
+    if(dailyList.length >= 0){
         $("#collapsible_daily").removeClass("hide");
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }
-    else 
-    {
+    else{
         mensagemParaPesquisaSemResultado();
     }
 }
-
-// function procurarDailyPorUserDOM(user, data){
-//     if($('span[data-name="'+ user +'"]').length && $('span[data-date="'+ data +'"]').length){
-//         $('#inserir').attr("disabled", true);
-//     }
-// }
-
-function dateConverter(date = new Date()) 
-{
+function dateConverter(date = new Date()){
     return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
 }
-
-function animaLoad() 
-{
+function animaLoad(){
     $(".progress").addClass('hide').hide('slow');
     $("#show_dailies").fadeIn('fast').removeClass('hide');
 }
-
-function showData()
-{
+function showData(){
     $("#div_username").addClass('hide');
     $("#div_data").removeClass('hide');
     $("input[name='filter_username']").val('');
 }
-
 function showUser(){
     $("#div_username").removeClass('hide');
     $("#div_data").addClass('hide');
