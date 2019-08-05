@@ -1,0 +1,93 @@
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <title>Game of Bols</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Ordem de carregamento de link -->
+    <link rel="stylesheet" type="text/css" href="../public/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/daily.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/material-icons.css">
+    <link rel="stylesheet" href="../public/fonts/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2">
+    <link rel="stylesheet" type="text/css" href="../public/css/helpinho.css">
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <!-- Ordem de carregamento de link -->
+</head>
+
+<body class="bg-blue-compass">
+    <header>
+        <% include ./includes/navbar.ejs %>
+    </header>
+    <!-- Botão nova daily aparece ativo apenas se usuário está logado e é do tipo user -->
+    <div class="section no-pad-bot">
+        <div class="container">
+            
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <!-- Filtro de dailies -->
+            <div class="row white z-depth-2">
+                <div class="col l2 m3 s12">
+                    <label>Filtrar por:</label>
+                    <div class="switch-field margin-top">
+                        <input onclick="showData()" type="radio" id="radio-one" name="switch-one" value="true" checked/>
+                        <label for="radio-one" class="tooltipped" data-position="left" data-tooltip="Data"><i class="material-icons icons-font">date_range</i></label>
+                        <input onclick="showUser()" type="radio" id="radio-two" name="switch-one" value="false" />
+                        <label for="radio-two" class="tooltipped" data-position="right" data-tooltip="Nome de usuário"><i class="material-icons icons-font">account_circle</i></label>
+                    </div>
+                </div>
+                <div id="div_username" class="input-field col l8 m7 s12 hide">
+                    <input placeholder=" " name="filter_username" type="text" class="active">
+                    <label for="filter_username">Nome de usuário</label>
+                </div>
+                <div id="div_data" class="input-field col l8 m7 s12">
+                    <input placeholder=" " name="filter_data" type="text" class="datepicker">
+                    <label for="filter_data">Data</label>
+                </div>
+                <div class="input-field col l1 m2 s12 center">
+                    <button class="btn bg-blue-compass btn-margin-filter" onclick="filtrar()">filtrar</button>
+                </div>
+            </div>
+            <!-- Barra de progresso -->
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+            <!-- Daily notes -->
+            <div id="show_dailies" class="row hide">
+                <ul id="collapsible_daily" class="collapsible expandable">
+                </ul>
+            </div>
+        </div>
+    <% include ./includes/chatbot.ejs %>
+    </div>
+
+    <!-- Paginação -->
+    <footer class="page-footer bg-blue-compass">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="pagination center">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../public/js/libs/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="helper/custom_materialize.js"></script>
+    <script type="text/javascript" src="helper/valida.js"></script>
+    <script type="text/javascript" src="../public/js/semcontrato/dailyStart.js"></script>
+    <script type="text/javascript" src="../public/js/semcontrato/dailyCRUD.js"></script>
+    <!-- Ordem de carregamento de script -->
+</body>
+
+</html>
