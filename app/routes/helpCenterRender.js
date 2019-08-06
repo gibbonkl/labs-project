@@ -11,7 +11,7 @@ module.exports = function(app) {
         else
             var user = { username: '', tipo: '', imagem: '', nome: '' }
 
-        res.render('helpcenter.ejs', { user: user });
+        res.render('helpcenter.ejs', { user: user});
     });
 
     // Renderiza Pagina de Inserir Postagem
@@ -30,7 +30,7 @@ module.exports = function(app) {
             var user = { username: '', tipo: '', imagem: '', nome: '' }
 
         HelpCenterController.getPostagem(req)
-            .then(response => response ? res.render('topico.ejs', { user: user, response: response }) : res.send('Página não encontrada'))
+            .then(response => response ? res.render('topico.ejs', { user: user, response: response, }) : res.send('Página não encontrada'))
             .catch(err => res.send('Página não encontrada'))
 
     });
