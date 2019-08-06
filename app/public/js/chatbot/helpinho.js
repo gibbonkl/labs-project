@@ -66,9 +66,9 @@ var initial_message = {
 }
 
 function loadStore(){
-    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX') ? window.localStorage.getItem('HELPINHO_REDUX') : JSON.stringify(initial_message);
+    let reduxStore = window.sessionStorage.getItem('HELPINHO_REDUX') ? window.sessionStorage.getItem('HELPINHO_REDUX') : JSON.stringify(initial_message);
     if (reduxStore == JSON.stringify(initial_message)){
-        window.localStorage.setItem('HELPINHO_REDUX', reduxStore)
+        window.sessionStorage.setItem('HELPINHO_REDUX', reduxStore)
     }
 
     return JSON.parse(reduxStore);
@@ -76,14 +76,14 @@ function loadStore(){
 
 function updateStore(activity){
     //console.log(activity.text)
-    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    let reduxStore = window.sessionStorage.getItem('HELPINHO_REDUX');
     reduxStore = JSON.parse(reduxStore);
     reduxStore['activities'].push(activity)
-    window.localStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
+    window.sessionStorage.setItem('HELPINHO_REDUX', JSON.stringify(reduxStore));
 }
 
 function checkEmptyStore(){
-    let reduxStore = window.localStorage.getItem('HELPINHO_REDUX');
+    let reduxStore = window.sessionStorage.getItem('HELPINHO_REDUX');
     reduxStore = JSON.parse(reduxStore);
     if (reduxStore['activities'].length > 0)
         return false
@@ -95,7 +95,7 @@ var store = window.WebChat.createStore(
     ({ dispatch }) => next => action => {
         //console.log(action)
 
-        // save conversations in localstorage        
+        // save conversations in sessionstorage        
         if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
             const activity = action.payload.activity;
             if (activity.type === 'message') {
