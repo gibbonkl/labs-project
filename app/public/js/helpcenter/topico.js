@@ -8,6 +8,11 @@ $(document).ready(function() {
     list_comments(topic_id())
 });
 
+function animaLoad() {
+    $(".progress").addClass('hide').hide('slow');
+    $("#show_dailies").fadeIn('fast').removeClass('hide');
+}
+
 function topic_id() {
     let href = window.location.href.split('/');
     return href[href.length - 1]
