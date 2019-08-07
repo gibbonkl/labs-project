@@ -188,33 +188,27 @@ class HelpCenterController {
         */
         //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getComentarios(req.params.id)
+        /*
+            *   Retorna a primeira posição do array de postagens
+        */
+        .then(postagem =>{
             /*
-                *   Retorna a primeira posição do array de postagens
+                *   Adiciona o campo imagem ao comentário
+                *   a partir do array de usuários
             */
-            .then(postagem =>{
-                /*
-                    *   Adiciona o campo imagem ao comentário
-                    *   a partir do array de usuários
-                */
-                //for(let i=0;i<postagem.comentarios.comentario.length;i++){
-                    //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
-                    /*
-                        *   Se o usuário for admin ou dono da postagem,
-                        *   Seta as permissões para verdadeiro
-                        *   Caso contrário, falso
-                    */
+           postagem.comentarios.map( comment =>{
+                comment.username == username || user == "admin"? comment.permissao = true : comment.permissao = false
+                return comment
+           })
+            /*
+                *   Desfaz o array de comentários para o campo comentário
+                *   Remove o array de usuário da postagem e adiciona a foto ao objeto
+            */
+           user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+        //    postagem.comentarios = postagem.comentarios.comentario;
+           return postagem;
 
-
-                //}
-                /*
-                    *   Desfaz o array de comentários para o campo comentário
-                    *   Remove o array de usuário da postagem e adiciona a foto ao objeto
-                */
-               user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
-            //    postagem.comentarios = postagem.comentarios.comentario;
-               return postagem;
-
-            })
+        })
             .then(postagem => 
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
             )

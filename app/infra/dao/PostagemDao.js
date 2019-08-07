@@ -294,6 +294,12 @@ class PostagemDao extends TemplateDao{
             }
         ])
         .then(res => res[0])
+        .then(res => {
+            res.comentarios = res.comentarios.filter(comentario =>
+                 comentario.ativo? comentario  :  null
+             )
+             return res
+         })
         .then(res => res ? res : 'error')
         .catch(console.error)
     }
