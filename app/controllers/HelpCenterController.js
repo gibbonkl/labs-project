@@ -75,8 +75,6 @@ class HelpCenterController {
         }
         else if(op == 'tags')
         {
-            //tratar requisição
-            console.log(req.params.tags);
             let tags = req.params.tags.split('+');
             return this.listHelper(
                 postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
@@ -101,7 +99,7 @@ class HelpCenterController {
             username: req.session.user.username,
             corpo: req.body.corpo,
             titulo: req.body.titulo,
-            tags: req.body.tags
+            tags: req.body.tags.split(',')
         });
 
         return new PostagemDao(PostagemModel).insertPostagem(postagem)
