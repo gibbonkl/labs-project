@@ -1,26 +1,25 @@
 var pagina = 1;
 var tamanho = 1;
 
-function listarHelpcenter(pagina)
-{
+function listarHelpcenter(pagina) {
     fetch(`https://reborn100contrato.azurewebsites.net/helps/list/post/${pagina}`, {
-        method: "GET",
-        headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => response.json())
-    .then(response => {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(response => {
 
-        let paginacao = response.pop();
-        tamanho = paginacao.totalPages;
+            let paginacao = response.pop();
+            tamanho = paginacao.totalPages;
 
-        animaLoad();
-        $("#list-posts").removeClass("hide");
-        $('#list-posts').html('');
-        $('#list-posts').html(response.map(posts => render(posts)).join(''));
+            animaLoad();
+            $("#list-posts").removeClass("hide");
+            $('#list-posts').html('');
+            $('#list-posts').html(response.map(posts => render(posts)).join(''));
 
-        paginacaoView(pagina);
-    })
-    .catch((e) => console.log(e))
+            paginacaoView(pagina);
+        })
+        .catch((e) => console.log(e))
 }
 
 $(document).ready(function() {
@@ -34,12 +33,13 @@ function animaLoad() {
 }
 
 function render(dados) {
+    console.log(dados)
     return `<div id="${dados._id}" class="topico" onclick="enter_topic('${dados._id}')">
         <a class="collection-item avatar">
             <img src="../public/img/user.png" alt="" class="circle">
             <span class="black-text topico-nome">${removeTags(dados.owner)}</span><br>
             <span class="black-text topico-titulo">${removeTags(dados.title)}</span><br>
-            <span class="grey-text topico-data">${removeTags(dados.date)}</span>
+            <span class="grey-text topico-data">${removeTags(formatDate(dados.date))}</span>
             <span class="secondary-content">
         </a>
     </<span>
@@ -77,7 +77,7 @@ function paginacaoFetch(pag) {
 function searchOp() {
     tamanho = 0;
     pagina = 1;
-    
+
     let option = $('select#search_select').val();
 
     $(".input-search").addClass('hide');
@@ -87,11 +87,11 @@ function searchOp() {
     $("select#search_select").formSelect();
 }
 
-function buscar(){
-    
+function buscar() {
+
     let option = $('select#search_select').val();
     value = ''
-    
+
     if (option == 'tag') {
         let chips = []
         let array = M.Chips.getInstance($('.chips')).chipsData;
@@ -100,11 +100,11 @@ function buscar(){
         });
         value = chips.join('+');
     } else {
-        value  = $("#div_" + option).children().val();
+        value = $("#div_" + option).children().val();
     }
-    
-    value != '' ? list_topics(option, value.replace(/\//g, '-')) 
-                : list_topics()
+
+    value != '' ? list_topics(option, value.replace(/\//g, '-')) :
+        list_topics()
 }
 
 

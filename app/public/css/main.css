@@ -16,6 +16,10 @@ html {
     background-color: #3A5477 !important;
 }
 
+.gradient-sidenav {
+    background-image: linear-gradient(to right bottom, #3a5377, #4b6385, #5c7394, #6e84a2, #8095b1);
+}
+
 .gradient-compass {
     background: -moz-linear-gradient(left, #3A5377 0%, #8095B1 100%);
     background: -webkit-linear-gradient(left, #3A5377 0%, #8095B1 100%);
@@ -174,6 +178,7 @@ td select {
 .chat-opacity {
     background-color: rgba(10, 23, 55, 0.5);
 }
+
 .btn-margin-filter {
     vertical-align: middle !important;
     margin-top: 1% !important;
