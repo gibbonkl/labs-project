@@ -23,7 +23,7 @@
     <!-- Botão nova daily aparece ativo apenas se usuário está logado e é do tipo user -->
     <div class="section no-pad-bot">
         <div class="container">
-            
+
         </div>
     </div>
 
@@ -31,24 +31,12 @@
         <div class="section">
             <!-- Filtro de dailies -->
             <div class="row white z-depth-2">
-                <div class="col l2 m3 s12">
-                    <label>Filtrar por:</label>
-                    <div class="switch-field margin-top">
-                        <input onclick="showData()" type="radio" id="radio-one" name="switch-one" value="true" checked/>
-                        <label for="radio-one" class="tooltipped" data-position="left" data-tooltip="Data"><i class="material-icons icons-font">date_range</i></label>
-                        <input onclick="showUser()" type="radio" id="radio-two" name="switch-one" value="false" />
-                        <label for="radio-two" class="tooltipped" data-position="right" data-tooltip="Nome de usuário"><i class="material-icons icons-font">account_circle</i></label>
-                    </div>
-                </div>
-                <div id="div_username" class="input-field col l8 m7 s12 hide">
-                    <input placeholder=" " name="filter_username" type="text" class="active">
-                    <label for="filter_username">Nome de usuário</label>
-                </div>
-                <div id="div_data" class="input-field col l8 m7 s12">
+                <div id="div_data" class="input-field col m10 s12">
+                    <i class="material-icons prefix">date_range</i>
                     <input placeholder=" " name="filter_data" type="text" class="datepicker">
                     <label for="filter_data">Data</label>
                 </div>
-                <div class="input-field col l1 m2 s12 center">
+                <div class="input-field col m2 s12 center">
                     <button class="btn bg-blue-compass btn-margin-filter" onclick="filtrar()">filtrar</button>
                 </div>
             </div>
@@ -62,7 +50,7 @@
                 </ul>
             </div>
         </div>
-    <% include ./includes/chatbot.ejs %>
+        <% include ./includes/chatbot.ejs %>
     </div>
 
     <!-- Paginação -->
@@ -76,7 +64,7 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Ordem de carregamento de script -->
     <script type="text/javascript" src="../public/js/libs/jquery.min.js"></script>
     <script type="text/javascript" src="../public/js/libs/materialize.js"></script>
@@ -85,6 +73,7 @@
     <script type="text/javascript" src="../public/js/menu/menu.js"></script>
     <script type="text/javascript" src="helper/custom_materialize.js"></script>
     <script type="text/javascript" src="helper/valida.js"></script>
+    <script type="text/javascript" src="../public/js/semcontrato/geral.js"></script>
     <script type="text/javascript" src="../public/js/semcontrato/dailyStart.js"></script>
     <script type="text/javascript" src="../public/js/semcontrato/dailyCRUD.js"></script>
     <!-- Ordem de carregamento de script -->
