@@ -34,10 +34,18 @@ function render_comment(comment) {
 				<div class="col s12 black-text corpo-resposta">
 					${comment.corpo}
                 </div>
-                <div class="right">
-                <button class="btn-floating white" onclick="edit_comment('${comment._id}','${comment.username}')"><i class="material-icons black-text">edit</i></button>
-                <button class="btn-floating white" onclick="delete_comment('${comment._id}')"><i class="material-icons black-text">delete</i></button>
-                </div>
+                ${comment.permissao?
+                `
+                    <div class="right">
+                        <button class="btn-floating white" onclick="edit_comment('${comment._id}','${comment.username}')"><i class="material-icons black-text">edit</i></button>
+                        <button class="btn-floating white" onclick="delete_comment('${comment._id}')"><i class="material-icons black-text">delete</i></button>
+                    </div>
+                `
+                    :
+                ''
+                
+                }
+ 
             </div>
 	</div>`
 }

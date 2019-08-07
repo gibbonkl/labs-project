@@ -75,8 +75,6 @@ class HelpCenterController {
         }
         else if(op == 'tags')
         {
-            //tratar requisição
-            console.log(req.params.tags);
             let tags = req.params.tags.split('+');
             return this.listHelper(
                 postagemDao.listarPostagemByTags(tags, (page-1)*batch, batch),
@@ -101,7 +99,7 @@ class HelpCenterController {
             username: req.session.user.username,
             corpo: req.body.corpo,
             titulo: req.body.titulo,
-            tags: req.body.tags
+            tags: req.body.tags.split(',')
         });
 
         return new PostagemDao(PostagemModel).insertPostagem(postagem)
@@ -119,7 +117,7 @@ class HelpCenterController {
             username: req.session.user.username,
             corpo: req.body.corpo,
             titulo: req.body.titulo,
-            tags: req.body.tags
+            tags: req.body.tags.split(',')
         });
         console.log(postagem);
        
@@ -188,33 +186,27 @@ class HelpCenterController {
         */
         //console.log(req.params.id);
         return new PostagemDao(PostagemModel).getComentarios(req.params.id)
+        /*
+            *   Retorna a primeira posição do array de postagens
+        */
+        .then(postagem =>{
             /*
-                *   Retorna a primeira posição do array de postagens
+                *   Adiciona o campo imagem ao comentário
+                *   a partir do array de usuários
             */
-            .then(postagem =>{
-                /*
-                    *   Adiciona o campo imagem ao comentário
-                    *   a partir do array de usuários
-                */
-                //for(let i=0;i<postagem.comentarios.comentario.length;i++){
-                    //postagem.comentarios.comentario[i].imagem = postagem.comentarios.user[i].imagem;
-                    /*
-                        *   Se o usuário for admin ou dono da postagem,
-                        *   Seta as permissões para verdadeiro
-                        *   Caso contrário, falso
-                    */
+           postagem.comentarios.map( comment =>{
+                comment.username == username || user == "admin"? comment.permissao = true : comment.permissao = false
+                return comment
+           })
+            /*
+                *   Desfaz o array de comentários para o campo comentário
+                *   Remove o array de usuário da postagem e adiciona a foto ao objeto
+            */
+           user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
+        //    postagem.comentarios = postagem.comentarios.comentario;
+           return postagem;
 
-
-                //}
-                /*
-                    *   Desfaz o array de comentários para o campo comentário
-                    *   Remove o array de usuário da postagem e adiciona a foto ao objeto
-                */
-               user == 'admin' || postagem.username == username? postagem.permissao = true : postagem.permissao = false
-            //    postagem.comentarios = postagem.comentarios.comentario;
-               return postagem;
-
-            })
+        })
             .then(postagem => 
                 HelpCenterController.insereNumeroDeLikesEComentarios(postagem)
             )
