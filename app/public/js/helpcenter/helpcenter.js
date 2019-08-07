@@ -64,11 +64,11 @@ function list_topics(busca='atividade', dados='') {
             if (posts.erro)
                 console.log(posts.erro);
             else {
+                tamanho = posts.count;
                 if(posts.postagens.length > 0) {
                     animaLoad()
                     $("#list-posts").removeClass("hide");
                     $('#list-posts').html(posts.postagens.map(posts => render(posts)).join(''));
-                    tamanho = posts.count;
                     paginacaoView(busca, dados);
                 }
                 else {
