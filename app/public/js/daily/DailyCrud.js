@@ -56,6 +56,7 @@ function inserir() {
         })
         .catch(() => { console.log });
 }
+
 function deletar(id) {
     Swal.fire({
             title: 'Tem certeza que deseja excluir a daily?',
@@ -121,6 +122,7 @@ function listarPorData(data) {
         .then(response => response.json())
         .then(dailies => listarDailiesDOM(dailies))
 }
+
 function listarPorUser(name) {
     fetch("/daily/user", {
             method: "POST",
@@ -134,17 +136,19 @@ function listarPorUser(name) {
             listarDailiesDOM(dailies);
         })
 }
+
 function filtrar() {
     let data = $("input[name='filter_data']").val();
     let name = $("input[name='filter_username']").val();
     if (name.length) listarPorUser(name)
     else data.length ? listarPorData(data) : listar()
 }
+
 function editar(id) {
     var obj = {
-        ontem: $("#" + id + " .ontem").text(),
-        hoje: $("#" + id + " .hoje").text(),
-        imp: $("#" + id + " .imp").text()
+        ontem: $(`#${id} .ontem`).text(),
+        hoje: $(`#${id} .hoje`).text(),
+        imp: $(`#${id} .imp`).text()
     }
     Swal.mixin({
             input: 'text',
@@ -196,9 +200,9 @@ function editar(id) {
                     if (response.erro)
                         message('error', response.erro);
                     else {
-                        $("#" + id + " .ontem").text(response.corpo.ontem).html();
-                        $("#" + id + " .hoje").text(response.corpo.hoje).html();
-                        $("#" + id + " .imp").text(response.corpo.impedimento).html();
+                        $(`#${id} .ontem`).text(response.corpo.ontem).html();
+                        $(`#${id} .hoje`).text(response.corpo.hoje).html();
+                        $(`#${id} .imp`).text(response.corpo.impedimento).html();
                         message('success', 'Daily Editada!');
                     }
                 })
@@ -207,6 +211,7 @@ function editar(id) {
         })
         .catch(() => { console.log });
 }
+
 function message(type, title) {
     Swal.fire({
         position: 'center',

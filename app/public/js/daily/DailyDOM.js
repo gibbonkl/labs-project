@@ -12,9 +12,9 @@ function dailyHTML(daily) {
         <div class="collapsible-body grey lighten-3">
             <div class="row">
                 <div class="col s10 word-wrap">
-                    <span class="bold">Ontem: </span><span class="font-nunito">${removeTags(daily.corpo.ontem)}</span><br>
-                    <span class="bold">Hoje: </span><span class="font-nunito">${removeTags(daily.corpo.hoje)}</span><br>
-                    <span class="bold">Impedimentos: </span><span class="font-nunito">${removeTags(daily.corpo.impedimento)}</span>
+                    <span class="bold">Ontem: </span><span class="font-nunito ontem">${removeTags(daily.corpo.ontem)}</span><br>
+                    <span class="bold">Hoje: </span><span class="font-nunito hoje">${removeTags(daily.corpo.hoje)}</span><br>
+                    <span class="bold">Impedimentos: </span><span class="font-nunito imp">${removeTags(daily.corpo.impedimento)}</span>
                 </div>
                 ${daily.permissao ?
                     `<div class="col s2">
