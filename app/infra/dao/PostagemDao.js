@@ -447,16 +447,16 @@ class PostagemDao extends TemplateDao{
                                         {ativo: true} ]
                                     },
                                 },
-                                {
-                                    "$sort":{
-                                        updatedAt: -1
-                                    }
-                                },
                                 {'$lookup': {
                                     'from': 'usuarios', 
                                     'localField': 'username', 
                                     'foreignField': 'username', 
                                     'as': 'user'
+                                    }
+                                },
+                                {
+                                    "$sort":{
+                                        updatedAt: -1
                                     }
                                 },
                                 {
