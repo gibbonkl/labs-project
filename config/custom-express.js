@@ -30,7 +30,12 @@ module.exports = function() {
         .into(app);
 
     app.get('*', function(req, res){
-        res.status(404).send('Não rolou');
+
+        if (req.session.user && req.cookies.user_sid)
+            var user = { username: req.session.user.username, tipo: req.session.user.tipo, imagem: req.session.user.imagem, nome: req.session.user.nome }
+        else
+            var user = { username: '', tipo: '', imagem: '', nome: '' }
+        res.status(404).render('404_template', {user: user, title: "Página não encontrada"});
     });
 
     return app;
