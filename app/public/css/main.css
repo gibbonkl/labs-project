@@ -38,7 +38,6 @@ html {
 .grey-compass {
     color: #373435 !important;
 }
-
 .mont-serrat {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: bold !important;
@@ -183,4 +182,13 @@ td select {
     vertical-align: middle !important;
     margin-top: 1% !important;
     height: 40px !important;
+}
+.cinza-swal {
+    background-color: #b3bac5 !important;
+}
+.azul-swal {
+    background-color: #3085d6 !important;
+}
+.btn-swal {
+    margin-right: 2%;
 }
