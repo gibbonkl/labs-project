@@ -46,7 +46,7 @@ function limparTelaSemResultado(){
 function listarDailiesDOM(dailyList){
     animaLoad();
     limparTelaSemResultado();
-    if(dailyList.length >= 0){
+    if(dailyList.length > 0){
         $("#collapsible_daily").removeClass("hide");
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }
