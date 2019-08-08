@@ -9,7 +9,7 @@ function inserir() {
             cancelButtonColor: '#b3bac5',
             cancelButtonText: 'Cancelar',
             allowOutsideClick: false,
-            progressSteps: ['1', '2', '3'],
+            progressSteps: ['1', '2', '3', '4'],
             inputValidator: (value) => {
                 if (!value) {
                     return 'Você precisa preencher o campo!'
@@ -24,15 +24,39 @@ function inserir() {
                 text: 'Cadastrar daily'
             },
             {
+                input: null,
                 title: 'Há algum impedimento?',
+                html: 'Cadastrar daily<br/><br/>'+
+                '<button id="nenhum" class="btn azul-swal rounded btn-swal">Não</button>'+
+                '<button id="sim" class="btn cinza-swal rounded">Sim</button>',
+                showCancelButton: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    const content = Swal.getContent()
+                    const $ = content.querySelector.bind(content)                
+                    const nenhum = $('#nenhum')
+                    const sim = $('#sim')                
+                    nenhum.addEventListener('click', () => {
+                        Swal.deleteQueueStep(3)
+                        Swal.clickConfirm()
+                    })                
+                    sim.addEventListener('click', () => {
+                        Swal.clickConfirm()
+                    })
+                }
+            },
+            {
+                title: 'Qual é o impedimento?',
                 text: 'Cadastrar daily'
             }
         ])
         .then(result => {
+            let impedimento = 'Nenhum'
+            if(result.value[3]) impedimento = result.value[3]
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2]
+                'impedimento': impedimento
             }
         })
         .then(resultado => {
@@ -43,7 +67,6 @@ function inserir() {
                 })
                 .then(response => response.json())
                 .then(response => {
-
                     if (response.erro)
                         message('error', response.erro);
                     else {
@@ -150,7 +173,7 @@ function editar(id) {
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
             showCancelButton: true,
-            progressSteps: ['1', '2', '3'],
+            progressSteps: ['1', '2', '3', '4'],
             cancelButtonColor: '#b3bac5',
             cancelButtonText: 'Cancelar',
             allowOutsideClick: false,
@@ -171,16 +194,40 @@ function editar(id) {
                 inputValue: obj.hoje
             },
             {
+                input: null,
                 title: 'Há algum impedimento?',
+                html: 'Cadastrar daily<br/><br/>'+
+                '<button id="nenhum" class="btn azul-swal rounded btn-swal">Não</button>'+
+                '<button id="sim" class="btn cinza-swal rounded">Sim</button>',
+                showCancelButton: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    const content = Swal.getContent()
+                    const $ = content.querySelector.bind(content)                
+                    const nenhum = $('#nenhum')
+                    const sim = $('#sim')                
+                    nenhum.addEventListener('click', () => {
+                        Swal.deleteQueueStep(3)
+                        Swal.clickConfirm()
+                    })                
+                    sim.addEventListener('click', () => {
+                        Swal.clickConfirm()
+                    })
+                }
+            },
+            {
+                title: 'Qual é o impedimento?',
                 text: 'Editar daily',
                 inputValue: obj.imp
             }
         ])
         .then((result) => {
+            let impedimento = 'Nenhum'
+            if(result.value[3]) impedimento = result.value[3]
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2],
+                'impedimento': impedimento,
                 '_id': id
             }
         })
