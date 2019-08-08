@@ -40,7 +40,7 @@ function render(dados) {
             </div>
             <div class="tags">
             <div class="${dados.tags[0].length ? `right` : `hide` }"> 
-            ${dados.tags.length ? dados.tags[0].split(',').map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
+            ${dados.tags.length ? dados.tags.map( element => `<span class="chip">${removeTags(element)}</span>`).join('') : ''}           
             </div>
             &nbsp;
                 </div>
