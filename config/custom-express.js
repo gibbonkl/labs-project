@@ -14,7 +14,6 @@ module.exports = function() {
     app.set('views', path.join(__dirname, './../app/views/'));
 
     app.use(express.static(path.join(__dirname, './../app/public/js/daily')));
-
     
     console.log(path.join(__dirname + './../app'));
     
@@ -29,6 +28,10 @@ module.exports = function() {
     consign({ cwd: 'app' })
         .include('routes')
         .into(app);
+
+    app.get('*', function(req, res){
+        res.status(404).send('Não rolou');
+    });
 
     return app;
 }
