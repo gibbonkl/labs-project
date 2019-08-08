@@ -27,7 +27,11 @@ function showData() {
 }
 
 function listarDailiesDOM(dailyList) {
-    if (dailyList.length == 0) M.toast({ html: "Sem daily notes neste dia! :(", displayLength: 3500 })
+    $("#paginacao").removeClass("hide");
+    if (dailyList.length == 0){
+        M.toast({ html: "Sem daily notes neste dia! :(", displayLength: 3500 });
+        $("#paginacao").addClass("hide");
+    }
     animaLoad();
     $("#collapsible_daily").removeClass("hide");
     $("#collapsible_daily").html('');
