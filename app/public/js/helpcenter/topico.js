@@ -85,7 +85,7 @@ $("#comment_form").submit(function(event) {
         })
         .then(response => response.json())
         //.then(response => console.log(response))
-        //.then(response => {response['permissao'] = true; return response})
+        .then(response => {response['permissao'] = true; return response})
         .then(response => {
             $('#list_comments').append(render_comment(response));
             CKEDITOR.instances.corpo_comment.setData('<p>Digite aqui o conteúdo da sua resposta.</p>')
@@ -284,14 +284,14 @@ function enviaEdit(_id, id) {
         _id: id,
         corpo
     }
-    console.log(dados)
+    //console.log(dados)
     fetch("/helpcenter/comentario", {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         })
         .then(response => {
-            console.log(response)
+            //console.log(response)
             $(`#${id} .corpo-resposta`).html(dados.corpo);
             M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
             $("#modal_editcomm").modal('close');
