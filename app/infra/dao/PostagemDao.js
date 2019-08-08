@@ -447,6 +447,11 @@ class PostagemDao extends TemplateDao{
                                         {ativo: true} ]
                                     },
                                 },
+                                {
+                                    "$sort":{
+                                        updatedAt: -1
+                                    }
+                                },
                                 {'$lookup': {
                                     'from': 'usuarios', 
                                     'localField': 'username', 
