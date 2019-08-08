@@ -73,7 +73,8 @@ function list_topics(busca='atividade', dados='') {
                 }
                 else {
                     $("#list-posts").addClass("hide");
-                    M.toast({html: 'Nenhum tópico encontrado.',displayLength: 2000})
+                    $(".pagination").html("");
+                    M.toast({html: 'Nenhum tópico encontrado.',displayLength: 2000});
                 }
             }
         })
