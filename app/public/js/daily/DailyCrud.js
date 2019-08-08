@@ -173,6 +173,7 @@ function editar(id) {
         hoje: $(`#${id} .hoje`).text(),
         imp: $(`#${id} .imp`).text()
     }
+    if(obj.imp=='Nenhum') obj.imp='';
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
