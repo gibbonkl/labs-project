@@ -1,4 +1,5 @@
 function dailyHTML(daily) {
+    console.log(daily)
     return `<li id="${daily._id}" class="data">
         <div class="collapsible-header">
             ${daily.imagem ?
