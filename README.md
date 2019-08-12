@@ -2,8 +2,7 @@
 
 ## Ambientes de homologação:
 
-[test_dev](https://gob-p1.azurewebsites.net/) <br>
-[homologado](https://casadobolsista.azurewebsites.net/)
+[test_dev](https://gob-bols.azurewebsites.net/) <br>
 
 ## Padrões de mensagem de commit:
 "(FEAT) mensagem" <br>
