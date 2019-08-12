@@ -25,6 +25,7 @@
                 <div class="col s12">
                     <h5 class="blue-compass mont-serrat">Novo tópico</h5>
                     <div class="divider"></div>
+                    
                     <form action="/helpcenter" method="post" id='topico-form'>
                         <div class="div-margin col s12">
                             <div class="padding-titulo input-field col s12">
@@ -40,8 +41,7 @@
                                 <% } %>
                                 <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                             </div>
-                            <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
-                                Digite aqui o conteúdo do seu post.
+                            <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form" required>
                             </textarea>
 
                         </div>
@@ -71,7 +71,7 @@
     <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
     <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
     <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
-
+    
     <!-- Ordem de carregamento de script -->
 
 </body>

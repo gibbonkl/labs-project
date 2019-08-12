@@ -130,14 +130,17 @@ class UserDao extends TemplateDao{
                 })
         }
     }    
-    updatePhoto(username, newPhoto){
+    updatePhoto(username= "", newPhoto= ""){
         if(username && newPhoto){
             return this._findOneAndUpdate({username: username}, {$set:{imagem: newPhoto}})
                 .then(res => res? res : null)
                 .catch(err=>{
-                    return({detail:"Impossível atualizar a foto.", error:err});
+                    return({detail:"Impossível atualizar a foto.", error: err});
                 })
         }
+        else return({detail:"Impossível atualizar a foto.", error: "Foto vazia"});
+
+
     }
     /*
     *   Verifica tipo de permissão de usuário
@@ -151,6 +154,13 @@ class UserDao extends TemplateDao{
                 .catch(err => {
                     return ({ detail: "Impossível verificar ", error: err });
                 })
+        }
+    }
+    updatePassword(hash="",newPassword=""){
+        if(newPassword && hash){
+            return this._findOneAndUpdate({hash:hash},{$set:{senha: newPassword}})
+                .then(user => this.updateHash(user.username,user.email))
+                .then(hash => hash? true: false)
         }
     }
     listarUsers()

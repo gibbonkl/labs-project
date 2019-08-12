@@ -14,7 +14,6 @@ module.exports = function() {
     app.set('views', path.join(__dirname, './../app/views/'));
 
     app.use(express.static(path.join(__dirname, './../app/public/js/daily')));
-
     
     console.log(path.join(__dirname + './../app'));
     
@@ -29,6 +28,15 @@ module.exports = function() {
     consign({ cwd: 'app' })
         .include('routes')
         .into(app);
+
+    app.get('*', function(req, res){
+
+        if (req.session.user && req.cookies.user_sid)
+            var user = { username: req.session.user.username, tipo: req.session.user.tipo, imagem: req.session.user.imagem, nome: req.session.user.nome }
+        else
+            var user = { username: '', tipo: '', imagem: '', nome: '' }
+        res.status(404).render('404_template', {user: user, title: "Página não encontrada"});
+    });
 
     return app;
 }

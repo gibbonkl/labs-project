@@ -34,10 +34,9 @@ class DailiesController {
         *   @param {Number} batch Número máximo de dailies por retorno
         *   @return {Array}    
     */
-    static listDailies(req, op, page=1, batch=20){
+    static listDailies(req, op, page=1, batch=200){
         let userDao = new UserDAO(UserModel);
         let dailyDao = new DailyDao(DailyModel);
-        //verificar user
         /*
             *   Verifica o tipo de usuário
             *   E o username
@@ -57,9 +56,7 @@ class DailiesController {
                 user = userDao.checkUserPermission(req.session.user.username);
                 username = req.session.user.username;
             }
-
-        }
-        
+        }        
          // get dailies
         if (op == 'user'){
             /*
@@ -75,11 +72,9 @@ class DailiesController {
                         daily.imagem = daily.user[0].imagem
                         delete(daily.user);
                         return daily;
-
                     }))
                 .catch(console.error)
         }
-
         else if(op == 'data'){
             /*
                 *   Se a operação for por data
@@ -92,13 +87,33 @@ class DailiesController {
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
                         daily.imagem = daily.user[0].imagem
+                        
                         delete(daily.user);
                         return daily
                     })
                 )
                 .catch(console.error)
         }
+        else if(op == 'default'){
+            /*
+                *   Se a operação for default
+                *   Seta as permissões para true somente se o usuário for dono da daily
+                *   Ou se o usuário for admin do sistema
+                *   Se não, seta a permissão para false
+            */
+            return dailyDao.listDailyNotesDefault((page-1)*7, 7) 
+                .then(dailies => 
+                    dailies.map(daily=>{
+                        user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
+                        daily.imagem = daily.user[0].imagem
 
+                        
+                        delete(daily.user);
+                        return daily
+                    })
+                )
+                .catch(console.error)
+        }
     }
     /*
         *   Insere uma lista na base de dados,

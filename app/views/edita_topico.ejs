@@ -29,7 +29,7 @@
                     <form action="/helpcenter/editar" method="post" id='topico-form'>
                         <div class="div-margin col s12">
                             <div class="padding-titulo input-field col s12">
-                                <input id="topico-titulo" value='<%= response.titulo %>' name="titulo" type="text" class="active">
+                                <input id="topico-titulo" value='<%= response.titulo %>' name="titulo" type="text" class="active" required>
                             </div>
                         </div>
                         <div class="col s12">
@@ -41,7 +41,7 @@
                                 <% } %>
                                 <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                             </div>
-                            <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form">
+                            <textarea name="corpo" id="corpo" rows="10" cols="80" form="topico-form" required> 
                                 <%= response.corpo %>
                             </textarea>
                             <input class="hide" name='_id' value="<%= response._id %>" />
@@ -72,7 +72,7 @@
     <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
     <script type="text/javascript" src="../../public/js/helpcenter/novo_topico.js"></script>
     <script type="text/javascript" src="../../public/js/chatbot/helpinho.js"></script>
-
+    <script>verificaTags()</script>
     <!-- Ordem de carregamento de script -->
 
 </body>
