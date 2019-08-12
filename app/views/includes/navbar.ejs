@@ -23,16 +23,14 @@
                 <li><a href="/login" class="blue-compass <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Entrar</a></li>
                 <li><a href="/cadastro" class="waves-effect waves-light btn bg-blue-compass rounded <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Cadastrar-se</a></li>
                 <!-- Em caso de usuário logado (user ou admin), mostra o olá e o menu dropdown -->
-                <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá,
-                    <%= user.nome %>
-                </li>
+                <li class="blue-compass <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%=user.nome%>!</li>
                 <li>
                     <a href="#" class="dropdown-trigger blue-compass padding-bottom <%if(user.tipo==''){%><%='hide'%><%}%>" data-target="dropdown1">
                         <% if(user.imagem){ %>
-                            <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
-                            <% } else { %>
-                                <i class="material-icons">face</i>
-                                <% } %>
+                        <img class="circle resize-photo" src="../../public/uploads/<%= user.imagem %>">
+                        <% } else { %>
+                        <img class="circle avatar-user resize-photo" src="../../public/img/user.png" alt="">
+                        <% } %>
                     </a>
                 </li>
             </ul>
@@ -49,23 +47,19 @@
                 <div class="background gradient-sidenav"></div>
                 <div class="input-field col s12">
                     <% if(user.imagem){ %>
-                        <img class="circle resize-forum" src="../../public/uploads/<%=user.imagem %>">
-                        <% } else { %>
-                            <img class="circle avatar-user" src="../../public/img/user.png" alt="">
-                            <% } %>
+                    <img class="circle resize-photo" src="../../public/uploads/<%=user.imagem %>">
+                    <% } else { %>
+                    <img class="circle avatar-user resize-photo" src="../../public/img/user.png" alt="">
+                    <% } %>
                 </div>
                 <!-- caso usuário logado, mostra olá e o username no sidenav  -->
-                <p><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%= user.nome %>!</span></p>
+                <p><span class="white-text name <%if(user.tipo==''){%><%='hide'%><%}%>">Olá, <%=user.nome%>!</span></p>
                 <!-- caso usuário não esteja logado, mostra só olá -->
                 <p><span class="white-text name <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>">Olá!</span></p>
             </div>
         </li>
         <li><a href="/">GAME OF BOLS</a></li>
-        <!-- <li><a href="#!">Second Link</a></li> -->
-        <li>
-            <div class="divider"></div>
-        </li>
-        <!-- <li><a class="subheader">Subheader</a></li> -->
+        <li><div class="divider"></div></li>
         <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
         <li><a class="waves-effect" href="/dailynote"><i class="material-icons">event_note</i>Daily Notes</a></li>
         <li><a class="waves-effect" href="/helpcenter"><i class="material-icons">help_outline</i>Help Center</a></li>
@@ -74,8 +68,9 @@
         <li><a class="waves-effect" href="/dailynote100contrato"><i class="material-icons">event_note</i>Daily Notes</a></li>
         <li><a class="waves-effect" href="/helpcenter100contrato"><i class="material-icons">help_outline</i>Help Center</a></li>
         <li class="divider"></li>
-        <!-- caso usuário esteja logado, mostra a opção alterar senha  -->
+        <!-- caso usuário esteja logado, mostra a opção alterar senha e editar foto -->
         <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/alterar_senha"><i class="material-icons">vpn_key</i>Alterar senha</a></li>
+        <li><a class="waves-effect <%if(user.tipo==''){%><%='hide'%><%}%>" href="/editar_foto"><i class="material-icons">face</i>Editar foto</a></li>                                 
         <!-- caso usuário não esteja logado, mostra a opção cadastre-se  -->
         <li><a href="/login" class="waves-effect <%if(user.tipo=='user' || user.tipo=='admin'){%><%='hide'%><%}%>"><i class="material-icons">create</i>Login</a></li>
         <!-- caso usuário esteja logado, mostra a opção logout  -->
