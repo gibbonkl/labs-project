@@ -1,3 +1,5 @@
+var time = 500;
+
 function inserir() {
     Swal.mixin({
             input: 'text',
@@ -7,7 +9,7 @@ function inserir() {
             cancelButtonColor: '#b3bac5',
             cancelButtonText: 'Cancelar',
             allowOutsideClick: false,
-            progressSteps: ['1', '2', '3'],
+            progressSteps: ['1', '2', '3', '4'],
             inputValidator: (value) => {
                 if (!value) {
                     return 'Você precisa preencher o campo!'
@@ -22,20 +24,42 @@ function inserir() {
                 text: 'Cadastrar daily'
             },
             {
+                input: null,
                 title: 'Há algum impedimento?',
+                html: 'Cadastrar daily<br/><br/>'+
+                '<button id="nenhum" class="btn azul-swal rounded btn-swal">Não</button>'+
+                '<button id="sim" class="btn cinza-swal rounded">Sim</button>',
+                showCancelButton: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    const content = Swal.getContent()
+                    const $ = content.querySelector.bind(content)                
+                    const nenhum = $('#nenhum')
+                    const sim = $('#sim')                
+                    nenhum.addEventListener('click', () => {
+                        Swal.deleteQueueStep(3)
+                        Swal.clickConfirm()
+                    })                
+                    sim.addEventListener('click', () => {
+                        Swal.clickConfirm()
+                    })
+                }
+            },
+            {
+                title: 'Qual é o impedimento?',
                 text: 'Cadastrar daily'
             }
         ])
         .then(result => {
-            console.log(result);
+            let impedimento = 'Nenhum'
+            if(result.value[3]) impedimento = result.value[3]
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2]
+                'impedimento': impedimento
             }
         })
         .then(resultado => {
-
             fetch("/daily", {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
@@ -43,7 +67,6 @@ function inserir() {
                 })
                 .then(response => response.json())
                 .then(response => {
-
                     if (response.erro)
                         message('error', response.erro);
                     else {
@@ -52,13 +75,10 @@ function inserir() {
                         message('success', 'Daily registrada!')
                     }
                 })
-                .catch(message('error', 'Unexpected Error'))
+                .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
         })
         .catch(() => { console.log });
-
 }
-
-
 
 function deletar(id) {
     Swal.fire({
@@ -89,34 +109,37 @@ function deletar(id) {
                         removerElementDOM(id);
                         message('success', 'Daily deletada!')
                     })
-                    .catch(message('error', 'Unexpected Error'))
-
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
             }
         })
         .catch(console.log)
 }
-
+// Listar daily notes com data de hoje (default)
 function listar() {
-    fetch("/daily/data", {
+    fetch("/daily/default", {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "filtro": dateConverter()
-            })
+            headers: { 'Content-Type': 'application/json' }
         })
         .then(response => response.json())
-        .then(dailies => {
-            listarDailiesDOM(dailies);
-        })
-        .catch(console.log)
+        .then(dailies => listarDailiesDOM(dailies))
 }
-
+// function listar() {
+//     fetch("/daily/data", {
+//             method: "POST",
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//                 "filtro": dateConverter()
+//             })
+//         })
+//         .then(response => response.json())
+//         .then(dailies => listarDailiesDOM(dailies))
+// }
 function listarPorData(data) {
     fetch("/daily/data", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                filtro: data
+                "filtro": data
             })
         })
         .then(response => response.json())
@@ -128,7 +151,7 @@ function listarPorUser(name) {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                filtro: name
+                "filtro": name
             })
         })
         .then(response => response.json())
@@ -142,21 +165,20 @@ function filtrar() {
     let name = $("input[name='filter_username']").val();
     if (name.length) listarPorUser(name)
     else data.length ? listarPorData(data) : listar()
-
 }
 
 function editar(id) {
     var obj = {
-        ontem: $("#" + id + " .ontem").text(),
-        hoje: $("#" + id + " .hoje").text(),
-        imp: $("#" + id + " .imp").text()
+        ontem: $(`#${id} .ontem`).text(),
+        hoje: $(`#${id} .hoje`).text(),
+        imp: $(`#${id} .imp`).text()
     }
-
+    if(obj.imp=='Nenhum') obj.imp='';
     Swal.mixin({
             input: 'text',
             confirmButtonText: 'Próximo &rarr;',
             showCancelButton: true,
-            progressSteps: ['1', '2', '3'],
+            progressSteps: ['1', '2', '3', '4'],
             cancelButtonColor: '#b3bac5',
             cancelButtonText: 'Cancelar',
             allowOutsideClick: false,
@@ -177,16 +199,40 @@ function editar(id) {
                 inputValue: obj.hoje
             },
             {
+                input: null,
                 title: 'Há algum impedimento?',
+                html: 'Cadastrar daily<br/><br/>'+
+                '<button id="nenhum" class="btn azul-swal rounded btn-swal">Não</button>'+
+                '<button id="sim" class="btn cinza-swal rounded">Sim</button>',
+                showCancelButton: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    const content = Swal.getContent()
+                    const $ = content.querySelector.bind(content)                
+                    const nenhum = $('#nenhum')
+                    const sim = $('#sim')                
+                    nenhum.addEventListener('click', () => {
+                        Swal.deleteQueueStep(3)
+                        Swal.clickConfirm()
+                    })                
+                    sim.addEventListener('click', () => {
+                        Swal.clickConfirm()
+                    })
+                }
+            },
+            {
+                title: 'Qual é o impedimento?',
                 text: 'Editar daily',
                 inputValue: obj.imp
             }
         ])
         .then((result) => {
+            let impedimento = 'Nenhum'
+            if(result.value[3]) impedimento = result.value[3]
             return {
                 'ontem': result.value[0],
                 'hoje': result.value[1],
-                'impedimento': result.value[2],
+                'impedimento': impedimento,
                 '_id': id
             }
         })
@@ -199,18 +245,16 @@ function editar(id) {
                 })
                 .then(response => response.json())
                 .then(response => {
-
                     if (response.erro)
                         message('error', response.erro);
                     else {
-                        $("#" + id + " .ontem").text(response.corpo.ontem).html();
-                        $("#" + id + " .hoje").text(response.corpo.hoje).html();
-                        $("#" + id + " .imp").text(response.corpo.impedimento).html();
+                        $(`#${id} .ontem`).text(response.corpo.ontem).html();
+                        $(`#${id} .hoje`).text(response.corpo.hoje).html();
+                        $(`#${id} .imp`).text(response.corpo.impedimento).html();
                         message('success', 'Daily Editada!');
                     }
-
                 })
-                .catch(message('error', 'Unexpected Error'))
+                .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
 
         })
         .catch(() => { console.log });

@@ -65,7 +65,7 @@
                 </div>
                 <!-- Número de likes do tópico e opção de curtir -->
                 <div class="div-margin col s6 div-like-botao">
-                    <a id="like-button" class="waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
+                    <a id="like-button" class="btn-static waves-effect waves-light like <%= user.tipo? '':'isDisabled'  %> <%= response.likes.indexOf(user.username) >=0 ? 'bg-blue-compass' : 'not-liked' %> btn rounded like-botao liked" onclick="like()">
                         <i class="left material-icons">thumb_up</i>
                         <span id="number-likes" class="number-likes"><%= response.numeroLikes %></span>
                     </a>
@@ -76,9 +76,9 @@
                 </div>
                 <!-- Deletar | Editar | Setar Resolvido -->
                 <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                    <button class="waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
-                    <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
-                    <button class="waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
                 </div>
             </div>
             <!-- Respostas -->
@@ -100,8 +100,7 @@
                         <span class="grey-text text-darken-2 nome-user"><%= user.username %></span>
                     </div>
                     <div>
-                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form">
-                            Digite aqui o conteúdo da sua resposta.
+                        <textarea name="corpo_comment" id="corpo_comment" rows="10" cols="80" form="comment_form" required>
                         </textarea>
                     </div>
                     <div class="div-margin col s12 center">
@@ -109,6 +108,14 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+    <div id="modal_editcomm" class="modal">
+        <div class="modal-content">
+            <h5 class="blue-compass">Editar comentário</h5>
+            <div class="divider"></div>
+            <div id="modal-form" class="row"></div>
+    </div>
         </div>
         <% include ./includes/chatbot.ejs %>
         <!-- Ordem de carregamento de script -->

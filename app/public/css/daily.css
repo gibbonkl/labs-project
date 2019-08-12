@@ -69,12 +69,6 @@
     border-radius: 0 2rem 2rem 0;
 }
 
-.btn-margin-filter {
-    vertical-align: middle;
-    margin-top: 1%;
-    height: 40px !important;
-}
-
 .bold {
     font-weight: bold;
     /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;  */
@@ -87,4 +81,8 @@
 
 .word-wrap {
     word-wrap: break-word;
+}
+
+.row .col.s2 {
+   position: sticky;    
 }

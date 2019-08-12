@@ -27,3 +27,11 @@
     text-decoration: none;
     pointer-events: none;
   }
+.btn-static {
+    position: static !important;
+    float: right !important;
+}
+.chip {
+    position: static !important;
+    float: left !important;
+}
