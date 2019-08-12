@@ -3,7 +3,6 @@ const comentcontroller = require('../controllers/ComentarioController');
 let sessionCheckerRedLogin = require('../helper/sessionCheckerRedLogin');
 
 
-
 module.exports = function(app)
 {
     app.use( (request, response, next) => {
