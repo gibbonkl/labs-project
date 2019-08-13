@@ -15,7 +15,7 @@
     color: white;
 }
 .margin-top{
-    margin-top: 5%;
+    margin-top: 3% !important;
 }
 .margin-bottom{
     margin-bottom: 3% !important;
@@ -33,4 +33,35 @@
 }
 .not-clickable div{
     cursor: default !important;
+}
+.tabs .indicator{
+    background-color: #3A5477 !important;
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.tabs .tab {
+    text-align: left !important;
+}
+.tabs{
+    width: none !important;
+}
+.tabs span{
+    padding-top: 10px !important;
+    line-height: 2 !important;
+}
+.tabs i{
+    line-height: 2 !important;
+}
+.collection{
+    border: none !important;
+}
+.topico:last-child {
+    border-bottom: 1px solid lightgrey;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+}
+.margin-top-6{
+    margin-top: 26px !important;
 }
