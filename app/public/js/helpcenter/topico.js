@@ -6,7 +6,6 @@ editor.on('required', function(evt){
 
 $(document).ready(function() {
     list_comments(topic_id())
-     CKEDITOR.replace('corpo_comment');
 });
 
 function animaLoad() {

@@ -64,7 +64,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.codeSnippet_theme = 'monokai_sublime';
 
-	config.extraPlugins = 'confighelper';
+	config.extraPlugins = 'confighelper, image2';
 
 	config.placeholder = 'Digite aqui o conteúdo';
 
