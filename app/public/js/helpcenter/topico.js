@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
-    $("#show_dailies").fadeIn('fast').removeClass('hide');
+    $("#list_comments").fadeIn('fast').removeClass('hide');
 }
 
    
