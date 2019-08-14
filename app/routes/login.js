@@ -1,8 +1,16 @@
 var sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
 const Controller = require('../controllers/LoginController')
+var sessionCheckerLoginBot = require('../helper/sessionCheckerLoginBot')
 
 module.exports = function(app)
 {
+    
+    // route for check loged user
+    app.route('/check_login')
+        .get(sessionCheckerLoginBot, (req, res => {
+            res.send({status:'logged'})
+        })) 
+
     // route for user Login
     app.route('/login')
         .get(sessionCheckerRedDash, (req, res) => {
