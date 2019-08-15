@@ -262,7 +262,8 @@ const edit_comment = (id, username) => {
     };
     renderEdit(dados);
     $("#modal_editcomm").modal({
-        opacity: 0.9
+        opacity: 0.9,
+        dismissible: false
     }).modal('open');
 
     let content = $(`#${id} .corpo-resposta`).html();
