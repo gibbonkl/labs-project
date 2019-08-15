@@ -217,7 +217,7 @@ function delete_comment(id) {
                         message('success', 'Topico Deletado!');
                         $(`#${idComentario}`).remove();
                     })
-                    .catch(message('error', 'Unexpected Error'))
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, 500))
             }
         })
         .catch(console.log)
