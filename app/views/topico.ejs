@@ -41,7 +41,7 @@
                 <div class="col s12"></div>
                 <% } else { %>
                 <div class="col s12">
-                    <% response.tags[0].split(',').forEach(function(tag) { %>
+                    <% response.tags.forEach(function(tag) { %>
                         <% if(tag != '') {%>
                             <span class="chip waves-effect select-chip"><%= tag %></span>
                         <% }%>
