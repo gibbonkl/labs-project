@@ -4,13 +4,6 @@ var sessionCheckerLoginBot = require('../helper/sessionCheckerLoginBot')
 
 module.exports = function(app)
 {
-    
-    // route for check loged user
-    app.route('/check_login')
-        .get(sessionCheckerLoginBot, (req, res => {
-            res.send({status:'logged'})
-        })) 
-
     // route for user Login
     app.route('/login')
         .get(sessionCheckerRedDash, (req, res) => {
@@ -20,7 +13,6 @@ module.exports = function(app)
 
             Controller.validateUser(req.body.username, req.body.senha)
                 .then((user)=>{
-                    //console.log(user);
                     if(user.status == 'ok'){
                         req.session.user = user.user;
                         res.redirect('/');

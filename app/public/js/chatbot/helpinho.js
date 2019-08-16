@@ -64,7 +64,7 @@ var initial_message = {
         }
     ]
 }
-
+const user = $("#webchat").attr("data-user")
 function loadStore(){
     let reduxStore = window.sessionStorage.getItem('HELPINHO_REDUX') ? window.sessionStorage.getItem('HELPINHO_REDUX') : JSON.stringify(initial_message);
     if (reduxStore == JSON.stringify(initial_message)){
@@ -93,14 +93,14 @@ function checkEmptyStore(){
 var store = window.WebChat.createStore(
     loadStore(),
     ({ dispatch }) => next => action => {
-        //console.log(action)
 
-        // save conversations in sessionstorage        
+        // save conversations in sessionstorage       
         if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
-            const activity = action.payload.activity;
+            console.log(action)
+            let activity = action.payload.activity
             if (activity.type === 'message') {
                 activity.timestamp = new Date();
-
+                activity.from.name = user
                 updateStore(activity)
             }
         }
@@ -118,6 +118,8 @@ var styleOptions = {
 
 window.WebChat.renderWebChat({
     directLine: window.WebChat.createDirectLine({ token: '1N2l4XpDN30.k3H03nmx8B9JVKj7mOPZI1_9EInhDlAkMJnBaIfD9S0' }),
+    userID: user,
+    username: user, 
     store,
     styleOptions
 }, document.getElementById('webchat'));

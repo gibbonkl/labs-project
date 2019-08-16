@@ -61,7 +61,13 @@ module.exports = function(app)
     app.route('/helpcenter')
         //inserir postagem
         .post(sessionCheckerRedLogin, (req, res) => {
-            HelpCenterController.insertPostagem(req)
+            let data = {
+                username: req.session.user.username,
+                corpo: req.body.corpo,
+                titulo: req.body.titulo,
+                tags: req.body.tags.split(",")
+            }
+            HelpCenterController.insertPostagem(data)
                 .then(postagem => postagem ? res.redirect('/helpcenter') : res.send("Não foi possível inserir postagem"))
                 .catch(console.error)
         })
