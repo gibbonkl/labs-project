@@ -1,6 +1,5 @@
 var sessionCheckerRedDash = require('../helper/sessionCheckerRedDash');
 const Controller = require('../controllers/LoginController')
-var sessionCheckerLoginBot = require('../helper/sessionCheckerLoginBot')
 
 module.exports = function(app)
 {
