@@ -11,6 +11,7 @@ module.exports = function(app){
     app.route('/daily-bot')
         .post((req, res) => {
             if(req.body.secret_key == process.env.secret_key){
+                console.log(req.body)
                 let data = {
                     username: req.body.username,
                     ontem: req.body.ontem,
