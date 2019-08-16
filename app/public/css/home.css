@@ -3,7 +3,7 @@ header{
 }
 .hero-image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/home.jpg");
-    height: 30%;  
+    height: 30vh;  
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
     background-repeat: no-repeat;
@@ -68,4 +68,16 @@ header{
 }
 .margin-top-6{
     margin-top: 26px !important;
+}
+.footer-copyright {
+    padding-left: 1% !important;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }

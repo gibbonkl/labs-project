@@ -31,7 +31,7 @@ class ComentarioDAO extends TemplateDao {
          *   @returns {object} comentario
          */
     deleteComentarioById(req, tipo) {
-            console.log(req.body)
+            //console.log(req.body)
             var idPostagem = req.body.idPostagem;
             var idComentario = req.body.idComentario;
             if (tipo == 'admin') {
