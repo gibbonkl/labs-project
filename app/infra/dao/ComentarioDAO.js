@@ -66,7 +66,7 @@ class ComentarioDAO extends TemplateDao {
          *   @returns {object} comentario
          */
     editarComentario(comentario) {
-        console.log(comentario)
+        //console.log(comentario)
         if (comentario) {
             return this._findOneAndUpdate({ _id: comentario._id }, { $set: { corpo: comentario.corpo } }, { new: true })
                 .then((res, err) => res ? res : err)

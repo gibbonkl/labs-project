@@ -87,7 +87,7 @@ $("#comment_form").submit(function(event) {
         .then(response => {response['permissao'] = true; return response})
         .then(response => {
             $('#list_comments').append(render_comment(response));
-            CKEDITOR.instances.corpo_comment.setData('<p>Digite aqui o conteúdo da sua resposta.</p>')
+            CKEDITOR.instances.corpo_comment.setData('');
         })
         .catch(console.log);
 });
@@ -217,7 +217,7 @@ function delete_comment(id) {
                         message('success', 'Topico Deletado!');
                         $(`#${idComentario}`).remove();
                     })
-                    .catch(message('error', 'Unexpected Error'))
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, 500))
             }
         })
         .catch(console.log)
@@ -228,21 +228,21 @@ function delete_comment(id) {
  *  e habilita o framework do CKeditor na abertura do modal;
  */
 const renderEdit = (dados) => {
-    $("#modal-form").html(
-        `<div id="editcomm_form" class="div-margin col s12" value=${dados.comentario.id}>
-    <div class="input-field col s12">
-        <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-        <span class="grey-text text-darken-2 nome-user">${dados.comentario.username}</span>
-    </div>
-    <div>
-        <textarea id="text_editcomm" rows="10" cols="80" placeholder=""></textarea>
-    </div>
-    <div class="div-margin col s12 center">
-        <button class="btn grey white-text rounded modal-close">Cancelar</button>
-        <button id="btn-edit-comm" class="btn bg-blue-compass rounded" onclick="enviaEdit('${dados._id}', '${dados.comentario.id}')">Editar</button>
-
-    </div>
-    </div>`);
+    $("#modal-form").html(`
+        <div id="editcomm_form" class="div-margin col s12" value=${dados.comentario.id}>
+            <div class="input-field col s12">
+                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                <span class="grey-text text-darken-2 nome-user">${dados.comentario.username}</span>
+            </div>
+            <div>
+                <textarea id="text_editcomm" rows="10" cols="80" required></textarea>
+            </div>
+            <div class="div-margin col s12 center">
+                <button class="btn grey white-text rounded modal-close">Cancelar</button>
+                <button id="btn-edit-comm" class="btn bg-blue-compass rounded" onclick="enviaEdit('${dados._id}', '${dados.comentario.id}')">Editar</button>
+            </div>
+        </div>
+    `);
     CKEDITOR.replace('text_editcomm');
 }
 
@@ -262,7 +262,8 @@ const edit_comment = (id, username) => {
     };
     renderEdit(dados);
     $("#modal_editcomm").modal({
-        opacity: 0.9
+        opacity: 0.9,
+        dismissible: false
     }).modal('open');
 
     let content = $(`#${id} .corpo-resposta`).html();
@@ -283,20 +284,24 @@ function enviaEdit(_id, id) {
         _id: id,
         corpo
     }
-    //console.log(dados)
-    fetch("/helpcenter/comentario", {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dados)
-        })
-        .then(response => {
-            //console.log(response)
-            $(`#${id} .corpo-resposta`).html(dados.corpo);
-            M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
-            $("#modal_editcomm").modal('close');
+    if(corpo!=''){
+        //console.log(dados)
+        fetch("/helpcenter/comentario", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(response => {
+                //console.log(response)
+                $(`#${id} .corpo-resposta`).html(dados.corpo);
+                M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
+                $("#modal_editcomm").modal('close');
 
-        })
-        .catch(console.log)
+            })
+            .catch(console.log)
+    } else{        
+        M.toast({ html: "Por favor insira sua resposta.", displayLength: 2000 });
+    }
 }
 
 function message(type, title) {
