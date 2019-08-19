@@ -1,3 +1,5 @@
+var time = 500;
+
 var editor = CKEDITOR.replace('corpo_comment');
 editor.on('required', function(evt){
     editor.showNotification('Insira o conteúdo da resposta.', 'warning');
@@ -179,7 +181,7 @@ function delete_topic() {
                                 .then(res => forum());
                         }
                     })
-                    .catch(message('error', 'Houve um problema na comunicação :('))
+                    .catch(() => setTimeout(() => { message('error', 'Houve um problema na comunicação :(') }, time))
             }
         })
         .catch(console.log)
@@ -217,7 +219,7 @@ function delete_comment(id) {
                         message('success', 'Topico Deletado!');
                         $(`#${idComentario}`).remove();
                     })
-                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, 500))
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
             }
         })
         .catch(console.log)
