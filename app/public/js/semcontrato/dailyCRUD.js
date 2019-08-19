@@ -1,7 +1,7 @@
 var tamanho = 1;
 
 function listarDailiesData(data, pagina) {
-    fetch(`https://reborn100contrato.azurewebsites.net/dailys/list/${data}/${pagina}`, {
+    fetch(`https://100contratoo.azurewebsites.net/dailys/list/${data}/${pagina}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
         })
