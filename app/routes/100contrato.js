@@ -8,7 +8,9 @@ module.exports = function(app)
                 user = {
                     username: req.session.user.username,
                     tipo: req.session.user.tipo,
-                    imagem: req.session.user.imagem
+                    imagem: req.session.user.imagem,
+                    nome: req.session.user.nome
+
                 }
 
                 res.render('daily100contrato.ejs', user);
@@ -17,7 +19,8 @@ module.exports = function(app)
                 user = {
                     username: '',
                     tipo: '',
-                    imagem: ''
+                    imagem: '',
+                    nome: ''
                 }
                 res.render('daily100contrato.ejs', user);                
             }      
@@ -30,7 +33,9 @@ module.exports = function(app)
                 user = {
                     username: req.session.user.username,
                     tipo: req.session.user.tipo,
-                    imagem: req.session.user.imagem
+                    imagem: req.session.user.imagem,
+                    nome: req.session.user.nome
+
                 }
 
                 res.render('helpcenter100contrato.ejs', user);
@@ -39,7 +44,8 @@ module.exports = function(app)
                 user = {
                     username: '',
                     tipo: '',
-                    imagem: ''
+                    imagem: '',
+                    nome: ''
                 }
                 res.render('helpcenter100contrato.ejs', user);
             }      
