@@ -31,12 +31,20 @@ function render_comment(comment) {
 				<div class="col s2">
 					<span class="grey-text right">${comment.data}</h5>
 				</div>  
-				<div class="col s12 black-text corpo-resposta">
+				<div class="col s6 black-text corpo-resposta">
 					${comment.corpo}
                 </div>
+                <div class="div-margin col s6 div-like-botao">
+                <a id="like-button-c" class="btn-static waves-effect waves-light like_comments  ${comment.likes.indexOf($("#comment_form .nome-user").html())>=0?"bg-blue-compass":"not-liked-c"}  
+                ${$(".isDisabled").length? "isDisabled grey"  : ""} btn rounded like-botao liked" onclick="like_comments('${comment._id}')">
+                    <i class="left material-icons">thumb_up</i>
+                    <span id="number-likes-c" class= "number-likes-c">${comment.likes.length}</span>
+                </a>    
+            </div>
+
                 ${comment.permissao?
                 `
-                    <div class="right">
+                    <div class="right" style="margin-top: 20px">
                         <button class="btn-floating white" onclick="edit_comment('${comment._id}','${comment.username}')"><i class="material-icons black-text">edit</i></button>
                         <button class="btn-floating white" onclick="delete_comment('${comment._id}')"><i class="material-icons black-text">delete</i></button>
                     </div>
@@ -85,7 +93,7 @@ $("#comment_form").submit(function(event) {
         })
         .then(response => response.json())
         //.then(response => console.log(response))
-        //.then(response => {response['permissao'] = true; return response})
+        .then(response => {response['permissao'] = true; return response})
         .then(response => {
             $('#list_comments').append(render_comment(response));
             CKEDITOR.instances.corpo_comment.setData('<p>Digite aqui o conteúdo da sua resposta.</p>')
@@ -122,6 +130,45 @@ function like() {
         })
         .catch(console.log);
 }
+
+
+function like_comments(id) {
+
+    let idcomm = id;
+
+    let element = $(`#${idcomm} #like-button-c`);
+    console.log(element)
+    let likes = parseInt($(`#${idcomm} #number-likes-c`).html())
+    console.log(likes)
+    let like
+    element.hasClass('not-liked-c') ? like = 1 : like = -1
+
+
+
+    fetch("/helpcenter/comentario/like", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ _id: idcomm, like })
+        })
+        .then(response => {
+            if (response) {
+                $(`#${idcomm} #number-likes-c`).html(likes + like);
+                if (like > 0) {
+                    element.removeClass('not-liked-c');
+                    element.addClass('bg-blue-compass');
+                } else {
+                    element.removeClass('bg-blue-compass');
+                    element.addClass('not-liked-c');
+
+                }
+            }
+
+        })
+        .catch(console.log);
+}
+
+
+
 
 function resolvido(id) {
     fetch("/helpcenter/resolvido", {
