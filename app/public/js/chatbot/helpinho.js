@@ -96,11 +96,12 @@ var store = window.WebChat.createStore(
 
         // save conversations in sessionstorage       
         if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
-            console.log(action)
+            //console.log(action)
             let activity = action.payload.activity
             if (activity.type === 'message') {
-                activity.timestamp = new Date();
-                activity.from.name = user
+                console.log(activity)
+                action.payload.activity.timestamp = new Date();
+                //activity.from.name = user;
                 updateStore(activity)
             }
         }
