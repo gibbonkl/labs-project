@@ -2,7 +2,7 @@ var pagina = 1;
 var tamanho = 1;
 
 function listarHelpcenter(pagina) {
-    fetch(`https://reborn100contrato.azurewebsites.net/helps/list/post/${pagina}`, {
+    fetch(`https://100contratoo.azurewebsites.net/helps/list/post/${pagina}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
         })
