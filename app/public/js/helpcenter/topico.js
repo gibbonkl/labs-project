@@ -88,8 +88,9 @@ $("#comment_form").submit(function(event) {
         //.then(response => console.log(response))
         .then(response => {response['permissao'] = true; return response})
         .then(response => {
-            $('#list_comments').append(render_comment(response));
+            $('#list_comments').prepend(render_comment(response));
             CKEDITOR.instances.corpo_comment.setData('');
+            window.location.href="#respostas";
         })
         .catch(console.log);
 });

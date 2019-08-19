@@ -82,13 +82,13 @@
                 </div>
             </div>
             <!-- Respostas -->
-            <div class="row div-topico white">
+            <div id="respostas" class="row div-topico white">
                 <h5 class="col s12 blue-compass mont-serrat">Respostas</h5>
                 <div id="list_comments"></div>
             </div>
             <!-- Responder -->                        
-            <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
-                <h5 id="responder"class="col s12 blue-compass mont-serrat">Responder</h5>
+            <div id="responder" class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
+                <h5 class="col s12 blue-compass mont-serrat">Responder</h5>
                 <!-- Formulário para responder ao tópico -->
                 <form id="comment_form" class="div-margin col s12" action="/helpenter/comentario" method="post">
                     <div class="input-field col s12">
