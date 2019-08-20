@@ -90,19 +90,19 @@
                         <%- captcha %>
                             <% } %>
                 </div>
-                <div class="col s12 center btn-margin-top">
-                    <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
-                </div>
-                <div class="notificacoes">
-                    <% user.erros.forEach(function(er){ %>
-                        <li>
-                            <%= er%>
-                        </li>
-                        <% }) %>
-                </div>
+
+                        <div class="col s12 center btn-margin-top">
+                                <input class="btn bg-blue-compass rounded" type="submit" value="Cadastrar" />
+                                <div class="notificacoes">
+                                        <% user.erros.forEach(function(er){ %>
+                                            <li>
+                                                <%= er%>
+                                            </li>
+                                            <% }) %>
+                                    </div>
+                            </div>
             </form>
-        </div>
-        <!-- Fim do formulário -->
+    <!-- Fim do formulário -->
     </div>
     <!-- Ordem de carregamento de script -->
     <script type="text/javascript" src="../public/js/libs/ejs.js"></script>
