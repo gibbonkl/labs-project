@@ -98,7 +98,7 @@ $("#comment_form").submit(function(event) {
         .then(response => {
             $('#list_comments').prepend(render_comment(response));
             CKEDITOR.instances.corpo_comment.setData('');
-            window.location.href="#respostas";
+            
         })
         .catch(console.log);
 });
