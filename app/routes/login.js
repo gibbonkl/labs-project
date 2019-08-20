@@ -12,7 +12,6 @@ module.exports = function(app)
 
             Controller.validateUser(req.body.username, req.body.senha)
                 .then((user)=>{
-                    //console.log(user);
                     if(user.status == 'ok'){
                         req.session.user = user.user;
                         res.redirect('/');

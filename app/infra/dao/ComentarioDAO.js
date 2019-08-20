@@ -31,7 +31,7 @@ class ComentarioDAO extends TemplateDao {
          *   @returns {object} comentario
          */
     deleteComentarioById(req, tipo) {
-            console.log(req.body)
+            //console.log(req.body)
             var idPostagem = req.body.idPostagem;
             var idComentario = req.body.idComentario;
             if (tipo == 'admin') {
@@ -66,7 +66,7 @@ class ComentarioDAO extends TemplateDao {
          *   @returns {object} comentario
          */
     editarComentario(comentario) {
-        console.log(comentario)
+        //console.log(comentario)
         if (comentario) {
             return this._findOneAndUpdate({ _id: comentario._id }, { $set: { corpo: comentario.corpo } }, { new: true })
                 .then((res, err) => res ? res : err)
@@ -85,18 +85,35 @@ class ComentarioDAO extends TemplateDao {
             .catch(() => false);
     }
 
-    /*
-     *   Remove Like no comentario 
-     *   @param {id} comentario
-     *   @param {username} da sessão 
-     *   @returns {true or false}
-     */
     removeLike(id = '', username = '') {
         return this._findOneAndUpdate({ _id: id, likes: { $eq: username } }, { $pull: { likes: username } }, { new: true })
             .then((res, err) => res ? true : false)
             .catch(() => false);
     }
 
+    // adicionaLike_comments(id = '', username = '') {
+    //     return this._findOneAndUpdate({ _id: id, likes_comments: { $ne: username } }, { $addToSet: { likes_comments: username } }, { new: true })
+    //         .then((res, err) => res ? true : false)
+    //         .catch(() => false);
+    // }
+
+
+    // removeLike_comments(id = '', username = '') {
+    //     return this._findOneAndUpdate({ _id: id, likes_comments: { $eq: username } }, { $pull: { likes_comments: username } }, { new: true })
+    //         .then((res, err) => res ? true : false)
+    //         .catch(() => false);
+    // }
+
+
+    /*
+     *   Remove Like no comentario 
+     *   @param {id} comentario
+     *   @param {username} da sessão 
+     *   @returns {true or false}
+     */
+   
+
+    
     /*
      *   Pega numero de Likes do comentario '
      *   @param {id} comentario

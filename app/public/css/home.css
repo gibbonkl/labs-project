@@ -1,21 +1,25 @@
+header{
+    position: static;
+}
 .hero-image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/home.jpg");
-    height: 50%;  
+    height: 30vh;  
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: inherit;
+    position: static;
 }  
 .hero-text {
     text-align: left;
     position: absolute;
-    top: 25%;
-    left: 15%;
+    top: 13%;
+    left: 13%;
+    margin-right: 13%;
     color: white;
 }
 .margin-top{
-    margin-top: 5%;
+    margin-top: 3% !important;
 }
 .margin-bottom{
     margin-bottom: 3% !important;
@@ -33,4 +37,47 @@
 }
 .not-clickable div{
     cursor: default !important;
+}
+.tabs .indicator{
+    background-color: #3A5477 !important;
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.tabs .tab {
+    text-align: left !important;
+}
+.tabs{
+    width: none !important;
+}
+.tabs span{
+    padding-top: 10px !important;
+    line-height: 2 !important;
+}
+.tabs i{
+    line-height: 2 !important;
+}
+.collection{
+    border: none !important;
+}
+.topico:last-child {
+    border-bottom: 1px solid lightgrey;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+}
+.margin-top-6{
+    margin-top: 26px !important;
+}
+.footer-copyright {
+    padding-left: 1% !important;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }

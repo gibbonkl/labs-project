@@ -1,4 +1,5 @@
 function dailyHTML(daily) {
+    console.log(daily)
     return `<li id="${daily._id}" class="data">
         <div class="collapsible-header">
             ${daily.imagem ?
@@ -12,9 +13,9 @@ function dailyHTML(daily) {
         <div class="collapsible-body grey lighten-3">
             <div class="row">
                 <div class="col s10 word-wrap">
-                    <span class="bold">Ontem: </span><span class="font-nunito">${removeTags(daily.corpo.ontem)}</span><br>
-                    <span class="bold">Hoje: </span><span class="font-nunito">${removeTags(daily.corpo.hoje)}</span><br>
-                    <span class="bold">Impedimentos: </span><span class="font-nunito">${removeTags(daily.corpo.impedimento)}</span>
+                    <span class="bold">Ontem: </span><span class="font-nunito ontem">${removeTags(daily.corpo.ontem)}</span><br>
+                    <span class="bold">Hoje: </span><span class="font-nunito hoje">${removeTags(daily.corpo.hoje)}</span><br>
+                    <span class="bold">Impedimentos: </span><span class="font-nunito imp">${removeTags(daily.corpo.impedimento)}</span>
                 </div>
                 ${daily.permissao ?
                     `<div class="col s2">
@@ -31,7 +32,7 @@ function adicionarDailyDOM(daily){
     animaLoad();
     limparTelaSemResultado();
     $("#collapsible_daily").removeClass("hide");
-    $('#collapsible_daily').append(dailyHTML(daily));
+    $('#collapsible_daily').prepend(dailyHTML(daily));
 }
 function removerElementDOM(id){
     $('#' + id).remove();
@@ -46,7 +47,7 @@ function limparTelaSemResultado(){
 function listarDailiesDOM(dailyList){
     animaLoad();
     limparTelaSemResultado();
-    if(dailyList.length >= 0){
+    if(dailyList.length > 0){
         $("#collapsible_daily").removeClass("hide");
         $('#collapsible_daily').html(dailyList.map(daily => dailyHTML(daily)).join(''));
     }

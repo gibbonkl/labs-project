@@ -16,6 +16,10 @@ html {
     background-color: #3A5477 !important;
 }
 
+.gradient-sidenav {
+    background-image: linear-gradient(to right bottom, #3a5377, #4b6385, #5c7394, #6e84a2, #8095b1);
+}
+
 .gradient-compass {
     background: -moz-linear-gradient(left, #3A5377 0%, #8095B1 100%);
     background: -webkit-linear-gradient(left, #3A5377 0%, #8095B1 100%);
@@ -34,7 +38,6 @@ html {
 .grey-compass {
     color: #373435 !important;
 }
-
 .mont-serrat {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: bold !important;
@@ -174,8 +177,31 @@ td select {
 .chat-opacity {
     background-color: rgba(10, 23, 55, 0.5);
 }
+
 .btn-margin-filter {
     vertical-align: middle !important;
     margin-top: 1% !important;
     height: 40px !important;
+}
+.cinza-swal {
+    background-color: #b3bac5 !important;
+}
+.azul-swal {
+    background-color: #3085d6 !important;
+}
+.btn-swal {
+    margin-right: 2%;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: unset !important;
+    opacity: 1 !important;
+}
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: unset !important; 
+    opacity: 1 !important;
+    pointer-events: all !important;
 }

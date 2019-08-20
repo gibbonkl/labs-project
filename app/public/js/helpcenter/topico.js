@@ -1,3 +1,5 @@
+var time = 500;
+
 var editor = CKEDITOR.replace('corpo_comment');
 editor.on('required', function(evt){
     editor.showNotification('Insira o conteúdo da resposta.', 'warning');
@@ -6,12 +8,11 @@ editor.on('required', function(evt){
 
 $(document).ready(function() {
     list_comments(topic_id())
-     CKEDITOR.replace('corpo_comment');
 });
 
 function animaLoad() {
     $(".progress").addClass('hide').hide('slow');
-    $("#show_dailies").fadeIn('fast').removeClass('hide');
+    $("#list_comments").fadeIn('fast').removeClass('hide');
 }
 
    
@@ -31,12 +32,20 @@ function render_comment(comment) {
 				<div class="col s2">
 					<span class="grey-text right">${comment.data}</h5>
 				</div>  
-				<div class="col s12 black-text corpo-resposta">
+				<div class="col s6 black-text corpo-resposta">
 					${comment.corpo}
                 </div>
+                <div class="div-margin col s6 div-like-botao">
+                <a id="like-button-c" class="btn-static waves-effect waves-light like like_comments  ${comment.likes.indexOf($("#comment_form .nome-user").html())>=0?"bg-blue-compass":"not-liked-c"}  
+                ${$(".isDisabled").length? "isDisabled grey"  : ""} btn rounded like like-botao liked" onclick="like_comments('${comment._id}')">
+                    <i class="left material-icons">thumb_up</i>
+                    <span id="number-likes-c" class= "number-likes-c">${comment.likes.length}</span>
+                </a>    
+            </div>
+
                 ${comment.permissao?
                 `
-                    <div class="right">
+                    <div class="right" style="margin-top: 20px">
                         <button class="btn-floating white" onclick="edit_comment('${comment._id}','${comment.username}')"><i class="material-icons black-text">edit</i></button>
                         <button class="btn-floating white" onclick="delete_comment('${comment._id}')"><i class="material-icons black-text">delete</i></button>
                     </div>
@@ -85,10 +94,11 @@ $("#comment_form").submit(function(event) {
         })
         .then(response => response.json())
         //.then(response => console.log(response))
-        //.then(response => {response['permissao'] = true; return response})
+        .then(response => {response['permissao'] = true; return response})
         .then(response => {
-            $('#list_comments').append(render_comment(response));
-            CKEDITOR.instances.corpo_comment.setData('<p>Digite aqui o conteúdo da sua resposta.</p>')
+            $('#list_comments').prepend(render_comment(response));
+            CKEDITOR.instances.corpo_comment.setData('');
+            
         })
         .catch(console.log);
 });
@@ -122,6 +132,45 @@ function like() {
         })
         .catch(console.log);
 }
+
+
+function like_comments(id) {
+
+    let idcomm = id;
+
+    let element = $(`#${idcomm} #like-button-c`);
+    console.log(element)
+    let likes = parseInt($(`#${idcomm} #number-likes-c`).html())
+    console.log(likes)
+    let like
+    element.hasClass('not-liked-c') ? like = 1 : like = -1
+
+
+
+    fetch("/helpcenter/comentario/like", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ _id: idcomm, like })
+        })
+        .then(response => {
+            if (response) {
+                $(`#${idcomm} #number-likes-c`).html(likes + like);
+                if (like > 0) {
+                    element.removeClass('not-liked-c');
+                    element.addClass('bg-blue-compass');
+                } else {
+                    element.removeClass('bg-blue-compass');
+                    element.addClass('not-liked-c');
+
+                }
+            }
+
+        })
+        .catch(console.log);
+}
+
+
+
 
 function resolvido(id) {
     fetch("/helpcenter/resolvido", {
@@ -180,7 +229,7 @@ function delete_topic() {
                                 .then(res => forum());
                         }
                     })
-                    .catch(message('error', 'Houve um problema na comunicação :('))
+                    .catch(() => setTimeout(() => { message('error', 'Houve um problema na comunicação :(') }, time))
             }
         })
         .catch(console.log)
@@ -218,7 +267,7 @@ function delete_comment(id) {
                         message('success', 'Topico Deletado!');
                         $(`#${idComentario}`).remove();
                     })
-                    .catch(message('error', 'Unexpected Error'))
+                    .catch(() => setTimeout(() => { message('error', 'Unexpected Error') }, time))
             }
         })
         .catch(console.log)
@@ -229,21 +278,21 @@ function delete_comment(id) {
  *  e habilita o framework do CKeditor na abertura do modal;
  */
 const renderEdit = (dados) => {
-    $("#modal-form").html(
-        `<div id="editcomm_form" class="div-margin col s12" value=${dados.comentario.id}>
-    <div class="input-field col s12">
-        <img src="../../public/img/user.png" alt="" class="circle avatar-user">
-        <span class="grey-text text-darken-2 nome-user">${dados.comentario.username}</span>
-    </div>
-    <div>
-        <textarea id="text_editcomm" rows="10" cols="80" placeholder=""></textarea>
-    </div>
-    <div class="div-margin col s12 center">
-        <button class="btn grey white-text rounded modal-close">Cancelar</button>
-        <button id="btn-edit-comm" class="btn bg-blue-compass rounded" onclick="enviaEdit('${dados._id}', '${dados.comentario.id}')">Editar</button>
-
-    </div>
-    </div>`);
+    $("#modal-form").html(`
+        <div id="editcomm_form" class="div-margin col s12" value=${dados.comentario.id}>
+            <div class="input-field col s12">
+                <img src="../../public/img/user.png" alt="" class="circle avatar-user">
+                <span class="grey-text text-darken-2 nome-user">${dados.comentario.username}</span>
+            </div>
+            <div>
+                <textarea id="text_editcomm" rows="10" cols="80" required></textarea>
+            </div>
+            <div class="div-margin col s12 center">
+                <button class="btn grey white-text rounded modal-close">Cancelar</button>
+                <button id="btn-edit-comm" class="btn bg-blue-compass rounded" onclick="enviaEdit('${dados._id}', '${dados.comentario.id}')">Editar</button>
+            </div>
+        </div>
+    `);
     CKEDITOR.replace('text_editcomm');
 }
 
@@ -263,7 +312,8 @@ const edit_comment = (id, username) => {
     };
     renderEdit(dados);
     $("#modal_editcomm").modal({
-        opacity: 0.9
+        opacity: 0.9,
+        dismissible: false
     }).modal('open');
 
     let content = $(`#${id} .corpo-resposta`).html();
@@ -284,20 +334,24 @@ function enviaEdit(_id, id) {
         _id: id,
         corpo
     }
-    console.log(dados)
-    fetch("/helpcenter/comentario", {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dados)
-        })
-        .then(response => {
-            console.log(response)
-            $(`#${id} .corpo-resposta`).html(dados.corpo);
-            M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
-            $("#modal_editcomm").modal('close');
+    if(corpo!=''){
+        //console.log(dados)
+        fetch("/helpcenter/comentario", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(response => {
+                //console.log(response)
+                $(`#${id} .corpo-resposta`).html(dados.corpo);
+                M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
+                $("#modal_editcomm").modal('close');
 
-        })
-        .catch(console.log)
+            })
+            .catch(console.log)
+    } else{        
+        M.toast({ html: "Por favor insira sua resposta.", displayLength: 2000 });
+    }
 }
 
 function message(type, title) {
