@@ -331,14 +331,14 @@ function enviaEdit(_id, id) {
         _id: id,
         corpo
     }
-    console.log(dados)
+    //console.log(dados)
     fetch("/helpcenter/comentario", {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         })
         .then(response => {
-            console.log(response)
+            //console.log(response)
             $(`#${id} .corpo-resposta`).html(dados.corpo);
             M.toast({ html: "Comentário editado com sucesso!", displayLength: 2000 });
             $("#modal_editcomm").modal('close');

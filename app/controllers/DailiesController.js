@@ -87,6 +87,7 @@ class DailiesController {
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
                         daily.imagem = daily.user[0].imagem
+                        
                         delete(daily.user);
                         return daily
                     })
@@ -105,6 +106,8 @@ class DailiesController {
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
                         daily.imagem = daily.user[0].imagem
+
+                        
                         delete(daily.user);
                         return daily
                     })

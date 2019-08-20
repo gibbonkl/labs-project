@@ -2,8 +2,11 @@ const mailer = require('nodejs-nodemailer-outlook');
 const Class_config = require('../../config/config_localOUremoto');
 const config = new Class_config();
 const local = `http://localhost:1337`;
-const remote = `https://gob-dev.azurewebsites.net`
+const remote = `https://gob-bols.azurewebsites.net`
 const route = "/recuperar_senha";
+const path = require('path');
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 class sendEmail{
     constructor(){
         throw new Error("Classe estática. Impossível instanciar.");
@@ -16,10 +19,10 @@ class sendEmail{
                 pool: true,
                 secure: false,
                 auth: {
-                    user: 'casadobolsista@outlook.com',
-                    pass: '#c4s4d0b0ls1st4.2019'
+                    user: process.env.user,
+                    pass: process.env.password
                 },
-                from: 'casadobolsista@outlook.com',
+                from: process.env.user,
                 to: dest,
                 subject: `Recuperar senha - Casa do Código`,
                 html: `

@@ -255,24 +255,27 @@ class PostagemDao extends TemplateDao{
         *   @returns {postagem} postagem e todos os comentarios associados
     */
    getPostagem(id=''){
-        // return this._findOne({ _id: id, ativo: true })
-        return this._aggregate([
-            {'$match': {
-                    _id: mongoose.Types.ObjectId(id),
-                    ativo: true
+        var hex = new RegExp("^[a-fA-F0-9]+$");
+        if(hex.test(id) && id.length == 24)
+            return this._aggregate([
+                {'$match': {
+                        _id: mongoose.Types.ObjectId(id),
+                        ativo: true
+                    }
+                },
+                {'$lookup': {
+                        'from': 'usuarios', 
+                        'localField': 'username', 
+                        'foreignField': 'username', 
+                        'as': 'user'
+                    }
                 }
-            },
-            {'$lookup': {
-                    'from': 'usuarios', 
-                    'localField': 'username', 
-                    'foreignField': 'username', 
-                    'as': 'user'
-                }
-            }
-        ])
-        .then(res=> res[0])
-        .then(res => res ? res : false)
-        .catch(err => console.log('Erro ao realizar busca: ' + err.message))
+            ])
+            .then(res=> res[0])
+            .then(res => res ? res : false)
+            .catch(err => console.log('Erro ao realizar busca: ' + err.message))
+        else
+            return Promise.reject("Id inválido").then(() => false)
     }
 
     /*
@@ -281,27 +284,31 @@ class PostagemDao extends TemplateDao{
         *   @returns {postagem} postagem e todos os comentarios associados
     */
     getComentarios(id=''){
-        return this._aggregate([
-            {'$match': 
-                {_id: mongoose.Types.ObjectId(id)}
-            },
-            {'$lookup': {
-                    'from': 'comentarios', 
-                    'localField': 'comentarios', 
-                    'foreignField': '_id',
-                    'as': 'comentarios'
+        var hex = new RegExp("^[a-fA-F0-9]+$");
+        if(hex.test(id) && id.length == 24)
+            return this._aggregate([
+                {'$match': 
+                    {_id: mongoose.Types.ObjectId(id)}
+                },
+                {'$lookup': {
+                        'from': 'comentarios', 
+                        'localField': 'comentarios', 
+                        'foreignField': '_id',
+                        'as': 'comentarios'
+                    }
                 }
-            }
-        ])
-        .then(res => res[0])
-        .then(res => {
-            res.comentarios = res.comentarios.filter(comentario =>
-                 comentario.ativo? comentario  :  null
-             )
-             return res
-         })
-        .then(res => res ? res : 'error')
-        .catch(console.error)
+            ])
+            .then(res => res[0])
+            .then(res => {
+                res.comentarios = res.comentarios.filter(comentario =>
+                    comentario.ativo? comentario  :  null
+                )
+                return res
+            })
+            .then(res => res ? res : 'error')
+            .catch(console.error)
+        else
+            return Promise.reject("Id inválido").then(() => false)
     }
     /*
         *   Busca uma postagem na base de dados pelo título
@@ -452,6 +459,11 @@ class PostagemDao extends TemplateDao{
                                     'localField': 'username', 
                                     'foreignField': 'username', 
                                     'as': 'user'
+                                    }
+                                },
+                                {
+                                    "$sort":{
+                                        updatedAt: -1
                                     }
                                 },
                                 {

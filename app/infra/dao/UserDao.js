@@ -156,6 +156,13 @@ class UserDao extends TemplateDao{
                 })
         }
     }
+    updatePassword(hash="",newPassword=""){
+        if(newPassword && hash){
+            return this._findOneAndUpdate({hash:hash},{$set:{senha: newPassword}})
+                .then(user => this.updateHash(user.username,user.email))
+                .then(hash => hash? true: false)
+        }
+    }
     listarUsers()
     {
         return this._find();
