@@ -40,7 +40,7 @@ class ComentarioController {
         {
             return new ComentarioDAO(ComentarioModel).removeLike(req.body._id, req.session.user.username)
         }
-        else
+        else if(req.body.like == 1)
         {
             return new ComentarioDAO(ComentarioModel).adicionaLike(req.body._id, req.session.user.username)
         }

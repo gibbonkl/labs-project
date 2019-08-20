@@ -35,3 +35,18 @@
     position: static !important;
     float: left !important;
 }
+
+.resolvido {
+margin-top: 5px;
+margin-left: 2px;
+}
+
+.editar{
+margin-top: 5px;
+margin-left: 2px;
+
+}
+
+.deletar{
+margin-top: 5px;
+}

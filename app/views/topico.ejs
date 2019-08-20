@@ -41,7 +41,7 @@
                 <div class="col s12"></div>
                 <% } else { %>
                 <div class="col s12">
-                    <% response.tags[0].split(',').forEach(function(tag) { %>
+                    <% response.tags.forEach(function(tag) { %>
                         <% if(tag != '') {%>
                             <span class="chip waves-effect select-chip"><%= tag %></span>
                         <% }%>
@@ -76,19 +76,19 @@
                 </div>
                 <!-- Deletar | Editar | Setar Resolvido -->
                 <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                    <button class="btn-static waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
-                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
-                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
+                    <button class="btn-static waves-effect waves-light resolvido like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                    <button class="btn-static waves-effect waves-light editar like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                    <button class="btn-static waves-effect waves-light deletar like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
                 </div>
             </div>
             <!-- Respostas -->
-            <div class="row div-topico white">
+            <div id="respostas" class="row div-topico white">
                 <h5 class="col s12 blue-compass mont-serrat">Respostas</h5>
                 <div id="list_comments"></div>
             </div>
             <!-- Responder -->                        
-            <div class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
-                <h5 id="responder"class="col s12 blue-compass mont-serrat">Responder</h5>
+            <div id="responder" class="row div-topico white <%if(user.tipo==''){%><%='hide'%><%}%>">
+                <h5 class="col s12 blue-compass mont-serrat">Responder</h5>
                 <!-- Formulário para responder ao tópico -->
                 <form id="comment_form" class="div-margin col s12" action="/helpenter/comentario" method="post">
                     <div class="input-field col s12">
@@ -115,20 +115,18 @@
             <h5 class="blue-compass">Editar comentário</h5>
             <div class="divider"></div>
             <div id="modal-form" class="row"></div>
-    </div>
         </div>
-        <% include ./includes/chatbot.ejs %>
-        <!-- Ordem de carregamento de script -->
-        <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
-        <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
-        <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
-        <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
-        <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> -->
-        <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
-
-        <!-- Ordem de carregamento de script -->
+    </div>
+    <% include ./includes/chatbot.ejs %>
+    <!-- Ordem de carregamento de script -->
+    <script type="text/javascript" src="../../public/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/materialize.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/md5.min.js"></script>
+    <script type="text/javascript" src="../../public/js/libs/sweetalert2@8.js"></script>
+    <script type="text/javascript" src="../../public/js/menu/menu.js"></script>
+    <script type="text/javascript" src="../../public/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../../public/js/helpcenter/topico.js"></script>
+    <!-- Ordem de carregamento de script -->
 </body>
 
 </html>

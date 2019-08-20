@@ -5,3 +5,6 @@ function dailynote(){
 function helpcenter(){
     window.location.href = "/helpcenter";
 }
+$(document).ready(function(){
+    $('.tabs').tabs();
+});
