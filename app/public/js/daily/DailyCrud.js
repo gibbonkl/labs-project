@@ -114,15 +114,19 @@ function deletar(id) {
         })
         .catch(console.log)
 }
-// Listar daily notes com data de hoje (default)
+// Listar últimas 7 daily notes registradas (default)
 function listar() {
     fetch("/daily/default", {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "limit": 7
+            })
         })
         .then(response => response.json())
         .then(dailies => listarDailiesDOM(dailies))
 }
+// Listar daily notes do dia atual
 // function listar() {
 //     fetch("/daily/data", {
 //             method: "POST",

@@ -94,12 +94,12 @@ class HelpCenterController {
         return postagem;
     }
 
-    static insertPostagem(req) {
+    static insertPostagem(data) {
         let postagem = new PostagemModel ({
-            username: req.session.user.username,
-            corpo: req.body.corpo,
-            titulo: req.body.titulo,
-            tags: req.body.tags.split(',')
+            username: data.username,
+            corpo: data.corpo,
+            titulo: data.titulo,
+            tags: data.tags
         });
 
         return new PostagemDao(PostagemModel).insertPostagem(postagem)
@@ -119,7 +119,7 @@ class HelpCenterController {
             titulo: req.body.titulo,
             tags: req.body.tags.split(',')
         });
-        console.log(postagem);
+        //console.log(postagem);
        
         return new PostagemDao(PostagemModel).editarPostagem(postagem)
             .then(res=> res ? res : false)

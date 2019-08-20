@@ -17,7 +17,13 @@ module.exports = function(app) {
     app.route('/daily')
         // controller adicionar nova daily
         .post(sessionCheckerRedLogin, (req,res) => {
-            controller.addDaily(req)
+            let data = {
+                username: req.session.user.username,
+                ontem: req.body.ontem,
+                hoje: req.body.hoje,
+                impedimento: req.body.impedimento
+            }
+            controller.addDaily(data)
                 .then(retorno => {
                     if(!retorno)
                         res.send({erro:'Já existe uma daily registrada nesse dia.'});

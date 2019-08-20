@@ -101,12 +101,11 @@ class DailiesController {
                 *   Ou se o usuário for admin do sistema
                 *   Se não, seta a permissão para false
             */
-            return dailyDao.listDailyNotesDefault((page-1)*7, 7) 
+            return dailyDao.listDailyNotesDefault(req.body.limit) 
                 .then(dailies => 
                     dailies.map(daily=>{
                         user == 'admin' || daily['usuario'] == username? daily['permissao'] = true : daily['permissao'] = false
                         daily.imagem = daily.user[0].imagem
-
                         
                         delete(daily.user);
                         return daily
@@ -124,15 +123,15 @@ class DailiesController {
         *   @param {Request} req Requisição com as informações da daily
         *   @return {object}
     */
-    static addDaily(req){
+    static addDaily(data){
         
         let daily = new DailyModel({
-            usuario : req.session.user.username,
+            usuario : data.username,
             corpo : 
             {   
-                ontem : req.body.ontem,
-                hoje: req.body.hoje,
-                impedimento: req.body.impedimento
+                ontem : data.ontem,
+                hoje: data.hoje,
+                impedimento: data.impedimento
             }
         });
 

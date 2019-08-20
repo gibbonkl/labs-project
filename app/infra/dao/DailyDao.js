@@ -124,44 +124,41 @@ class DailyDao extends TemplateDao {
             return this._aggregate([
                 {
                     '$match': {
-                      'data': data, 
-                      'ativo': true
+                        'data': data, 
+                        'ativo': true
                     }
-                  },
+                },
                 {
                     '$skip': skip
                 },
                 {
                     '$limit': limit
                 },
-                  {
+                {
                     '$lookup': {
-                      'from': 'usuarios', 
-                      'localField': 'usuario', 
-                      'foreignField': 'username', 
-                      'as': 'user'
+                        'from': 'usuarios', 
+                        'localField': 'usuario', 
+                        'foreignField': 'username', 
+                        'as': 'user'
                     }
-                  }
+                }
             ])
-                .then(res => res? res : null)
-                .catch(err => {
-                    console.error(err);
-                    return ({ detail: "Impossível buscar para esse usuário", error: err })
-                })
+            .then(res => res? res : null)
+            .catch(err => {
+                console.error(err);
+                return ({ detail: "Impossível buscar para esse usuário", error: err })
+            })
         }
         else return ({ detail: "Impossível realizar busca", error: "Data null ou undefined" })
     }
-    // Lista as 5 daily notes mais recentes // Controller manda limit = 5
-    listDailyNotesDefault(skip = '', limit = '') {
+    // Lista as n daily notes mais recentes
+    listDailyNotesDefault(limit = '') {
         return this._aggregate([
             {
-                '$sort': { 'data': -1 }
+                '$sort': {'_id': -1}
             },
             {
                 '$match': { 'ativo': true }
-            },
-            {
-                '$skip': skip
             },
             {
                 '$limit': limit
@@ -173,9 +170,6 @@ class DailyDao extends TemplateDao {
                     'foreignField': 'username', 
                     'as': 'user'
                 }
-            },
-            {
-                '$sort': { 'data': 1 }
             }
         ])
         .then(res => res? res : null)
