@@ -36,8 +36,8 @@ function render_comment(comment) {
 					${comment.corpo}
                 </div>
                 <div class="div-margin col s6 div-like-botao">
-                <a id="like-button-c" class="btn-static waves-effect waves-light like_comments  ${comment.likes.indexOf($("#comment_form .nome-user").html())>=0?"bg-blue-compass":"not-liked-c"}  
-                ${$(".isDisabled").length? "isDisabled grey"  : ""} btn rounded like-botao liked" onclick="like_comments('${comment._id}')">
+                <a id="like-button-c" class="btn-static waves-effect waves-light like like_comments  ${comment.likes.indexOf($("#comment_form .nome-user").html())>=0?"bg-blue-compass":"not-liked-c"}  
+                ${$(".isDisabled").length? "isDisabled grey"  : ""} btn rounded like like-botao liked" onclick="like_comments('${comment._id}')">
                     <i class="left material-icons">thumb_up</i>
                     <span id="number-likes-c" class= "number-likes-c">${comment.likes.length}</span>
                 </a>    
