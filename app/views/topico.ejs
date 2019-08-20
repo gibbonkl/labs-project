@@ -76,9 +76,9 @@
                 </div>
                 <!-- Deletar | Editar | Setar Resolvido -->
                 <div class="div-margin col s12 <%if(user.username != response.username && user.tipo != 'admin'){%><%='hide'%><%}%>">
-                    <button class="btn-static waves-effect waves-light like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
-                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
-                    <button class="btn-static waves-effect waves-light like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
+                    <button class="btn-static waves-effect waves-light resolvido like btn rounded btn-resolvido <%= (response.resolvido) ? 'green' : 'bg-blue-compass' %>" onclick="resolvido('<%= response._id %>')">resolvido<i class="left material-icons">check</i></button>
+                    <button class="btn-static waves-effect waves-light editar like btn rounded bg-blue-compass" onclick="edit_topic('<%= response._id %>')">editar<i class="left material-icons">edit</i></button>
+                    <button class="btn-static waves-effect waves-light deletar like btn rounded bg-blue-compass" onclick="delete_topic('<%= response._id %>')">deletar<i class="left material-icons">delete</i></button>
                 </div>
             </div>
             <!-- Respostas -->
