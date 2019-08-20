@@ -287,22 +287,26 @@ class PostagemDao extends TemplateDao{
         var hex = new RegExp("^[a-fA-F0-9]+$");
         if(hex.test(id) && id.length == 24)
             return this._aggregate([
-                {'$match': 
-                    {_id: mongoose.Types.ObjectId(id)}
+
+                {
+                    '$match': {_id: mongoose.Types.ObjectId(id)},
+
                 },
-                {'$lookup': {
+                {
+                    '$lookup': {
                         'from': 'comentarios', 
                         'localField': 'comentarios', 
                         'foreignField': '_id',
                         'as': 'comentarios'
                     }
-                }
+                },
             ])
             .then(res => res[0])
             .then(res => {
                 res.comentarios = res.comentarios.filter(comentario =>
                     comentario.ativo? comentario  :  null
                 )
+                res.comentarios.reverse()
                 return res
             })
             .then(res => res ? res : 'error')
