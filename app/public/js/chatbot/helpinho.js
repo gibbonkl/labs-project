@@ -118,7 +118,7 @@ var styleOptions = {
 };
 
 window.WebChat.renderWebChat({
-    directLine: window.WebChat.createDirectLine({ token: '1N2l4XpDN30.k3H03nmx8B9JVKj7mOPZI1_9EInhDlAkMJnBaIfD9S0' }),
+    directLine: window.WebChat.createDirectLine({ token: 'h2YdnybwvH8.gyFcH-kaH4CsG0O2b5BGyeE88AJTS-sEdIRb3DAuux8' }),
     userID: user,
     username: user, 
     store,
