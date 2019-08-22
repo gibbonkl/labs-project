@@ -50,7 +50,7 @@
                             <label class="left col s12">Selecione as tags:</label>
                             <div class="div-margin left col s12">
                                 <% tags.forEach(function(tag) { %>
-                                <span class="chip waves-effect <%= response.tags[0].split(',').indexOf(tag)>=0? 'select-chip': '' %>"><%= tag %></span>
+                                <span class="chip waves-effect <%= response.tags.indexOf(tag)>=0? 'select-chip': '' %>"><%= tag %></span>
                                 <% }); %>
                             </div>
                         </div>
