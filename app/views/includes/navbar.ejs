@@ -16,6 +16,9 @@
                     <li><a href="/dailynote" class="blue-compass">Daily Notes</a></li>
                     <li><a href="/helpcenter" class="blue-compass">Help Center</a></li>
                     <li><a data-target="ul-semcontrato" class="blue-compass dropdown-trigger">Sem Contrato</a></li>
+                    <%if(user.tipo!=''){%>
+                    <li><a data-target="ul-powerbi" class="blue-compass dropdown-trigger">Power BI</a></li>
+                    <%}%>
                 </ul>
             </div>
             <ul class="right hide-on-med-and-down">
@@ -38,6 +41,14 @@
                 <li><a href="/dailynote100contrato" class="blue-compass">Daily Notes</a></li>
                 <li><a href="/helpcenter100contrato" class="blue-compass">Help Center</a></li>
             </ul>
+
+            <%if(user.tipo!=''){%>
+            <ul id="ul-powerbi" class="dropdown-content">
+                <li><a href="https://app.powerbi.com/reportEmbed?reportId=832c7c93-1b5e-4b7e-bafd-300c38406749&autoAuth=true&ctid=97fa1f96-7877-469f-aa37-1f8568e3a3ff&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQifQ%3D%3D"  target="_blank" class="blue-compass">Análise da Aplicação</a></li>
+                <li><a href="https://app.powerbi.com/reportEmbed?reportId=f4283fc7-5339-491b-a608-7f9eeea7ba69&autoAuth=true&ctid=97fa1f96-7877-469f-aa37-1f8568e3a3ff&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQifQ%3D%3D"  target="_blank" class="blue-compass">Análise do Desenvolvimento</a></li>
+            </ul>
+            <%}%>
+
         </div>
     </nav>
     <!-- sidenav -->
